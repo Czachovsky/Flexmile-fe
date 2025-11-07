@@ -1,0 +1,146 @@
+@use 'mixins';
+
+.offer {
+  background: var(--color-black-50);
+
+  &__id {
+    color: var(--color-black-700);
+    @include mixins.fontSize(12);
+  }
+
+  &__body {
+    &-info {
+      flex: 1;
+
+      &-header {
+        h1 {
+          @include mixins.fontSize(40);
+          line-height: 56px;
+          font-weight: 600;
+        }
+
+        span {
+          font-weight: 500;
+          @include mixins.fontSize(20);
+        }
+
+        &-specs {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+
+          div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-black-700);
+            @include mixins.fontSize(16);
+          }
+        }
+      }
+    }
+
+    &-form {
+      background: var(--color-white);
+      padding: 40px;
+      border-radius: var(--border-radius-base);
+      border: 1px solid var(--color-black-100);
+      max-width: 470px;
+
+      & > h3, & > div {
+        border-bottom: 1px solid var(--color-black-100);
+      }
+
+      h3 {
+        font-weight: 600;
+        @include mixins.fontSize(24);
+        line-height: 32px;
+      }
+
+      span {
+        color: var(--color-black-700);
+        @include mixins.fontSize(12);
+        line-height: var(--line-height-base);
+      }
+
+      &-price {
+        .p {
+          color: var(--p-primary-900);
+          font-weight: 600;
+          @include mixins.fontSize(32);
+
+          span {
+            @include mixins.fontSize(24);
+            color: var(--p-primary-900);
+            font-weight: 600;
+          }
+        }
+
+        .b {
+        }
+      }
+    }
+  }
+}
+
+
+:host ::ng-deep {
+  .mileage {
+    flexmile-button {
+      max-height: 48px;
+
+      button {
+        max-height: 48px;
+      }
+    }
+  }
+
+  .periods {
+    flexmile-button {
+      max-height: 48px;
+      max-width: 48px;
+
+      button {
+        max-height: 48px;
+        max-width: 48px;
+      }
+    }
+  }
+
+}
+
+.offer--info{
+  &-container{
+    max-width: 770px;
+  }
+  h3{
+    font-weight: 600;
+    @include mixins.fontSize(32);
+    line-height: 40px;
+  }
+  .technicals{
+    &-info{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      & > div{
+        border-radius: 16px;
+        background-color: var(--color-black-50);
+        padding: 16px 24px;
+        display: flex;
+        flex-direction: column;
+        span{
+          @include mixins.fontSize(14);
+          color: var(--color-black-700);
+          line-height: 24px;
+          margin-bottom: 4px;
+        }
+        b{
+          @include mixins.fontSize(16);
+          color: var(--color-black);
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}

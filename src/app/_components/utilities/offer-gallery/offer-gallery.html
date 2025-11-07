@@ -1,0 +1,156 @@
+@if (gallery() && gallery().length > 0) {
+  <div class="car-gallery">
+
+    <!-- NORMAL VIEW -->
+    <div class="gallery-container">
+
+      <!-- Main Image Display -->
+      <div class="main-image-container"
+           (touchstart)="onTouchStart($event)"
+           (touchend)="onTouchEnd($event)"
+           (mousedown)="onMouseDown($event)"
+           (mouseup)="onMouseUp($event)"
+           (mouseleave)="onMouseLeave()"
+           (click)="openLightbox()">
+
+        <img [src]="getImageUrl('large')"
+             [alt]="'Car image ' + (currentIndex + 1)"
+             class="main-image">
+
+        <!-- Navigation Arrows -->
+        @if (totalImages > 1) {
+          <button class="nav-arrow nav-arrow-left"
+                  (click)="previousImage($event)"
+                  aria-label="Previous image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <button class="nav-arrow nav-arrow-right"
+                  (click)="nextImage($event)"
+                  aria-label="Next image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="image-counter">
+            {{ currentIndex + 1 }} / {{ totalImages }}
+          </div>
+        }
+
+        <!-- Fullscreen Icon -->
+        <button class="fullscreen-btn"
+                (click)="openLightbox()"
+                aria-label="Open fullscreen">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Thumbnails -->
+      @if (totalImages > 1) {
+        <div class="thumbnails-container">
+          <div class="thumbnails-scroll">
+            @for (image of gallery(); track image; let i = $index) {
+              @if(i <= 3){
+                <div class="thumbnail"
+                     [class.active]="i === currentIndex"
+                     (click)="goToImage(i)">
+                  <img [src]="image.thumbnail"
+                       [alt]="'Thumbnail ' + (i + 1)"
+                       loading="lazy">
+                </div>
+              }
+            }
+            @if(gallery().length > 4){
+             <span class="gallery-counter">+ {{gallery().length - 4}}</span>
+            }
+          </div>
+        </div>
+      }
+
+    </div>
+
+    <!-- LIGHTBOX MODE -->
+    @if (isLightboxOpen) {
+      <div class="lightbox-overlay" (click)="closeLightbox($event)">
+        <div class="lightbox-container" (click)="$event.stopPropagation()">
+
+          <!-- Close Button -->
+          <button class="lightbox-close"
+                  (click)="closeLightbox($event)"
+                  aria-label="Close lightbox">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Main Image in Lightbox -->
+          <div class="lightbox-main"
+               (touchstart)="onTouchStart($event)"
+               (touchend)="onTouchEnd($event)"
+               (mousedown)="onMouseDown($event)"
+               (mouseup)="onMouseUp($event)"
+               (mouseleave)="onMouseLeave()">
+
+            <img [src]="getImageUrl('large')"
+                 [alt]="'Car image ' + (currentIndex + 1)"
+                 class="lightbox-image">
+
+            <!-- Navigation Arrows in Lightbox -->
+            @if (totalImages > 1) {
+              <button class="nav-arrow nav-arrow-left lightbox-arrow"
+                      (click)="previousImage($event)"
+                      aria-label="Previous image">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+
+              <button class="nav-arrow nav-arrow-right lightbox-arrow"
+                      (click)="nextImage($event)"
+                      aria-label="Next image">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <div class="image-counter lightbox-counter">
+                {{ currentIndex + 1 }} / {{ totalImages }}
+              </div>
+            }
+          </div>
+
+          <!-- Thumbnails in Lightbox -->
+          @if (totalImages > 1) {
+            <div class="lightbox-thumbnails">
+              <div class="thumbnails-scroll">
+                @for (image of gallery(); track image; let i = $index) {
+                  <div class="thumbnail"
+                       [class.active]="i === currentIndex"
+                       (click)="goToImage(i)">
+                    <img [src]="image.thumbnail"
+                         [alt]="'Thumbnail ' + (i + 1)"
+                         loading="lazy">
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  </div>
+}
+
+<!-- Empty state -->
+@if (!gallery || gallery().length === 0) {
+  <div class="gallery-empty">
+    <img src="/layout/images/no-image.png">
+  </div>
+}

@@ -1,0 +1,24 @@
+$xs: 320px;
+$sm: 375px;
+$md: 414px;
+$lg: 768px;
+$xlg: 992px;
+$xl: 1024px;
+$xxl: 1280px;
+$xxxl: 1440px;
+$fhd: 1920px;
+
+@use '../node_modules/primeflex/primeflex.scss' with (
+  $breakpoints: (
+    'xs': $xs,
+    'sm': $sm,
+    'md': $md,
+    'lg': $lg,
+    'xlg': $xlg,
+    'xl': $xl,
+    'xxl': $xxl,
+    'xxxl': $xxxl,
+    'fhd': $fhd,
+  )
+);
+@import "../public/layout/scss/main.scss";

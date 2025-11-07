@@ -1,0 +1,117 @@
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip-content {
+  position: absolute;
+  padding: 10px 16px;
+  border-radius: 48px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 1000;
+
+  // Początkowo niewidoczny
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+
+  // Gdy pozycja została obliczona
+  &.ready {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+
+// Pozycje
+.position-top {
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+
+  &.ready {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.position-bottom {
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+
+  &.ready {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.position-left {
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+
+  &.ready {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.position-right {
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+
+  &.ready {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.position-top .tooltip-arrow {
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0 8px;
+  border-color: currentColor transparent transparent transparent;
+}
+
+.position-bottom .tooltip-arrow {
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 8px 8px 8px;
+  border-color: transparent transparent currentColor transparent;
+}
+
+.position-left .tooltip-arrow {
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 8px 0 8px 8px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+.position-right .tooltip-arrow {
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 8px 8px 8px 0;
+  border-color: transparent currentColor transparent transparent;
+}
+
+// Opcjonalnie: obsługa długiego tekstu
+.tooltip-content {
+  max-width: 250px;
+
+  &.multi-line {
+    white-space: normal;
+  }
+}

@@ -1,0 +1,44 @@
+:host {
+  display: inline-block;
+}
+
+a {
+  color: var(--p-primary-900);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-decoration: none;
+
+}
+
+
+//a {
+//
+//  color: inherit;
+//  display: inline-flex;
+//  align-items: center;
+//  gap: 0.5rem;
+//  transition: all 0.2s ease;
+//}
+
+a:hover:not([disabled]) {
+  opacity: 0.8;
+}
+
+a[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+a.active {
+  font-weight: 600;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-title {
+  display: inline-block;
+}

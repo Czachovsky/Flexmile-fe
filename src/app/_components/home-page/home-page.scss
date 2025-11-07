@@ -1,0 +1,11 @@
+@use "mixins";
+
+.home-offers{
+  &--header{
+    span{
+      color: var(--color-black-700);
+      @include mixins.fontSize(18);
+      line-height: 24px;
+    }
+  }
+}

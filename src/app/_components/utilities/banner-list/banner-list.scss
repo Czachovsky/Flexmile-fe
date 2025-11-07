@@ -1,0 +1,23 @@
+@use "mixins";
+
+.list-banner {
+  padding: 40px 0;
+  border-radius: 24px;
+  @include mixins.fontSize(32);
+  font-weight: 600;
+  white-space: pre;
+
+  &--label {
+    color: var(--color-white);
+
+    svg {
+      height: 48px;
+      width: auto;
+      margin-right: 24px;
+    }
+  }
+
+  &--description {
+    color: var(--color-green-800);
+  }
+}

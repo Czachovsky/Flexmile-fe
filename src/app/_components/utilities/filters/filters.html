@@ -1,0 +1,61 @@
+<div class="filters">
+  <h3>Znajdź auto na wynajem od Flexmile!</h3>
+  {{filtersForm.getRawValue() | json}}
+  <div class="filters__form" [formGroup]=filtersForm>
+    <div class="grid mt-0">
+      <div class="col-8">
+        <div class="grid">
+          <div class="col-6 pb-0">
+            <div>
+              <div class="mb-4">
+                <flexmile-dropdown placeholder="Wybierz markę" [options]="carBrands" formControlName="car_brand"
+                                   [label]="'Marka pojazdu'"></flexmile-dropdown>
+              </div>
+              <div>
+                <flexmile-dropdown placeholder="Paliwo" [options]="[]" [label]="'Rodzaj paliwa'"></flexmile-dropdown>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-6 pb-0">
+            <div>
+              <div class="mb-4">
+                <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="car_model"
+                                   [label]="'Model pojazdu'" [disabled]="!filtersForm.get('car_brand')?.value" ></flexmile-dropdown>
+              </div>
+              <div>
+                <flexmile-dropdown placeholder="Skrzynia" [options]="[]" [label]="'Typ skrzyni'"></flexmile-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 flex">
+        <div class="flex flex-1 flex-column max-w-full">
+          <span class="label">Budżet miesięczny</span>
+          <div class="filters__price p-4 flex-1">
+            <div class="flex">
+              <div class="range_input"><flexmile-input formControlName="price_from" inputId="price_from" [type]="inputType.text" [isPriceInput]="true"></flexmile-input></div>
+              <div class="spacer">-</div>
+              <div class="range_input"><flexmile-input formControlName="price_to" inputId="price_to" [type]="inputType.text" [isPriceInput]="true"></flexmile-input></div>
+            </div>
+            <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500" [max]="10000"></flexmile-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <div class="flex pt-5 filters__bottom align-items-center justify-content-between">
+          <div>
+            <label>
+              <input type="checkbox">
+              Pokaż tylko dostępne od ręki
+            </label>
+          </div>
+          <div><span class="cursor-pointer" (click)="resetFilters()">Wyczyść filtry</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

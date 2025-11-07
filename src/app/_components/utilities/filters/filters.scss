@@ -1,0 +1,29 @@
+@use 'mixins';
+.filters {
+  &__price {
+    background: var(--color-purple-secondary);
+    border-radius: var(--border-radius-base);
+
+    & > div {
+      gap: 12px;
+      .spacer{
+        color: var(--color-white);
+       @include mixins.fontSize(20);
+        font-weight: 900;
+        width: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .range_input{
+        flex: 1 1 0;
+        min-width: 0;
+      }
+    }
+  }
+  &__bottom{
+    color: var(--color-white);
+    @include mixins.fontSize(14);
+    font-weight: 600;
+  }
+}

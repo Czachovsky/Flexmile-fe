@@ -1,0 +1,36 @@
+@use "variables";
+
+@mixin fontSize($size, $important: false) {
+  $remSize: $size / variables.$mainFontSize;
+  font-size: #{$remSize}rem#{if($important, ' !important', '')};
+}
+
+@mixin padding($values...) {
+  $converted-values: ();
+
+  @each $value in $values {
+    $converted-values: append($converted-values, ($value / variables.$mainFontSize) + rem);
+  }
+
+  padding: $converted-values;
+}
+
+@import "variables";
+
+@mixin fontSize($size, $important: false) {
+  $remSize: $size / variables.$mainFontSize;
+  font-size: #{$remSize}rem #{"#{if($important, ' !important', '')}"};
+}
+@mixin media-query($type, $breakpoint) {
+  $value: map-get(variables.$grid-breakpoints, $breakpoint);
+
+  @if $type == "min" {
+    @media screen and (min-width: $value) {
+      @content;
+    }
+  } @else if $type == "max" {
+    @media screen and (max-width: $value - 1px) {
+      @content;
+    }
+  }
+}

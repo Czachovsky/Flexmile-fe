@@ -1,0 +1,56 @@
+
+<div class="input-group flex flex-column">
+  @if (label()) {
+    <label [for]="inputId()" class="mb-2">{{ label() }}
+      @if (required()) {
+        <span class="required">*</span>
+      }
+    </label>
+  }
+  @if (type() !== inputType.textarea && type() !== inputType.range) {
+    <div class="input-wrapper" [class.price-input]="isPriceInput()">
+      @if (isPriceInput()) {
+        <input
+          [id]="inputId()"
+          [type]="type()"
+          [value]="displayValue"
+          [placeholder]="placeholder()"
+          [disabled]="disabled()"
+          (input)="onPriceInput($event)"
+          (blur)="onPriceBlur($event)"
+          (focus)="onPriceFocus($event)"
+          class="px-4 py-3 f-input"
+          [attr.inputmode]="'numeric'"
+        />
+      } @else {
+        <input
+          [id]="inputId()"
+          [type]="type()"
+          [formControl]="formControl"
+          [placeholder]="placeholder()"
+          [disabled]="disabled()"
+          (blur)="onTouched()"
+          class="px-4 py-3 f-input"
+        />
+      }
+    </div>
+  } @else if (type() === inputType.textarea) {
+    <textarea
+      [id]="inputId()"
+      [formControl]="formControl"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      (blur)="onTouched()"
+      class="px-4 py-3 f-textarea"
+      rows="4"
+      cols="50"
+    ></textarea>
+  } @else if (type() === inputType.range) {
+    <ngx-slider
+      [(value)]="minValue"
+      [(highValue)]="maxValue"
+      [options]="options"
+      (userChangeEnd)="onUserChangeEnd()">
+    </ngx-slider>
+  }
+</div>

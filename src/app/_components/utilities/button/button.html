@@ -1,0 +1,13 @@
+<button
+  class="btn btn-{{color()}} btn-{{size()}} {{btnClass()}}"
+  [type]="type()"
+  [disabled]="disabled()"
+  (click)="onClick()">
+  @if (icon()) {
+    <i class="pi {{icon()}}"
+       [ngClass]="{'icon-left ml-3' : (iconPosition() === 'right' && !onlyIcon()), 'mr-3' : (iconPosition() === 'left' && !onlyIcon()), 'm-0' : onlyIcon()}"></i>
+  }
+  @if (!onlyIcon()) {
+    {{ label() }}
+  }
+</button>

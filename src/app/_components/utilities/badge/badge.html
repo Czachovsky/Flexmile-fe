@@ -1,0 +1,11 @@
+<div class="badge {{size()}} {{type() | lowercase}}" [ngClass]="{'date': date(), 'flex align-items-center' : !date()}">
+  <div class="flex align-items-center">
+    @if (badgeIcons[type()] !== '') {
+      <span class="badge--icon" [innerHTML]="badgeIcons[type()] | sanitize: 'html'"></span>
+    }
+    {{ label() || badgeLabels[type()] }}
+  </div>
+  @if (date()) {
+    <span class="badge--date">{{ date() }}</span>
+  }
+</div>

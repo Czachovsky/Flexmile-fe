@@ -1,0 +1,491 @@
+@use 'mixins';
+
+.car-gallery {
+  width: 100%;
+  user-select: none;
+}
+
+.gallery-counter {
+  background: var(--color-white);
+  @include mixins.fontSize(12);
+  color: var(--color-black);
+  border-radius: 50px;
+  height: 32px;
+  width: 32px;
+  border: 2px solid var(--color-black-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin-right: -16px;
+  margin-top: -16px;
+}
+
+.gallery-container {
+  width: 100%;
+}
+
+.main-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #f8fafc;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    .nav-arrow {
+      opacity: 1;
+    }
+
+    .fullscreen-btn {
+      opacity: 1;
+    }
+  }
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+// Navigation Arrows
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.nav-arrow-left {
+  left: 16px;
+}
+
+.nav-arrow-right {
+  right: 16px;
+}
+
+// Image Counter
+.image-counter {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+// Fullscreen Button
+.fullscreen-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Thumbnails Container
+.thumbnails-container {
+  margin-top: 16px;
+  padding: 0 4px;
+}
+
+.thumbnails-scroll {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 4px 0;
+  scroll-behavior: smooth;
+
+  // Hide scrollbar but keep functionality
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+}
+
+.thumbnail {
+  flex-shrink: 0;
+  width: 107px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--color-black-100);
+  transition: all 0.3s ease;
+  background: #f8fafc;
+
+  //&:hover {
+  //  border-color: #94a3b8;
+  //  transform: scale(1.05);
+  //}
+
+  &.active {
+    border-color: var(--p-primary-900);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// ========================================
+// LIGHTBOX MODE
+// ========================================
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.lightbox-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 80px 20px 20px;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-arrow {
+  opacity: 1;
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.lightbox-counter {
+  bottom: 24px;
+  right: 24px;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.lightbox-thumbnails {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+
+  .thumbnails-scroll {
+    justify-content: center;
+    max-width: 100%;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+
+  .thumbnail {
+    width: 120px;
+    height: 80px;
+    border-color: rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    &.active {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 1px #60a5fa;
+    }
+  }
+}
+
+// ========================================
+// EMPTY STATE
+// ========================================
+
+.gallery-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+
+@media (max-width: 768px) {
+  .main-image-container {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .nav-arrow-left {
+    left: 8px;
+  }
+
+  .nav-arrow-right {
+    right: 8px;
+  }
+
+  .fullscreen-btn {
+    width: 36px;
+    height: 36px;
+    top: 12px;
+    right: 12px;
+    opacity: 1;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .image-counter {
+    bottom: 12px;
+    right: 12px;
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .thumbnails-container {
+    margin-top: 12px;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 56px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .lightbox-main {
+    padding: 60px 12px 12px;
+  }
+
+  .lightbox-arrow {
+    width: 48px;
+    height: 48px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .lightbox-thumbnails {
+    padding: 12px;
+
+    .thumbnail {
+      width: 90px;
+      height: 60px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .thumbnail {
+    width: 70px;
+    height: 50px;
+  }
+
+  .lightbox-thumbnails .thumbnail {
+    width: 80px;
+    height: 54px;
+  }
+
+  .thumbnails-scroll {
+    gap: 8px;
+  }
+}
+
+// ========================================
+// ANIMATIONS
+// ========================================
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.thumbnail {
+  animation: slideIn 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}

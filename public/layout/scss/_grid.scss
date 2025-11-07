@@ -1,0 +1,80 @@
+@import "variables";
+
+// Mixin dla media queries
+@mixin media-breakpoint-up($name) {
+  $min: map-get($grid-breakpoints, $name);
+  @if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Główna klasa container
+.container {
+  width: 100%;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+  margin-right: auto;
+  margin-left: auto;
+
+  // Responsive maksymalne szerokości
+  @each $breakpoint, $max-width in $container-max-widths {
+    @include media-breakpoint-up($breakpoint) {
+      max-width: $max-width;
+    }
+  }
+
+  // Warianty kontenerów
+  &--fluid {
+    max-width: none;
+    width: 100%;
+  }
+
+  &--narrow {
+    @each $breakpoint, $max-width in $container-max-widths {
+      @include media-breakpoint-up($breakpoint) {
+        max-width: $max-width * 0.8;
+      }
+    }
+  }
+
+  &--wide {
+    @each $breakpoint, $max-width in $container-max-widths {
+      @include media-breakpoint-up($breakpoint) {
+        max-width: $max-width * 1.2;
+      }
+    }
+  }
+
+  // Modyfikatory paddingu
+  &--no-padding {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  &--large-padding {
+    padding-right: $container-padding * 2;
+    padding-left: $container-padding * 2;
+  }
+
+  // Modyfikator dla pełnej wysokości
+  &--full-height {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Klasy pomocnicze dla różnych rozmiarów
+@each $breakpoint, $max-width in $container-max-widths {
+  .container-#{$breakpoint} {
+    @extend .container;
+
+    @include media-breakpoint-up($breakpoint) {
+      max-width: $max-width;
+    }
+  }
+}

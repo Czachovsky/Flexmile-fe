@@ -1,0 +1,24 @@
+@use 'mixins';
+
+.hero {
+  min-height: calc(100vh - 125px);
+  background: url('../../../../../../public/layout/images/hero-img.webp') no-repeat scroll center right;
+  .container {
+    h1 {
+      color: var(--color-white);
+      @include mixins.fontSize(96);
+      line-height: 100%;
+      font-weight: 600;
+      span {
+        color: var(--color-green-800);
+        text-transform: uppercase;
+      }
+    }
+
+    h2 {
+      color: var(--color-white);
+      @include mixins.fontSize(24);
+      line-height: 32px;
+    }
+  }
+}

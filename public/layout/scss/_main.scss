@@ -1,0 +1,65 @@
+@use "reset";
+@use "fonts";
+@use "variables";
+@use "grid";
+@use "mixins";
+
+html {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-family: var(--font-family), sans-serif;
+}
+
+h2 {
+  @include mixins.fontSize(48);
+  font-weight: 600;
+  color: var(--color-black);
+  line-height: 56px;
+}
+
+
+.label {
+  color: var(--color-white);
+  @include mixins.fontSize(14);
+  margin-bottom: 8px;
+  display: block;
+
+  &.disabled {
+    color: var(--color-purple-500);
+  }
+}
+
+
+.ngx-slider {
+  margin: 25px 0 15px !important;
+  .ngx-slider-selection {
+    background: var(--color-green-900) !important;
+  }
+
+  .ngx-slider-bar:not(.ngx-slider-selection) {
+    background: var(--color-white) !important;
+  }
+  .ngx-slider-bubble{
+    color: var(--color-white) !important;
+    @include mixins.fontSize(14, true);
+    bottom: -32px !important;
+  }
+  .ngx-slider-pointer {
+    width: 24px !important;
+    height: 24px !important;
+    background: var(--color-green-900) !important;
+    top: -10px !important;
+
+    &:after {
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 32px !important;
+      left: 4px !important;
+      top: 4px !important;
+    }
+    &.ngx-slider-active:after{
+      background: var(--color-white) !important;
+    }
+  }
+}
+

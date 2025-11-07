@@ -1,0 +1,82 @@
+<div class="list">
+  @if(!hideHeader()){
+    <div class="list--header pb-5 flex align-items-center justify-content-between">
+      <div class="list--header-counter">
+        Liczba dostępnych ofert: <span>108</span>
+      </div>
+      <div class="list--header-sort">
+        Sortowanie: Najnowsze
+      </div>
+    </div>
+  }
+  <div class="list--body">
+    <div class="list--body-grid">
+      <!-- Rząd 1: 3 produkty -->
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+
+      <!-- Rząd 2: 3 produkty -->
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+
+      <!-- Rząd 3: Banner 100% -->
+      <div class="banner">
+        <flexmile-banner-list label="Brak wkładu własnego - "
+                              description="Brak konieczności wykupu Auta!"></flexmile-banner-list>
+      </div>
+
+      <!-- Rząd 4: 3 produkty -->
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+      <div class="product">
+        <flexmile-car></flexmile-car>
+      </div>
+
+      <!-- Rząd 5: 1 produkt 100% -->
+      <div class="product-full">
+        <flexmile-car [cardSize]="badgeSizes.LG"></flexmile-car>
+      </div>
+
+      <!-- POWTÓRZENIE WZORCA -->
+
+      <!-- Rząd 1: 3 produkty -->
+      <div class="product">Produkt 10</div>
+      <div class="product">Produkt 11</div>
+      <div class="product">Produkt 12</div>
+
+      <!-- Rząd 2: 3 produkty -->
+      <div class="product">Produkt 13</div>
+      <div class="product">Produkt 14</div>
+      <div class="product">Produkt 15</div>
+
+      <!-- Rząd 3: Banner 100% -->
+      <div class="banner">BANNER REKLAMOWY 2</div>
+
+      <!-- Rząd 4: 3 produkty -->
+      <div class="product">Produkt 16</div>
+      <div class="product">Produkt 17</div>
+      <div class="product">Produkt 18</div>
+
+      <!-- Rząd 5: 1 produkt 100% -->
+      <div class="product-full">Produkt Wyróżniony 2</div>
+    </div>
+  </div>
+</div>

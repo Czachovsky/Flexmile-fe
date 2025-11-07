@@ -1,0 +1,68 @@
+@use "mixins";
+@use "variables";
+
+.btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-green-800);
+  border-radius: 40px;
+  color: var(--p-primary-900);
+  font-weight: 700;
+  background: var(--color-green-800);
+  line-height: 1rem;
+  transition: all variables.$transitionDuration ease;
+
+  &:hover {
+
+  }
+
+  &:disabled,
+  &[disabled] {
+    background: var(--color-black-100);
+    border-color: var(--color-black-100);
+    color: var(--color-black-400);
+    cursor: not-allowed;
+  }
+
+  &.btn {
+    &-small {
+      @include mixins.fontSize(14);
+      @include mixins.padding(8);
+    }
+
+    &-medium {
+      @include mixins.fontSize(16);
+      @include mixins.padding(16);
+    }
+
+    &-large {
+      @include mixins.fontSize(16);
+      @include mixins.padding(16);
+      line-height: 24px;
+    }
+
+    &-outline {
+      background: transparent;
+      color: var(--color-white);
+    }
+
+    &-secondary {
+      &:hover, &.active {
+        background: var(--p-primary-900);
+        border-color: var(--p-primary-900);
+        color: var(--color-black-50);
+      }
+
+      background: var(--color-black-50);
+      border-color: var(--color-black-50);
+      color: var(--color-black-700);
+    }
+  }
+
+}
+
+.icon-left {
+  order: 1;
+}

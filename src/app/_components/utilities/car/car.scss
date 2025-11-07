@@ -1,0 +1,159 @@
+@use "mixins";
+
+.car-card {
+  background: var(--color-black-50);
+  border-radius: var(--border-radius-base);
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+
+
+  * {
+    transition: all 0.3s ease;
+  }
+
+  &__content {
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom-left-radius: var(--border-radius-base);
+    border-bottom-right-radius: var(--border-radius-base);
+  }
+
+  &__image-wrapper {
+    display: block;
+    width: 100%;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__badges {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 24px 24px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &.card-large {
+    .car-card__badges{
+      justify-content: flex-start;
+      gap: 8px;
+    }
+  }
+
+  h3#{&}__title {
+    @include mixins.fontSize(24);
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-black);
+  }
+
+  p#{&}__subtitle {
+    @include mixins.fontSize(16);
+    color: var(--color-black);
+  }
+
+  &__specs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  &__spec {
+    gap: 4px;
+
+    span {
+      color: var(--color-black-600);
+      @include mixins.fontSize(14);
+    }
+  }
+
+  &__price {
+    color: var(--p-primary-900);
+    font-weight: 600;
+
+    &-amount {
+      @include mixins.fontSize(24);
+    }
+
+    &-label {
+      @include mixins.fontSize(16);
+    }
+  }
+
+  &__features {
+    background: var(--color-white);
+    border-radius: 48px;
+    padding: 8px 13px;
+    gap: 3px;
+    display: inline-flex;
+    width: auto;
+    transition: all 0.3s ease;
+  }
+
+  &__feature-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--color-white);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: var(--color-black-100);
+      transition: all 0.3s ease;
+    }
+  }
+
+  &__feature-label {
+    color: var(--p-primary-900);
+    @include mixins.fontSize(14);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    //  width: 110px;
+    width: 0;
+  }
+
+  &:hover:not(.card-large) {
+    .car-card__feature-label {
+      width: 110px;
+    }
+
+    .car-card__content {
+      background: var(--p-primary-900);
+      transition: all 0.3s ease;
+      color: var(--color-white);
+
+      .car-card__title, .car-card__subtitle {
+        color: var(--color-white);
+      }
+
+      .car-card__price {
+        color: var(--color-white);
+      }
+
+      .car-card__spec {
+        span {
+          color: var(--color-white);
+        }
+
+        svg {
+          path {
+            transition: all 0.3s ease;
+            fill: var(--color-white);
+          }
+        }
+      }
+    }
+  }
+}
