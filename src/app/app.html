@@ -1,10 +1,13 @@
 <header>
   <flexmile-header></flexmile-header>
 </header>
-<main style="padding-top:126px;">
+<main>
   <router-outlet/>
 </main>
-<footer>
-  <flexmile-footer></flexmile-footer>
-</footer>
+@if (showFooter()) {
+  <footer>
+    <flexmile-footer></flexmile-footer>
+  </footer>
+}
+
 

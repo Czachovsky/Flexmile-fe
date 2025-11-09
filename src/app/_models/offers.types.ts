@@ -68,6 +68,27 @@ export interface OfferModel {
   additional_equipment?: string[];
 }
 
+interface OfferListMetaModel {
+  current_page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+}
+
+export interface OfferListOffersModel{
+  title: string;
+  model: string;
+  available: boolean;
+  id: number;
+
+
+}
+
+export interface OfferListModel {
+  offers: OfferModel[];
+  meta: OfferListMetaModel;
+}
+
 export enum TransmissionType {
   manual = 'Manualna',
   automatic = 'Automatyczna'
@@ -81,5 +102,5 @@ export enum DrivetrainType {
 }
 
 export enum FuelType {
-  
+
 }

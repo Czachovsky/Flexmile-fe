@@ -1,6 +1,11 @@
 .offers {
+  padding-top:126px;
+  background: var(--p-primary-900);
   &__filters {
     background: var(--p-primary-900);
     border-top: 1px solid #944a93;
+  }
+  &__list {
+    background: var(--color-white);
   }
 }

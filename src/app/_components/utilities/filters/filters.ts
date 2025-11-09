@@ -1,11 +1,10 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {Dropdown, DropdownOption} from '@components/utilities/dropdown/dropdown';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {NgxSliderModule, Options} from '@angular-slider/ngx-slider';
+import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {Input} from '@components/utilities/input/input';
 import {InputType} from '@models/common.types';
 import {FilterBuilder} from '@builders/filters-builder';
-import {JsonPipe} from '@angular/common';
 import {Offers} from '@services/offers';
 import {MakeListModel} from '@models/hero-search.types';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -17,7 +16,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     ReactiveFormsModule,
     NgxSliderModule,
     Input,
-    JsonPipe,
   ],
   templateUrl: './filters.html',
   styleUrl: './filters.scss',
@@ -36,8 +34,10 @@ export class Filters implements OnInit {
   }
 
   public priceRangeChanged(obj: { min: number, max: number }): void {
-    this.filtersForm.get('price_from')?.setValue(obj.min);
-    this.filtersForm.get('price_to')?.setValue(obj.max);
+    this.filtersForm.patchValue({
+      price_from: obj.min,
+      price_to: obj.max,
+    });
   }
 
   public resetFilters(): void {
@@ -68,8 +68,9 @@ export class Filters implements OnInit {
         })
       }
     })
-    this.filtersForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+    this.filtersForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       console.log(this.filtersForm.getRawValue());
+      this.offersService.filterOffers(this.filtersForm.getRawValue())
     })
   };
 }

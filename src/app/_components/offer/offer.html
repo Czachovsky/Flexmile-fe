@@ -116,11 +116,49 @@
           }
         </div>
       </div>
-      <div class="equipment py-5">
-        <div class="equipment-header">
-          <h3 class="pb-5">Wyposażenie</h3>
+      @if (offerData.additional_equipment?.length || offerData.standard_equipment?.length) {
+        <div class="equipment py-5">
+          <div class="equipment-header">
+            <h3 class="pb-5">Wyposażenie</h3>
+          </div>
+          <div class="equipment-list">
+            @if (offerData.standard_equipment?.length) {
+              <div class="equipment-list--standard mb-5">
+                <div class="mb-4">Standardowe</div>
+                <ul>
+                  @for (equipment of offerData.standard_equipment; track equipment; let i = $index) {
+                    <li>
+                      {{ equipment }}
+                    </li>
+                  }
+                </ul>
+                @if ((offerData.standard_equipment?.length ?? 0) > 9) {
+                  Pokaż więcej
+                }
+              </div>
+            }
+            @if (offerData.additional_equipment?.length) {
+              <div class="equipment-list--additional">
+                <div class="mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" viewBox="0 0 22 21" fill="none">
+                    <path
+                      d="M11.9531 0.9375L14.5312 6.13281L20.2344 6.95312C21.25 7.10938 21.6797 8.35938 20.9375 9.10156L16.7969 13.0859L17.7734 18.75C17.9297 19.7656 16.875 20.5469 15.9375 20.0781L10.8594 17.4219L5.74219 20.1172C4.80469 20.5859 3.75 19.8047 3.90625 18.7891L4.88281 13.125L0.742188 9.10156C0 8.35938 0.429688 7.10938 1.44531 6.95312L7.14844 6.13281L9.72656 0.9375C10.1953 0 11.5234 0.0390625 11.9531 0.9375Z"
+                      fill="#C1D342"/>
+                  </svg>
+                  Wyposażenie dodatkowe
+                </div>
+                <ul>
+                  @for (equipment of offerData.additional_equipment; track equipment; let i = $index) {
+                    <li>
+                      {{ equipment }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
 </div>

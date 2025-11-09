@@ -1,7 +1,8 @@
 @use 'mixins';
 
 .hero {
-  min-height: calc(100vh - 125px);
+  min-height: 100vh;
+  padding-top:125px;
   background: url('../../../../../../public/layout/images/hero-img.webp') no-repeat scroll center right;
   .container {
     h1 {

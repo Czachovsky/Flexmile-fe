@@ -50,13 +50,14 @@
   h3#{&}__title {
     @include mixins.fontSize(24);
     font-weight: 600;
-    line-height: 24px;
+    line-height: 32px;
     color: var(--color-black);
   }
 
   p#{&}__subtitle {
     @include mixins.fontSize(16);
     color: var(--color-black);
+    line-height: 24px;
   }
 
   &__specs {

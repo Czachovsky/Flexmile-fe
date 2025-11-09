@@ -3,6 +3,7 @@ import {Offers} from '@components/offers/offers';
 import {Offer} from '@components/offer/offer';
 import {HomePage} from '@components/home-page/home-page';
 import {offerResolver} from './_resolvers/offer-resolver';
+import {PageNotFound} from '@components/page-not-found/page-not-found';
 
 export const routes: Routes = [
   {
@@ -23,9 +24,6 @@ export const routes: Routes = [
       offer: offerResolver
     }
   },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
-  }
+  { path: '404', component: PageNotFound },
+  { path: '**', component: PageNotFound },
 ];
