@@ -22,7 +22,7 @@ export const routes: Routes = [
     title: 'Szczegóły samochodu - Flexmile',
     resolve: {
       offer: offerResolver
-    }
+    },
   },
   { path: '404', component: PageNotFound },
   { path: '**', component: PageNotFound },

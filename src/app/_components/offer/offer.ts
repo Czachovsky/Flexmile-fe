@@ -3,9 +3,12 @@ import {Badge} from "@components/utilities/badge/badge";
 import {badgeSizes, badgeTypes} from "@models/common.types";
 import {ButtonComponent} from '@components/utilities/button/button';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
-import {DrivetrainType, OfferGalleryModel, OfferModel, TransmissionType} from '@models/offers.types';
+import {DrivetrainType, OfferModel, TransmissionType} from '@models/offers.types';
 import {Offers} from '@services/offers';
-import {DecimalPipe, JsonPipe, SlicePipe} from '@angular/common';
+import {DecimalPipe, SlicePipe} from '@angular/common';
+import {descriptionBanner, offerDescription, offerDescriptionModel} from '@models/offer.type';
+import {BannerList} from '@components/utilities/banner-list/banner-list';
+import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carousel';
 
 @Component({
   selector: 'flexmile-offer',
@@ -13,9 +16,10 @@ import {DecimalPipe, JsonPipe, SlicePipe} from '@angular/common';
     Badge,
     ButtonComponent,
     OfferGallery,
-    JsonPipe,
     DecimalPipe,
-    SlicePipe
+    SlicePipe,
+    BannerList,
+    OffersCarousel
   ],
   templateUrl: './offer.html',
   styleUrl: './offer.scss',
@@ -28,17 +32,18 @@ export class Offer implements OnInit {
   public readonly transmissionType = TransmissionType;
   public readonly drivetrainType = DrivetrainType;
   public readonly technicalsArray: { value: string; label: string }[] = [
-    {label: 'Paliwo', value: 'fuel_type.name'},
+    {label: 'Paliwo', value: 'fuel_type'},
     {label: 'Skrzynia biegów', value: 'specs.transmission'},
     {label: 'Silnik', value: 'specs.engine'},
     {label: 'Moc', value: 'specs.horsepower'},
     {label: 'Napęd', value: 'specs.drivetrain'},
-    {label: 'Nadwozie', value: 'body_type.name'},
+    {label: 'Nadwozie', value: 'body_type'},
     {label: 'Liczba drzwi', value: 'specs.doors'},
     {label: 'Liczba miejsc', value: 'specs.seats'},
     {label: 'Kolor', value: 'specs.color'}
   ];
-
+  public descriptionList: offerDescriptionModel[] = offerDescription;
+  public descriptionBanner = descriptionBanner;
   public readonly offerData: OfferModel = this.offerService.getCurrentOffern()!;
   public selectedPeriod: number | null = null;
   public selectedMileageLimit: number | null = null;

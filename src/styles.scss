@@ -21,4 +21,7 @@ $fhd: 1920px;
     'fhd': $fhd,
   )
 );
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import "../public/layout/scss/main.scss";
+

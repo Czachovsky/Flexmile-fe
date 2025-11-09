@@ -92,7 +92,7 @@
 </div>
 <div class="offer--info">
   <div class="container">
-    <div class="offer--info-container">
+    <div class="offer--info-container pb-7">
       <div class="technicals pt-7 pb-5">
         <div class="technicals-header">
           <h3 class="pb-5">Dane techniczne</h3>
@@ -161,8 +161,30 @@
           </div>
         </div>
       }
+      <div class="offer--description pt-5">
+        <h3 class="pb-5">W racie najmu od flexmile!</h3>
+        @for (description of descriptionList; track description.label) {
+          <div class="flex offer--description_item mb-5">
+            <div class="offer--description_item-icon">
+              @if (description.icon) {
+                <img src="{{description.icon}}" alt="{{description.label}}">
+              }
+            </div>
+            <div class="flex flex-column">
+              <h4>{{ description.label }}</h4>
+              <span>{{ description.description }}</span>
+            </div>
+          </div>
+        }
+      </div>
+      <div>
+        <flexmile-banner-list size="small" [icon]="descriptionBanner.icon" label="Odbiór w salonie" separator="lub"
+                              description="dostawa pod dom!"></flexmile-banner-list>
+      </div>
+    </div>
+    <div class="similar-offerts">
+      <flexmile-offers-carousel></flexmile-offers-carousel>
     </div>
   </div>
 </div>
 
-{{ offerData | json }}

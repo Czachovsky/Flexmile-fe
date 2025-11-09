@@ -5,7 +5,7 @@ import {
   provideZoneChangeDetection
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import {API_URL} from '@tokens/api-url.token';
 import {provideHttpClient} from '@angular/common/http';
@@ -19,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimations(),
     { provide: API_URL, useValue: 'http://flexmile.local/wp-json/flexmile/v1' },
     { provide: LOCALE_ID, useValue: 'pl-PL' },
     provideHttpClient(),
