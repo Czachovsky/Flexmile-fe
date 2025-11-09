@@ -212,6 +212,22 @@
           }
         }
       }
+
+      .equipment-list__toggle {
+        background: none;
+        border: none;
+        color: var(--p-primary-900);
+        cursor: pointer;
+        margin-top: 16px;
+        padding: 0;
+        font-weight: 600;
+        @include mixins.fontSize(16);
+
+        &:hover,
+        &:focus-visible {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

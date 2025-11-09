@@ -126,14 +126,16 @@
               <div class="equipment-list--standard mb-5">
                 <div class="mb-4">Standardowe</div>
                 <ul>
-                  @for (equipment of offerData.standard_equipment; track equipment; let i = $index) {
+                  @for (equipment of offerData.standard_equipment | slice:0:standardEquipmentDisplayCount; track equipment; let i = $index) {
                     <li>
                       {{ equipment }}
                     </li>
                   }
                 </ul>
-                @if ((offerData.standard_equipment?.length ?? 0) > 9) {
-                  Pokaż więcej
+                @if (showStandardEquipmentToggle) {
+                  <button type="button" class="equipment-list__toggle" (click)="toggleStandardEquipment()">
+                    {{ isShowingAllStandardEquipment ? 'Pokaż mniej' : 'Pokaż więcej' }}
+                  </button>
                 }
               </div>
             }

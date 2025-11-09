@@ -5,7 +5,7 @@ import {ButtonComponent} from '@components/utilities/button/button';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
 import {DrivetrainType, OfferGalleryModel, OfferModel, TransmissionType} from '@models/offers.types';
 import {Offers} from '@services/offers';
-import {DecimalPipe, JsonPipe} from '@angular/common';
+import {DecimalPipe, JsonPipe, SlicePipe} from '@angular/common';
 
 @Component({
   selector: 'flexmile-offer',
@@ -14,7 +14,8 @@ import {DecimalPipe, JsonPipe} from '@angular/common';
     ButtonComponent,
     OfferGallery,
     JsonPipe,
-    DecimalPipe
+    DecimalPipe,
+    SlicePipe
   ],
   templateUrl: './offer.html',
   styleUrl: './offer.scss',
@@ -42,6 +43,8 @@ export class Offer implements OnInit {
   public selectedPeriod: number | null = null;
   public selectedMileageLimit: number | null = null;
   public calculatedPrice: number = 0;
+  public readonly standardEquipmentDefaultVisible = 9;
+  public standardEquipmentDisplayCount = this.standardEquipmentDefaultVisible;
 
 
   ngOnInit(): void {
@@ -93,6 +96,28 @@ export class Offer implements OnInit {
 
     const result = getValueByPath(this.offerData, value);
     return result ?? '';
+  }
+
+  public get showStandardEquipmentToggle(): boolean {
+    return (this.offerData.standard_equipment?.length ?? 0) > this.standardEquipmentDefaultVisible;
+  }
+
+  public get isShowingAllStandardEquipment(): boolean {
+    const total = this.offerData.standard_equipment?.length ?? 0;
+    return total > 0 && this.standardEquipmentDisplayCount >= total;
+  }
+
+  public toggleStandardEquipment(): void {
+    const total = this.offerData.standard_equipment?.length ?? 0;
+    if (!total) {
+      return;
+    }
+
+    if (this.isShowingAllStandardEquipment) {
+      this.standardEquipmentDisplayCount = this.standardEquipmentDefaultVisible;
+    } else {
+      this.standardEquipmentDisplayCount = total;
+    }
   }
 
   public onOrderClick(): void {
