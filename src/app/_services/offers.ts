@@ -12,22 +12,12 @@ export class Offers {
   private http: HttpClient = inject(HttpClient);
   private apiUrl = inject(API_URL);
   private currentOfferSubject = new BehaviorSubject<OfferModel | null>(null);
-  private offersSubject = new BehaviorSubject<OfferModel[]>([]);
-  public readonly offers$ = this.offersSubject.asObservable();
 
-  filterOffers(filters: OfferFilters = {}): void {
-    this.getOffers(filters).subscribe({
-      next: (offers: OfferModel[]) => {
-        this.offersSubject.next(offers);
-      },
-      error: (error) => {
-        console.error('Failed to load offers', error);
-        this.offersSubject.next([]);
-      }
-    });
+  filterOffers(filters: OfferFilters = {}): void{
+
   }
 
-  getOffers(filters: OfferFilters = {}): Observable<OfferModel[]> {
+  getOffers(filters: OfferFilters = {}): Observable<any> {
     let params = new HttpParams();
 
     Object.keys(filters).forEach(key => {
@@ -37,7 +27,7 @@ export class Offers {
       }
     });
 
-    return this.http.get<OfferModel[]>(this.apiUrl + '/offers', {params});
+    return this.http.get<any>(this.apiUrl, {params});
   }
 
   getOffer(id: number): Observable<OfferModel> {
@@ -56,7 +46,7 @@ export class Offers {
     this.currentOfferSubject.next(offer);
   }
 
-  getCurrentOffern(): OfferModel | null {
+  getCurrentOffert(): OfferModel | null {
     return this.currentOfferSubject.value;
   }
 }

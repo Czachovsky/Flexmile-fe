@@ -44,7 +44,7 @@ export class Offer implements OnInit {
   ];
   public descriptionList: offerDescriptionModel[] = offerDescription;
   public descriptionBanner = descriptionBanner;
-  public readonly offerData: OfferModel = this.offerService.getCurrentOffern()!;
+  public readonly offerData: OfferModel = this.offerService.getCurrentOffert()!;
   public selectedPeriod: number | null = null;
   public selectedMileageLimit: number | null = null;
   public calculatedPrice: number = 0;
