@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import {ButtonComponent} from '@components/utilities/button/button';
-import {Car} from '@components/utilities/car/car';
 import {Hero} from '@components/home-page/_components/hero/hero';
-import {Badge} from '@components/utilities/badge/badge';
 import {badgeSizes, badgeTypes} from '@models/common.types';
-import {BannerList} from '@components/utilities/banner-list/banner-list';
 import {Link} from '@components/utilities/link/link';
 import {List} from '@components/utilities/list/list';
+import {WhyUs} from '@components/home-page/_components/why-us/why-us';
+import {Faq} from '@components/home-page/_components/faq/faq';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -14,6 +12,8 @@ import {List} from '@components/utilities/list/list';
     Hero,
     Link,
     List,
+    WhyUs,
+    Faq,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',

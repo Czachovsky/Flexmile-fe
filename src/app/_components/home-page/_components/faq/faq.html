@@ -1,1 +1,20 @@
-<p>faq works!</p>
+<section class="pb-7 faq">
+    <h2 class="pb-7 text-center">Najczęściej zadawane pytania</h2>
+    <div class="faq-list">
+      @for (faq of faqObject; let i = $index; track i) {
+        <div class="faq-list_item mb-2" [ngClass]="{'expanded' : faq.isExpanded}">
+          <div class="flex lg:align-items-center align-items-start p-4 cursor-pointer" (click)="changeExpandState(i, $event.target)">
+            <div class="flex align-items-center w-full">
+              <span class="faq-list_item__header">{{ faq.header }}</span>
+              <span class="faq-list_item__arrow ml-auto">
+              <i class="pi pi-angle-down"></i>
+            </span>
+            </div>
+          </div>
+          <div class="faq-list_item__body" #questionAnswer [ngStyle]="{ 'height': faq.isExpanded ? faq.contentHeight + 'px' : '0' }">
+            <div class="p-4 pt-0">{{ faq.body }}</div>
+          </div>
+        </div>
+      }
+    </div>
+</section>

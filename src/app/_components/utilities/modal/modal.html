@@ -1,1 +1,40 @@
-<p>modal works!</p>
+@if (isOpen()) {
+  <section
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      class="modal__backdrop"
+      (click)="handleBackdropClick()"
+    ></div>
+
+    <div class="modal__panel">
+      @if (!hideCloseButton()) {
+        <button
+          type="button"
+          class="modal__close"
+          aria-label="Zamknij okno"
+          (click)="close()"
+        >
+          &times;
+        </button>
+      }
+
+      @if (hasContent) {
+        @if (templateContent; as tpl) {
+          <ng-container
+            [ngTemplateOutlet]="tpl"
+            [ngTemplateOutletContext]="outletContext"
+          ></ng-container>
+        } @else {
+          {{ textContent }}
+        }
+      } @else {
+        <ng-content></ng-content>
+      }
+
+
+    </div>
+  </section>
+}

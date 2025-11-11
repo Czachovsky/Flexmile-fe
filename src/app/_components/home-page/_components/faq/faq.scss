@@ -1,0 +1,110 @@
+@use 'mixins';
+
+
+.faq {
+  max-width: 860px;
+  margin: 0 auto;
+
+  h2 {
+    @include mixins.fontSize(48);
+    line-height: 56px;
+    font-weight: 600;
+  }
+
+  &-list {
+    &_item {
+      background: var(--color-black-50);
+      transition: background 0.3s ease;
+      border-radius: var(--border-radius-base);
+      &.expanded {
+        background: var(--p-primary-900);
+
+        .faq-list_item__header {
+          color: var(--color-white);
+        }
+
+        .faq-list_item__arrow {
+          transform: rotate(180deg);
+          color: var(--color-white);
+        }
+      }
+
+      &__header {
+        font-weight: 500;
+        @include mixins.fontSize(20);
+        color: var(--color-black);
+        transition: color 0.3s ease;
+        line-height: 24px;
+      }
+
+      &__arrow {
+        color: var(--color-black);
+        transition: all 0.3s ease;
+        @include mixins.fontSize(24);
+      }
+
+      &__body {
+        color: #F0E2EF;
+        @include mixins.fontSize(16);
+        line-height: 24px;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+      }
+    }
+  }
+}
+
+//
+//.servicesSections {
+//  .service {
+//    border: 1px solid var(--black-100);
+//    border-radius: 1rem;
+//    & > div{
+//      @include mixins.lower-than('lg') {
+//        flex-direction: column;
+//      }
+//    }
+//    &.expanded {
+//      border-color: var(--black-900);
+//
+//      .questionArrow {
+//        transform: rotate(180deg);
+//      }
+//
+//      .questionAnswer {
+//        height: auto;
+//        // height: 137px;
+//      }
+//    }
+//  }
+//
+//  .servicesIcon {
+//    width: 48px;
+//    height: 48px;
+//    background: var(--red-500);
+//    border-radius: 50px;
+//  }
+//
+//  .questionTitle {
+//    font-weight: 700;
+//    @include mixins.fontSize(20);
+//    @include mixins.lower-than('lg') {
+//      @include mixins.fontSize(18);
+//    }
+//  }
+//
+//  .questionAnswer {
+//    color: var(--black-700);
+//    @include mixins.fontSize(16);
+//    line-height: 24px;
+//    height: 0;
+//    overflow: hidden;
+//    transition: height 0.3s ease;
+//  }
+//
+//  .questionArrow {
+//    font-size: 24px;
+//    color: var(--gray-900);
+//  }
+//}
