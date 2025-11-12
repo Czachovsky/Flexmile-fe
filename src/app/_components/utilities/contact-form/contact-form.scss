@@ -1,0 +1,11 @@
+.contact-form{
+  background: var(--color-purple-secondary);
+  border-radius: var(--border-radius-base);
+  padding: 40px;
+}
+
+:host ::ng-deep{
+  label{
+    color: var(--color-white);
+  }
+}

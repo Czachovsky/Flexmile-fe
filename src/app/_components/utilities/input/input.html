@@ -1,13 +1,12 @@
-
 <div class="input-group flex flex-column">
-  @if (label()) {
+  @if (label() && type() !== inputType.checkbox) {
     <label [for]="inputId()" class="mb-2">{{ label() }}
       @if (required()) {
         <span class="required">*</span>
       }
     </label>
   }
-  @if (type() !== inputType.textarea && type() !== inputType.range) {
+  @if (type() !== inputType.textarea && type() !== inputType.range && type() !== inputType.checkbox) {
     <div class="input-wrapper" [class.price-input]="isPriceInput()">
       @if (isPriceInput()) {
         <input
@@ -52,5 +51,12 @@
       [options]="options"
       (userChangeEnd)="onUserChangeEnd()">
     </ngx-slider>
+  } @else if (type() === inputType.checkbox) {
+    <div class="checkbox-wrapper">
+      <input [id]="inputId()" type="checkbox" aria-hidden="true"  [formControl]="formControl"/>
+      <label [for]="inputId()">{{label()}}</label>
+    </div>
   }
 </div>
+
+

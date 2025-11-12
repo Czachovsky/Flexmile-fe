@@ -1,0 +1,68 @@
+<div class="contact-form">
+  <div [formGroup]="contactForm">
+    <div class="grid mt-0">
+      <div class="col-6">
+        <div>
+          <flexmile-input label="Imię" placeholder="Wpisz Imię" formControlName="first_name"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+          <flexmile-input label="Nazwisko" placeholder="Wpisz Nazwisko" formControlName="last_name"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+          <flexmile-input label="Email" placeholder="Wpisz Email"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+          <flexmile-input label="Telefon" placeholder="Wpisz Telefon"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+          <flexmile-input label="Budżet miesięczny" placeholder="500"
+                          formControlName="monthly_budget_from"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+          <flexmile-input label="." placeholder="100000" formControlName="monthly_budget_to"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-12">
+        <div>
+          <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500"
+                          [max]="10000"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-12">
+        <div>
+          <flexmile-input label="Wiadomość" placeholder="Wiadomość" [type]="inputType.textarea"
+                          formControlName="message"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-12">
+        <div>
+          <flexmile-input
+            label="Wyrażam zgodę na otrzymywanie na wskazany adres e-mail wiadomości dotyczących mojego zapytania od flexmile."
+            [type]="inputType.checkbox" inputId="consent_email" formControlName="consent_email"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-12">
+        <div>
+          <flexmile-input
+            label="Wyrażam zgodę na kontakt telefoniczny w celu przekazywania informacji handlowych przez flexmile."
+            [type]="inputType.checkbox" inputId="consent_phone" formControlName="consent_phone"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-12">
+        <flexmile-button label="Wyślij" iconPosition="right" icon="pi-arrow-right" btnClass="w-full"></flexmile-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ contactForm.getRawValue() | json }}

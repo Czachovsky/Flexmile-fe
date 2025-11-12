@@ -35,4 +35,5 @@ export enum InputType {
   textarea = 'textarea',
   range = 'range',
   number = 'number',
+  checkbox = 'checkbox'
 }

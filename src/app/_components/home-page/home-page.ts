@@ -5,6 +5,7 @@ import {Link} from '@components/utilities/link/link';
 import {List} from '@components/utilities/list/list';
 import {WhyUs} from '@components/home-page/_components/why-us/why-us';
 import {Faq} from '@components/home-page/_components/faq/faq';
+import {Opinions} from '@components/home-page/_components/opinions/opinions';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -14,6 +15,7 @@ import {Faq} from '@components/home-page/_components/faq/faq';
     List,
     WhyUs,
     Faq,
+    Opinions,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
