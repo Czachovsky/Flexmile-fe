@@ -1,13 +1,13 @@
 <div class="filters">
   <h3 class="pb-4">Znajdź auto na wynajem od Flexmile!</h3>
-  <div class="filters__form" [formGroup]=filtersForm>
+  <div class="filters__form" [formGroup]=offersService.filtersForm>
     <div class="grid mt-0">
       <div class="col-8">
         <div class="grid">
           <div class="col-6 pb-0">
             <div>
               <div class="mb-4">
-                <flexmile-dropdown placeholder="Wybierz markę" [options]="carBrands" formControlName="car_brand"
+                <flexmile-dropdown placeholder="Wybierz markę" [options]="carBrands" formControlName="make"
                                    [label]="'Marka pojazdu'"></flexmile-dropdown>
               </div>
               <div>
@@ -19,8 +19,8 @@
           <div class="col-6 pb-0">
             <div>
               <div class="mb-4">
-                <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="car_model"
-                                   [label]="'Model pojazdu'" [disabled]="!filtersForm.get('car_brand')?.value" ></flexmile-dropdown>
+                <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="model"
+                                   [label]="'Model pojazdu'" [disabled]="!offersService.filtersForm.get('make')?.value" ></flexmile-dropdown>
               </div>
               <div>
                 <flexmile-dropdown placeholder="Skrzynia" [options]="[]" [label]="'Typ skrzyni'"></flexmile-dropdown>

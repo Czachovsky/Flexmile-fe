@@ -4,8 +4,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class FilterBuilder {
   static build(): FormGroup<FiltersFormValues> {
     return new FormGroup<FiltersFormValues>({
-      car_brand: new FormControl<string | null>(null),
-      car_model: new FormControl<string | null>(null),
+      make: new FormControl<string | null>(null),
+      model: new FormControl<string | null>(null),
       transmission: new FormControl<string | null>(null),
       fuel: new FormControl<string | null>(null),
       price_from: new FormControl<string | null>('500'),

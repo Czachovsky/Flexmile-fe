@@ -4,11 +4,14 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {OfferFilters, OfferModel} from '@models/offers.types';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {CarModelsModel, MakeListModel} from '@models/hero-search.types';
+import {FormGroup} from '@angular/forms';
+import {FilterBuilder} from '@builders/filters-builder';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Offers {
+export class OffersService {
+  public filtersForm: FormGroup = FilterBuilder.build();
   private http: HttpClient = inject(HttpClient);
   private apiUrl = inject(API_URL);
   private currentOfferSubject = new BehaviorSubject<OfferModel | null>(null);

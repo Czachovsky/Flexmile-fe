@@ -1,69 +1,113 @@
 <div class="contact-form">
   <div [formGroup]="contactForm">
-    <div class="grid mt-0">
-      <div class="col-6">
+    <div class="grid">
+      <div class="col-6 pb-3">
         <div>
-          <flexmile-input label="Imię" placeholder="Wpisz Imię" formControlName="first_name" inputId="first_name"></flexmile-input>
+          <flexmile-input label="Imię" placeholder="Wpisz Imię" [control]="contactForm.get('first_name')"
+                          inputId="first_name"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6 pb-3">
+        <div>
+          <flexmile-input label="Nazwisko" placeholder="Wpisz Nazwisko" [control]="contactForm.get('last_name')"
+                          inputId="last_name"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6 pb-3">
+        <div>
+          <flexmile-input label="Email" placeholder="Wpisz Email" inputId="email"
+                          [control]="contactForm.get('email')"></flexmile-input>
+        </div>
+      </div>
+      <div class="col-6 pb-3">
+        <div>
+          <flexmile-input label="Telefon" placeholder="Wpisz Telefon" inputId="phone"
+                          [control]="contactForm.get('phone')"></flexmile-input>
         </div>
       </div>
       <div class="col-6">
         <div>
-          <flexmile-input label="Nazwisko" placeholder="Wpisz Nazwisko" formControlName="last_name" inputId="last_name"></flexmile-input>
+          <flexmile-input label="Budżet miesięczny" placeholder="500" inputId="monthly_budget_from"
+                          [control]="contactForm.get('monthly_budget_from')"></flexmile-input>
         </div>
       </div>
       <div class="col-6">
         <div>
-          <flexmile-input label="Email" placeholder="Wpisz Email" inputId="email" formControlName="email"></flexmile-input>
+          <flexmile-input class="range_to" label=" " placeholder="100000"
+                          [control]="contactForm.get('monthly_budget_to')"
+                          inputId="monthly_budget_to"></flexmile-input>
         </div>
       </div>
-      <div class="col-6">
-        <div>
-          <flexmile-input label="Telefon" placeholder="Wpisz Telefon" inputId="phone" formControlName="phone"></flexmile-input>
-        </div>
-      </div>
-      <div class="col-6">
-        <div>
-          <flexmile-input label="Budżet miesięczny" placeholder="500"
-                          formControlName="monthly_budget_from"></flexmile-input>
-        </div>
-      </div>
-      <div class="col-6">
-        <div>
-          <flexmile-input label="." placeholder="100000" formControlName="monthly_budget_to"></flexmile-input>
-        </div>
-      </div>
-      <div class="col-12">
+      <div class="col-12 pt-0 pb-6">
         <div>
           <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500"
                           [max]="10000"></flexmile-input>
         </div>
       </div>
-      <div class="col-12">
+      <div class="col-12 pb-3">
         <div>
           <flexmile-input label="Wiadomość" placeholder="Wiadomość" [type]="inputType.textarea"
-                          formControlName="message"></flexmile-input>
+                          [control]="contactForm.get('message')" inputId="message"></flexmile-input>
         </div>
       </div>
       <div class="col-12">
         <div>
           <flexmile-input
             label="Wyrażam zgodę na otrzymywanie na wskazany adres e-mail wiadomości dotyczących mojego zapytania od flexmile."
-            [type]="inputType.checkbox" inputId="consent_email" formControlName="consent_email"></flexmile-input>
+            [type]="inputType.checkbox" inputId="consent_email"
+            [control]="contactForm.get('consent_email')"></flexmile-input>
         </div>
       </div>
       <div class="col-12">
         <div>
           <flexmile-input
             label="Wyrażam zgodę na kontakt telefoniczny w celu przekazywania informacji handlowych przez flexmile."
-            [type]="inputType.checkbox" inputId="consent_phone" formControlName="consent_phone"></flexmile-input>
+            [type]="inputType.checkbox" inputId="consent_phone"
+            [control]="contactForm.get('consent_phone')"></flexmile-input>
         </div>
       </div>
+      @if (contactForm.invalid && errorChecked) {
+        <div class="col-12">
+          <div class="form-error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M7 0C10.8555 0 14 3.14453 14 7C14 10.8828 10.8555 14 7 14C3.11719 14 0 10.8828 0 7C0 3.14453 3.11719 0 7 0ZM6.34375 4.15625V7.65625C6.34375 8.03906 6.61719 8.3125 7 8.3125C7.35547 8.3125 7.65625 8.03906 7.65625 7.65625V4.15625C7.65625 3.80078 7.35547 3.5 7 3.5C6.61719 3.5 6.34375 3.80078 6.34375 4.15625ZM7 10.9375C7.46484 10.9375 7.84766 10.5547 7.84766 10.0898C7.84766 9.625 7.46484 9.24219 7 9.24219C6.50781 9.24219 6.125 9.625 6.125 10.0898C6.125 10.5547 6.50781 10.9375 7 10.9375Z"
+                fill="#FF1D25"/>
+            </svg>
+            Pola wymagane
+          </div>
+        </div>
+      }
       <div class="col-12">
-        {{this.contactForm.invalid}}
-        <flexmile-button label="Wyślij" iconPosition="right" icon="pi-arrow-right" btnClass="w-full" [type]="'submit'" (clicked)="sendForm()"></flexmile-button>
+        <flexmile-button label="Wyślij" iconPosition="right" icon="pi-arrow-right" btnClass="w-full" [type]="'submit'"
+                         (clicked)="sendForm()"></flexmile-button>
       </div>
     </div>
   </div>
+
+  @if (successfullySent) {
+    <div class="message-sent">
+      <svg xmlns="http://www.w3.org/2000/svg" width="81" height="56" viewBox="0 0 81 56" fill="none">
+        <g clip-path="url(#clip0_1669_104598)">
+          <path
+            d="M59.0093 28.4357C59.0093 39.1378 50.6117 47.6743 40.0819 47.6743C29.5521 47.6743 20.875 39.1378 20.875 28.4357C20.875 17.7335 29.4123 9.05737 39.9422 9.05737C47.6788 9.05737 55.0047 14.028 57.9935 20.7564C59.0736 23.1872 59.0093 25.5957 59.0093 28.4357Z"
+            fill="#C4D145"/>
+          <path
+            d="M4.68086 55.9986H76.2323C78.8941 55.623 80.6994 53.7353 80.9118 51.042V4.81699C80.7008 2.14601 78.7208 0.265284 76.0912 0L4.44472 0.0432831C2.00369 0.321133 0.268276 1.93378 0 4.39813V51.3212C0.254303 53.78 2.22026 55.7417 4.68086 55.9986ZM2.80013 6.56787L3.22071 6.7759L16.5619 18.7165C18.1547 19.8865 19.9712 18.3409 18.7276 16.6919C13.8777 12.1277 8.66727 7.95153 3.91795 3.28533L4.56069 2.95163C27.958 2.59001 51.4154 2.90835 74.8364 2.79106C75.3297 2.8511 75.9207 2.87205 76.3776 3.06612C76.5886 3.15548 76.9184 3.32163 76.72 3.56737C76.467 3.87873 75.665 4.36043 75.3185 4.68016C71.5445 8.15678 67.4463 11.5384 63.7896 15.0807C63.3062 15.5484 62.1338 16.5914 61.9732 17.1736C61.4855 18.9482 63.3662 19.7078 64.607 18.5503L77.9733 6.42824L78.1214 7.46844V50.3467L77.8336 51.3869C77.7218 51.472 76.5621 50.5575 76.372 50.4067C71.6255 46.6327 67.2912 42.0698 62.5949 38.2036C61.5721 37.4218 60.0799 37.9356 60.0757 39.3109C60.0729 40.0955 61.0705 40.8816 61.6238 41.408C65.1519 44.7645 69.0964 47.7273 72.6665 51.0378C73.3986 51.7164 74.0987 52.4578 74.761 53.2034H5.45495L19.64 40.5005C20.7579 39.2285 19.8259 37.5795 18.1338 38.0193C13.0016 42.2513 8.08321 46.7751 3.14945 51.2458C3.07539 51.2458 2.80013 50.6985 2.80013 50.6203V6.56787Z"
+            fill="white"/>
+          <path
+            d="M37.3828 47.7553C40.795 47.9564 45.2201 47.342 48.3053 45.8271C49.5251 45.2281 50.995 44.6012 50.1693 43.0765C49.4147 41.6845 48.4283 42.4943 47.4683 42.8964C36.9329 47.3099 24.0543 43.1896 23.3333 30.5188C22.9113 23.1007 26.6308 16.4043 33.4886 13.429C43.4638 9.10205 56.7336 14.4301 55.7528 26.601C55.5404 29.2315 53.9642 32.9846 51.4757 34.1951C48.5959 35.5955 47.3258 34.3836 47.513 31.3524C47.7282 27.8786 48.8349 24.0794 49.0459 20.5986C49.078 20.0708 49.1912 19.6883 48.7315 19.3797C48.2131 19.032 46.8829 18.7821 46.3938 19.2038C46.0613 19.4914 46.0836 21.2632 45.9733 21.3679C45.5876 21.7324 44.7995 20.5051 44.5103 20.2468C39.2538 15.5457 32.1403 18.4791 29.9368 24.6798C26.9312 33.1368 33.2427 42.4133 42.1559 37.0295C42.9496 36.5505 43.5518 35.8636 44.3496 35.4894C45.1978 36.6329 46.1661 38.1758 47.7338 38.3908C53.4193 39.1657 57.7215 33.2052 58.6493 28.2388C61.3502 13.7822 46.6789 5.79299 34.1034 9.85462C14.754 16.1041 15.3409 46.454 37.3828 47.7553ZM37.9389 34.9239C30.2092 34.9309 30.8632 22.5882 37.9753 21.6835C47.2029 20.5093 46.1144 34.917 37.9389 34.9239Z"
+            fill="white"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_1669_104598">
+            <rect width="80.9118" height="56" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+      <h3>Wiadomość <br> została wysłana!</h3>
+      <flexmile-button label="Tak jest!" (clicked)="showForm()"></flexmile-button>
+    </div>
+  }
 </div>
 
-{{ contactForm.getRawValue() | json }}

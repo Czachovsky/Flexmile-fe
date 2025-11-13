@@ -1,11 +1,57 @@
-.contact-form{
+@use 'mixins';
+
+.contact-form {
   background: var(--color-purple-secondary);
   border-radius: var(--border-radius-base);
   padding: 40px;
+  position: relative;
 }
 
-:host ::ng-deep{
-  label{
+:host ::ng-deep {
+  label {
     color: var(--color-white);
+  }
+}
+
+.form-error {
+  color: var(--red-500);
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 18px;
+  @include mixins.fontSize(12)
+}
+
+.message-sent {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background: var(--color-purple-secondary);
+  z-index: 999;
+  border-radius: var(--border-radius-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    color: var(--color-white);
+    text-align: center;
+    font-weight: 600;
+    line-height: 56px;
+    @include mixins.fontSize(48);
+    padding-top:40px;
+    padding-bottom: 24px;
+  }
+}
+
+:host ::ng-deep {
+  .range_to{
+    label{
+      height: 16px;
+    }
   }
 }

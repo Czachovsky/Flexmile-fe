@@ -1,15 +1,15 @@
 import {FormControl} from '@angular/forms';
 
 export interface ContactFormValues {
-  first_name: FormControl<string | null>;
-  last_name: FormControl<string | null>;
-  email: FormControl<string | null>;
-  phone: FormControl<string | null>;
+  first_name: FormControl<string>;
+  last_name: FormControl<string>;
+  email: FormControl<string>;
+  phone: FormControl<string>;
   monthly_budget_from: FormControl<string>;
   monthly_budget_to: FormControl<string>;
   consent_phone: FormControl<boolean>;
   consent_email: FormControl<boolean>;
-  message: FormControl<string | null>;
+  message: FormControl<string>;
 }
 
 export interface ContactFormTypes {

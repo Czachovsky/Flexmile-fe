@@ -4,7 +4,7 @@
 // Label
 // -------------------------------------
 label {
-  font-weight: 700;
+  font-weight: 400;
   @include mixins.fontSize(14);
   line-height: 16px;
 }
@@ -13,9 +13,20 @@ label {
 // Inputs & Textareas
 // -------------------------------------
 .has-error {
+  input::placeholder,
+  textarea::placeholder {
+    color: #FF1D25;
+    opacity: 1;
+  }
   input.f-input,
   textarea.f-textarea {
     border-color: var(--red-500);
+    background: #FFE9EA;
+    color: var(--red-500);
+  }
+  input[type='checkbox'] + label:before {
+    border-color: var(--red-500);
+    background: #FFE9EA;
   }
 }
 
@@ -99,7 +110,7 @@ input {
         background-size: 0;
         will-change: color, border, background, background-size, box-shadow;
         transform: translate3d(0, 0, 0);
-        transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
+        //transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
         box-shadow:
           0 0 0.04em,
           0 0.06em 0.16em -0.03em inset,

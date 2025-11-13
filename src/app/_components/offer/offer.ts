@@ -4,7 +4,7 @@ import {badgeSizes, badgeTypes} from "@models/common.types";
 import {ButtonComponent} from '@components/utilities/button/button';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
 import {DrivetrainType, OfferModel, TransmissionType} from '@models/offers.types';
-import {Offers} from '@services/offers';
+import {OffersService} from '@services/offers';
 import {DecimalPipe, SlicePipe} from '@angular/common';
 import {descriptionBanner, offerDescription, offerDescriptionModel} from '@models/offer.type';
 import {BannerList} from '@components/utilities/banner-list/banner-list';
@@ -25,7 +25,7 @@ import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carou
   styleUrl: './offer.scss',
 })
 export class Offer implements OnInit {
-  private readonly offerService: Offers = inject(Offers);
+  private readonly offerService: OffersService = inject(OffersService);
 
   public readonly badgeTypes = badgeTypes;
   public readonly badgeSizes = badgeSizes;

@@ -1,13 +1,13 @@
 import {ResolveFn, Router} from '@angular/router';
 import {catchError, of, tap} from 'rxjs';
 import {inject} from '@angular/core';
-import {Offers} from '@services/offers';
+import {OffersService} from '@services/offers';
 import {OfferModel} from '@models/offers.types';
 
 export const offerResolver: ResolveFn<any> = (route, state) => {
   const offerParamId = Number(route.paramMap.get('id'));
   const router: Router = inject(Router);
-  const offerService: Offers = inject(Offers)
+  const offerService: OffersService = inject(OffersService)
   if (isNaN(offerParamId) || offerParamId <= 0) {
     void router.navigate(['/oferty']);
     return of(null);

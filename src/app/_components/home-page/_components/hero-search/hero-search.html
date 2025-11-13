@@ -12,7 +12,7 @@
           <flexmile-dropdown placeholder="Model" [options]="carModels" formControlName="model"
                              [disabled]="!searchForm.get('make')?.value"></flexmile-dropdown>
         </div>
-        <flexmile-button [onlyIcon]="true" icon="pi-search" color="outline"></flexmile-button>
+        <flexmile-button [onlyIcon]="true" icon="pi-search" color="outline" (clicked)="goToFiltered()"></flexmile-button>
       </div>
     </div>
   </div>

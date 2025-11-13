@@ -1,11 +1,10 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {Dropdown, DropdownOption} from '@components/utilities/dropdown/dropdown';
-import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {Input} from '@components/utilities/input/input';
 import {InputType} from '@models/common.types';
-import {FilterBuilder} from '@builders/filters-builder';
-import {Offers} from '@services/offers';
+import {OffersService} from '@services/offers';
 import {MakeListModel} from '@models/hero-search.types';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
@@ -21,9 +20,8 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   styleUrl: './filters.scss',
 })
 export class Filters implements OnInit {
-  public filtersForm: FormGroup = FilterBuilder.build();
   public readonly inputType = InputType;
-  private readonly offersService: Offers = inject(Offers);
+  public readonly offersService: OffersService = inject(OffersService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   public carBrands: DropdownOption[] = [];
   public carModels: DropdownOption[] = [];
@@ -33,15 +31,17 @@ export class Filters implements OnInit {
     this.listenValueChanges();
   }
 
+
+
   public priceRangeChanged(obj: { min: number, max: number }): void {
-    this.filtersForm.patchValue({
+    this.offersService.filtersForm.patchValue({
       price_from: obj.min,
       price_to: obj.max,
     });
   }
 
   public resetFilters(): void {
-  this.filtersForm.reset({'price_from': 500, 'price_to': 10000});
+  this.offersService.filtersForm.reset({'price_from': 500, 'price_to': 10000});
   }
 
   private getBrands(): void {
@@ -56,7 +56,8 @@ export class Filters implements OnInit {
   }
 
   private listenValueChanges(): void {
-    this.filtersForm.get('make')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+    this.offersService.filtersForm.get('make')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
+      console.log(value);
       if (value) {
         this.offersService.getModelsForBrand(value).subscribe({
           next: (data) => {
@@ -68,9 +69,9 @@ export class Filters implements OnInit {
         })
       }
     })
-    this.filtersForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      console.log(this.filtersForm.getRawValue());
-      this.offersService.filterOffers(this.filtersForm.getRawValue())
+    this.offersService.filtersForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      console.log(this.offersService.filtersForm.getRawValue());
+      this.offersService.filterOffers(this.offersService.filtersForm.getRawValue())
     })
   };
 }
