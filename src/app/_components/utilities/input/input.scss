@@ -6,6 +6,7 @@
 label {
   font-weight: 700;
   @include mixins.fontSize(14);
+  line-height: 16px;
 }
 
 // -------------------------------------
@@ -70,7 +71,7 @@ input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
+    position: absolute;
     + label {
       -webkit-user-select: none;
       user-select: none;

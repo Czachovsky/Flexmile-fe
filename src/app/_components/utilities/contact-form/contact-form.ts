@@ -33,4 +33,13 @@ export class ContactForm {
   public getValueForPriceRange(value: string): number {
     return Number(value);
   }
+
+  public sendForm(): void {
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+    } else {
+      console.log(this.contactForm.getRawValue());
+    }
+
+  }
 }

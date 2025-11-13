@@ -3,22 +3,22 @@
     <div class="grid mt-0">
       <div class="col-6">
         <div>
-          <flexmile-input label="Imię" placeholder="Wpisz Imię" formControlName="first_name"></flexmile-input>
+          <flexmile-input label="Imię" placeholder="Wpisz Imię" formControlName="first_name" inputId="first_name"></flexmile-input>
         </div>
       </div>
       <div class="col-6">
         <div>
-          <flexmile-input label="Nazwisko" placeholder="Wpisz Nazwisko" formControlName="last_name"></flexmile-input>
+          <flexmile-input label="Nazwisko" placeholder="Wpisz Nazwisko" formControlName="last_name" inputId="last_name"></flexmile-input>
         </div>
       </div>
       <div class="col-6">
         <div>
-          <flexmile-input label="Email" placeholder="Wpisz Email"></flexmile-input>
+          <flexmile-input label="Email" placeholder="Wpisz Email" inputId="email" formControlName="email"></flexmile-input>
         </div>
       </div>
       <div class="col-6">
         <div>
-          <flexmile-input label="Telefon" placeholder="Wpisz Telefon"></flexmile-input>
+          <flexmile-input label="Telefon" placeholder="Wpisz Telefon" inputId="phone" formControlName="phone"></flexmile-input>
         </div>
       </div>
       <div class="col-6">
@@ -59,7 +59,8 @@
         </div>
       </div>
       <div class="col-12">
-        <flexmile-button label="Wyślij" iconPosition="right" icon="pi-arrow-right" btnClass="w-full"></flexmile-button>
+        {{this.contactForm.invalid}}
+        <flexmile-button label="Wyślij" iconPosition="right" icon="pi-arrow-right" btnClass="w-full" [type]="'submit'" (clicked)="sendForm()"></flexmile-button>
       </div>
     </div>
   </div>

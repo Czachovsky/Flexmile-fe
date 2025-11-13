@@ -1,6 +1,6 @@
-<div class="input-group flex flex-column">
+<div class="input-group flex flex-column" [ngClass]="{'has-error': formControl?.invalid && formControl?.['touched']}">
   @if (label() && type() !== inputType.checkbox) {
-    <label [for]="inputId()" class="mb-2">{{ label() }}
+    <label [for]="inputId()" class="mb-2">{{ label() }} {{formControl?.invalid}}
       @if (required()) {
         <span class="required">*</span>
       }

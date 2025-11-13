@@ -20,12 +20,14 @@ import {
 import {InputType} from '@models/common.types';
 import {NgxSliderModule, Options} from '@angular-slider/ngx-slider';
 import {Subscription} from 'rxjs';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'flexmile-input',
   imports: [
     ReactiveFormsModule,
-    NgxSliderModule
+    NgxSliderModule,
+    NgClass
   ],
   templateUrl: './input.html',
   styleUrl: './input.scss',
