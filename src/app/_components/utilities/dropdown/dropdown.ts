@@ -1,4 +1,4 @@
-import { Component, input, signal, effect, forwardRef, HostListener, ElementRef } from '@angular/core';
+import {Component, input, signal, effect, forwardRef, HostListener, ElementRef, computed} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -29,11 +29,20 @@ export class Dropdown implements ControlValueAccessor {
   theme = input<'light' | 'dark'>('light');
   ariaLabel = input<string>('Dropdown menu');
   disabledInput = input<boolean>(false, { alias: 'disabled' }); // DODANE
+  hideSearch = input<boolean>(false);
 
   isOpen = signal(false);
   selectedValue = signal<any>(null);
   disabled = signal(false);
   focusedIndex = signal(-1);
+  searchQuery = signal<string>('');
+
+  filteredOptions = computed(() =>
+    this.options().filter(opt =>
+      opt.label.toLowerCase().includes(this.searchQuery().toLowerCase())
+    )
+  );
+
 
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
@@ -114,9 +123,9 @@ export class Dropdown implements ControlValueAccessor {
 
   toggleDropdown(): void {
     if (!this.disabled()) {
-      this.isOpen.update(value => !value);
+      this.isOpen.update(v => !v);
       if (this.isOpen()) {
-        // Ustaw fokus na wybranej opcji lub pierwszej
+        this.searchQuery.set('');
         const selectedIndex = this.options().findIndex(
           opt => opt.value === this.selectedValue()
         );

@@ -1,190 +1,192 @@
-<div class="offer">
-  <div class="container">
-    <div class="offer__id py-4">
-      {{ offerData.car_reference_id }}
-    </div>
-    <div class="offer__body pb-7">
-      <div class="flex">
-        <div class="offer__body-info  pr-7">
-          <div class="offer__body-info-header">
-            <div class="flex align-items-center justify-content-between pb-2">
-              <h1>{{ offerData.brand.name }} {{ offerData.model }} {{ offerData.specs.engine }}</h1>
-              <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
-            </div>
-            <span class="block pb-3">
-              {{ offerData.specs.engine ? offerData.specs.engine + ', ' : '' }}{{ offerData.specs.engine_capacity }} cm³
-            </span>
-            <div class="offer__body-info-header-specs flex align-items-center">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path
-                    d="M3.71094 0H9.96094C11.3672 0 12.5 1.13281 12.5 2.5V10H13.125C14.8438 10 16.25 11.4062 16.25 13.125V15C16.25 15.7031 16.7969 16.25 17.5 16.25C18.1641 16.25 18.75 15.7031 18.75 15V8.75C17.3438 8.75 16.25 7.65625 16.25 6.25V3.32031L15.1953 2.34375C14.9219 2.10938 14.9219 1.71875 15.1562 1.48438C15.3906 1.21094 15.7812 1.21094 16.0156 1.44531L19.1797 4.29688C19.6875 4.80469 20 5.46875 20 6.17188V15C20 16.4062 18.8672 17.5 17.5 17.5C16.0938 17.5 15 16.4062 15 15V13.125C15 12.1094 14.1406 11.25 13.125 11.25H12.5V18.75H13.125C13.4375 18.75 13.75 19.0625 13.75 19.375C13.75 19.7266 13.4375 20 13.125 20H0.625C0.273438 20 0 19.7266 0 19.375C0 19.0625 0.273438 18.75 0.625 18.75H1.25V2.5C1.25 1.13281 2.34375 0 3.75 0H3.71094ZM9.96094 1.25H3.71094C3.04688 1.25 2.46094 1.83594 2.46094 2.5V7.5H11.25V2.5C11.25 1.83594 10.6641 1.25 9.96094 1.25ZM11.25 8.75H2.46094V18.75H11.25V8.75ZM18.75 7.5V6.17188C18.75 5.82031 18.5938 5.46875 18.3203 5.23438L17.5 4.45312V6.25C17.5 6.95312 18.0469 7.5 18.75 7.5Z"
-                    fill="#863087"/>
-                </svg>
-                {{ offerData.fuel_type.name }}
-              </div>
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path
-                    d="M15.5254 0C16.9032 0.000206925 17.9998 1.0968 18 2.47461C18 3.62757 17.1845 4.61194 16.0879 4.86523V9C16.0879 9.30924 15.8346 9.56229 15.5254 9.5625H9.5625V13.1348C10.6593 13.3879 11.4746 14.3723 11.4746 15.5254C11.4744 16.9033 10.378 18 9 18C7.62201 18 6.5256 16.8752 6.52539 15.5254C6.52539 14.3723 7.34067 13.3879 8.4375 13.1348V9.5625H3.03711V13.1348C4.13398 13.3879 4.9502 14.3723 4.9502 15.5254C4.94999 16.9033 3.8526 18 2.47461 18C1.0968 17.9998 0.000206924 16.9032 0 15.5254C0 14.3724 0.815465 13.3881 1.91211 13.1348V4.86523C0.815465 4.61194 0 3.62757 0 2.47461C0.000207304 1.0968 1.0968 0.000207304 2.47461 0C3.8526 0 4.94998 1.12478 4.9502 2.47461C4.9502 3.62773 4.13398 4.61211 3.03711 4.86523V8.4375H8.4375V4.86523C7.34067 4.61208 6.52539 3.6277 6.52539 2.47461C6.5256 1.09667 7.65013 0 9 0C10.3499 0 11.4744 1.09667 11.4746 2.47461C11.4746 3.6277 10.6593 4.61208 9.5625 4.86523V8.4375H14.9629V4.86523C13.866 4.61211 13.0498 3.62773 13.0498 2.47461C13.05 1.09667 14.1474 0 15.5254 0ZM2.47461 14.1748C1.71542 14.175 1.125 14.7943 1.125 15.5254C1.12519 16.2846 1.68802 16.875 2.44727 16.875C3.20632 16.8748 3.79667 16.2563 3.79688 15.5254C3.79688 14.7941 3.23398 14.1748 2.47461 14.1748ZM9 14.1748C8.24063 14.1748 7.65039 14.7941 7.65039 15.5254C7.65059 16.2846 8.24076 16.875 9 16.875C9.75924 16.875 10.3494 16.2565 10.3496 15.5254C10.3496 14.7941 9.75937 14.1748 9 14.1748ZM2.47461 1.125C1.71555 1.1252 1.1252 1.71555 1.125 2.47461C1.125 3.20573 1.71542 3.82498 2.47461 3.8252C3.23398 3.8252 3.8252 3.20586 3.8252 2.47461C3.82499 1.71542 3.23385 1.125 2.47461 1.125ZM9 1.125C8.26888 1.125 7.6506 1.71542 7.65039 2.47461C7.65039 3.20586 8.24063 3.8252 9 3.8252C9.75937 3.8252 10.3496 3.20586 10.3496 2.47461C10.3494 1.71542 9.73112 1.125 9 1.125ZM15.5254 1.09668C14.766 1.09668 14.1748 1.71602 14.1748 2.44727C14.175 3.20645 14.7943 3.79688 15.5254 3.79688C16.2846 3.79667 16.875 3.20573 16.875 2.47461C16.8748 1.71554 16.2844 1.09689 15.5254 1.09668Z"
-                    fill="#863087"/>
-                  <path
-                    d="M15.5254 0C16.9032 0.000206925 17.9998 1.0968 18 2.47461C18 3.62757 17.1845 4.61194 16.0879 4.86523V9C16.0879 9.30924 15.8346 9.56229 15.5254 9.5625H9.5625V13.1348C10.6593 13.3879 11.4746 14.3723 11.4746 15.5254C11.4744 16.9033 10.378 18 9 18C7.62201 18 6.5256 16.8752 6.52539 15.5254C6.52539 14.3723 7.34067 13.3879 8.4375 13.1348V9.5625H3.03711V13.1348C4.13398 13.3879 4.9502 14.3723 4.9502 15.5254C4.94999 16.9033 3.8526 18 2.47461 18C1.0968 17.9998 0.000206924 16.9032 0 15.5254C0 14.3724 0.815465 13.3881 1.91211 13.1348V4.86523C0.815465 4.61194 0 3.62757 0 2.47461C0.000207304 1.0968 1.0968 0.000207304 2.47461 0C3.8526 0 4.94998 1.12478 4.9502 2.47461C4.9502 3.62773 4.13398 4.61211 3.03711 4.86523V8.4375H8.4375V4.86523C7.34067 4.61208 6.52539 3.6277 6.52539 2.47461C6.5256 1.09667 7.65013 0 9 0C10.3499 0 11.4744 1.09667 11.4746 2.47461C11.4746 3.6277 10.6593 4.61208 9.5625 4.86523V8.4375H14.9629V4.86523C13.866 4.61211 13.0498 3.62773 13.0498 2.47461C13.05 1.09667 14.1474 0 15.5254 0ZM2.47461 14.1748C1.71542 14.175 1.125 14.7943 1.125 15.5254C1.12519 16.2846 1.68802 16.875 2.44727 16.875C3.20632 16.8748 3.79667 16.2563 3.79688 15.5254C3.79688 14.7941 3.23398 14.1748 2.47461 14.1748ZM9 14.1748C8.24063 14.1748 7.65039 14.7941 7.65039 15.5254C7.65059 16.2846 8.24076 16.875 9 16.875C9.75924 16.875 10.3494 16.2565 10.3496 15.5254C10.3496 14.7941 9.75937 14.1748 9 14.1748ZM2.47461 1.125C1.71555 1.1252 1.1252 1.71555 1.125 2.47461C1.125 3.20573 1.71542 3.82498 2.47461 3.8252C3.23398 3.8252 3.8252 3.20586 3.8252 2.47461C3.82499 1.71542 3.23385 1.125 2.47461 1.125ZM9 1.125C8.26888 1.125 7.6506 1.71542 7.65039 2.47461C7.65039 3.20586 8.24063 3.8252 9 3.8252C9.75937 3.8252 10.3496 3.20586 10.3496 2.47461C10.3494 1.71542 9.73112 1.125 9 1.125ZM15.5254 1.09668C14.766 1.09668 14.1748 1.71602 14.1748 2.44727C14.175 3.20645 14.7943 3.79688 15.5254 3.79688C16.2846 3.79667 16.875 3.20573 16.875 2.47461C16.8748 1.71554 16.2844 1.09689 15.5254 1.09668Z"
-                    stroke="#863087"/>
-                </svg>
-                {{ getTransmissionLabel(offerData.specs.transmission) }}
-              </div>
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="15" viewBox="0 0 25 15" fill="none">
-                  <path
-                    d="M8.4375 7.5C8.4375 8.04688 8.00781 8.4375 7.5 8.4375C6.95312 8.4375 6.5625 8.04688 6.5625 7.5C6.5625 6.99219 6.95312 6.5625 7.5 6.5625C8.00781 6.5625 8.4375 6.99219 8.4375 7.5ZM10.3125 7.5C10.3125 6.99219 10.7031 6.5625 11.25 6.5625C11.7578 6.5625 12.1875 6.99219 12.1875 7.5C12.1875 8.04688 11.7578 8.4375 11.25 8.4375C10.7031 8.4375 10.3125 8.04688 10.3125 7.5ZM15.9375 7.5C15.9375 8.04688 15.5078 8.4375 15 8.4375C14.4531 8.4375 14.0625 8.04688 14.0625 7.5C14.0625 6.99219 14.4531 6.5625 15 6.5625C15.5078 6.5625 15.9375 6.99219 15.9375 7.5ZM16.25 0.625C16.25 0.976562 15.9375 1.25 15.625 1.25H12.5V2.5H15.4688C15.9766 2.5 16.4453 2.65625 16.875 2.92969L18.8672 4.25781C19.5703 4.72656 20 5.50781 20 6.36719V12.5C20 13.9062 18.8672 15 17.5 15H9.92188C9.17969 15 8.4375 14.6875 7.96875 14.0625L6.71875 12.5H5.625C4.57031 12.5 3.75 11.6797 3.75 10.625V8.125H1.25V11.25C1.25 11.6016 0.9375 11.875 0.625 11.875C0.273438 11.875 0 11.6016 0 11.25V3.75C0 3.4375 0.273438 3.125 0.625 3.125C0.9375 3.125 1.25 3.4375 1.25 3.75V6.875H3.75V4.375C3.75 3.35938 4.57031 2.5 5.625 2.5H11.25V1.25H8.125C7.77344 1.25 7.5 0.976562 7.5 0.625C7.5 0.3125 7.77344 0 8.125 0H15.625C15.9375 0 16.25 0.3125 16.25 0.625ZM5.625 3.75C5.27344 3.75 5 4.0625 5 4.375V10.625C5 10.9766 5.27344 11.25 5.625 11.25H7.34375L8.94531 13.2812C9.17969 13.5938 9.57031 13.75 9.92188 13.75H17.5C18.1641 13.75 18.75 13.2031 18.75 12.5V6.36719C18.75 5.9375 18.5156 5.54688 18.1641 5.3125L16.1719 3.98438C15.9766 3.82812 15.7031 3.75 15.4688 3.75H5.625ZM21.25 6.25C21.25 5.58594 21.7969 5 22.5 5H23.75C24.4141 5 25 5.58594 25 6.25V13.75C25 14.4531 24.4141 15 23.75 15H22.5C21.7969 15 21.25 14.4531 21.25 13.75V6.25ZM22.5 13.75H23.75V6.25H22.5V13.75Z"
-                    fill="#863087"/>
-                </svg>
-                {{ offerData.specs.horsepower }} KM
-              </div>
-            </div>
-          </div>
-          <div class="offer__body-gallery">
-            <flexmile-offer-gallery></flexmile-offer-gallery>
-          </div>
-        </div>
-        <div class="offer__body-form">
-          <h3 class="block pb-5 mb-5">Wybierz ofertę najmu idealną dla Twojej firmy!</h3>
-          <div class="block pb-5 mb-5">
-            <div>
-              <div class="pb-5">
-                <div class="pb-2">Czas trwania umowy <span>(w miesiącach)</span></div>
-                <div class="periods flex gap-2 flex-wrap">
-                  @for (period of offerData.pricing.rental_periods; track period) {
-                    <flexmile-button [btnClass]="isPeriodActive(period) ? 'active' : ''" [label]="period"
-                                     color="secondary" size="medium" (click)="selectPeriod(period)"></flexmile-button>
-                  }
-                </div>
-              </div>
-              <div class="pb-5">
-                <div class="pb-2">Roczny limit kilometrów</div>
-                <div class="mileage flex gap-2 flex-wrap">
-                  @for (limit of offerData.pricing.mileage_limits; track limit) {
-                    <flexmile-button [btnClass]="isMileageLimitActive(limit) ? 'active' : ''"
-                                     label="{{limit | number:'1.0-0'}}" color="secondary"
-                                     size="medium" (click)="selectMileageLimit(limit)"></flexmile-button>
-                  }
-                </div>
-              </div>
-              <div class="offer__body-form-price">
-                <div class="p pb-5">{{ calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span></div>
-                <div class="b">
-                  <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'" label="Zamów" iconPosition="right"
-                                   icon="pi-arrow-right"
-                                   size="large" (click)="onOrderClick()"></flexmile-button>
-                </div>
-              </div>
+<!--<div class="offer">-->
+<!--  <div class="container">-->
+<!--    <div class="offer__id py-4">-->
+<!--      {{ offerData.car_reference_id }}-->
+<!--    </div>-->
+<!--    <div class="offer__body pb-7">-->
+<!--      <div class="flex">-->
+<!--        <div class="offer__body-info  pr-7">-->
+<!--          <div class="offer__body-info-header">-->
+<!--            <div class="flex align-items-center justify-content-between pb-2">-->
+<!--              <h1>{{ offerData.brand.name }} {{ offerData.model }} {{ offerData.specs.engine }}</h1>-->
+<!--              <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>-->
+<!--            </div>-->
+<!--            <span class="block pb-3">-->
+<!--              {{ offerData.specs.engine ? offerData.specs.engine + ', ' : '' }}{{ offerData.specs.engine_capacity }} cm³-->
+<!--            </span>-->
+<!--            <div class="offer__body-info-header-specs flex align-items-center">-->
+<!--              <div>-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">-->
+<!--                  <path-->
+<!--                    d="M3.71094 0H9.96094C11.3672 0 12.5 1.13281 12.5 2.5V10H13.125C14.8438 10 16.25 11.4062 16.25 13.125V15C16.25 15.7031 16.7969 16.25 17.5 16.25C18.1641 16.25 18.75 15.7031 18.75 15V8.75C17.3438 8.75 16.25 7.65625 16.25 6.25V3.32031L15.1953 2.34375C14.9219 2.10938 14.9219 1.71875 15.1562 1.48438C15.3906 1.21094 15.7812 1.21094 16.0156 1.44531L19.1797 4.29688C19.6875 4.80469 20 5.46875 20 6.17188V15C20 16.4062 18.8672 17.5 17.5 17.5C16.0938 17.5 15 16.4062 15 15V13.125C15 12.1094 14.1406 11.25 13.125 11.25H12.5V18.75H13.125C13.4375 18.75 13.75 19.0625 13.75 19.375C13.75 19.7266 13.4375 20 13.125 20H0.625C0.273438 20 0 19.7266 0 19.375C0 19.0625 0.273438 18.75 0.625 18.75H1.25V2.5C1.25 1.13281 2.34375 0 3.75 0H3.71094ZM9.96094 1.25H3.71094C3.04688 1.25 2.46094 1.83594 2.46094 2.5V7.5H11.25V2.5C11.25 1.83594 10.6641 1.25 9.96094 1.25ZM11.25 8.75H2.46094V18.75H11.25V8.75ZM18.75 7.5V6.17188C18.75 5.82031 18.5938 5.46875 18.3203 5.23438L17.5 4.45312V6.25C17.5 6.95312 18.0469 7.5 18.75 7.5Z"-->
+<!--                    fill="#863087"/>-->
+<!--                </svg>-->
+<!--                {{ offerData.fuel_type.name }}-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">-->
+<!--                  <path-->
+<!--                    d="M15.5254 0C16.9032 0.000206925 17.9998 1.0968 18 2.47461C18 3.62757 17.1845 4.61194 16.0879 4.86523V9C16.0879 9.30924 15.8346 9.56229 15.5254 9.5625H9.5625V13.1348C10.6593 13.3879 11.4746 14.3723 11.4746 15.5254C11.4744 16.9033 10.378 18 9 18C7.62201 18 6.5256 16.8752 6.52539 15.5254C6.52539 14.3723 7.34067 13.3879 8.4375 13.1348V9.5625H3.03711V13.1348C4.13398 13.3879 4.9502 14.3723 4.9502 15.5254C4.94999 16.9033 3.8526 18 2.47461 18C1.0968 17.9998 0.000206924 16.9032 0 15.5254C0 14.3724 0.815465 13.3881 1.91211 13.1348V4.86523C0.815465 4.61194 0 3.62757 0 2.47461C0.000207304 1.0968 1.0968 0.000207304 2.47461 0C3.8526 0 4.94998 1.12478 4.9502 2.47461C4.9502 3.62773 4.13398 4.61211 3.03711 4.86523V8.4375H8.4375V4.86523C7.34067 4.61208 6.52539 3.6277 6.52539 2.47461C6.5256 1.09667 7.65013 0 9 0C10.3499 0 11.4744 1.09667 11.4746 2.47461C11.4746 3.6277 10.6593 4.61208 9.5625 4.86523V8.4375H14.9629V4.86523C13.866 4.61211 13.0498 3.62773 13.0498 2.47461C13.05 1.09667 14.1474 0 15.5254 0ZM2.47461 14.1748C1.71542 14.175 1.125 14.7943 1.125 15.5254C1.12519 16.2846 1.68802 16.875 2.44727 16.875C3.20632 16.8748 3.79667 16.2563 3.79688 15.5254C3.79688 14.7941 3.23398 14.1748 2.47461 14.1748ZM9 14.1748C8.24063 14.1748 7.65039 14.7941 7.65039 15.5254C7.65059 16.2846 8.24076 16.875 9 16.875C9.75924 16.875 10.3494 16.2565 10.3496 15.5254C10.3496 14.7941 9.75937 14.1748 9 14.1748ZM2.47461 1.125C1.71555 1.1252 1.1252 1.71555 1.125 2.47461C1.125 3.20573 1.71542 3.82498 2.47461 3.8252C3.23398 3.8252 3.8252 3.20586 3.8252 2.47461C3.82499 1.71542 3.23385 1.125 2.47461 1.125ZM9 1.125C8.26888 1.125 7.6506 1.71542 7.65039 2.47461C7.65039 3.20586 8.24063 3.8252 9 3.8252C9.75937 3.8252 10.3496 3.20586 10.3496 2.47461C10.3494 1.71542 9.73112 1.125 9 1.125ZM15.5254 1.09668C14.766 1.09668 14.1748 1.71602 14.1748 2.44727C14.175 3.20645 14.7943 3.79688 15.5254 3.79688C16.2846 3.79667 16.875 3.20573 16.875 2.47461C16.8748 1.71554 16.2844 1.09689 15.5254 1.09668Z"-->
+<!--                    fill="#863087"/>-->
+<!--                  <path-->
+<!--                    d="M15.5254 0C16.9032 0.000206925 17.9998 1.0968 18 2.47461C18 3.62757 17.1845 4.61194 16.0879 4.86523V9C16.0879 9.30924 15.8346 9.56229 15.5254 9.5625H9.5625V13.1348C10.6593 13.3879 11.4746 14.3723 11.4746 15.5254C11.4744 16.9033 10.378 18 9 18C7.62201 18 6.5256 16.8752 6.52539 15.5254C6.52539 14.3723 7.34067 13.3879 8.4375 13.1348V9.5625H3.03711V13.1348C4.13398 13.3879 4.9502 14.3723 4.9502 15.5254C4.94999 16.9033 3.8526 18 2.47461 18C1.0968 17.9998 0.000206924 16.9032 0 15.5254C0 14.3724 0.815465 13.3881 1.91211 13.1348V4.86523C0.815465 4.61194 0 3.62757 0 2.47461C0.000207304 1.0968 1.0968 0.000207304 2.47461 0C3.8526 0 4.94998 1.12478 4.9502 2.47461C4.9502 3.62773 4.13398 4.61211 3.03711 4.86523V8.4375H8.4375V4.86523C7.34067 4.61208 6.52539 3.6277 6.52539 2.47461C6.5256 1.09667 7.65013 0 9 0C10.3499 0 11.4744 1.09667 11.4746 2.47461C11.4746 3.6277 10.6593 4.61208 9.5625 4.86523V8.4375H14.9629V4.86523C13.866 4.61211 13.0498 3.62773 13.0498 2.47461C13.05 1.09667 14.1474 0 15.5254 0ZM2.47461 14.1748C1.71542 14.175 1.125 14.7943 1.125 15.5254C1.12519 16.2846 1.68802 16.875 2.44727 16.875C3.20632 16.8748 3.79667 16.2563 3.79688 15.5254C3.79688 14.7941 3.23398 14.1748 2.47461 14.1748ZM9 14.1748C8.24063 14.1748 7.65039 14.7941 7.65039 15.5254C7.65059 16.2846 8.24076 16.875 9 16.875C9.75924 16.875 10.3494 16.2565 10.3496 15.5254C10.3496 14.7941 9.75937 14.1748 9 14.1748ZM2.47461 1.125C1.71555 1.1252 1.1252 1.71555 1.125 2.47461C1.125 3.20573 1.71542 3.82498 2.47461 3.8252C3.23398 3.8252 3.8252 3.20586 3.8252 2.47461C3.82499 1.71542 3.23385 1.125 2.47461 1.125ZM9 1.125C8.26888 1.125 7.6506 1.71542 7.65039 2.47461C7.65039 3.20586 8.24063 3.8252 9 3.8252C9.75937 3.8252 10.3496 3.20586 10.3496 2.47461C10.3494 1.71542 9.73112 1.125 9 1.125ZM15.5254 1.09668C14.766 1.09668 14.1748 1.71602 14.1748 2.44727C14.175 3.20645 14.7943 3.79688 15.5254 3.79688C16.2846 3.79667 16.875 3.20573 16.875 2.47461C16.8748 1.71554 16.2844 1.09689 15.5254 1.09668Z"-->
+<!--                    stroke="#863087"/>-->
+<!--                </svg>-->
+<!--                {{ getTransmissionLabel(offerData.specs.transmission) }}-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="15" viewBox="0 0 25 15" fill="none">-->
+<!--                  <path-->
+<!--                    d="M8.4375 7.5C8.4375 8.04688 8.00781 8.4375 7.5 8.4375C6.95312 8.4375 6.5625 8.04688 6.5625 7.5C6.5625 6.99219 6.95312 6.5625 7.5 6.5625C8.00781 6.5625 8.4375 6.99219 8.4375 7.5ZM10.3125 7.5C10.3125 6.99219 10.7031 6.5625 11.25 6.5625C11.7578 6.5625 12.1875 6.99219 12.1875 7.5C12.1875 8.04688 11.7578 8.4375 11.25 8.4375C10.7031 8.4375 10.3125 8.04688 10.3125 7.5ZM15.9375 7.5C15.9375 8.04688 15.5078 8.4375 15 8.4375C14.4531 8.4375 14.0625 8.04688 14.0625 7.5C14.0625 6.99219 14.4531 6.5625 15 6.5625C15.5078 6.5625 15.9375 6.99219 15.9375 7.5ZM16.25 0.625C16.25 0.976562 15.9375 1.25 15.625 1.25H12.5V2.5H15.4688C15.9766 2.5 16.4453 2.65625 16.875 2.92969L18.8672 4.25781C19.5703 4.72656 20 5.50781 20 6.36719V12.5C20 13.9062 18.8672 15 17.5 15H9.92188C9.17969 15 8.4375 14.6875 7.96875 14.0625L6.71875 12.5H5.625C4.57031 12.5 3.75 11.6797 3.75 10.625V8.125H1.25V11.25C1.25 11.6016 0.9375 11.875 0.625 11.875C0.273438 11.875 0 11.6016 0 11.25V3.75C0 3.4375 0.273438 3.125 0.625 3.125C0.9375 3.125 1.25 3.4375 1.25 3.75V6.875H3.75V4.375C3.75 3.35938 4.57031 2.5 5.625 2.5H11.25V1.25H8.125C7.77344 1.25 7.5 0.976562 7.5 0.625C7.5 0.3125 7.77344 0 8.125 0H15.625C15.9375 0 16.25 0.3125 16.25 0.625ZM5.625 3.75C5.27344 3.75 5 4.0625 5 4.375V10.625C5 10.9766 5.27344 11.25 5.625 11.25H7.34375L8.94531 13.2812C9.17969 13.5938 9.57031 13.75 9.92188 13.75H17.5C18.1641 13.75 18.75 13.2031 18.75 12.5V6.36719C18.75 5.9375 18.5156 5.54688 18.1641 5.3125L16.1719 3.98438C15.9766 3.82812 15.7031 3.75 15.4688 3.75H5.625ZM21.25 6.25C21.25 5.58594 21.7969 5 22.5 5H23.75C24.4141 5 25 5.58594 25 6.25V13.75C25 14.4531 24.4141 15 23.75 15H22.5C21.7969 15 21.25 14.4531 21.25 13.75V6.25ZM22.5 13.75H23.75V6.25H22.5V13.75Z"-->
+<!--                    fill="#863087"/>-->
+<!--                </svg>-->
+<!--                {{ offerData.specs.horsepower }} KM-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="offer__body-gallery">-->
+<!--            <flexmile-offer-gallery></flexmile-offer-gallery>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="offer__body-form">-->
+<!--          <h3 class="block pb-5 mb-5">Wybierz ofertę najmu idealną dla Twojej firmy!</h3>-->
+<!--          <div class="block pb-5 mb-5">-->
+<!--            <div>-->
+<!--              <div class="pb-5">-->
+<!--                <div class="pb-2">Czas trwania umowy <span>(w miesiącach)</span></div>-->
+<!--                <div class="periods flex gap-2 flex-wrap">-->
+<!--                  @for (period of offerData.pricing.rental_periods; track period) {-->
+<!--                    <flexmile-button [btnClass]="isPeriodActive(period) ? 'active' : ''" [label]="period"-->
+<!--                                     color="secondary" size="medium" (click)="selectPeriod(period)"></flexmile-button>-->
+<!--                  }-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="pb-5">-->
+<!--                <div class="pb-2">Roczny limit kilometrów</div>-->
+<!--                <div class="mileage flex gap-2 flex-wrap">-->
+<!--                  @for (limit of offerData.pricing.mileage_limits; track limit) {-->
+<!--                    <flexmile-button [btnClass]="isMileageLimitActive(limit) ? 'active' : ''"-->
+<!--                                     label="{{limit | number:'1.0-0'}}" color="secondary"-->
+<!--                                     size="medium" (click)="selectMileageLimit(limit)"></flexmile-button>-->
+<!--                  }-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="offer__body-form-price">-->
+<!--                <div class="p pb-5">{{ calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span></div>-->
+<!--                <div class="b">-->
+<!--                  <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'" label="Zamów" iconPosition="right"-->
+<!--                                   icon="pi-arrow-right"-->
+<!--                                   size="large" (click)="onOrderClick()"></flexmile-button>-->
+<!--                </div>-->
+<!--              </div>-->
 
-            </div>
-          </div>
-          <span>
-            Wypełnij krótki formularz, a nasz doradca skontaktuje się z Tobą. Złożenie zapytania jest bezpłatne i nie stanowi zobowiązania.
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="offer--info">
-  <div class="container">
-    <div class="offer--info-container pb-7">
-      <div class="technicals pt-7 pb-5">
-        <div class="technicals-header">
-          <h3 class="pb-5">Dane techniczne</h3>
-        </div>
-        <div class="technicals-info">
-          @for (spec of technicalsArray; track spec.value) {
-            <div>
-              <span class="block">{{ spec.label }}</span>
-              @if (spec.value === 'specs.transmission') {
-                <b class="block"> {{ getTransmissionLabel(offerData.specs.transmission) }}</b>
-              } @else if (spec.value === 'specs.drivetrain') {
-                <b class="block"> {{ getDrivetrainLabel(offerData.specs.drivetrain) }}</b>
-              } @else {
-                <b class="block">{{ getSpecValue(spec.value) }} @if (spec.value === 'specs.horsepower') {
-                  KM
-                }</b>
-              }
+<!--            </div>-->
+<!--          </div>-->
+<!--          <span>-->
+<!--            Wypełnij krótki formularz, a nasz doradca skontaktuje się z Tobą. Złożenie zapytania jest bezpłatne i nie stanowi zobowiązania.-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="offer&#45;&#45;info">-->
+<!--  <div class="container">-->
+<!--    <div class="offer&#45;&#45;info-container pb-7">-->
+<!--      <div class="technicals pt-7 pb-5">-->
+<!--        <div class="technicals-header">-->
+<!--          <h3 class="pb-5">Dane techniczne</h3>-->
+<!--        </div>-->
+<!--        <div class="technicals-info">-->
+<!--          @for (spec of technicalsArray; track spec.value) {-->
+<!--            <div>-->
+<!--              <span class="block">{{ spec.label }}</span>-->
+<!--              @if (spec.value === 'specs.transmission') {-->
+<!--                <b class="block"> {{ getTransmissionLabel(offerData.specs.transmission) }}</b>-->
+<!--              } @else if (spec.value === 'specs.drivetrain') {-->
+<!--                <b class="block"> {{ getDrivetrainLabel(offerData.specs.drivetrain) }}</b>-->
+<!--              } @else {-->
+<!--                <b class="block">{{ getSpecValue(spec.value) }} @if (spec.value === 'specs.horsepower') {-->
+<!--                  KM-->
+<!--                }</b>-->
+<!--              }-->
 
 
-            </div>
-          }
-        </div>
-      </div>
-      @if (offerData.additional_equipment?.length || offerData.standard_equipment?.length) {
-        <div class="equipment py-5">
-          <div class="equipment-header">
-            <h3 class="pb-5">Wyposażenie</h3>
-          </div>
-          <div class="equipment-list">
-            @if (offerData.standard_equipment?.length) {
-              <div class="equipment-list--standard mb-5">
-                <div class="mb-4">Standardowe</div>
-                <ul>
-                  @for (equipment of offerData.standard_equipment | slice:0:standardEquipmentDisplayCount; track equipment; let i = $index) {
-                    <li>
-                      {{ equipment }}
-                    </li>
-                  }
-                </ul>
-                @if (showStandardEquipmentToggle) {
-                  <button type="button" class="equipment-list__toggle" (click)="toggleStandardEquipment()">
-                    {{ isShowingAllStandardEquipment ? 'Pokaż mniej' : 'Pokaż więcej' }}
-                  </button>
-                }
-              </div>
-            }
-            @if (offerData.additional_equipment?.length) {
-              <div class="equipment-list--additional">
-                <div class="mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" viewBox="0 0 22 21" fill="none">
-                    <path
-                      d="M11.9531 0.9375L14.5312 6.13281L20.2344 6.95312C21.25 7.10938 21.6797 8.35938 20.9375 9.10156L16.7969 13.0859L17.7734 18.75C17.9297 19.7656 16.875 20.5469 15.9375 20.0781L10.8594 17.4219L5.74219 20.1172C4.80469 20.5859 3.75 19.8047 3.90625 18.7891L4.88281 13.125L0.742188 9.10156C0 8.35938 0.429688 7.10938 1.44531 6.95312L7.14844 6.13281L9.72656 0.9375C10.1953 0 11.5234 0.0390625 11.9531 0.9375Z"
-                      fill="#C1D342"/>
-                  </svg>
-                  Wyposażenie dodatkowe
-                </div>
-                <ul>
-                  @for (equipment of offerData.additional_equipment; track equipment; let i = $index) {
-                    <li>
-                      {{ equipment }}
-                    </li>
-                  }
-                </ul>
-              </div>
-            }
-          </div>
-        </div>
-      }
-      <div class="offer--description pt-5">
-        <h3 class="pb-5">W racie najmu od flexmile!</h3>
-        @for (description of descriptionList; track description.label) {
-          <div class="flex offer--description_item mb-5">
-            <div class="offer--description_item-icon">
-              @if (description.icon) {
-                <img src="{{description.icon}}" alt="{{description.label}}">
-              }
-            </div>
-            <div class="flex flex-column">
-              <h4>{{ description.label }}</h4>
-              <span>{{ description.description }}</span>
-            </div>
-          </div>
-        }
-      </div>
-      <div>
-        <flexmile-banner-list size="small" [icon]="descriptionBanner.icon" label="Odbiór w salonie" separator="lub"
-                              description="dostawa pod dom!"></flexmile-banner-list>
-      </div>
-    </div>
-    <div class="similar-offerts">
-      <flexmile-offers-carousel></flexmile-offers-carousel>
-    </div>
-  </div>
-</div>
+<!--            </div>-->
+<!--          }-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      @if (offerData.additional_equipment?.length || offerData.standard_equipment?.length) {-->
+<!--        <div class="equipment py-5">-->
+<!--          <div class="equipment-header">-->
+<!--            <h3 class="pb-5">Wyposażenie</h3>-->
+<!--          </div>-->
+<!--          <div class="equipment-list">-->
+<!--            @if (offerData.standard_equipment?.length) {-->
+<!--              <div class="equipment-list&#45;&#45;standard mb-5">-->
+<!--                <div class="mb-4">Standardowe</div>-->
+<!--                <ul>-->
+<!--                  @for (equipment of offerData.standard_equipment | slice:0:standardEquipmentDisplayCount; track equipment; let i = $index) {-->
+<!--                    <li>-->
+<!--                      {{ equipment }}-->
+<!--                    </li>-->
+<!--                  }-->
+<!--                </ul>-->
+<!--                @if (showStandardEquipmentToggle) {-->
+<!--                  <button type="button" class="equipment-list__toggle" (click)="toggleStandardEquipment()">-->
+<!--                    {{ isShowingAllStandardEquipment ? 'Pokaż mniej' : 'Pokaż więcej' }}-->
+<!--                  </button>-->
+<!--                }-->
+<!--              </div>-->
+<!--            }-->
+<!--            @if (offerData.additional_equipment?.length) {-->
+<!--              <div class="equipment-list&#45;&#45;additional">-->
+<!--                <div class="mb-4">-->
+<!--                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" viewBox="0 0 22 21" fill="none">-->
+<!--                    <path-->
+<!--                      d="M11.9531 0.9375L14.5312 6.13281L20.2344 6.95312C21.25 7.10938 21.6797 8.35938 20.9375 9.10156L16.7969 13.0859L17.7734 18.75C17.9297 19.7656 16.875 20.5469 15.9375 20.0781L10.8594 17.4219L5.74219 20.1172C4.80469 20.5859 3.75 19.8047 3.90625 18.7891L4.88281 13.125L0.742188 9.10156C0 8.35938 0.429688 7.10938 1.44531 6.95312L7.14844 6.13281L9.72656 0.9375C10.1953 0 11.5234 0.0390625 11.9531 0.9375Z"-->
+<!--                      fill="#C1D342"/>-->
+<!--                  </svg>-->
+<!--                  Wyposażenie dodatkowe-->
+<!--                </div>-->
+<!--                <ul>-->
+<!--                  @for (equipment of offerData.additional_equipment; track equipment; let i = $index) {-->
+<!--                    <li>-->
+<!--                      {{ equipment }}-->
+<!--                    </li>-->
+<!--                  }-->
+<!--                </ul>-->
+<!--              </div>-->
+<!--            }-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      }-->
+<!--      <div class="offer&#45;&#45;description pt-5">-->
+<!--        <h3 class="pb-5">W racie najmu od flexmile!</h3>-->
+<!--        @for (description of descriptionList; track description.label) {-->
+<!--          <div class="flex offer&#45;&#45;description_item mb-5">-->
+<!--            <div class="offer&#45;&#45;description_item-icon">-->
+<!--              @if (description.icon) {-->
+<!--                <img src="{{description.icon}}" alt="{{description.label}}">-->
+<!--              }-->
+<!--            </div>-->
+<!--            <div class="flex flex-column">-->
+<!--              <h4>{{ description.label }}</h4>-->
+<!--              <span>{{ description.description }}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        }-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <flexmile-banner-list size="small" [icon]="descriptionBanner.icon" label="Odbiór w salonie" separator="lub"-->
+<!--                              description="dostawa pod dom!"></flexmile-banner-list>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="similar-offerts">-->
+<!--      <flexmile-offers-carousel></flexmile-offers-carousel>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 

@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="home-offers--list">
-      <flexmile-list [hideHeader]="true"></flexmile-list>
+      @if(offersList?.offers?.length){
+        <flexmile-list [hideHeader]="true" [offerList]="offersList"></flexmile-list>
+      }
     </div>
   </div>
 </div>

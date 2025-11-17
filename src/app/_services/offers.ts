@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {API_URL} from '@tokens/api-url.token';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {OfferFilters, OfferModel} from '@models/offers.types';
+import {OfferFilters, OfferListModel, OfferModel} from '@models/offers.types';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {CarModelsModel, MakeListModel} from '@models/hero-search.types';
 import {FormGroup} from '@angular/forms';
@@ -20,7 +20,7 @@ export class OffersService {
 
   }
 
-  getOffers(filters: OfferFilters = {}): Observable<any> {
+  getOffers(filters: OfferFilters = {}): Observable<OfferListModel> {
     let params = new HttpParams();
 
     Object.keys(filters).forEach(key => {
@@ -30,7 +30,8 @@ export class OffersService {
       }
     });
 
-    return this.http.get<any>(this.apiUrl, {params});
+    // return this.http.get<any>(this.apiUrl, {params});
+    return this.http.get<OfferListModel>('/example.json');
   }
 
   getOffer(id: number): Observable<OfferModel> {

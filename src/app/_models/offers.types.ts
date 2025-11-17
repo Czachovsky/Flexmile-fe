@@ -57,13 +57,13 @@ export interface OfferModel {
   car_reference_id: string;
   id: number;
   description: string;
-  fuel_type: { name: string; };
-  brand: { name: string; };
-  body_type: { name: string; };
+  fuel_type: string;
+  brand: { name: string; slug: string; };
+  body_type: string;
   attributes: OfferAttributesModel;
   specs: OfferSpecsModel;
   pricing: OfferPricingModel;
-  gallery?: OfferGalleryModel[];
+  gallery: OfferGalleryModel[];
   standard_equipment?: string[];
   additional_equipment?: string[];
 }
@@ -75,7 +75,7 @@ interface OfferListMetaModel {
   total_pages: number;
 }
 
-export interface OfferListOffersModel{
+export interface OfferListOffersModel {
   title: string;
   model: string;
   available: boolean;
@@ -102,5 +102,17 @@ export enum DrivetrainType {
 }
 
 export enum FuelType {
+  diesel = 'Diesel',
+  petrol = 'Bezołowiowa',
+  electric = 'Elektryczny',
+  hybrid = 'Hybryda',
+  plug_in_hybrid = 'Hybryda Plug-in'
+}
 
+export enum BodyType {
+  suv = 'SUV',
+  sedan = 'Sedan',
+  hatchback = 'Hatchback',
+  combi = 'Kombi',
+  coupe = 'Coupe',
 }

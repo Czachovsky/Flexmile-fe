@@ -7,6 +7,10 @@ import {InputType} from '@models/common.types';
 import {OffersService} from '@services/offers';
 import {MakeListModel} from '@models/hero-search.types';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {startWith} from 'rxjs';
+import {enumToList} from '../../../helpers';
+import {BodyType, FuelType, TransmissionType} from '@models/offers.types';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'flexmile-filters',
@@ -15,6 +19,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     ReactiveFormsModule,
     NgxSliderModule,
     Input,
+    JsonPipe,
   ],
   templateUrl: './filters.html',
   styleUrl: './filters.scss',
@@ -25,7 +30,8 @@ export class Filters implements OnInit {
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   public carBrands: DropdownOption[] = [];
   public carModels: DropdownOption[] = [];
-
+  public fuelList: DropdownOption[] = enumToList(FuelType)
+  public transmissionTypeList: DropdownOption[] = enumToList(TransmissionType)
   ngOnInit() {
     this.getBrands();
     this.listenValueChanges();
@@ -56,19 +62,27 @@ export class Filters implements OnInit {
   }
 
   private listenValueChanges(): void {
-    this.offersService.filtersForm.get('make')?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
-      console.log(value);
-      if (value) {
-        this.offersService.getModelsForBrand(value).subscribe({
-          next: (data) => {
-            this.carModels = data.models.map(model => ({
-              value: model.toLowerCase(),
-              label: model
-            }))
-          }
-        })
-      }
-    })
+    const makeControl = this.offersService.filtersForm.get('make');
+    if (makeControl) {
+      makeControl.valueChanges.pipe(
+        startWith(makeControl.value),
+        takeUntilDestroyed(this.destroyRef)
+      ).subscribe(value => {
+        console.log(value);
+        if (value) {
+          this.offersService.getModelsForBrand(value).subscribe({
+            next: (data) => {
+              this.carModels = data.models.map(model => ({
+                value: model.toLowerCase(),
+                label: model
+              }))
+            }
+          })
+        } else {
+          this.carModels = [];
+        }
+      })
+    }
     this.offersService.filtersForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       console.log(this.offersService.filtersForm.getRawValue());
       this.offersService.filterOffers(this.offersService.filtersForm.getRawValue())

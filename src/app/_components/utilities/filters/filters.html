@@ -1,6 +1,6 @@
 <div class="filters">
   <h3 class="pb-4">Znajdź auto na wynajem od Flexmile!</h3>
-  <div class="filters__form" [formGroup]=offersService.filtersForm>
+  <div class="filters__form" [formGroup]="offersService.filtersForm">
     <div class="grid mt-0">
       <div class="col-8">
         <div class="grid">
@@ -11,7 +11,8 @@
                                    [label]="'Marka pojazdu'"></flexmile-dropdown>
               </div>
               <div>
-                <flexmile-dropdown placeholder="Paliwo" [options]="[]" [label]="'Rodzaj paliwa'"></flexmile-dropdown>
+                <flexmile-dropdown [hideSearch]="true" placeholder="Paliwo" [options]="fuelList"
+                                   [label]="'Rodzaj paliwa'" formControlName="fuel"></flexmile-dropdown>
               </div>
 
             </div>
@@ -20,10 +21,12 @@
             <div>
               <div class="mb-4">
                 <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="model"
-                                   [label]="'Model pojazdu'" [disabled]="!offersService.filtersForm.get('make')?.value" ></flexmile-dropdown>
+                                   [label]="'Model pojazdu'"
+                                   [disabled]="!offersService.filtersForm.get('make')?.value"></flexmile-dropdown>
               </div>
               <div>
-                <flexmile-dropdown placeholder="Skrzynia" [options]="[]" [label]="'Typ skrzyni'"></flexmile-dropdown>
+                <flexmile-dropdown [hideSearch]="true" placeholder="Skrzynia" [options]="transmissionTypeList"
+                                   [label]="'Typ skrzyni'" formControlName="transmission"></flexmile-dropdown>
               </div>
             </div>
           </div>
@@ -38,7 +41,8 @@
               <div class="spacer">-</div>
               <div class="range_input"><flexmile-input formControlName="price_to" inputId="price_to" [type]="inputType.text" [isPriceInput]="true"></flexmile-input></div>
             </div>
-            <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500" [max]="10000"></flexmile-input>
+            <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500"
+                            [max]="10000"></flexmile-input>
           </div>
         </div>
       </div>
@@ -47,10 +51,7 @@
       <div class="col-12">
         <div class="flex pt-5 filters__bottom align-items-center justify-content-between">
           <div>
-            <label>
-              <input type="checkbox">
-              Pokaż tylko dostępne od ręki
-            </label>
+            <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="only_available" [type]="inputType.checkbox" [control]="offersService.filtersForm.get('available')"></flexmile-input>
           </div>
           <div><span class="cursor-pointer" (click)="resetFilters()">Wyczyść filtry</span></div>
         </div>
@@ -58,3 +59,4 @@
     </div>
   </div>
 </div>
+{{offersService.filtersForm.getRawValue() | json}}

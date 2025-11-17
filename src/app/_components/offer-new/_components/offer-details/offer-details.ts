@@ -1,40 +1,43 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {Badge} from "@components/utilities/badge/badge";
-import {badgeSizes, badgeTypes} from "@models/common.types";
-import {ButtonComponent} from '@components/utilities/button/button';
+import {Component, input, InputSignal, OnInit, output} from '@angular/core';
+import {BodyType, FuelType, OfferModel, TransmissionType} from '@models/offers.types';
+import {DecimalPipe, JsonPipe, SlicePipe} from '@angular/common';
+import {Badge} from '@components/utilities/badge/badge';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
-import {DrivetrainType, OfferModel, TransmissionType} from '@models/offers.types';
-import {OffersService} from '@services/offers';
-import {DecimalPipe, SlicePipe} from '@angular/common';
-import {descriptionBanner, offerDescription, offerDescriptionModel} from '@models/offer.type';
+import {badgeSizes, badgeTypes} from '@models/common.types';
+import {ButtonComponent} from '@components/utilities/button/button';
 import {BannerList} from '@components/utilities/banner-list/banner-list';
 import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carousel';
-import {OfferDetails} from '@components/offer-new/_components/offer-details/offer-details';
-import {OfferOrder} from '@components/offer-new/_components/offer-order/offer-order';
+import {descriptionBanner, offerDescription, offerFirstStepModel} from '@models/offer.type';
 
 @Component({
-  selector: 'flexmile-offer',
+  selector: 'flexmile-offer-details',
   imports: [
+    JsonPipe,
     Badge,
-    ButtonComponent,
     OfferGallery,
+    ButtonComponent,
     DecimalPipe,
-    SlicePipe,
     BannerList,
     OffersCarousel,
-    OfferDetails,
-    OfferOrder
+    SlicePipe
   ],
-  templateUrl: './offer.html',
-  styleUrl: './offer.scss',
+  templateUrl: './offer-details.html',
+  styleUrl: './offer-details.scss',
 })
-export class Offer implements OnInit {
-  private readonly offerService: OffersService = inject(OffersService);
-
+export class OfferDetails implements OnInit {
+  public details: InputSignal<OfferModel> = input.required<OfferModel>();
+  public similarOffers: InputSignal<OfferModel[] | []> = input.required<OfferModel[] | []>();
+  public nextStep = output<offerFirstStepModel>();
   public readonly badgeTypes = badgeTypes;
   public readonly badgeSizes = badgeSizes;
   public readonly transmissionType = TransmissionType;
-  public readonly drivetrainType = DrivetrainType;
+  public readonly fuelType = FuelType;
+  public readonly bodyType = BodyType;
+  public selectedPeriod: number | null = null;
+  public selectedMileageLimit: number | null = null;
+  public calculatedPrice: number = 0;
+  public readonly standardEquipmentDefaultVisible = 9;
+  public standardEquipmentDisplayCount = this.standardEquipmentDefaultVisible;
   public readonly technicalsArray: { value: string; label: string }[] = [
     {label: 'Paliwo', value: 'fuel_type'},
     {label: 'Skrzynia biegów', value: 'specs.transmission'},
@@ -46,33 +49,27 @@ export class Offer implements OnInit {
     {label: 'Liczba miejsc', value: 'specs.seats'},
     {label: 'Kolor', value: 'specs.color'}
   ];
-  public descriptionList: offerDescriptionModel[] = offerDescription;
-  public descriptionBanner = descriptionBanner;
-  public readonly offerData: OfferModel = this.offerService.getCurrentOffert()!;
-  public selectedPeriod: number | null = null;
-  public selectedMileageLimit: number | null = null;
-  public calculatedPrice: number = 0;
-  public readonly standardEquipmentDefaultVisible = 9;
-  public standardEquipmentDisplayCount = this.standardEquipmentDefaultVisible;
-  public ordering: boolean = false;
 
   ngOnInit(): void {
-    if (this.offerData.pricing.rental_periods.length > 0) {
-      this.selectedPeriod = this.offerData.pricing.rental_periods[0];
+    if (this.details().pricing.rental_periods.length > 0) {
+      this.selectedPeriod = this.details().pricing.rental_periods[0];
     }
-    if (this.offerData.pricing.mileage_limits.length > 0) {
-      this.selectedMileageLimit = this.offerData.pricing.mileage_limits[0];
+    if (this.details().pricing.mileage_limits.length > 0) {
+      this.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
     this.calculatePrice();
   }
-
 
   public getTransmissionLabel(type: string): string {
     return this.transmissionType[type as keyof typeof TransmissionType];
   }
 
-  public getDrivetrainLabel(type: string): string {
-    return this.drivetrainType[type as keyof typeof DrivetrainType];
+  public getBodyTypeLabel(type: string): string {
+    return this.bodyType[type as keyof typeof BodyType];
+  }
+
+  public getFuelLabel(type: string): string {
+    return this.fuelType[type as keyof typeof FuelType];
   }
 
   public selectMileageLimit(limit: number): void {
@@ -103,21 +100,21 @@ export class Offer implements OnInit {
     const getValueByPath = (obj: any, path: string) =>
       path.split('.').reduce((acc, part) => acc?.[part], obj);
 
-    const result = getValueByPath(this.offerData, value);
+    const result = getValueByPath(this.details(), value);
     return result ?? '';
   }
 
   public get showStandardEquipmentToggle(): boolean {
-    return (this.offerData.standard_equipment?.length ?? 0) > this.standardEquipmentDefaultVisible;
+    return (this.details().standard_equipment?.length ?? 0) > this.standardEquipmentDefaultVisible;
   }
 
   public get isShowingAllStandardEquipment(): boolean {
-    const total = this.offerData.standard_equipment?.length ?? 0;
+    const total = this.details().standard_equipment?.length ?? 0;
     return total > 0 && this.standardEquipmentDisplayCount >= total;
   }
 
   public toggleStandardEquipment(): void {
-    const total = this.offerData.standard_equipment?.length ?? 0;
+    const total = this.details().standard_equipment?.length ?? 0;
     if (!total) {
       return;
     }
@@ -134,24 +131,24 @@ export class Offer implements OnInit {
       alert('Wybierz okres wynajmu i roczny limit kilometrów');
       return;
     }
-
-
-    console.log({
-      offer_id: this.offerData.id,
-      rental_months: this.selectedPeriod,
-      annual_mileage_limit: this.selectedMileageLimit,
+    this.nextStep.emit({
+      offer_id: this.details().id,
+      rental_months: this.selectedPeriod!,
+      annual_mileage_limit: this.selectedMileageLimit!,
       monthly_price: this.calculatedPrice
-    });
+    })
+
   }
 
   private calculatePrice(): void {
     if (this.selectedPeriod && this.selectedMileageLimit) {
       const priceKey = `${this.selectedPeriod}_${this.selectedMileageLimit}`;
-      this.calculatedPrice = this.offerData.pricing.price_matrix[priceKey] || 0;
+      this.calculatedPrice = this.details().pricing.price_matrix[priceKey] || 0;
     } else {
       this.calculatedPrice = 0;
     }
   }
 
-
+  protected readonly descriptionList = offerDescription;
+  protected readonly descriptionBanner = descriptionBanner;
 }

@@ -1,0 +1,9 @@
+<div class="offer-wrapper">
+  @if (!ordering) {
+    <flexmile-offer-details [similarOffers]="similarOffers" [details]="offerData" (nextStep)="showNextStep($event)"></flexmile-offer-details>
+  } @else {
+    <flexmile-offer-order [orderObject]="orderObject!"></flexmile-offer-order>
+  }
+</div>
+
+

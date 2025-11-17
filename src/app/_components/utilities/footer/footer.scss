@@ -1,4 +1,52 @@
+@use 'mixins';
+
 footer {
   background: var(--p-primary-900);
-  padding-top:120px;
+  padding-top: 120px;
+
+  h3 {
+    color: var(--color-white);
+    @include mixins.fontSize(80);
+    font-weight: 600;
+    line-height: 100%;
+  }
+
+  .phone {
+    max-width: 420px;
+    border-bottom: 1px solid var(--color-purple-700);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+
+    a {
+      color: var(--color-white);
+      font-weight: 600;
+      @include mixins.fontSize(32);
+      line-height: 40px;
+    }
+  }
+  .contact{
+    div{
+      padding: 16px 0;
+      span{
+        color: var(--color-white);
+        @include mixins.fontSize(20);
+        line-height: 28px;
+      }
+    }
+  }
+  .copyright {
+    color: var(--color-white);
+    @include mixins.fontSize(14);
+
+    span {
+      color: var(--color-green-900);
+    }
+  }
+
+  :host ::ng-deep a {
+    color: var(--color-white);
+    margin-left: 16px;
+  }
 }

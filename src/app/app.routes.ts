@@ -4,6 +4,7 @@ import {Offer} from '@components/offer/offer';
 import {HomePage} from '@components/home-page/home-page';
 import {offerResolver} from './_resolvers/offer-resolver';
 import {PageNotFound} from '@components/page-not-found/page-not-found';
+import {OfferNew} from '@components/offer-new/offer-new';
 
 export const routes: Routes = [
   {
@@ -18,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'oferta/:id',
-    component: Offer,
+    component: OfferNew,
     title: 'Szczegóły samochodu - Flexmile',
     resolve: {
       offer: offerResolver

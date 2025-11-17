@@ -37,11 +37,11 @@ export class Offers implements OnInit {
         model: params['model'] || '',
         fuel: params['fuel'] || '',
         transmission: params['transmission'] || '',
-        price_from: params['price_from'] || '',
-        price_to: params['price_to'] || '',
+        price_from: params['price_from'] || '500',
+        price_to: params['price_to'] || '10000',
         available: params['available'] || null
       }
-      this.offersService.filtersForm.patchValue(this.currentFilters);
+      this.offersService.filtersForm.patchValue(this.currentFilters, { emitEvent: true });
       console.log(this.offersService.filtersForm);
       console.log(this.currentFilters);
     })
