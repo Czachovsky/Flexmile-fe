@@ -9,8 +9,9 @@ import {MakeListModel} from '@models/hero-search.types';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {startWith} from 'rxjs';
 import {enumToList} from '../../../helpers';
-import {BodyType, FuelType, TransmissionType} from '@models/offers.types';
+import {FuelType, TransmissionType} from '@models/offers.types';
 import {JsonPipe} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'flexmile-filters',
@@ -31,12 +32,14 @@ export class Filters implements OnInit {
   public carBrands: DropdownOption[] = [];
   public carModels: DropdownOption[] = [];
   public fuelList: DropdownOption[] = enumToList(FuelType)
-  public transmissionTypeList: DropdownOption[] = enumToList(TransmissionType)
+  public transmissionTypeList: DropdownOption[] = enumToList(TransmissionType);
+  private router: Router = inject(Router);
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+
   ngOnInit() {
     this.getBrands();
     this.listenValueChanges();
   }
-
 
 
   public priceRangeChanged(obj: { min: number, max: number }): void {
@@ -47,7 +50,7 @@ export class Filters implements OnInit {
   }
 
   public resetFilters(): void {
-  this.offersService.filtersForm.reset({'price_from': 500, 'price_to': 10000});
+    this.offersService.filtersForm.reset({'price_from': 500, 'price_to': 10000});
   }
 
   private getBrands(): void {
@@ -70,6 +73,7 @@ export class Filters implements OnInit {
       ).subscribe(value => {
         console.log(value);
         if (value) {
+          console.log(value);
           this.offersService.getModelsForBrand(value).subscribe({
             next: (data) => {
               this.carModels = data.models.map(model => ({
@@ -83,9 +87,28 @@ export class Filters implements OnInit {
         }
       })
     }
-    this.offersService.filtersForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      console.log(this.offersService.filtersForm.getRawValue());
-      this.offersService.filterOffers(this.offersService.filtersForm.getRawValue())
-    })
+
+    this.offersService.filtersForm.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(formValue => {
+
+        const cleaned = Object.fromEntries(
+          Object.entries(formValue).filter(([_, value]) =>
+            value !== null && value !== '' && value !== undefined
+          )
+        );
+        const currentParams = this.route.snapshot.queryParams;
+        const isDifferent = Object.keys(cleaned).length !== Object.keys(currentParams).length
+          || Object.entries(cleaned).some(([key, value]) => currentParams[key] !== String(value));
+
+        if (isDifferent) {
+          this.router.navigate([], {
+            queryParams: cleaned,
+            queryParamsHandling: 'merge'
+          });
+        }
+
+        this.offersService.filterOffers(formValue);
+      });
   };
 }

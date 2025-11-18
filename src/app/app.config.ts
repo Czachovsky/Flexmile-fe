@@ -4,7 +4,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection
 } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router'; // ← dodaj import
+import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import {API_URL} from '@tokens/api-url.token';
@@ -18,10 +18,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withInMemoryScrolling({  // ← dodaj to
-      scrollPositionRestoration: 'top',
-      anchorScrolling: 'enabled'
-    })),
+    provideRouter(routes),
     provideAnimations(),
     { provide: API_URL, useValue: 'http://flexmile.local/wp-json/flexmile/v1' },
     { provide: LOCALE_ID, useValue: 'pl-PL' },

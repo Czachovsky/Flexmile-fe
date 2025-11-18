@@ -31,7 +31,6 @@ export class Offers implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
-      console.log(params);
       this.currentFilters = {
         make: params['make'] || '',
         model: params['model'] || '',

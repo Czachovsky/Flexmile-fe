@@ -17,7 +17,7 @@ export class OffersService {
   private currentOfferSubject = new BehaviorSubject<OfferModel | null>(null);
 
   filterOffers(filters: OfferFilters = {}): void{
-
+      console.log(filters);
   }
 
   getOffers(filters: OfferFilters = {}): Observable<OfferListModel> {

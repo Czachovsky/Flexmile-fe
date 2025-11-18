@@ -5,6 +5,10 @@ import {Footer} from '@components/utilities/footer/footer';
 import {Screen} from '@services/screen';
 import {filter} from 'rxjs';
 import {PageNotFound} from '@components/page-not-found/page-not-found';
+import {BannersService} from '@services/banners';
+import {HttpClient} from '@angular/common/http';
+import {API_URL} from '@tokens/api-url.token';
+import {BannerTypes} from '@models/banners.types';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +22,9 @@ export class App {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly banners: BannersService = inject(BannersService);
+  private http: HttpClient = inject(HttpClient);
+  private apiUrl = inject(API_URL);
 
   constructor() {
     const subscription = this.router.events
@@ -26,6 +33,11 @@ export class App {
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
     this.updateFooterVisibility();
+    this.http.get<BannerTypes[]>(this.apiUrl + '/banners').subscribe({
+      next: data => {
+        this.banners.setBanners(data);
+      },
+    })
   }
 
   private updateFooterVisibility(): void {
