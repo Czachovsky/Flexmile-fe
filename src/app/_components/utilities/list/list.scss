@@ -11,27 +11,6 @@
       }
     }
   }
-
-  &--body {
-    &-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-
-      .product {
-
-      }
-
-      .banner {
-        grid-column: 1 / -1;
-
-      }
-
-      .product-full {
-        grid-column: 1 / -1;
-      }
-    }
-  }
 }
 
 .no-offers {

@@ -32,6 +32,7 @@ h2 {
 
 .ngx-slider {
   margin: 25px 0 15px !important;
+
   .ngx-slider-selection {
     background: var(--color-green-900) !important;
   }
@@ -39,11 +40,13 @@ h2 {
   .ngx-slider-bar:not(.ngx-slider-selection) {
     background: var(--color-white) !important;
   }
-  .ngx-slider-bubble{
+
+  .ngx-slider-bubble {
     color: var(--color-white) !important;
     @include mixins.fontSize(14, true);
     bottom: -32px !important;
   }
+
   .ngx-slider-pointer {
     width: 24px !important;
     height: 24px !important;
@@ -57,13 +60,36 @@ h2 {
       left: 4px !important;
       top: 4px !important;
     }
-    &.ngx-slider-active:after{
+
+    &.ngx-slider-active:after {
       background: var(--color-white) !important;
     }
   }
 }
 
-main{
+main {
   margin-top: 126px;
 }
 
+.list {
+  &--body {
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+
+      .product {
+
+      }
+
+      .banner {
+        grid-column: 1 / -1;
+
+      }
+
+      .product-full {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}
