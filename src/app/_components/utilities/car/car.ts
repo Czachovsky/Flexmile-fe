@@ -1,4 +1,4 @@
-import {Component, inject, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input} from '@angular/core';
 import {Tooltip} from '@components/utilities/tooltip/tooltip';
 import {Badge} from '@components/utilities/badge/badge';
 import {badgeSizes, badgeTypes} from '@models/common.types';
@@ -16,6 +16,7 @@ import {ButtonComponent} from '@components/utilities/button/button';
   ],
   templateUrl: './car.html',
   styleUrl: './car.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Car {
   cardSize = input<badgeSizes>(badgeSizes.MD);

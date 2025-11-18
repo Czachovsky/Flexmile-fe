@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {Hero} from '@components/home-page/_components/hero/hero';
 import {badgeSizes, badgeTypes} from '@models/common.types';
 import {Link} from '@components/utilities/link/link';
@@ -9,6 +9,7 @@ import {Opinions} from '@components/home-page/_components/opinions/opinions';
 import {OffersService} from '@services/offers';
 import {OfferListModel} from '@models/offers.types';
 import {Player} from '@components/utilities/player/player';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -28,11 +29,18 @@ export class HomePage implements OnInit {
   protected readonly badgeSizes = badgeSizes;
   protected readonly badgeTypes = badgeTypes;
   private readonly offers: OffersService = inject(OffersService);
+  private readonly destroyRef = inject(DestroyRef);
   public offersList: OfferListModel | undefined;
   ngOnInit() {
-    this.offers.getOffers().subscribe((offerList: OfferListModel) => {
-      console.log(offerList)
-      this.offersList = offerList;
+    this.offers.getOffers({per_page: 29}).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: (offerList: OfferListModel) => {
+        this.offersList = offerList;
+      },
+      error: (error) => {
+        console.error('Error loading offers:', error);
+      }
     })
   }
 }
