@@ -10,6 +10,7 @@ import {OffersService} from '@services/offers';
 import {OfferListModel} from '@models/offers.types';
 import {Player} from '@components/utilities/player/player';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {HomepageList} from '@components/home-page/_components/homepage-list/homepage-list';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -21,6 +22,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     Faq,
     Opinions,
     Player,
+    HomepageList,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',

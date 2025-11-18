@@ -6,17 +6,21 @@
   width: 100%;
   position: relative;
   cursor: pointer;
+  // Performance optimization: helps browser skip rendering when off-screen
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
 
-
-  * {
-    transition: all 0.3s ease;
-  }
+  // Optimized: removed universal selector - transitions only where needed
+  // * {
+  //   transition: all 0.3s ease;
+  // }
 
   &__content {
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     position: relative;
     border-bottom-left-radius: var(--border-radius-base);
     border-bottom-right-radius: var(--border-radius-base);
+    will-change: background-color, color;
   }
 
   &__image-wrapper {
@@ -166,7 +170,6 @@
     gap: 3px;
     display: inline-flex;
     width: auto;
-    transition: all 0.3s ease;
   }
 
   &__feature-btn {
@@ -175,11 +178,11 @@
     background: var(--color-white);
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
+    will-change: background-color;
 
     &:hover {
       background: var(--color-black-100);
-      transition: all 0.3s ease;
     }
   }
 
@@ -190,7 +193,8 @@
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: width 0.3s ease;
+    will-change: width;
     //  width: 110px;
     width: 0;
   }
@@ -202,7 +206,6 @@
 
     .car-card__content {
       background: var(--p-primary-900);
-      transition: all 0.3s ease;
       color: var(--color-white);
 
       .car-card__title, .car-card__subtitle {
@@ -220,7 +223,7 @@
 
         svg {
           path {
-            transition: all 0.3s ease;
+            transition: fill 0.3s ease;
             fill: var(--color-white);
           }
         }

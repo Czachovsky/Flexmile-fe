@@ -10,134 +10,13 @@
     </div>
   }
   <div class="list--body">
-    <!--    29 na strone-->
-    3 / 3 / banner / 3 / 1 / 3 / 3 / banner / 3 / 1 / 3 / 3 / banner / 3
     @if (offerList()?.offers?.length) {
       <div class="list--body-grid">
-        car
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Rząd 2: 3 produkty &ndash;&gt;-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 3: Banner 100% &ndash;&gt;-->
-<!--        <div class="banner">-->
-<!--          <flexmile-banner-list label="Brak wkładu własnego - " position="center"-->
-<!--                                description="Brak konieczności wykupu Auta!"></flexmile-banner-list>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 4: 3 produkty &ndash;&gt;-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 5: 1 produkt 100% &ndash;&gt;-->
-<!--        <div class="product-full">-->
-<!--          <flexmile-car [cardSize]="badgeSizes.LG"></flexmile-car>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; POWTÓRZENIE WZORCA &ndash;&gt;-->
-
-<!--        &lt;!&ndash; Rząd 1: 3 produkty &ndash;&gt;-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 2: 3 produkty &ndash;&gt;-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 3: Banner 100% &ndash;&gt;-->
-<!--        <div class="banner">-->
-<!--          <flexmile-banner-list position="center" label="Rata najmu - "-->
-<!--                                description="100% w koszty firmy!"></flexmile-banner-list>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 4: 3 produkty &ndash;&gt;-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Rząd 5: 1 produkt 100% &ndash;&gt;-->
-<!--        <div class="product-full">-->
-<!--          <flexmile-car [cardSize]="badgeSizes.LG"></flexmile-car>-->
-<!--        </div>-->
-
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
-<!--        <div class="banner">-->
-<!--          <flexmile-banner-list position="center" label="Rata najmu - "-->
-<!--                                description="100% w koszty firmy!"></flexmile-banner-list>-->
-<!--        </div>-->
-
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-<!--        <div class="product">-->
-<!--          <flexmile-car></flexmile-car>-->
-<!--        </div>-->
-
+        @for (offer of offerList()?.offers; track trackByOfferId($index, offer)) {
+          <div class="product">
+            <flexmile-car></flexmile-car>
+          </div>
+        }
       </div>
     } @else {
       <div class="no-offers">
