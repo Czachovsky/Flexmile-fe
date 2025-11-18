@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, OnInit, output} from '@angular/core';
+import {Component, inject, input, InputSignal, OnInit, output} from '@angular/core';
 import {BodyType, FuelType, OfferModel, TransmissionType} from '@models/offers.types';
 import {DecimalPipe, JsonPipe, SlicePipe} from '@angular/common';
 import {Badge} from '@components/utilities/badge/badge';
@@ -8,11 +8,11 @@ import {ButtonComponent} from '@components/utilities/button/button';
 import {BannerList} from '@components/utilities/banner-list/banner-list';
 import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carousel';
 import {descriptionBanner, offerDescription, offerFirstStepModel} from '@models/offer.type';
+import {OfferService} from '@services/offer';
 
 @Component({
   selector: 'flexmile-offer-details',
   imports: [
-    JsonPipe,
     Badge,
     OfferGallery,
     ButtonComponent,
@@ -25,6 +25,7 @@ import {descriptionBanner, offerDescription, offerFirstStepModel} from '@models/
   styleUrl: './offer-details.scss',
 })
 export class OfferDetails implements OnInit {
+  public offerService: OfferService = inject(OfferService);
   public details: InputSignal<OfferModel> = input.required<OfferModel>();
   public similarOffers: InputSignal<OfferModel[] | []> = input.required<OfferModel[] | []>();
   public nextStep = output<offerFirstStepModel>();
@@ -33,9 +34,6 @@ export class OfferDetails implements OnInit {
   public readonly transmissionType = TransmissionType;
   public readonly fuelType = FuelType;
   public readonly bodyType = BodyType;
-  public selectedPeriod: number | null = null;
-  public selectedMileageLimit: number | null = null;
-  public calculatedPrice: number = 0;
   public readonly standardEquipmentDefaultVisible = 9;
   public standardEquipmentDisplayCount = this.standardEquipmentDefaultVisible;
   public readonly technicalsArray: { value: string; label: string }[] = [
@@ -51,13 +49,13 @@ export class OfferDetails implements OnInit {
   ];
 
   ngOnInit(): void {
-    if (this.details().pricing.rental_periods.length > 0) {
-      this.selectedPeriod = this.details().pricing.rental_periods[0];
+    if (this.details().pricing.rental_periods.length > 0 && !this.offerService.selectedPeriod) {
+      this.offerService.selectedPeriod = this.details().pricing.rental_periods[0];
     }
-    if (this.details().pricing.mileage_limits.length > 0) {
-      this.selectedMileageLimit = this.details().pricing.mileage_limits[0];
+    if (this.details().pricing.mileage_limits.length > 0 && !this.offerService.selectedMileageLimit) {
+      this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
-    this.calculatePrice();
+    this.offerService.calculatePrice(this.details());
   }
 
   public getTransmissionLabel(type: string): string {
@@ -73,27 +71,23 @@ export class OfferDetails implements OnInit {
   }
 
   public selectMileageLimit(limit: number): void {
-    this.selectedMileageLimit = limit;
-    this.calculatePrice();
+    this.offerService.selectMileageLimit(limit, this.details());
   }
 
   public selectPeriod(period: number): void {
-    this.selectedPeriod = period;
-    this.calculatePrice();
+    this.offerService.selectPeriod(period, this.details());
   }
 
   public isPeriodActive(period: number): boolean {
-    return this.selectedPeriod === period;
+    return this.offerService.selectedPeriod === period;
   }
 
   public isMileageLimitActive(limit: number): boolean {
-    return this.selectedMileageLimit === limit;
+    return this.offerService.selectedMileageLimit === limit;
   }
 
   public canOrder(): boolean {
-    return this.selectedPeriod !== null &&
-      this.selectedMileageLimit !== null &&
-      this.calculatedPrice > 0;
+    return this.offerService.canOrder();
   }
 
   public getSpecValue(value: string): string {
@@ -133,21 +127,13 @@ export class OfferDetails implements OnInit {
     }
     this.nextStep.emit({
       offer_id: this.details().id,
-      rental_months: this.selectedPeriod!,
-      annual_mileage_limit: this.selectedMileageLimit!,
-      monthly_price: this.calculatedPrice
+      rental_months: this.offerService.selectedPeriod!,
+      annual_mileage_limit: this.offerService.selectedMileageLimit!,
+      monthly_price: this.offerService.calculatedPrice
     })
 
   }
 
-  private calculatePrice(): void {
-    if (this.selectedPeriod && this.selectedMileageLimit) {
-      const priceKey = `${this.selectedPeriod}_${this.selectedMileageLimit}`;
-      this.calculatedPrice = this.details().pricing.price_matrix[priceKey] || 0;
-    } else {
-      this.calculatedPrice = 0;
-    }
-  }
 
   protected readonly descriptionList = offerDescription;
   protected readonly descriptionBanner = descriptionBanner;

@@ -46,8 +46,8 @@ export interface offerFirstStepModel {
 }
 
 export interface offerOrderModel extends offerFirstStepModel {
-  first_name: string;
-  last_name: string;
+  company_name: string;
+  nip: string;
   email: string;
   phone: string;
   pickup_location: pickupLocation;
@@ -58,8 +58,8 @@ export interface OfferFormValues {
   rental_months: FormControl<number | null>;
   annual_mileage_limit: FormControl<number | null>;
   monthly_price: FormControl<number | null>;
-  first_name: FormControl<string | null>;
-  last_name: FormControl<string | null>;
+  company_name: FormControl<string | null>;
+  nip: FormControl<string | null>;
   email: FormControl<string | null>;
   phone: FormControl<string | null>;
   pickup_location: FormControl<pickupLocation | null>;

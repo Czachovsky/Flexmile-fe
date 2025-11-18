@@ -41,9 +41,79 @@
   }
 
   &.card-large {
-    .car-card__badges{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: end;
+    position: relative;
+    max-height: 440px;
+    overflow: hidden;
+
+    .car-card__badges {
       justify-content: flex-start;
       gap: 8px;
+      position: absolute;
+    }
+
+    .car-card__specs {
+      gap: 24px;
+
+      .car-card__spec {
+        span {
+          @include mixins.fontSize(16);
+        }
+      }
+    }
+
+    .car-card__features {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+    }
+
+    .car-card__header {
+      padding-bottom: 8px;
+    }
+
+    .car-card__image-wrapper {
+      padding: 0 !important;
+      position: relative;
+      top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+
+      img {
+        max-height: 570px;
+      }
+    }
+
+    .car-card__content {
+      padding-left: 40px !important;
+      padding-bottom: 40px !important;
+    }
+
+    .car-card__price {
+      white-space: nowrap;
+
+      &-amount {
+        @include mixins.fontSize(32);
+        line-height: 40px;
+      }
+
+      &-label {
+        @include mixins.fontSize(24);
+        line-height: 32px;
+      }
+    }
+
+    .car-card__title {
+      @include mixins.fontSize(32);
+      line-height: 32px;
+      margin-bottom: 8px;
+    }
+
+    .car-card__subtitle {
+      @include mixins.fontSize(20);
     }
   }
 

@@ -1,0 +1,74 @@
+@use 'mixins';
+
+.go-back {
+  color: var(--p-primary-900);
+  font-weight: 600;
+  display: inline-flex;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.offer-order {
+  &-details {
+    &_section {
+      &:nth-of-type(1){
+        border-bottom:1px solid var(--color-black-100);
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+      }
+      h4 {
+        font-weight: 500;
+        @include mixins.fontSize(20);
+      }
+
+      & > div {
+        & > span {
+          padding-bottom: 12px;
+          display: block;
+
+          span {
+            color: var(--color-black-700);
+          }
+        }
+      }
+    }
+  }
+
+  &_left {
+    flex: 1;
+
+    & > div {
+
+      max-width: 640px;
+
+      & > h2 {
+        @include mixins.fontSize(48);
+        line-height: 56px;
+      }
+
+      & > span {
+        color: var(--color-black-700);
+        line-height: 24px;
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+        display: block;
+        border-bottom: 1px solid var(--color-black-100);
+      }
+    }
+  }
+
+  &_right {
+    max-width: 415px;
+    background: var(--color-black-50);
+    border-radius: var(--border-radius-base);
+    padding: 24px;
+    width: 100%;
+  }
+
+}
+
+:host ::ng-deep .order-input {
+  input{
+    border-color: var(--color-black-200);
+  }
+}

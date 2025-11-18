@@ -1,5 +1,6 @@
 <div class="list-banner bg-primary-900 {{size()}}">
-  <div class="flex align-items-center justify-content-start px-4">
+  <div class="flex align-items-center px-4"
+       [ngClass]="{'justify-content-start' : position() !== 'center', 'justify-content-center' : position() === 'center'}">
     <span class="list-banner--label flex align-items-center">
       @if (!icon()) {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd"

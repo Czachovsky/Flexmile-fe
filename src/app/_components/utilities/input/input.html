@@ -18,7 +18,7 @@
           (input)="onPriceInput($event)"
           (blur)="onPriceBlur($event)"
           (focus)="onPriceFocus($event)"
-          class="px-4 py-3 f-input"
+          class="px-4 py-3 f-input {{classList()}}"
           [attr.inputmode]="'numeric'"
         />
       } @else {
@@ -29,7 +29,7 @@
           [placeholder]="placeholder()"
           [disabled]="disabled()"
           (blur)="onTouched()"
-          class="px-4 py-3 f-input"
+          class="px-4 py-3 f-input {{classList()}}"
         />
       }
     </div>
@@ -40,7 +40,7 @@
       [placeholder]="placeholder()"
       [disabled]="disabled()"
       (blur)="onTouched()"
-      class="px-4 py-3 f-textarea"
+      class="px-4 py-3 f-textarea {{classList()}}"
       rows="4"
       cols="50"
     ></textarea>
