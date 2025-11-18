@@ -8,6 +8,7 @@ import {Faq} from '@components/home-page/_components/faq/faq';
 import {Opinions} from '@components/home-page/_components/opinions/opinions';
 import {OffersService} from '@services/offers';
 import {OfferListModel} from '@models/offers.types';
+import {Player} from '@components/utilities/player/player';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -18,6 +19,7 @@ import {OfferListModel} from '@models/offers.types';
     WhyUs,
     Faq,
     Opinions,
+    Player,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
@@ -29,6 +31,7 @@ export class HomePage implements OnInit {
   public offersList: OfferListModel | undefined;
   ngOnInit() {
     this.offers.getOffers().subscribe((offerList: OfferListModel) => {
+      console.log(offerList)
       this.offersList = offerList;
     })
   }
