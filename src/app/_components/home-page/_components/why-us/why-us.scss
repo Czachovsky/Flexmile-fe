@@ -69,7 +69,15 @@
         line-height: 24px;
         padding-bottom: 64px;
       }
-
+      .cars{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: -105px;
+        img{
+          display: block;
+        }
+      }
       .table {
         max-width: 640px;
         margin: 0 auto;

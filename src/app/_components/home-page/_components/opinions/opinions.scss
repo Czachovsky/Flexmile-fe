@@ -1,0 +1,68 @@
+@use "mixins";
+
+.opinions {
+  .opinion {
+    padding: 40px;
+    background-color: var(--color-black-50);
+    border-radius: var(--border-radius-base);
+
+    .content {
+      color: #525252;
+      line-height: 24px;
+    }
+
+    .name {
+      font-weight: 500;
+      @include mixins.fontSize(20);
+      line-height: 24px;
+    }
+
+    .city {
+      line-height: 24px;
+    }
+  }
+
+  .dreams {
+    .col-8 {
+      padding: 0 0 0 16px;
+
+      & > div {
+        background: #863087;
+        border-radius: 24px;
+        padding: 40px;
+        position: relative;
+
+        .icon {
+          position: absolute;
+          right: 40px;
+          top: 40px;
+        }
+
+        h2 {
+          padding-bottom: 16px;
+          color: var(--color-white);
+          line-height: 56px;
+          @include mixins.fontSize(48);
+          font-weight: 600;
+        }
+
+        span {
+          color: var(--color-white);
+          display: block;
+          line-height: 24px;
+        }
+      }
+    }
+
+    .col-4 {
+      padding: 0 16px 0 0;
+
+      & > div {
+        border-radius: 24px;
+        background: url('../../../../../../public/layout/images/gosciu.webp') no-repeat scroll center center / cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

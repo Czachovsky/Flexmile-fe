@@ -93,3 +93,30 @@ main {
     }
   }
 }
+
+  .owl-nav {
+    & > div {
+      position: absolute;
+
+      padding: 0 !important;
+      height: 40px !important;
+      width: 40px !important;
+      border-radius: 50px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: var(--color-green-800) !important;
+      color: var(--p-primary-900) !important;
+      top: 50%;
+      transform: translateY(-50%);
+      &.owl-prev{
+        left:0;
+        margin: 0 0 0 -20px !important;
+      }
+      &.owl-next{
+        right:0;
+        margin: 0 -20px 0 0 !important;
+      }
+    }
+  }
+

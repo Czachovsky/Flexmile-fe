@@ -9,3 +9,24 @@
     }
   }
 }
+
+.add_info{
+  ._d{
+    max-width: 526px;
+  }
+  ._img{
+    background: url('../../../../public/layout/images/chlopy.webp') no-repeat scroll center center / cover;
+    max-width: 640px;
+    width: 100%;
+    aspect-ratio: 320/237;
+  }
+  h2{
+font-weight: 600;
+    @include mixins.fontSize(48);
+    line-height: 56px;
+  }
+  span{
+    color: var(--color-black-700);
+    line-height: 24px;
+  }
+}

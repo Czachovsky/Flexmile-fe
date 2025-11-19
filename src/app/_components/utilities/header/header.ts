@@ -17,7 +17,7 @@ import {RouterLink} from '@angular/router';
 export class Header {
   public readonly screen: Screen = inject(Screen);
   public readonly menuElements = menuElements;
-  private readonly scrollTriggerOffset = 125;
+  private readonly scrollTriggerOffset = 200;
   public isScrolled = window.scrollY > this.scrollTriggerOffset && !this.screen.isMobile();
   public mobileMenuState: boolean = false;
 
