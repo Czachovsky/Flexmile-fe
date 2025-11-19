@@ -1,10 +1,26 @@
-@if (offerList()?.offers?.length) {
+@if (layoutItems().length) {
   <div class="list--body">
     <div class="list--body-grid">
-      @for (offer of offerList()?.offers; track offer; let index = $index) {
-        <div class="product">
-        <flexmile-car></flexmile-car>
-        </div>
+      @for (item of layoutItems(); track trackByItem($index, item)) {
+        @if (item.type === 'banner' && item.bannerIndex !== undefined) {
+          <div class="banner">
+            <flexmile-banner-list
+              [label]="getBanner(item.bannerIndex).label"
+              [description]="getBanner(item.bannerIndex).description"
+              position="center">
+            </flexmile-banner-list>
+          </div>
+        } @else if (item.type === 'offer' && item.offer) {
+          @if (item.isFullWidth) {
+            <div class="product-full">
+              <flexmile-car [cardSize]="badgeSizes.LG" [offer]="item.offer"></flexmile-car>
+            </div>
+          } @else {
+            <div class="product">
+              <flexmile-car [offer]="item.offer"></flexmile-car>
+            </div>
+          }
+        }
       }
     </div>
   </div>

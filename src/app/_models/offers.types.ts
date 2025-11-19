@@ -26,12 +26,12 @@ interface OfferSpecsModel {
   drivetrain: string;
   engine: string;
   engine_capacity: number;
-  horsepower: number;
   mileage: number;
   seats: number;
   transmission: string;
   vin_number: string;
   year: number;
+  horsepower: number;
 }
 
 interface OfferPricingModel {
@@ -76,16 +76,36 @@ interface OfferListMetaModel {
 }
 
 export interface OfferListOffersModel {
-  title: string;
-  model: string;
-  available: boolean;
   id: number;
+  car_reference_id: string;
+  title: string;
+  slug: string;
+  image: {
+    thumbnail: boolean;
+    medium: boolean;
+    large: boolean;
+  };
+  engine: string;
+  horsepower: number;
+  transmission: string;
+  year: number;
+  mileage: number;
+  brand: {
+    slug: string;
+    name: string;
+  };
+  model: string;
+  body_type: string;
+  fuel_type: string;
+  price_from: number;
+  attributes: OfferAttributesModel;
+  available: boolean;
 
 
 }
 
 export interface OfferListModel {
-  offers: OfferModel[];
+  offers: OfferListOffersModel[];
   meta: OfferListMetaModel;
 }
 

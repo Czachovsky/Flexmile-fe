@@ -5,6 +5,8 @@ import {badgeSizes, badgeTypes} from '@models/common.types';
 import {Router} from '@angular/router';
 import {NgTemplateOutlet} from '@angular/common';
 import {ButtonComponent} from '@components/utilities/button/button';
+import {OfferListOffersModel, OfferModel} from '@models/offers.types';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'flexmile-car',
@@ -20,6 +22,7 @@ import {ButtonComponent} from '@components/utilities/button/button';
 })
 export class Car {
   cardSize = input<badgeSizes>(badgeSizes.MD);
+  offer = input.required<OfferListOffersModel>()
   protected readonly badgeTypes = badgeTypes;
   protected readonly badgeSizes = badgeSizes;
   private router: Router = inject(Router);
@@ -30,4 +33,5 @@ export class Car {
   }
 
 
+  protected readonly of = of;
 }
