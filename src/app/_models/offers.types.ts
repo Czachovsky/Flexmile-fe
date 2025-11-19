@@ -100,8 +100,7 @@ export interface OfferListOffersModel {
   price_from: number;
   attributes: OfferAttributesModel;
   available: boolean;
-
-
+  engine_capacity: number;
 }
 
 export interface OfferListModel {

@@ -5,7 +5,7 @@ import {badgeSizes, badgeTypes} from '@models/common.types';
 import {Router} from '@angular/router';
 import {NgTemplateOutlet} from '@angular/common';
 import {ButtonComponent} from '@components/utilities/button/button';
-import {OfferListOffersModel, OfferModel} from '@models/offers.types';
+import {BodyType, FuelType, OfferListOffersModel, OfferModel, TransmissionType} from '@models/offers.types';
 import {of} from 'rxjs';
 
 @Component({
@@ -26,12 +26,18 @@ export class Car {
   protected readonly badgeTypes = badgeTypes;
   protected readonly badgeSizes = badgeSizes;
   private router: Router = inject(Router);
+  public readonly transmissionType = TransmissionType;
+  public readonly fuelType = FuelType;
 
 
   public goToOffer(id: number): void {
     this.router.navigateByUrl(`/oferta/${id}`);
   }
+  public getTransmissionLabel(type: string): string {
+    return this.transmissionType[type as keyof typeof TransmissionType];
+  }
 
-
-  protected readonly of = of;
+  public getFuelLabel(type: string): string {
+    return this.fuelType[type as keyof typeof FuelType];
+  }
 }

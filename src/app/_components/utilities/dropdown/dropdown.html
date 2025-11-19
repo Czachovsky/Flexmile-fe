@@ -26,17 +26,17 @@
   </button>
 
   @if (isOpen()) {
+    @if(!hideSearch()){
+      <div class="dropdown-search">
+        <input
+          type="text"
+          placeholder="Szukaj..."
+          (input)="searchQuery.set(($any($event.target).value || '').trim())"
+          (keydown.escape)="closeDropdown()"
+        />
+      </div>
+    }
     <div class="dropdown-menu" role="listbox">
-      @if(!hideSearch()){
-        <div class="dropdown-search">
-          <input
-            type="text"
-            placeholder="Szukaj..."
-            (input)="searchQuery.set(($any($event.target).value || '').trim())"
-            (keydown.escape)="closeDropdown()"
-          />
-        </div>
-      }
       @for (option of filteredOptions(); track option.value; let idx = $index) {
         <div
           class="dropdown-item"

@@ -28,7 +28,25 @@
   display: flex;
   width: 100%;
 }
+.dropdown-search{
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  width: calc(100% - 35px);
 
+  input{
+    height: 51px;
+    width: 100%;
+    border: none;
+    padding-left: 24px;
+    border-radius: var(--dropdown-border-radius);
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-color: transparent;
+    }
+  }
+}
 .dropdown-button {
   width: 100%;
   min-height: var(--dropdown-min-height);
