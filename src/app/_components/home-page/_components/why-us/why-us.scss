@@ -1,0 +1,130 @@
+@use 'mixins';
+
+.why-us {
+  .container {
+    &.borders {
+      position: relative;
+
+      &:before, &:after {
+        height: 8px;
+        width: 100%;
+        background: #863087;
+        content: '';
+        display: block;
+        border-radius: 8px;
+      }
+    }
+
+    &.dreams {
+      .col-8 {
+        padding: 0 16px 0 0;
+
+        & > div {
+          background: #863087;
+          border-radius: 24px;
+          padding: 40px;
+
+          h2 {
+            padding-bottom: 16px;
+            color: var(--color-white);
+            line-height: 56px;
+            @include mixins.fontSize(48);
+            font-weight: 600;
+          }
+
+          span {
+            color: var(--color-white);
+            padding-bottom: 40px;
+            display: block;
+            line-height: 24px;
+          }
+        }
+      }
+
+      .col-4 {
+        padding: 0 0 0 16px;
+
+        & > div {
+          background: url('../../../../../../public/layout/images/car-woman.webp') no-repeat scroll center left;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    &.why {
+      h2 {
+        text-align: center;
+        line-height: 56px;
+        @include mixins.fontSize(48);
+        font-weight: 600;
+        padding-bottom: 16px;
+      }
+
+      .description {
+        max-width: 640px;
+        margin: 0 auto;
+        text-align: center;
+        color: var(--color-black-700);
+        line-height: 24px;
+        padding-bottom: 64px;
+      }
+
+      .table {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        border-radius: 24px;
+        overflow: hidden;
+
+        .table-left_header {
+          background: var(--color-green-800);
+        }
+
+        .table-right_header {
+          background: var(--color-black-100);
+        }
+
+        .table-left_body {
+          border-left: 1px solid #E2E2E2;
+        }
+
+        .table-left_body, .table-right_body {
+          & > div {
+            span {
+              margin-right: 8px;
+            }
+
+            height: 56px;
+            display: flex;
+            align-items: center;
+            padding-left: 24px;
+            color: #525252;
+            border-bottom: 1px solid #E2E2E2;
+            border-right: 1px solid #E2E2E2;
+          }
+        }
+
+        .table-right_body {
+          & > div {
+            background: #FAFAFA;
+          }
+        }
+
+        .table-left_header, .table-right_header {
+          display: flex;
+          align-items: center;
+          font-weight: 500;
+          padding: 0 24px;
+          @include mixins.fontSize(20);
+          line-height: 24px;
+          height: 56px;
+        }
+
+        & > div {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

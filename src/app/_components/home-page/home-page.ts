@@ -11,6 +11,7 @@ import {OfferListModel} from '@models/offers.types';
 import {Player} from '@components/utilities/player/player';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {HomepageList} from '@components/home-page/_components/homepage-list/homepage-list';
+import {ButtonComponent} from '@components/utilities/button/button';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -23,6 +24,7 @@ import {HomepageList} from '@components/home-page/_components/homepage-list/home
     Opinions,
     Player,
     HomepageList,
+    ButtonComponent,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
