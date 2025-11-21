@@ -6,8 +6,8 @@
 
 .tooltip-content {
   position: absolute;
-  padding: 10px 16px;
-  border-radius: 48px;
+  padding: 8px 16px;
+  border-radius: 16px;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
@@ -113,5 +113,9 @@
 
   &.multi-line {
     white-space: normal;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    min-width: 215px;
   }
 }

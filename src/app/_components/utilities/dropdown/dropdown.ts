@@ -1,4 +1,4 @@
-import {Component, input, signal, effect, forwardRef, HostListener, ElementRef, computed} from '@angular/core';
+import {Component, input, signal, effect, forwardRef, HostListener, ElementRef, computed, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -43,6 +43,11 @@ export class Dropdown implements ControlValueAccessor {
     )
   );
 
+  showNoResults = computed(() =>
+    this.searchQuery().length > 0 && this.filteredOptions().length === 0
+  );
+
+  @ViewChild('searchInput', { static: false }) searchInput?: ElementRef<HTMLInputElement>;
 
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
@@ -126,10 +131,17 @@ export class Dropdown implements ControlValueAccessor {
       this.isOpen.update(v => !v);
       if (this.isOpen()) {
         this.searchQuery.set('');
-        const selectedIndex = this.options().findIndex(
-          opt => opt.value === this.selectedValue()
-        );
-        this.setFocusedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+        // Jeśli wyszukiwanie jest włączone, fokusuj input po renderowaniu
+        if (!this.hideSearch()) {
+          setTimeout(() => {
+            this.searchInput?.nativeElement?.focus();
+          }, 0);
+        } else {
+          const selectedIndex = this.options().findIndex(
+            opt => opt.value === this.selectedValue()
+          );
+          this.setFocusedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+        }
       } else {
         this.onTouched();
         this.focusedIndex.set(-1);

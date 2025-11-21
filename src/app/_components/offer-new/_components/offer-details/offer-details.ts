@@ -1,6 +1,6 @@
 import {Component, inject, input, InputSignal, OnInit, output} from '@angular/core';
-import {BodyType, FuelType, OfferModel, TransmissionType} from '@models/offers.types';
-import {DecimalPipe, JsonPipe, SlicePipe} from '@angular/common';
+import {BodyType, FuelType, OfferListOffersModel, OfferModel, TransmissionType} from '@models/offers.types';
+import {DecimalPipe, SlicePipe} from '@angular/common';
 import {Badge} from '@components/utilities/badge/badge';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
 import {badgeSizes, badgeTypes} from '@models/common.types';
@@ -27,7 +27,7 @@ import {OfferService} from '@services/offer';
 export class OfferDetails implements OnInit {
   public offerService: OfferService = inject(OfferService);
   public details: InputSignal<OfferModel> = input.required<OfferModel>();
-  public similarOffers: InputSignal<OfferModel[] | []> = input.required<OfferModel[] | []>();
+  public similarOffers: InputSignal<OfferListOffersModel[] | []> = input.required<OfferListOffersModel[] | []>();
   public nextStep = output<offerFirstStepModel>();
   public readonly badgeTypes = badgeTypes;
   public readonly badgeSizes = badgeSizes;
@@ -56,6 +56,9 @@ export class OfferDetails implements OnInit {
       this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
     this.offerService.calculatePrice(this.details());
+    setTimeout(() => {
+      this.onOrderClick();
+    }, 1000)
   }
 
   public getTransmissionLabel(type: string): string {

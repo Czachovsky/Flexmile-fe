@@ -1,10 +1,12 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {Offers} from '@components/offers/offers';
-import {Offer} from '@components/offer/offer';
 import {HomePage} from '@components/home-page/home-page';
 import {offerResolver} from './_resolvers/offer-resolver';
 import {PageNotFound} from '@components/page-not-found/page-not-found';
 import {OfferNew} from '@components/offer-new/offer-new';
+import {PrivacyPolicy} from '@components/privacy-policy/privacy-policy';
+import {TermsConditions} from '@components/terms-conditions/terms-conditions';
+import {CookiesPolicy} from '@components/cookies-policy/cookies-policy';
 
 export const routes: Routes = [
   {
@@ -25,6 +27,21 @@ export const routes: Routes = [
       offer: offerResolver
     },
   },
-  { path: '404', component: PageNotFound },
-  { path: '**', component: PageNotFound },
+  {
+    path: 'polityka-prywatnosci',
+    component: PrivacyPolicy,
+    title: 'Polityka prywatności - Flexmile',
+  },
+  {
+    path: 'regulamin',
+    component: TermsConditions,
+    title: 'Regulamin - Flexmile',
+  },
+  {
+    path: 'polityka-cookies',
+    component: CookiesPolicy,
+    title: 'Polityka cookies - Flexmile',
+  },
+  {path: '404', component: PageNotFound},
+  {path: '**', component: PageNotFound},
 ];

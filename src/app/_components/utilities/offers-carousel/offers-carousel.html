@@ -5,9 +5,9 @@
   </div>
   <div class="offers-carousel__body">
     <owl-carousel-o [options]="customOptions">
-      @for (slide of sliderArr; let i = $index; track i) {
+      @for (offer of similarOffers(); let i = $index; track i) {
         <ng-template carouselSlide>
-<!--          <flexmile-car></flexmile-car>-->
+          <flexmile-car [offer]="offer"></flexmile-car>
         </ng-template>
       }
     </owl-carousel-o>

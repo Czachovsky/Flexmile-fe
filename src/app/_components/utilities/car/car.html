@@ -8,7 +8,7 @@
       <flexmile-badge [type]="badgeTypes.NEW" [size]="cardSize()"></flexmile-badge>
     }
     @if (offer().attributes.coming_soon) {
-      <flexmile-badge [type]="badgeTypes.SOON" [size]="cardSize()"></flexmile-badge>
+      <flexmile-badge [type]="badgeTypes.SOON" [size]="cardSize()" [date]="offer().coming_soon_date"></flexmile-badge>
     }
   </div>
 

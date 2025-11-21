@@ -3,4 +3,5 @@ export interface TooltipConfig {
   position: 'top' | 'bottom' | 'left' | 'right';
   backgroundColor?: string;
   textColor?: string;
+  multiline?: boolean;
 }

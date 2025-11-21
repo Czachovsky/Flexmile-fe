@@ -14,9 +14,6 @@ export class Link {
   /** Tekst wyświetlany w linku */
   title = input.required<string>();
 
-
-  // @Input({ required: true }) title!: string;
-
   /** Ścieżka URL do nawigacji */
   url = input.required<string | any[]>();
 
@@ -69,6 +66,20 @@ export class Link {
   onClick = input<(event: MouseEvent) => void>();
 
   isDisabled = computed(() => this.disabled());
+
+  isExternalLink = computed(() => {
+    const currentUrl = this.url();
+
+    if (Array.isArray(currentUrl)) {
+      return false;
+    }
+
+    return this.hasProtocol(currentUrl);
+  });
+
+  private hasProtocol(url: string): boolean {
+    return /^(?:[a-z][a-z0-9+\-.]*:|\/\/)/i.test(url);
+  }
 
   handleClick(event: MouseEvent) {
     if (this.disabled()) {

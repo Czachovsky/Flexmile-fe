@@ -9,7 +9,7 @@
       #tooltipContent
       class="tooltip-content"
       [class.ready]="positionCalculated()"
-      [ngClass]="'position-' + config().position"
+      [ngClass]="['position-' + config().position, config().multiline ? 'multi-line' : '']"
       [ngStyle]="{
         'background': config().backgroundColor || '#b8d14a',
         'color': config().textColor || '#5a3270'

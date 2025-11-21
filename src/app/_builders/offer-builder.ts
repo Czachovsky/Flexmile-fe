@@ -20,7 +20,9 @@ static build(): FormGroup<OfferFormValues> {
     nip: new FormControl<string | null>(null, [Validators.required]),
     phone: new FormControl<string | null>(null, [Validators.required, this.phoneValidator]),
     email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
-    pickup_location: new FormControl<pickupLocation | null>(null, [Validators.required]),
+    pickup_location: new FormControl<pickupLocation | null>(null),
+    consent_phone: new FormControl<boolean>(false, {nonNullable: true}),
+    consent_email: new FormControl<boolean>(false, {nonNullable: true}),
   })
 }
 }

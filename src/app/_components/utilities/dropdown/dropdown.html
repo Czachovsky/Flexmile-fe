@@ -29,6 +29,7 @@
     @if(!hideSearch()){
       <div class="dropdown-search">
         <input
+          #searchInput
           type="text"
           placeholder="Szukaj..."
           (input)="searchQuery.set(($any($event.target).value || '').trim())"
@@ -37,16 +38,22 @@
       </div>
     }
     <div class="dropdown-menu" role="listbox">
-      @for (option of filteredOptions(); track option.value; let idx = $index) {
-        <div
-          class="dropdown-item"
-          role="option"
-          [class.selected]="option.value === selectedValue()"
-          [class.focused]="idx === focusedIndex()"
-          (click)="selectOption(option)"
-          (mouseenter)="setFocusedIndex(idx)">
-          {{ option.label }}
+      @if (showNoResults()) {
+        <div class="dropdown-no-results">
+          Brak wyników dla frazy "{{ searchQuery() }}"
         </div>
+      } @else {
+        @for (option of filteredOptions(); track option.value; let idx = $index) {
+          <div
+            class="dropdown-item"
+            role="option"
+            [class.selected]="option.value === selectedValue()"
+            [class.focused]="idx === focusedIndex()"
+            (click)="selectOption(option)"
+            (mouseenter)="setFocusedIndex(idx)">
+            {{ option.label }}
+          </div>
+        }
       }
     </div>
   }

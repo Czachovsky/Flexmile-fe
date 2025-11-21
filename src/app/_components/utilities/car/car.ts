@@ -5,8 +5,7 @@ import {badgeSizes, badgeTypes} from '@models/common.types';
 import {Router} from '@angular/router';
 import {NgTemplateOutlet} from '@angular/common';
 import {ButtonComponent} from '@components/utilities/button/button';
-import {BodyType, FuelType, OfferListOffersModel, OfferModel, TransmissionType} from '@models/offers.types';
-import {of} from 'rxjs';
+import {FuelType, OfferListOffersModel, TransmissionType} from '@models/offers.types';
 
 @Component({
   selector: 'flexmile-car',
@@ -33,6 +32,7 @@ export class Car {
   public goToOffer(id: number): void {
     this.router.navigateByUrl(`/oferta/${id}`);
   }
+
   public getTransmissionLabel(type: string): string {
     return this.transmissionType[type as keyof typeof TransmissionType];
   }

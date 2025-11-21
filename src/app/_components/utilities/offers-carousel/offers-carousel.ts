@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
 import {Car} from '@components/utilities/car/car';
+import {OfferListOffersModel} from '@models/offers.types';
 
 @Component({
   selector: 'flexmile-offers-carousel',
@@ -14,7 +15,7 @@ import {Car} from '@components/utilities/car/car';
   styleUrl: './offers-carousel.scss',
 })
 export class OffersCarousel {
-  sliderArr = [1, 2, 3, 4, 5, 6];
+  public similarOffers: InputSignal<OfferListOffersModel[] | []> = input.required<OfferListOffersModel[] | []>();
   public readonly customOptions: OwlOptions = {
     navText: ['<i class="pi pi-arrow-left"></i>', '<i class="pi pi-arrow-right"></i>'],
     nav: true,

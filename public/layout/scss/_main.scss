@@ -3,11 +3,49 @@
 @use "variables";
 @use "grid";
 @use "mixins";
+@use "policy";
 
 html {
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   font-family: var(--font-family), sans-serif;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #B8B8B8;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+
+  &:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #863087;
+    background-color: CanvasText;
+  }
+
+  &:checked:before {
+    transform: scale(1);
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
 }
 
 h2 {
@@ -94,29 +132,31 @@ main {
   }
 }
 
-  .owl-nav {
-    & > div {
-      position: absolute;
+.owl-nav {
+  & > div {
+    position: absolute;
 
-      padding: 0 !important;
-      height: 40px !important;
-      width: 40px !important;
-      border-radius: 50px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      background: var(--color-green-800) !important;
-      color: var(--p-primary-900) !important;
-      top: 50%;
-      transform: translateY(-50%);
-      &.owl-prev{
-        left:0;
-        margin: 0 0 0 -20px !important;
-      }
-      &.owl-next{
-        right:0;
-        margin: 0 -20px 0 0 !important;
-      }
+    padding: 0 !important;
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--color-green-800) !important;
+    color: var(--p-primary-900) !important;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.owl-prev {
+      left: 0;
+      margin: 0 0 0 -20px !important;
+    }
+
+    &.owl-next {
+      right: 0;
+      margin: 0 -20px 0 0 !important;
     }
   }
+}
 

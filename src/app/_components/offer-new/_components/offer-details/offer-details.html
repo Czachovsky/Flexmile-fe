@@ -8,7 +8,7 @@
         <div class="offer__body-info pr-7">
           <div class="offer__body-info-header">
             <div class="flex align-items-center justify-content-between pb-2">
-              <h1>{{ details().brand.name }} {{ details().model }} {{ details().specs.engine }}</h1>
+              <h1>{{ details().brand.name }} {{ details().model }}</h1>
               <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
             </div>
             <span class="block pb-3">
@@ -186,7 +186,7 @@
     </div>
     @if (similarOffers().length) {
       <div class="similar-offerts">
-        <flexmile-offers-carousel></flexmile-offers-carousel>
+        <flexmile-offers-carousel [similarOffers]="similarOffers()"></flexmile-offers-carousel>
       </div>
     }
   </div>

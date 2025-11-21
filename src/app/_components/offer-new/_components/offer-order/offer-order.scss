@@ -9,13 +9,24 @@
 }
 
 .offer-order {
+  padding-bottom: 120px;
+
+  .radios {
+    label {
+      color: #525252;
+      @include mixins.fontSize(14);
+      line-height: 24px;
+    }
+  }
+
   &-details {
     &_section {
-      &:nth-of-type(1){
-        border-bottom:1px solid var(--color-black-100);
+      &:nth-of-type(1) {
+        border-bottom: 1px solid var(--color-black-100);
         margin-bottom: 32px;
         padding-bottom: 32px;
       }
+
       h4 {
         font-weight: 500;
         @include mixins.fontSize(20);
@@ -59,16 +70,46 @@
 
   &_right {
     max-width: 415px;
-    background: var(--color-black-50);
-    border-radius: var(--border-radius-base);
-    padding: 24px;
     width: 100%;
+
+    & > div {
+      background: var(--color-black-50);
+      border-radius: var(--border-radius-base);
+
+      .right_id {
+        @include mixins.fontSize(12);
+        color: var(--color-black-700);
+        line-height: 16px;
+      }
+
+      .right_title {
+        font-weight: 600;
+        line-height: 32px;
+        @include mixins.fontSize(24);
+      }
+
+      .right_subtitle {
+        line-height: 24px;
+      }
+
+      .right_price {
+        color: var(--p-primary-900);
+        font-weight: 600;
+        line-height: 40px;
+        @include mixins.fontSize(32);
+
+        span {
+          @include mixins.fontSize(24);
+          line-height: 32px;
+        }
+      }
+    }
   }
 
 }
 
 :host ::ng-deep .order-input {
-  input{
-    border-color: var(--color-black-200);
+  input {
+    border-color: var(--color-black-200) !important;
   }
 }

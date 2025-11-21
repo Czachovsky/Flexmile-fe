@@ -12,7 +12,17 @@
       } @else {
         <div [innerHTML]="icon() | sanitize: 'html'" class="mr-4"></div>
       }
-      {{ label() }} {{ separator() }}&nbsp;</span>
+      @if(bannerTemplate()){
+        <div class="list-banner--template">
+          <ng-container [ngTemplateOutlet]="bannerTemplate()!" />
+        </div>
+      } @else {
+        {{ label() }} {{ separator() }}&nbsp;
+      }
+
+    </span>
+    @if(!bannerTemplate()){
     <span class="list-banner--description">{{ description() }}</span>
+    }
   </div>
 </div>

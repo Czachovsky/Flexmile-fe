@@ -66,6 +66,7 @@ export interface OfferModel {
   gallery: OfferGalleryModel[];
   standard_equipment?: string[];
   additional_equipment?: string[];
+  coming_soon_date?: string;
 }
 
 interface OfferListMetaModel {
@@ -101,6 +102,7 @@ export interface OfferListOffersModel {
   attributes: OfferAttributesModel;
   available: boolean;
   engine_capacity: number;
+  coming_soon_date?: string;
 }
 
 export interface OfferListModel {

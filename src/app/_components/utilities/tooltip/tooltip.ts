@@ -19,7 +19,8 @@ import { TooltipConfig } from '@models/tooltip.types';
 export class Tooltip {
   config: InputSignal<TooltipConfig> = input<TooltipConfig>({
     text: '',
-    position: 'top'
+    position: 'top',
+    multiline: false,
   });
 
   visible = signal(false);
@@ -50,7 +51,6 @@ export class Tooltip {
 
     return styles;
   });
-
   show() {
     this.visible.set(true);
     this.positionCalculated.set(false);

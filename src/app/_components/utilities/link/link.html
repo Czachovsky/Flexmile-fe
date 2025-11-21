@@ -1,29 +1,52 @@
-<a
-  [routerLink]="url()"
-  [queryParams]="queryParams()"
-  [fragment]="fragment()"
-  [state]="state()"
-  [queryParamsHandling]="queryParamsHandling()"
-  [preserveFragment]="preserveFragment()"
-  [skipLocationChange]="skipLocationChange()"
-  [replaceUrl]="replaceUrl()"
-  [target]="target()"
-  [rel]="rel()"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="routerLinkActiveOptions()"
-  [class]="customClass()"
-  [attr.aria-label]="ariaLabel() || title()"
-  [attr.disabled]="disabled() ? true : null"
-  (click)="handleClick($event)"
-  class="flex align-items-center gap-2">
+@if (isExternalLink()) {
+  <a
+    [href]="url()"
+    [target]="target()"
+    [rel]="rel()"
+    [class]="customClass()"
+    [attr.aria-label]="ariaLabel() || title()"
+    [attr.disabled]="disabled() ? true : null"
+    (click)="handleClick($event)"
+    class="flex align-items-center gap-2">
 
-  @if (iconPosition() === 'left' && icon()) {
-    <i class="pi {{icon()}}"></i>
-  }
+    @if (iconPosition() === 'left' && icon()) {
+      <i class="pi {{icon()}}"></i>
+    }
 
-  <span class="link-title">{{ title() }}</span>
+    <span class="link-title">{{ title() }}</span>
 
-  @if (iconPosition() === 'right' && icon()) {
-    <i class="pi {{icon()}}"></i>
-  }
-</a>
+    @if (iconPosition() === 'right' && icon()) {
+      <i class="pi {{icon()}}"></i>
+    }
+  </a>
+} @else {
+  <a
+    [routerLink]="url()"
+    [queryParams]="queryParams()"
+    [fragment]="fragment()"
+    [state]="state()"
+    [queryParamsHandling]="queryParamsHandling()"
+    [preserveFragment]="preserveFragment()"
+    [skipLocationChange]="skipLocationChange()"
+    [replaceUrl]="replaceUrl()"
+    [target]="target()"
+    [rel]="rel()"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="routerLinkActiveOptions()"
+    [class]="customClass()"
+    [attr.aria-label]="ariaLabel() || title()"
+    [attr.disabled]="disabled() ? true : null"
+    (click)="handleClick($event)"
+    class="flex align-items-center gap-2">
+
+    @if (iconPosition() === 'left' && icon()) {
+      <i class="pi {{icon()}}"></i>
+    }
+
+    <span class="link-title">{{ title() }}</span>
+
+    @if (iconPosition() === 'right' && icon()) {
+      <i class="pi {{icon()}}"></i>
+    }
+  </a>
+}

@@ -1,5 +1,7 @@
 import {FormControl} from '@angular/forms';
 
+export const SIMILAR_OFFERS_COUNT = 6;
+
 export interface offerDescriptionModel {
   label: string;
   description: string;
@@ -63,6 +65,8 @@ export interface OfferFormValues {
   email: FormControl<string | null>;
   phone: FormControl<string | null>;
   pickup_location: FormControl<pickupLocation | null>;
+  consent_phone: FormControl<boolean>;
+  consent_email: FormControl<boolean>;
 }
 
 export enum pickupLocation {

@@ -34,27 +34,27 @@ Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
               </div>
               <div>
                 <span class="flex align-items-center gap-2">Preferowane miejsce odbioru <flexmile-tooltip
-                  [config]="{text: 'Pytanie ma charakter informacyjny. Decyzję można zmienić w kolejnych etapach', position: 'top'}"> <svg
+                  [config]="{text: 'Pytanie ma charakter informacyjny. Decyzję można zmienić w kolejnych etapach', position: 'top', multiline: true}"> <svg
                   xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                   viewBox="0 0 16 16" fill="none">
 <path
   d="M8 0C12.4062 0 16 3.59375 16 8C16 12.4375 12.4062 16 8 16C3.5625 16 0 12.4375 0 8C0 3.59375 3.5625 0 8 0ZM8 14.5C11.5625 14.5 14.5 11.5938 14.5 8C14.5 4.4375 11.5625 1.5 8 1.5C4.40625 1.5 1.5 4.4375 1.5 8C1.5 11.5938 4.40625 14.5 8 14.5ZM9.25 10.5C9.65625 10.5 10 10.8438 10 11.25C10 11.6875 9.65625 12 9.25 12H6.75C6.3125 12 6 11.6875 6 11.25C6 10.8438 6.3125 10.5 6.75 10.5H7.25V8.5H7C6.5625 8.5 6.25 8.1875 6.25 7.75C6.25 7.34375 6.5625 7 7 7H8C8.40625 7 8.75 7.34375 8.75 7.75V10.5H9.25ZM8 6C7.4375 6 7 5.5625 7 5C7 4.46875 7.4375 4 8 4C8.53125 4 9 4.46875 9 5C9 5.5625 8.53125 6 8 6Z"
   fill="#863087"/>
                 </svg></flexmile-tooltip></span>
-                <div>
-                  <label>
+                <div class="radios">
+                  <label class="flex align-items-center justify-content-start gap-2 pb-2">
                     <input type="radio" formControlName="pickup_location" [value]="pickupLocation.home_delivery"/>
                     Odbiór w salonie
                   </label>
-
-                  <label>
+                  <label class="flex align-items-center justify-content-start gap-2">
                     <input type="radio" formControlName="pickup_location" [value]="pickupLocation.salon"/>
                     Darmowa dostawa pod dom
                   </label>
                 </div>
               </div>
             </div>
-            <div class="offer-order-details_section">
+            <div class="offer-order-details_section pb-4">
+              <pre>{{ orderForm.getRawValue() | json }}</pre>
               <h4 class="mb-5">Dane firmy</h4>
               <div class="grid">
                 <div class="col-6 order-input">
@@ -79,13 +79,63 @@ Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
                 </div>
               </div>
             </div>
+            <div class="offer-order-banners">
+              <div class="pb-3">
+                <ng-template #banner1>Interesuje Cię <span style="color: #C1D342;">większa liczba</span><br>samochodów
+                  dla Twojej firmy?
+                </ng-template>
+                <flexmile-banner-list size="small" [icon]="descriptionBanner.icon"
+                                      [bannerTemplate]="banner1"></flexmile-banner-list>
+              </div>
+              <div>
+                <ng-template #banner2>Wybierz <span style="color: #C1D342;">kolejny samochód</span> z naszej<br>oferty i
+                  złóż zamówienie!
+                </ng-template>
+                <flexmile-banner-list size="small" [icon]="descriptionBanner.icon"
+                                      [bannerTemplate]="banner2"></flexmile-banner-list>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="offer-order_right"></div>
+      <div class="offer-order_right">
+        <div class="p-4">
+          <div class="right_id pb-2">
+            {{ details().car_reference_id }}
+          </div>
+          <div class="right_title pb-1">
+            {{ details().brand.name }} {{ details().model }}
+          </div>
+          <div class="right_subtitle">
+            {{ details().specs.engine ? details().specs.engine + ', ' : '' }}{{ details().specs.engine_capacity }} cm³
+          </div>
+          <div class="right_img" style="height: 276px;">
+            zdjecie
+          </div>
+          <div class="right_price pb-4">
+            {{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span>
+          </div>
+          <div class="right_consents pb-4">
+            <div class="pb-2">
+              <flexmile-input
+                label="Wyrażam zgodę na otrzymywanie na wskazany adres e-mail wiadomości dotyczących mojego zapytania od flexmile."
+                [type]="inputType.checkbox" inputId="consent_email"
+                [control]="orderForm.get('consent_email')"></flexmile-input>
+            </div>
+            <div>
+              <flexmile-input
+                label="Wyrażam zgodę na kontakt telefoniczny w celu przekazywania informacji handlowych przez flexmile."
+                [type]="inputType.checkbox" inputId="consent_phone"
+                [control]="orderForm.get('consent_phone')"></flexmile-input>
+            </div>
+          </div>
+          <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'" label="Zamów" iconPosition="right"
+                           icon="pi-arrow-right"
+                           size="large"></flexmile-button>
+        </div>
+      </div>
     </div>
-
-
-    {{ orderForm.getRawValue() | json }}
   </div>
 </div>
+
+
