@@ -56,9 +56,6 @@ export class OfferDetails implements OnInit {
       this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
     this.offerService.calculatePrice(this.details());
-    setTimeout(() => {
-      this.onOrderClick();
-    }, 1000)
   }
 
   public getTransmissionLabel(type: string): string {
@@ -90,7 +87,7 @@ export class OfferDetails implements OnInit {
   }
 
   public canOrder(): boolean {
-    return this.offerService.canOrder();
+    return this.details().available && this.offerService.canOrder();
   }
 
   public getSpecValue(value: string): string {

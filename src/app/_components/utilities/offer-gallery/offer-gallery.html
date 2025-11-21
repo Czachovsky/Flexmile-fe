@@ -18,7 +18,7 @@
              class="main-image">
 
         <!-- Navigation Arrows -->
-        @if (totalImages > 1) {
+        @if (totalImages > 1 && !hideControls) {
           <button class="nav-arrow nav-arrow-left"
                   (click)="previousImage($event)"
                   aria-label="Previous image">

@@ -91,7 +91,13 @@
       .right_subtitle {
         line-height: 24px;
       }
-
+      .right_img{
+        max-height: 276px;
+        img{
+          display: block;
+          width: 100%;
+        }
+      }
       .right_price {
         color: var(--p-primary-900);
         font-weight: 600;

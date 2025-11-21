@@ -9,7 +9,17 @@
           <div class="offer__body-info-header">
             <div class="flex align-items-center justify-content-between pb-2">
               <h1>{{ details().brand.name }} {{ details().model }}</h1>
-              <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
+              @if (!details().available) {
+                <flexmile-badge [type]="badgeTypes.RESERVED" [size]="badgeSizes.LG"></flexmile-badge>
+              } @else {
+                @if (details().attributes.available_immediately) {
+                  <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
+                }
+                @if (details().attributes.coming_soon) {
+                  <flexmile-badge [type]="badgeTypes.SOON" [size]="badgeSizes.LG"
+                                  [date]="details().coming_soon_date"></flexmile-badge>
+                }
+              }
             </div>
             <span class="block pb-3">
               {{ details().specs.engine ? details().specs.engine + ', ' : '' }}{{ details().specs.engine_capacity }} cm³
@@ -45,7 +55,7 @@
             </div>
           </div>
           <div class="offer__body-gallery">
-            <flexmile-offer-gallery [gallery]="details().gallery!"></flexmile-offer-gallery>
+            <flexmile-offer-gallery [gallery]="details().gallery!" [hideControls]="true"></flexmile-offer-gallery>
           </div>
         </div>
         <div class="offer__body-form">
@@ -62,7 +72,7 @@
                 </div>
               </div>
               <div class="pb-5">
-                <div class="pb-2">Roczny limit kilometrów {{offerService.selectedMileageLimit}}</div>
+                <div class="pb-2">Roczny limit kilometrów {{ offerService.selectedMileageLimit }}</div>
                 <div class="mileage flex gap-2 flex-wrap">
                   @for (limit of details().pricing.mileage_limits; track limit) {
                     <flexmile-button [btnClass]="isMileageLimitActive(limit) ? 'active' : ''"
@@ -72,9 +82,12 @@
                 </div>
               </div>
               <div class="offer__body-form-price">
-                <div class="p pb-5">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span></div>
+                <div class="p pb-5">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span>
+                </div>
                 <div class="b">
-                  <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'" label="Zamów" iconPosition="right"
+                  <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'"
+                                   [label]="details().attributes.coming_soon ? 'Zarezerwuj' : 'Zamów'"
+                                   iconPosition="right"
                                    icon="pi-arrow-right"
                                    size="large" (click)="onOrderClick()"></flexmile-button>
                 </div>

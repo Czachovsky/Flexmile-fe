@@ -7,17 +7,19 @@
     svg {
       display: block;
     }
-    .badge.large{
+
+    .badge.large {
       .badge--icon {
-        svg{
+        svg {
           height: 24px;
           width: auto;
         }
       }
     }
-    .badge.medium{
+
+    .badge.medium {
       .badge--icon {
-        svg{
+        svg {
           height: 16px;
           width: auto;
         }
@@ -66,10 +68,23 @@
     color: var(--color-black-600);
     background: var(--color-black-100);
   }
-  &.date{
-    max-height: 44px;
+
+  &.date {
+    &.medium {
+      max-height: 44px;
+    }
+
+    &.large {
+      .badge--date {
+        font-weight: normal;
+        text-transform: none;
+        margin-left: 35px;
+      }
+    }
+
     border-radius: 8px;
-    .badge--date{
+
+    .badge--date {
       margin-left: 24px;
     }
   }

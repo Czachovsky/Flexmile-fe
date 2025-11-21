@@ -1,9 +1,12 @@
 <div class="offer-wrapper">
   @if (!ordering) {
-    <flexmile-offer-details [similarOffers]="similarOffers" [details]="offerData" (nextStep)="showNextStep($event)"></flexmile-offer-details>
+    <flexmile-offer-details [similarOffers]="similarOffers" [details]="offerData"
+                            (nextStep)="showNextStep($event)"></flexmile-offer-details>
   } @else {
-    <flexmile-offer-order [details]="offerData" [orderObject]="orderObject!" (previousStep)="ordering = !$event"></flexmile-offer-order>
+    <flexmile-offer-order [details]="offerData" [orderObject]="orderObject!"
+                          (previousStep)="ordering = !$event"></flexmile-offer-order>
   }
 </div>
 
-
+<flexmile-player [label]="offerData.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
+                 [fileName]="offerData.attributes.coming_soon ? 'rezerwacja.m4a' : 'zamowienie.m4a'"></flexmile-player>

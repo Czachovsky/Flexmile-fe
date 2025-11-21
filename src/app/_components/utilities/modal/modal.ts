@@ -50,6 +50,7 @@ export class Modal {
   }
 
   handleBackdropClick(): void {
+    console.log('xxxxxxx', this.closeOnBackdrop())
     if (this.closeOnBackdrop()) {
       this.close();
     }

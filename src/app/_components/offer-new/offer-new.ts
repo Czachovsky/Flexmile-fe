@@ -4,12 +4,14 @@ import {OfferOrder} from '@components/offer-new/_components/offer-order/offer-or
 import {OffersService} from '@services/offers';
 import {OfferListModel, OfferListOffersModel, OfferModel} from '@models/offers.types';
 import {offerFirstStepModel, SIMILAR_OFFERS_COUNT} from '@models/offer.type';
+import {Player} from '@components/utilities/player/player';
 
 @Component({
   selector: 'flexmile-offer-new',
   imports: [
     OfferDetails,
-    OfferOrder
+    OfferOrder,
+    Player
   ],
   templateUrl: './offer-new.html',
   styleUrl: './offer-new.scss',

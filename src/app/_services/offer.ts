@@ -42,4 +42,8 @@ export class OfferService {
       this.calculatedPrice = 0;
     }
   }
+
+  public orderOrReserve(): void {
+
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, HostListener, input, OnInit} from '@angular/core';
+import {Component, HostListener, input, InputSignal, OnInit} from '@angular/core';
 import {OfferGalleryModel} from '@models/offers.types';
 
 @Component({
@@ -9,7 +9,7 @@ import {OfferGalleryModel} from '@models/offers.types';
 })
 export class OfferGallery implements OnInit  {
   gallery = input<OfferGalleryModel[]>([]);
-
+  hideControls: InputSignal<boolean> = input<boolean>(false);
   public currentIndex: number = 0;
   public isLightboxOpen: boolean = false;
   private touchStartX: number = 0;

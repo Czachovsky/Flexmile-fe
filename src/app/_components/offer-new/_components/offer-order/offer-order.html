@@ -1,4 +1,9 @@
 <div class="offer-order">
+  @if (ordering) {
+    <div class="__loading">
+      <flexmile-loader></flexmile-loader>
+    </div>
+  }
   <div class="go-back px-7 py-5">
     <span (click)="backToDetails()"><i class="pi pi-arrow-left"></i> Wróć</span>
   </div>
@@ -7,9 +12,22 @@
     <div class="flex">
       <div class="offer-order_left">
         <div>
-          <h2 class="pb-3">Złóż zamówienie</h2>
-          <span>Jesteś o krok od nowego samochodu! Wypełnij krótki formularz, a nasz doradca potwierdzi dostępność wybranego auta i ustali z Tobą szczegóły odbioru.
-Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
+          <h2 class="pb-3">
+            @if (details().attributes.coming_soon) {
+              Zarezerwuj
+            } @else {
+              Złóż zamówienie
+            }
+          </h2>
+          <span>
+            @if (details().attributes.coming_soon) {
+              Wybrałeś auto – teraz tylko jeden krok, aby je bezpłatnie zarezerwować!
+              <br>Rezerwacja nie stanowi zobowiązania.
+            } @else {
+              Jesteś o krok od nowego samochodu! Wypełnij krótki formularz, a nasz doradca potwierdzi dostępność wybranego auta i ustali z Tobą szczegóły odbioru.
+                Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.
+            }
+            </span>
           <div class="offer-order-details">
             <div class="offer-order-details_section">
               <h4 class="mb-5">Szczegóły zamówienia</h4>
@@ -54,7 +72,6 @@ Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
               </div>
             </div>
             <div class="offer-order-details_section pb-4">
-              <pre>{{ orderForm.getRawValue() | json }}</pre>
               <h4 class="mb-5">Dane firmy</h4>
               <div class="grid">
                 <div class="col-6 order-input">
@@ -109,8 +126,12 @@ Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
           <div class="right_subtitle">
             {{ details().specs.engine ? details().specs.engine + ', ' : '' }}{{ details().specs.engine_capacity }} cm³
           </div>
-          <div class="right_img" style="height: 276px;">
-            zdjecie
+          <div class="right_img">
+            @if (details().gallery.length) {
+              <img src="{{details().gallery[0].medium}}" alt="{{ details().brand.name }} {{ details().model }}">
+            } @else {
+              <img src="/layout/images/no-image.png" alt="{{ details().brand.name }} {{ details().model }}">
+            }
           </div>
           <div class="right_price pb-4">
             {{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span>
@@ -129,7 +150,8 @@ Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
                 [control]="orderForm.get('consent_phone')"></flexmile-input>
             </div>
           </div>
-          <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'" label="Zamów" iconPosition="right"
+          <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'"
+                           [label]="details().attributes.coming_soon ? 'Zarezerwuj' : 'Zamów'" iconPosition="right"
                            icon="pi-arrow-right"
                            size="large"></flexmile-button>
         </div>
@@ -138,4 +160,15 @@ Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.</span>
   </div>
 </div>
 
+<ng-template #modalContent>
+  <div>
+    <div class="model pb-2">BMW serii 7 M (G70)</div>
+    <div class="title pb-3">Auto zarezerwowane!</div>
+    <span class="block pb-4">Oczekuj na kontakt od flexmile – nasz zespół skontaktuje się z Tobą w ciągu 24 godzin. Jesteś już o krok od nowego samochodu!</span>
+    <div>
+      <flexmile-button label="Tak jest!" [btnClass]="'w-full'" (clicked)="closeModal()"></flexmile-button>
+    </div>
+  </div>
+</ng-template>
 
+<flexmile-modal [isOpen]="ordered" [hideCloseButton]="true" [content]="modalContent"></flexmile-modal>
