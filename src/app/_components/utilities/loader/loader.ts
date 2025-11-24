@@ -1,5 +1,7 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import lottie, {AnimationItem} from 'lottie-web';
+import {AnimationService} from '@services/animation';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'flexmile-loader',
@@ -12,7 +14,8 @@ export class Loader implements OnInit, OnDestroy {
   width: string = '120px';
   height: string = '120px';
   private animation?: AnimationItem;
-
+  private readonly animationService: AnimationService = inject(AnimationService);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.loadAnimation();
@@ -23,13 +26,22 @@ export class Loader implements OnInit, OnDestroy {
   }
 
   private loadAnimation(): void {
-    const config: any = {
-      container: this.container.nativeElement,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: '/layout/lottie/loader.json'
-    };
-    this.animation = lottie.loadAnimation(config);
+    this.animationService.getAnimationData('/layout/lottie/loader.json')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (animationData) => {
+          const config: any = {
+            container: this.container.nativeElement,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: animationData,
+          };
+          this.animation = lottie.loadAnimation(config);
+        },
+        error: (error) => {
+          console.error('Error loading animation:', error);
+        }
+      });
   }
 }

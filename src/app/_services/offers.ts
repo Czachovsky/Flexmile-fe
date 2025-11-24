@@ -2,12 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {API_URL} from '@tokens/api-url.token';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {OfferFilters, OfferListModel, OfferModel} from '@models/offers.types';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription, of} from 'rxjs';
 import {CarModelsModel, MakeListModel} from '@models/hero-search.types';
 import {FormGroup} from '@angular/forms';
 import {FilterBuilder} from '@builders/filters-builder';
 import {FiltersType} from '@models/filters.types';
-import {delay, finalize} from 'rxjs/operators';
+import {delay, finalize, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class OffersService {
   private filterSubscription?: Subscription;
   public readonly offersList$ = this.offersListSubject.asObservable();
   public readonly loading$ = this.loadingSubject.asObservable();
-  private readonly defaultPerPage = 12;
+  private readonly defaultPerPage = 29;
 
   filterOffers(filters: Partial<FiltersType> = {}): void{
     const mappedFilters = this.mapFilters(filters);
@@ -74,8 +74,39 @@ export class OffersService {
     return this.http.get<OfferModel>(this.apiUrl + '/offers/' + id);
   }
 
-  getMakes() {
-    return this.http.get<MakeListModel[]>(this.apiUrl + '/offers/brands');
+  getMakes(): Observable<MakeListModel[]> {
+    const cacheKey = 'makes_cache';
+    const cacheExpiryKey = 'makes_cache_expiry';
+    const cacheDuration = 2 * 24 * 60 * 60 * 1000;
+
+    const cachedData = localStorage.getItem(cacheKey);
+    const expiryTime = localStorage.getItem(cacheExpiryKey);
+
+    if (cachedData && expiryTime) {
+      const now = Date.now();
+      const expiry = parseInt(expiryTime, 10);
+
+      if (now < expiry) {
+        try {
+          const parsedData = JSON.parse(cachedData) as MakeListModel[];
+          return of(parsedData);
+        } catch (error) {
+          console.error('Error parsing cached makes data:', error);
+          localStorage.removeItem(cacheKey);
+          localStorage.removeItem(cacheExpiryKey);
+        }
+      } else {
+        localStorage.removeItem(cacheKey);
+        localStorage.removeItem(cacheExpiryKey);
+      }
+    }
+    return this.http.get<MakeListModel[]>(this.apiUrl + '/offers/brands').pipe(
+      tap((data: MakeListModel[]) => {
+        const expiry = Date.now() + cacheDuration;
+        localStorage.setItem(cacheKey, JSON.stringify(data));
+        localStorage.setItem(cacheExpiryKey, expiry.toString());
+      })
+    );
   }
 
   getModelsForBrand(brandName: string) {
