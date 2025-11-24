@@ -3,12 +3,14 @@ import {Car} from '@components/utilities/car/car';
 import {BannerList} from '@components/utilities/banner-list/banner-list';
 import {badgeSizes} from '@models/common.types';
 import {OfferListModel, OfferModel} from '@models/offers.types';
+import {NothingFound} from '@components/utilities/list/nothing-found/nothing-found';
 
 @Component({
-  selector: 'flexmile-list',
+    selector: 'flexmile-list',
   imports: [
     Car,
-    BannerList
+    BannerList,
+    NothingFound
   ],
   templateUrl: './list.html',
   styleUrl: './list.scss',
@@ -16,7 +18,7 @@ import {OfferListModel, OfferModel} from '@models/offers.types';
 })
 export class List {
   hideHeader = input<boolean>(false);
-  offerList = input<OfferListModel>();
+  offerList: OfferListModel | undefined;
   protected readonly badgeSizes = badgeSizes;
 
   trackByOfferId(index: number, offer: OfferModel): number {
