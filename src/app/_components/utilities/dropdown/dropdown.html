@@ -1,7 +1,7 @@
 <div class="dropdown-container" [attr.data-theme]="theme()">
-@if(label()){
-  <span class="label" [ngClass]="{'disabled': disabled()}">{{label()}}</span>
-}
+  @if (label()) {
+    <span class="label" [ngClass]="{'disabled': disabled()}">{{ label() }}</span>
+  }
   <button
     type="button"
     class="dropdown-button"
@@ -24,9 +24,11 @@
       <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
-
+  @if (selectedValue()) {
+    <div class="px-2 cursor-pointer remove" style="font-size: 12px;" (click)="clearValue()"><i class="pi pi-times block"></i></div>
+  }
   @if (isOpen()) {
-    @if(!hideSearch()){
+    @if (!hideSearch()) {
       <div class="dropdown-search">
         <input
           #searchInput

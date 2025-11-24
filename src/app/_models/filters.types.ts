@@ -7,7 +7,6 @@ export interface FiltersFormValues {
   transmission: FormControl<string | null>;
   price_from: FormControl<string | null>;
   price_to: FormControl<string | null>;
-  available: FormControl<boolean>;
 }
 
 export interface FiltersType {
@@ -17,5 +16,4 @@ export interface FiltersType {
   transmission: string;
   price_from: string;
   price_to: string;
-  available?: boolean;
 }

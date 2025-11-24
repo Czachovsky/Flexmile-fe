@@ -20,7 +20,7 @@ label {
   }
   input.f-input,
   textarea.f-textarea {
-    border-color: var(--red-500);
+    border-color: var(--red-500) !important;
     background: #FFE9EA;
     color: var(--red-500);
   }

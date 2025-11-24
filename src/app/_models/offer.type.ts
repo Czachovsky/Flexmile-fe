@@ -49,7 +49,7 @@ export interface offerFirstStepModel {
 
 export interface offerOrderModel extends offerFirstStepModel {
   company_name: string;
-  nip: string;
+  tax_id: string;
   email: string;
   phone: string;
   pickup_location: pickupLocation;
@@ -61,7 +61,7 @@ export interface OfferFormValues {
   annual_mileage_limit: FormControl<number | null>;
   monthly_price: FormControl<number | null>;
   company_name: FormControl<string | null>;
-  nip: FormControl<string | null>;
+  tax_id: FormControl<string | null>;
   email: FormControl<string | null>;
   phone: FormControl<string | null>;
   pickup_location: FormControl<pickupLocation | null>;
@@ -72,4 +72,11 @@ export interface OfferFormValues {
 export enum pickupLocation {
   salon = 'salon',
   home_delivery = 'home_delivery'
+}
+
+export interface OrderResponse {
+  success: boolean;
+  message: string;
+  reservation_id: number;
+  type: 'reservation' | 'order';
 }

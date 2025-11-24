@@ -7,7 +7,7 @@ import {InputType} from '@models/common.types';
 import {OffersService} from '@services/offers';
 import {MakeListModel} from '@models/hero-search.types';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {filter, distinctUntilChanged} from 'rxjs';
+import {distinctUntilChanged, EMPTY, startWith, switchMap} from 'rxjs';
 import {enumToList} from '../../../helpers';
 import {FuelType, TransmissionType} from '@models/offers.types';
 import {JsonPipe} from '@angular/common';
@@ -66,37 +66,53 @@ export class Filters implements OnInit {
 
   private listenValueChanges(): void {
     const makeControl = this.offersService.filtersForm.get('make');
+    const modelControl = this.offersService.filtersForm.get('model');
+
     if (makeControl) {
-      makeControl.valueChanges.pipe(
-        distinctUntilChanged(),
-        filter(value => !!value),
-        takeUntilDestroyed(this.destroyRef)
-      ).subscribe(value => {
-        console.log(value);
-        this.offersService.getModelsForBrand(value).subscribe({
-          next: (data) => {
+      const resetModels = () => {
+        this.carModels = [];
+        if (modelControl?.value !== null && modelControl?.value !== undefined && modelControl.value !== '') {
+          modelControl.setValue(null);
+        }
+      };
+
+      makeControl.valueChanges
+        .pipe(
+          startWith(makeControl.value),
+          distinctUntilChanged(),
+          switchMap(value => {
+            if (!value) {
+              resetModels();
+              return EMPTY;
+            }
+
+            return this.offersService.getModelsForBrand(value);
+          }),
+          takeUntilDestroyed(this.destroyRef)
+        )
+        .subscribe({
+          next: data => {
             this.carModels = data.models.map(model => ({
               value: model.toLowerCase(),
               label: model
-            }))
-          }
-        })
-      })
+            }));
 
-      // Obsługa czyszczenia modeli gdy marka jest usunięta
-      makeControl.valueChanges.pipe(
-        distinctUntilChanged(),
-        filter(value => !value),
-        takeUntilDestroyed(this.destroyRef)
-      ).subscribe(() => {
-        this.carModels = [];
-      })
+            if (modelControl?.value) {
+              const normalizedValue = modelControl.value.toLowerCase();
+              const existsInList = this.carModels.some(option => option.value === normalizedValue);
+
+              if (!existsInList) {
+                modelControl.setValue(null);
+              }
+            }
+          }
+        });
     }
 
     this.offersService.filtersForm.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(formValue => {
-
+        console.log(formValue);
         const cleaned = Object.fromEntries(
           Object.entries(formValue).filter(([_, value]) =>
             value !== null && value !== '' && value !== undefined
@@ -105,8 +121,9 @@ export class Filters implements OnInit {
         const currentParams = this.route.snapshot.queryParams;
         const isDifferent = Object.keys(cleaned).length !== Object.keys(currentParams).length
           || Object.entries(cleaned).some(([key, value]) => currentParams[key] !== String(value));
-
+        console.log(isDifferent, cleaned);
         if (isDifferent) {
+          console.log('this.router.navigate', cleaned)
           this.router.navigate([], {
             queryParams: cleaned,
             queryParamsHandling: 'merge'

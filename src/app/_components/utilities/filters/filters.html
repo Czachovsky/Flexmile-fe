@@ -8,7 +8,7 @@
             <div>
               <div class="mb-4">
                 <flexmile-dropdown placeholder="Wybierz markę" [options]="carBrands" formControlName="make"
-                                   [label]="'Marka pojazdu'"></flexmile-dropdown>
+                                   [label]="'Marka pojazdu'" [showClearButton]="true"></flexmile-dropdown>
               </div>
               <div>
                 <flexmile-dropdown [hideSearch]="true" placeholder="Paliwo" [options]="fuelList"
@@ -51,7 +51,7 @@
       <div class="col-12">
         <div class="flex pt-5 filters__bottom align-items-center justify-content-between">
           <div>
-            <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="only_available" [type]="inputType.checkbox" [control]="offersService.filtersForm.get('available')"></flexmile-input>
+<!--            <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="only_available" [type]="inputType.checkbox" [control]="offersService.filtersForm.get('available')"></flexmile-input>-->
           </div>
           <div><span class="cursor-pointer" (click)="resetFilters()">Wyczyść filtry</span></div>
         </div>

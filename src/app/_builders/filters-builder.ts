@@ -10,7 +10,6 @@ export class FilterBuilder {
       fuel: new FormControl<string | null>(null),
       price_from: new FormControl<string | null>('500'),
       price_to: new FormControl<string | null>('10000'),
-      available: new FormControl<boolean>(false, { nonNullable: true }),
     })
   }
 }

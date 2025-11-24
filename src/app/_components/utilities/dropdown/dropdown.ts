@@ -1,6 +1,16 @@
-import {Component, input, signal, effect, forwardRef, HostListener, ElementRef, computed, ViewChild} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  input,
+  signal,
+  effect,
+  forwardRef,
+  HostListener,
+  ElementRef,
+  computed,
+  ViewChild
+} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 export interface DropdownOption {
   label: string;
@@ -28,8 +38,9 @@ export class Dropdown implements ControlValueAccessor {
   placeholder = input<string>('Wybierz opcję');
   theme = input<'light' | 'dark'>('light');
   ariaLabel = input<string>('Dropdown menu');
-  disabledInput = input<boolean>(false, { alias: 'disabled' }); // DODANE
+  disabledInput = input<boolean>(false, {alias: 'disabled'}); // DODANE
   hideSearch = input<boolean>(false);
+  showClearButton = input<boolean>(false);
 
   isOpen = signal(false);
   selectedValue = signal<any>(null);
@@ -47,10 +58,12 @@ export class Dropdown implements ControlValueAccessor {
     this.searchQuery().length > 0 && this.filteredOptions().length === 0
   );
 
-  @ViewChild('searchInput', { static: false }) searchInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput', {static: false}) searchInput?: ElementRef<HTMLInputElement>;
 
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: any) => void = () => {
+  };
+  private onTouched: () => void = () => {
+  };
 
   displayLabel = signal<string>('');
 
@@ -181,5 +194,10 @@ export class Dropdown implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled.set(isDisabled);
+  }
+
+  clearValue(): void {
+    this.selectedValue.set(null);
+    this.onChange(null);
   }
 }

@@ -61,11 +61,11 @@
                 </svg></flexmile-tooltip></span>
                 <div class="radios">
                   <label class="flex align-items-center justify-content-start gap-2 pb-2">
-                    <input type="radio" formControlName="pickup_location" [value]="pickupLocation.home_delivery"/>
+                    <input type="radio" formControlName="pickup_location" [value]="pickupLocation.salon"/>
                     Odbiór w salonie
                   </label>
                   <label class="flex align-items-center justify-content-start gap-2">
-                    <input type="radio" formControlName="pickup_location" [value]="pickupLocation.salon"/>
+                    <input type="radio" formControlName="pickup_location" [value]="pickupLocation.home_delivery"/>
                     Darmowa dostawa pod dom
                   </label>
                 </div>
@@ -81,8 +81,8 @@
                 </div>
                 <div class="col-6 order-input">
                   <flexmile-input [classList]="'w-full'" label="NIP" placeholder="Wpisz NIP"
-                                  [control]="orderForm.get('nip')"
-                                  inputId="nip"></flexmile-input>
+                                  [control]="orderForm.get('tax_id')"
+                                  inputId="tax_id"></flexmile-input>
                 </div>
                 <div class="col-6 order-input">
                   <flexmile-input [classList]="'w-full'" label="Email" placeholder="Wpisz Email"
@@ -153,7 +153,7 @@
           <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'"
                            [label]="details().attributes.coming_soon ? 'Zarezerwuj' : 'Zamów'" iconPosition="right"
                            icon="pi-arrow-right"
-                           size="large"></flexmile-button>
+                           size="large" (clicked)="orderCar()"></flexmile-button>
         </div>
       </div>
     </div>
@@ -161,9 +161,9 @@
 </div>
 
 <ng-template #modalContent>
-  <div>
-    <div class="model pb-2">BMW serii 7 M (G70)</div>
-    <div class="title pb-3">Auto zarezerwowane!</div>
+  <div class="order-modal">
+    <div class="model pb-2">{{ details().brand.name }} {{ details().model }}</div>
+    <div class="title pb-3">Auto {{details().attributes.coming_soon ? "zarezerwowane" : "zamówione"}} !</div>
     <span class="block pb-4">Oczekuj na kontakt od flexmile – nasz zespół skontaktuje się z Tobą w ciągu 24 godzin. Jesteś już o krok od nowego samochodu!</span>
     <div>
       <flexmile-button label="Tak jest!" [btnClass]="'w-full'" (clicked)="closeModal()"></flexmile-button>

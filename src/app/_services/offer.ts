@@ -1,5 +1,9 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {OfferModel} from '@models/offers.types';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {offerOrderModel, OrderResponse} from '@models/offer.type';
+import {API_URL} from '@tokens/api-url.token';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +12,8 @@ export class OfferService {
   public selectedPeriod: number | null = null;
   public selectedMileageLimit: number | null = null;
   public calculatedPrice: number = 0;
-
+  private readonly http: HttpClient = inject(HttpClient);
+  private apiUrl = inject(API_URL);
 
   public selectMileageLimit(limit: number, offerDetail: OfferModel): void {
     this.selectedMileageLimit = limit;
@@ -43,7 +48,7 @@ export class OfferService {
     }
   }
 
-  public orderOrReserve(): void {
-
+  public orderOrReserve(reservationObject: offerOrderModel, orderType: 'reservation' | 'order'): Observable<OrderResponse> {
+      return this.http.post<OrderResponse>(this.apiUrl + `/reservations?type=${orderType}`, reservationObject);
   }
 }

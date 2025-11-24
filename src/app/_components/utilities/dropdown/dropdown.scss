@@ -31,7 +31,7 @@
 .dropdown-search{
   position: absolute;
   z-index: 9999;
-  top: 0;
+  bottom: 0;
   width: calc(100% - 35px);
 
   input{
@@ -162,4 +162,15 @@
 
 .dropdown-menu::-webkit-scrollbar-thumb:hover {
   background: #c3b5dc;
+}
+
+.remove{
+  position: absolute;
+  right: 30px;
+  width: 51px;
+  height: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom:0;
 }

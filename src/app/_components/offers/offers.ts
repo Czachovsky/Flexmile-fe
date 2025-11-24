@@ -38,7 +38,6 @@ export class Offers implements OnInit {
         transmission: params['transmission'] || '',
         price_from: params['price_from'] || '500',
         price_to: params['price_to'] || '10000',
-        available: params['available'] || null
       }
       this.offersService.filtersForm.patchValue(this.currentFilters, { emitEvent: true });
       console.log(this.offersService.filtersForm);

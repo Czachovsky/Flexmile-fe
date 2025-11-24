@@ -119,3 +119,21 @@
     border-color: var(--color-black-200) !important;
   }
 }
+
+.order-modal{
+  .model{
+    font-weight: 500;
+    @include mixins.fontSize(20);
+    line-height: 24px;
+  }
+  .title{
+    @include mixins.fontSize(32);
+    line-height: 40px;
+    font-weight: 600;
+  }
+  span{
+    color: var(--color-black-700);
+    @include mixins.fontSize(14);
+    line-height: 24px;
+  }
+}

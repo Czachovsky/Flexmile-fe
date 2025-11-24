@@ -9,11 +9,18 @@
   & > div{
     text-align: center;
     h3{
-      color: var(--color-green-900);
+      color: var(--color-white);
       font-weight: 600;
       @include mixins.fontSize(120);
       line-height: 100%;
       margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+      svg{
+        position: absolute;
+        bottom: -10px;
+        right: 29px;
+      }
     }
     h4{
       font-weight: 600;

@@ -1,5 +1,11 @@
 import {Component, effect, inject, input, InputSignal, output} from '@angular/core';
-import {descriptionBanner, offerFirstStepModel, OfferFormValues, pickupLocation} from '@models/offer.type';
+import {
+  descriptionBanner,
+  offerFirstStepModel,
+  OfferFormValues,
+  offerOrderModel,
+  pickupLocation
+} from '@models/offer.type';
 import {OfferBuilder} from '@builders/offer-builder';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {DecimalPipe} from '@angular/common';
@@ -39,7 +45,7 @@ export class OfferOrder {
   public readonly descriptionBanner = descriptionBanner;
   public readonly inputType = InputType;
   public ordering: boolean = false;
-  public ordered: boolean = true;
+  public ordered: boolean = false;
   private router: Router = inject(Router);
 
   constructor() {
@@ -78,6 +84,24 @@ export class OfferOrder {
 
   public closeModal(): void {
     this.ordered = false;
-    void this.router.navigate(['/oferty']);
+    void this.router.navigate(['/']);
+  }
+
+  public orderCar(): void {
+    console.log(this.orderForm.getRawValue());
+    this.ordering = true;
+    const orderObject: offerOrderModel = this.orderForm.getRawValue() as offerOrderModel;
+    const orderType: 'order' | 'reservation' = this.details().attributes.coming_soon ? 'reservation' : 'order';
+    this.offerService.orderOrReserve(orderObject, orderType).subscribe({
+      next: result => {
+        this.ordering = false;
+        this.ordered = true;
+      },
+      error: error => {
+        console.log(error);
+        this.ordering = false;
+      },
+    })
+
   }
 }
