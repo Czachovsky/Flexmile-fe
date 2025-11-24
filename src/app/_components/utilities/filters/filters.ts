@@ -125,8 +125,7 @@ export class Filters implements OnInit {
         if (isDifferent) {
           console.log('this.router.navigate', cleaned)
           this.router.navigate([], {
-            queryParams: cleaned,
-            queryParamsHandling: 'merge'
+            queryParams: cleaned
           });
         }
 

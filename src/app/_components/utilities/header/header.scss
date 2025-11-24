@@ -5,6 +5,7 @@
   right: 0;
   transition: all 0.3s ease-in-out;
   z-index: 1001;
+  background: #863087;
   &--logo {
     svg {
       height: 62px;
@@ -14,6 +15,11 @@
   }
 
   &--scrolled {
+    @supports (-webkit-backdrop-filter: initial) or (backdrop-filter: initial) {
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+      background-color: rgba(134, 48, 135, 0.72);
+    }
     .header--logo {
       svg {
         height: 24px;

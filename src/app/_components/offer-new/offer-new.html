@@ -1,12 +1,20 @@
-<div class="offer-wrapper">
-  @if (!ordering) {
-    <flexmile-offer-details [similarOffers]="similarOffers" [details]="offerData"
-                            (nextStep)="showNextStep($event)"></flexmile-offer-details>
+<div class="offer-wrapper" [style.min-height]="isLoading() ? '90vh' : null">
+  @if (isLoading()) {
+    <div class="__loading">
+      <flexmile-loader></flexmile-loader>
+    </div>
   } @else {
-    <flexmile-offer-order [details]="offerData" [orderObject]="orderObject!"
-                          (previousStep)="ordering = !$event"></flexmile-offer-order>
+    @if (!ordering) {
+      <flexmile-offer-details [similarOffers]="similarOffers" [details]="offerData()!"
+                              (nextStep)="showNextStep($event)"></flexmile-offer-details>
+    } @else {
+      <flexmile-offer-order [details]="offerData()!" [orderObject]="orderObject!"
+                            (previousStep)="ordering = !$event"></flexmile-offer-order>
+    }
   }
-</div>
 
-<flexmile-player [label]="offerData.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
-                 [fileName]="offerData.attributes.coming_soon ? 'rezerwacja.m4a' : 'zamowienie.m4a'"></flexmile-player>
+</div>
+<flexmile-player [label]="offerData()!.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
+                 [fileName]="offerData()!.attributes.coming_soon ? 'rezerwacja.m4a' : 'zamowienie.m4a'"></flexmile-player>
+
+

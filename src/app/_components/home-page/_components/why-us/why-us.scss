@@ -5,6 +5,19 @@
     &.borders {
       position: relative;
 
+      .animation {
+        position: absolute;
+        top: 60px;
+
+        &._l {
+          left: 260px;
+        }
+
+        &._r {
+          right: 260px;
+        }
+      }
+
       &:before, &:after {
         height: 8px;
         width: 100%;
@@ -12,6 +25,30 @@
         content: '';
         display: block;
         border-radius: 8px;
+      }
+
+      .elements {
+        align-items: flex-start;
+        justify-content: space-between;
+
+        & > div {
+          width: 400px;
+
+          h4 {
+            line-height: 32px;
+            @include mixins.fontSize(24);
+            text-align: center;
+            padding-bottom: 8px;
+            display: block;
+          }
+
+          span {
+            text-align: center;
+            display: block;
+            color: var(--color-black-700);
+            line-height: 24px;
+          }
+        }
       }
     }
 
@@ -69,15 +106,18 @@
         line-height: 24px;
         padding-bottom: 64px;
       }
-      .cars{
+
+      .cars {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: -105px;
-        img{
+
+        img {
           display: block;
         }
       }
+
       .table {
         max-width: 640px;
         margin: 0 auto;

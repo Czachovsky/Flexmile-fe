@@ -29,7 +29,10 @@ export class App {
   constructor() {
     const subscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe(() => this.updateFooterVisibility());
+      .subscribe(() => {
+        this.updateFooterVisibility();
+        this.scrollToTop();
+      });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
     this.updateFooterVisibility();
@@ -38,6 +41,10 @@ export class App {
         this.banners.setBanners(data);
       },
     })
+  }
+
+  private scrollToTop(): void {
+    window.scrollTo(0, 0);
   }
 
   private updateFooterVisibility(): void {
