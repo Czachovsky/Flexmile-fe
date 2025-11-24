@@ -1,22 +1,21 @@
 <div class="list">
-  @if (!hideHeader() && offerList()?.offers?.length) {
-    <div class="list--header pb-5 flex align-items-center justify-content-between">
-      <div class="list--header-counter">
-        Liczba dostępnych ofert: <span>{{offerList()?.meta?.total ?? 0}}</span>
-      </div>
-      <div class="list--header-sort">
-        Sortowanie: Najnowsze
-      </div>
+  @if (loading()) {
+    <div class="list--loader flex align-items-center justify-content-center">
+      <flexmile-loader></flexmile-loader>
     </div>
-  }
-  <div class="list--body">
-    @if (loading()) {
-      <div class="list--loader flex align-items-center justify-content-center">
-        <flexmile-loader></flexmile-loader>
+  } @else {
+    @if (!hideHeader() && offerList()?.offers?.length) {
+      <div class="list--header pb-5 flex align-items-center justify-content-between">
+        <div class="list--header-counter">
+          Liczba dostępnych ofert: <span>{{ offerList()?.meta?.total ?? 0 }}</span>
+        </div>
+        <div>
+          <flexmile-sort-by></flexmile-sort-by>
+        </div>
       </div>
-    } @else {
-
-      @if(!offerList()?.offers?.length){
+    }
+    <div class="list--body">
+      @if (!offerList()?.offers?.length) {
         <flexmile-nothing-found></flexmile-nothing-found>
       } @else {
         <div class="list--body-grid">
@@ -25,6 +24,6 @@
           }
         </div>
       }
-    }
-  </div>
+    </div>
+  }
 </div>

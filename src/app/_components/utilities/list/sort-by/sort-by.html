@@ -1,0 +1,13 @@
+<div class="list--header-sort cursor-pointer">
+  <div class="sort-input" (click)="toggleOpenSortBy()" [ngClass]="{'opened' : isOpen()}">
+    Sortowanie: <span>{{ sortByLabel }}</span>
+    <i class="pi pi-chevron-up"></i>
+  </div>
+  @if (isOpen()) {
+    <div class="sort-list">
+      @for (sort of sortByList; track sort) {
+        <div (click)="sortBy(sort)">{{ sort.label }}</div>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,47 @@
+@use "mixins";
+
+.list--header-sort {
+  position: relative;
+
+  .sort-input {
+    @include mixins.fontSize(14);
+
+    span {
+      font-weight: 600;
+    }
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    &.opened {
+      i {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .sort-list {
+    position: absolute;
+    z-index: 99;
+    right: 0;
+    padding: 8px;
+    min-width: 135px;
+    border-radius: 16px;
+    background: var(--color-white);
+    box-shadow: 0 4px 20px 0 #00000026;
+    display: inline-block;
+
+    & > div {
+      cursor: pointer;
+      padding: 8px;
+      @include mixins.fontSize(14);
+      line-height: 24px;
+      border-radius: 8px;
+
+      &:hover {
+        background: var(--color-black-50);
+      }
+    }
+  }
+}

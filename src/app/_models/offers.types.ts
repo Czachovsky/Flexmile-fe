@@ -138,3 +138,20 @@ export enum BodyType {
   combi = 'Kombi',
   coupe = 'Coupe',
 }
+
+export enum OrderbyType {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+export enum OrderType {
+  date = 'date',
+  price = 'price',
+}
+
+export interface SortByListModel {
+  label: string;
+  selected: boolean;
+  order: OrderType;
+  orderBy: OrderbyType;
+}
