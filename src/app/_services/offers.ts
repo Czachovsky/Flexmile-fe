@@ -98,8 +98,12 @@ export class OffersService {
       transmission: this.normalize(filters.transmission),
       price_from: this.toNumber(filters.price_from),
       price_to: this.toNumber(filters.price_to),
-      per_page: this.defaultPerPage
-    };
+      order: this.normalize(filters.order),
+      orderby: this.normalize(filters.orderby),
+      per_page: this.defaultPerPage,
+      available_immediately: filters.available_immediately
+
+  };
   }
 
   private normalize(value?: string | null): string | undefined {

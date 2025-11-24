@@ -48,7 +48,7 @@ export class Filters implements OnInit {
   }
 
   public resetFilters(): void {
-    this.offersService.filtersForm.reset({'price_from': 500, 'price_to': 10000});
+    this.offersService.filtersForm.reset({'price_from': 500, 'price_to': 10000, 'available_immediately': null});
   }
 
   private getBrands(): void {
@@ -110,17 +110,62 @@ export class Filters implements OnInit {
     this.offersService.filtersForm.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(formValue => {
+        const currentParams = this.route.snapshot.queryParams;
         const cleaned = Object.fromEntries(
-          Object.entries(formValue).filter(([_, value]) =>
-            value !== null && value !== '' && value !== undefined
+          Object.entries(formValue).filter(([key, value]) => {
+            // For boolean: only keep true values (false means unchecked, so don't include in query params)
+            if (typeof value === 'boolean') {
+              return value;
+            }
+            // Always include price_from and price_to if they have values (they are required for form inputs)
+            if (key === 'price_from' || key === 'price_to') {
+              return value !== null && value !== '' && value !== undefined;
+            }
+            // For other types: filter out null, undefined, and empty strings
+            return value !== null && value !== '' && value !== undefined;
+          })
+        );
+
+        // Convert boolean values to strings for query params
+        const queryParams: any = {};
+        Object.entries(cleaned).forEach(([key, value]) => {
+          if (typeof value === 'boolean') {
+            queryParams[key] = String(value);
+          } else {
+            queryParams[key] = value;
+          }
+        });
+
+        // Preserve sort parameters (order, order_by) from current query params
+        if (currentParams['order']) {
+          queryParams['order'] = currentParams['order'];
+        }
+        if (currentParams['orderby']) {
+          queryParams['orderby'] = currentParams['order_by'];
+        }
+
+        // Compare only filter parameters (not sort parameters) to avoid unnecessary updates
+        const filterKeys = Object.keys(cleaned);
+        const currentFilterParams = Object.fromEntries(
+          Object.entries(currentParams).filter(([key]) =>
+            !['order', 'orderby'].includes(key)
           )
         );
-        const currentParams = this.route.snapshot.queryParams;
-        const isDifferent = Object.keys(cleaned).length !== Object.keys(currentParams).length
-          || Object.entries(cleaned).some(([key, value]) => currentParams[key] !== String(value));
+
+        const isDifferent = filterKeys.length !== Object.keys(currentFilterParams).length
+          || filterKeys.some(key => {
+            const currentValue = currentFilterParams[key];
+            const newValue = cleaned[key];
+            // Compare boolean values properly
+            if (typeof newValue === 'boolean') {
+              return currentValue !== String(newValue);
+            }
+            return currentValue !== String(newValue);
+          });
+
         if (isDifferent) {
           this.router.navigate([], {
-            queryParams: cleaned
+            queryParams: queryParams
           });
         }
       });

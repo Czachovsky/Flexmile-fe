@@ -11,6 +11,9 @@ export interface OfferFilters {
   price_to?: number;
   page?: number;
   per_page?: number;
+  order?: string;
+  orderby?: string;
+  available_immediately?: boolean;
 }
 
 interface OfferAttributesModel {
@@ -139,12 +142,12 @@ export enum BodyType {
   coupe = 'Coupe',
 }
 
-export enum OrderbyType {
+export enum OrderType {
   ASC = 'ASC',
   DESC = 'DESC',
 }
 
-export enum OrderType {
+export enum OrderbyType {
   date = 'date',
   price = 'price',
 }
