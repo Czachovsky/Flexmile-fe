@@ -1,8 +1,8 @@
 <div class="list">
-  @if (offerList?.offers?.length) {
+  @if (!hideHeader() && offerList()?.offers?.length) {
     <div class="list--header pb-5 flex align-items-center justify-content-between">
       <div class="list--header-counter">
-        Liczba dostępnych ofert: <span>{{offerList?.meta.total}}</span>
+        Liczba dostępnych ofert: <span>{{offerList()?.meta?.total ?? 0}}</span>
       </div>
       <div class="list--header-sort">
         Sortowanie: Najnowsze
@@ -10,10 +10,21 @@
     </div>
   }
   <div class="list--body">
-    @if (offerList?.offers?.length) {
-      <div class="list--body-grid"></div>
+    @if (loading()) {
+      <div class="list--loader flex align-items-center justify-content-center">
+        <flexmile-loader></flexmile-loader>
+      </div>
     } @else {
-      <flexmile-nothing-found></flexmile-nothing-found>
+
+      @if(!offerList()?.offers?.length){
+        <flexmile-nothing-found></flexmile-nothing-found>
+      } @else {
+        <div class="list--body-grid">
+          @for (offer of offerList()?.offers; track trackByOfferId) {
+            <flexmile-car [offer]="offer"></flexmile-car>
+          }
+        </div>
+      }
     }
   </div>
 </div>

@@ -10,7 +10,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {distinctUntilChanged, EMPTY, startWith, switchMap} from 'rxjs';
 import {enumToList} from '../../../helpers';
 import {FuelType, TransmissionType} from '@models/offers.types';
-import {JsonPipe} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -20,7 +19,6 @@ import {ActivatedRoute, Router} from '@angular/router';
     ReactiveFormsModule,
     NgxSliderModule,
     Input,
-    JsonPipe,
   ],
   templateUrl: './filters.html',
   styleUrl: './filters.scss',
@@ -112,7 +110,6 @@ export class Filters implements OnInit {
     this.offersService.filtersForm.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(formValue => {
-        console.log(formValue);
         const cleaned = Object.fromEntries(
           Object.entries(formValue).filter(([_, value]) =>
             value !== null && value !== '' && value !== undefined
@@ -121,15 +118,11 @@ export class Filters implements OnInit {
         const currentParams = this.route.snapshot.queryParams;
         const isDifferent = Object.keys(cleaned).length !== Object.keys(currentParams).length
           || Object.entries(cleaned).some(([key, value]) => currentParams[key] !== String(value));
-        console.log(isDifferent, cleaned);
         if (isDifferent) {
-          console.log('this.router.navigate', cleaned)
           this.router.navigate([], {
             queryParams: cleaned
           });
         }
-
-        this.offersService.filterOffers(formValue);
       });
   };
 }

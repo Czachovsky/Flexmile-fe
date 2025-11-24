@@ -40,8 +40,7 @@ export class Offers implements OnInit {
         price_to: params['price_to'] || '10000',
       }
       this.offersService.filtersForm.patchValue(this.currentFilters, { emitEvent: true });
-      console.log(this.offersService.filtersForm);
-      console.log(this.currentFilters);
+      this.offersService.filterOffers(this.currentFilters);
     })
   }
 }

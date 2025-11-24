@@ -3,6 +3,7 @@ export interface OfferFilters {
   car_model?: string;
   body_type?: string;
   fuel_type?: string;
+  transmission?: string;
   year_from?: number;
   year_to?: number;
   max_mileage?: number;
