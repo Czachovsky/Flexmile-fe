@@ -23,6 +23,26 @@
             <flexmile-car [offer]="offer"></flexmile-car>
           }
         </div>
+        <div class="list--load-more" [class.list--load-more-active]="hasMorePages() || loadingMore() || loadMoreError()">
+          <div #loadMoreSentinel class="list--sentinel" aria-hidden="true"></div>
+          @if (!loadingMore()) {
+            <div class="list--load-more-status flex align-items-center justify-content-center">
+              <flexmile-loader></flexmile-loader>
+            </div>
+          } @else if (loadMoreError()) {
+            <div class="list--load-more-status list--load-more-error flex flex-column align-items-center">
+              <p class="list--load-more-error-message text-center">
+                Nie udało się pobrać kolejnych ofert.
+              </p>
+              <flexmile-button
+                label="Spróbuj ponownie"
+                color="secondary"
+                size="small"
+                (clicked)="retryLoadMore()">
+              </flexmile-button>
+            </div>
+          }
+        </div>
       }
     </div>
   }

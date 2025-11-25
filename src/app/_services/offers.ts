@@ -19,20 +19,29 @@ export class OffersService {
   private currentOfferSubject = new BehaviorSubject<OfferModel | null>(null);
   private offersListSubject = new BehaviorSubject<OfferListModel | null>(null);
   private loadingSubject = new BehaviorSubject<boolean>(false);
+  private loadingMoreSubject = new BehaviorSubject<boolean>(false);
+  private loadMoreErrorSubject = new BehaviorSubject<boolean>(false);
   private filterSubscription?: Subscription;
+  private loadMoreSubscription?: Subscription;
   public readonly offersList$ = this.offersListSubject.asObservable();
   public readonly loading$ = this.loadingSubject.asObservable();
+  public readonly loadingMore$ = this.loadingMoreSubject.asObservable();
+  public readonly loadMoreError$ = this.loadMoreErrorSubject.asObservable();
   private readonly defaultPerPage = 29;
+  private latestFilters: OfferFilters = {};
 
-  filterOffers(filters: Partial<FiltersType> = {}): void{
+  filterOffers(filters: Partial<FiltersType> = {}): void {
     const mappedFilters = this.mapFilters(filters);
     this.loadingSubject.next(true);
+    this.resetPaginationState();
+    this.latestFilters = { ...mappedFilters };
+    this.offersListSubject.next(null);
 
     if (this.filterSubscription) {
       this.filterSubscription.unsubscribe();
     }
 
-    this.filterSubscription = this.getOffers(mappedFilters)
+    this.filterSubscription = this.getOffers({ ...mappedFilters, page: 1 })
       .pipe(
         delay(1000),
         finalize(() => this.loadingSubject.next(false))
@@ -40,6 +49,7 @@ export class OffersService {
       .subscribe({
         next: (offerList: OfferListModel) => {
           this.offersListSubject.next(offerList);
+          this.loadMoreErrorSubject.next(false);
         },
         error: (error) => {
           console.error('Error loading offers:', error);
@@ -52,6 +62,50 @@ export class OffersService {
               total_pages: 0
             }
           });
+        }
+      });
+  }
+
+  loadNextPage(): void {
+    const currentList = this.offersListSubject.value;
+
+    if (!currentList || this.loadingMoreSubject.value || this.loadingSubject.value) {
+      return;
+    }
+
+    if (currentList.meta.current_page >= currentList.meta.total_pages) {
+      return;
+    }
+
+    this.loadingMoreSubject.next(true);
+    this.loadMoreErrorSubject.next(false);
+
+    const nextPage = currentList.meta.current_page + 1;
+    const filters = { ...this.latestFilters, page: nextPage };
+
+    if (this.loadMoreSubscription) {
+      this.loadMoreSubscription.unsubscribe();
+    }
+
+    this.loadMoreSubscription = this.getOffers(filters)
+      .pipe(finalize(() => this.loadingMoreSubject.next(false)))
+      .subscribe({
+        next: (offerList: OfferListModel) => {
+          const mergedOffers = [
+            ...(this.offersListSubject.value?.offers ?? []),
+            ...offerList.offers
+          ];
+
+          this.offersListSubject.next({
+            offers: mergedOffers,
+            meta: offerList.meta
+          });
+
+          this.loadMoreErrorSubject.next(false);
+        },
+        error: (error) => {
+          console.error('Error loading additional offers:', error);
+          this.loadMoreErrorSubject.next(true);
         }
       });
   }
@@ -147,5 +201,15 @@ export class OffersService {
     }
     const parsed = Number(value);
     return Number.isNaN(parsed) ? undefined : parsed;
+  }
+
+  private resetPaginationState(): void {
+    this.loadingMoreSubject.next(false);
+    this.loadMoreErrorSubject.next(false);
+
+    if (this.loadMoreSubscription) {
+      this.loadMoreSubscription.unsubscribe();
+      this.loadMoreSubscription = undefined;
+    }
   }
 }
