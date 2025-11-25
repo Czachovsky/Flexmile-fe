@@ -1,4 +1,4 @@
-<footer>
+<footer id="footer">
   <div class="container">
     <div class="grid mt-0">
       <div class="col-7">
@@ -100,7 +100,13 @@
       <div class="col-12">
         <div class="copyright py-5 text-right">
           © Copyrigt by <span>flexmile</span> 2025. Wszelkie prawa zastrzeżone
-          <flexmile-link [url]="'/'" title="Polityka prywatności"></flexmile-link>
+        <div class="urls">
+          <flexmile-link [url]="'/polityka-prywatnosci'" title="Polityka prywatności"></flexmile-link>
+          <span class="spacer"></span>
+          <flexmile-link [url]="'/polityka-cookies'" title="Polityka cookies"></flexmile-link>
+          <span class="spacer"></span>
+          <flexmile-link [url]="'/regulamin'" title="Regulamin"></flexmile-link>
+        </div>
         </div>
       </div>
     </div>

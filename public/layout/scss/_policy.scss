@@ -1,6 +1,9 @@
 @use "mixins";
 
 .policy {
+  & > div{
+    padding-top:120px;
+  }
   h1 {
     font-weight: 600;
     line-height: 56px;

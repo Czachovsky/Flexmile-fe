@@ -26,27 +26,44 @@ footer {
       line-height: 40px;
     }
   }
-  .contact{
-    div{
+
+  .contact {
+    div {
       padding: 16px 0;
-      span{
+
+      span {
         color: var(--color-white);
         @include mixins.fontSize(20);
         line-height: 28px;
       }
     }
   }
+
   .copyright {
     color: var(--color-white);
     @include mixins.fontSize(14);
+    line-height: 24px;
 
     span {
       color: var(--color-green-900);
+    }
+
+    .urls {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+
+      .spacer {
+        width: 1px;
+        height: 16px;
+        background: var(--color-purple-700);
+        display: inline-block;
+        margin: 0 16px;
+      }
     }
   }
 
   :host ::ng-deep a {
     color: var(--color-white);
-    margin-left: 16px;
   }
 }

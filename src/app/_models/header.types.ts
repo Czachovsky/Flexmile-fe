@@ -1,42 +1,17 @@
-interface MenuElementsModel {
+export interface MenuElementsModel {
   label: string;
   url?: string;
   icon?: string;
   section?: string;
+  type: 'url' | 'section';
 }
 
 export const menuElements: MenuElementsModel[] = [
-  {
-    label: 'Strona główna',
-    url: '/'
-  },
-  {
-    label: 'Oferta',
-    url: '/cars'
-  },
-  {
-    label: 'Jak to działa?',
-    section: 'how-it-works'
-  },
-  {
-    label: 'Dlaczego Flexmile',
-    section: 'why-flexmile'
-  },
-  {
-    label: 'FAQ',
-    section: 'faq'
-  },
-  {
-    label: 'Opinie',
-    section: 'reviews'
-  },
-  {
-    label: 'Kontakt',
-    url: '/contact'
-  },
-  {
-    label: 'Profil',
-    url: '/profile',
-    icon: 'user'
-  }
+  { label: 'Strona główna', url: '/', type: 'url' },
+  { label: 'Oferta', url: '/oferty', type: 'url' },
+  { label: 'Jak to działa?', section: 'how-it-works', type: 'section' },
+  { label: 'Dlaczego Flexmile', section: 'why-us', type: 'section' },
+  { label: 'FAQ', section: 'faq', type: 'section' },
+  { label: 'Opinie', section: 'opinions', type: 'section' },
+  { label: 'Kontakt', url: 'footer', type: 'section' },
 ];

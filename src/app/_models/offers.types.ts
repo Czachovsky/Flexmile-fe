@@ -31,10 +31,8 @@ interface OfferSpecsModel {
   drivetrain: string;
   engine: string;
   engine_capacity: number;
-  mileage: number;
   seats: number;
   transmission: string;
-  vin_number: string;
   year: number;
   horsepower: number;
 }
