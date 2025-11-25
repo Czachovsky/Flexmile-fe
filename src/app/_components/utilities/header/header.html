@@ -29,10 +29,19 @@
     </a>
   </div>
   <div class="flex align-items-center header--nav">
-    <ul class="flex gap-5">
+    <ul class="flex gap-2 align-items-center">
       @for (item of menuElements; track $index) {
         <li>
-          <a [href]="item.url">{{ item.label }}</a>
+          @if (item.type === 'url' && item.url) {
+            <a [routerLink]="item.url" [ngClass]="{'active': isMenuItemActive(item)}">{{ item.label }}</a>
+          } @else {
+            <a
+              [href]="item.type === 'section' && item.section ? '#' + item.section : '#'"
+              [ngClass]="{'active': isMenuItemActive(item)}"
+              (click)="handleMenuItemClick($event, item)">
+              {{ item.label }}
+            </a>
+          }
         </li>
       }
       <li>

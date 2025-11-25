@@ -7,8 +7,8 @@
       <h2>flexmile - Nowe Auta dla firm w najmie!</h2>
       <h2 class="mb-5">Z niską ratą! Bez wpłaty! Na START!</h2>
       <div class="mb-7">
-        <flexmile-button label="Sprawdź ofertę" iconPosition="right" icon="pi-arrow-right" btnClass="mr-3"></flexmile-button>
-        <flexmile-button label="Jak to działa?" color="outline"></flexmile-button>
+        <flexmile-button (clicked)="goToOffer()" label="Sprawdź ofertę" iconPosition="right" icon="pi-arrow-right" btnClass="mr-3"></flexmile-button>
+        <flexmile-button (clicked)="goToSection('how-it-works')" label="Jak to działa?" color="outline"></flexmile-button>
       </div>
       </div>
       <div class="xlg:col-5 col-12">

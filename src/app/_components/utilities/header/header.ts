@@ -1,9 +1,9 @@
-import {Component, HostListener, inject} from '@angular/core';
-import {menuElements} from '@models/header.types';
+import {Component, HostListener, inject, OnInit, OnDestroy} from '@angular/core';
+import {menuElements, MenuElementsModel} from '@models/header.types';
 import {Screen} from '@services/screen';
 import {NgClass} from '@angular/common';
-import {RouterLink} from '@angular/router';
-
+import {Router, RouterLink} from '@angular/router';
+import {scrollToSectionById} from '../../../helpers';
 
 @Component({
   selector: 'flexmile-header',
@@ -14,15 +14,119 @@ import {RouterLink} from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {
+export class Header implements OnInit, OnDestroy {
   public readonly screen: Screen = inject(Screen);
   public readonly menuElements = menuElements;
   private readonly scrollTriggerOffset = 200;
   public isScrolled = window.scrollY > this.scrollTriggerOffset && !this.screen.isMobile();
   public mobileMenuState: boolean = false;
+  public activeMenuItem: string | null = null;
+  private readonly router: Router = inject(Router);
+  private scrollTimeout: any;
+
+  ngOnInit() {
+    this.updateActiveMenuItem();
+  }
+
+  ngOnDestroy() {
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout);
+    }
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > this.scrollTriggerOffset && !this.screen.isMobile();
+    this.updateActiveMenuItem();
+  }
+
+  handleMenuItemClick(event: Event, item: MenuElementsModel) {
+    event.preventDefault();
+    
+    if (item.type === 'section' && item.section) {
+      // If we're not on the home page, navigate first
+      if (this.router.url !== '/') {
+        this.router.navigate(['/']).then(() => {
+          // Wait for navigation and DOM update
+          setTimeout(() => {
+            this.scrollToSection(item.section!);
+          }, 100);
+        });
+      } else {
+        this.scrollToSection(item.section);
+      }
+    } else if (item.type === 'url' && item.url) {
+      this.router.navigate([item.url]);
+    }
+  }
+
+  private scrollToSection(sectionId: string) {
+    const headerHeight = 100;
+    const scrolled = scrollToSectionById(sectionId, {offset: headerHeight});
+
+    if (scrolled) {
+      // Update active menu item after scroll
+      this.scrollTimeout = setTimeout(() => {
+        this.updateActiveMenuItem();
+      }, 300);
+    }
+  }
+
+  private updateActiveMenuItem() {
+    // Only update active menu item if we're on the home page
+    if (this.router.url !== '/') {
+      this.activeMenuItem = null;
+      return;
+    }
+
+    const sections = this.menuElements.filter(item => item.type === 'section' && item.section);
+    const headerHeight = 100;
+    const viewportOffset = 150; // Offset to trigger active state
+
+    let activeSection: string | null = null;
+    let minDistance = Infinity;
+
+    // Check which section is currently in viewport or closest to viewport top
+    for (const item of sections) {
+      if (!item.section) continue;
+      
+      const element = document.getElementById(item.section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        const distanceFromTop = Math.abs(rect.top - headerHeight);
+        
+        // Check if element is in viewport (with offset for header)
+        if (
+          rect.top <= headerHeight + viewportOffset &&
+          rect.bottom >= headerHeight
+        ) {
+          // Element is in viewport, prioritize by distance from top
+          if (distanceFromTop < minDistance) {
+            minDistance = distanceFromTop;
+            activeSection = item.section;
+          }
+        }
+      }
+    }
+
+    this.activeMenuItem = activeSection;
+  }
+
+  isMenuItemActive(item: MenuElementsModel): boolean {
+    if (item.type === 'section' && item.section) {
+      return this.activeMenuItem === item.section;
+    }
+    if (item.type === 'url' && item.url) {
+      const currentUrl = this.router.url;
+      // Handle root path
+      if (item.url === '/' && currentUrl === '/') {
+        return true;
+      }
+      // Handle other paths
+      if (item.url !== '/' && currentUrl.startsWith(item.url)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

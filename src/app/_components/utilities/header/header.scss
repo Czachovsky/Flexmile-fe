@@ -6,6 +6,7 @@
   transition: all 0.3s ease-in-out;
   z-index: 1001;
   background: #863087;
+
   &--logo {
     svg {
       height: 62px;
@@ -20,6 +21,7 @@
       backdrop-filter: saturate(180%) blur(20px);
       background-color: rgba(134, 48, 135, 0.72);
     }
+
     .header--logo {
       svg {
         height: 24px;
@@ -34,6 +36,15 @@
       li {
         a {
           color: var(--color-white);
+          transition: all 0.3s ease-in-out;
+          position: relative;
+          line-height: 24px;
+          padding: 8px 16px;
+          border-radius: 32px;
+          background: transparent;
+          &.active, &:hover {
+            background-color: var(--color-purple-secondary);
+          }
         }
       }
     }

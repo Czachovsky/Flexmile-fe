@@ -3,6 +3,18 @@
 footer {
   background: var(--p-primary-900);
   padding-top: 120px;
+  &.with-contact-form {
+    position: relative;
+    &:before{
+      content: '';
+      position: absolute;
+      width: 516px;
+      height: 328px;
+      background: url('../../../../../public/layout/images/car-footer.webp') no-repeat scroll center center / cover;
+      bottom:-45px;
+      left:33%;
+    }
+  }
 
   h3 {
     color: var(--color-white);
