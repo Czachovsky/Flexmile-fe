@@ -1,14 +1,14 @@
 <div class="car-card card-{{cardSize()}}" (click)="goToOffer(offer().id)">
   <div class="car-card__badges">
-
-    @if (offer().attributes.available_immediately) {
-      <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="cardSize()"></flexmile-badge>
-    }
-    @if (offer().attributes.new) {
-      <flexmile-badge [type]="badgeTypes.NEW" [size]="cardSize()"></flexmile-badge>
-    }
-    @if (offer().attributes.coming_soon) {
-      <flexmile-badge [type]="badgeTypes.SOON" [size]="cardSize()" [date]="offer().coming_soon_date"></flexmile-badge>
+    @if (!offer().available) {
+      <flexmile-badge [type]="badgeTypes.RESERVED"  [size]="cardSize()"></flexmile-badge>
+    } @else {
+      @if (offer().attributes.available_immediately) {
+        <flexmile-badge [type]="badgeTypes.AVAILABLE"  [size]="cardSize()"></flexmile-badge>
+      }
+      @if (offer().attributes.coming_soon) {
+        <flexmile-badge [type]="badgeTypes.SOON" [date]="offer().coming_soon_date"  [size]="cardSize()"></flexmile-badge>
+      }
     }
   </div>
 

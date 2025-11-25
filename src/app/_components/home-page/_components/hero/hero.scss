@@ -1,10 +1,12 @@
 @use 'mixins';
 
 .hero {
-  min-height: 100vh;
   padding-top:125px;
   background: url('../../../../../../public/layout/images/hero-img.webp') no-repeat scroll center right;
   .container {
+    padding-top:120px;
+    padding-bottom: 120px;
+
     h1 {
       color: var(--color-white);
       @include mixins.fontSize(96);

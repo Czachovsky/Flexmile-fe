@@ -1,27 +1,24 @@
 import {Routes} from '@angular/router';
-import {Offers} from '@components/offers/offers';
-import {HomePage} from '@components/home-page/home-page';
 import {offerResolver} from './_resolvers/offer-resolver';
-import {PageNotFound} from '@components/page-not-found/page-not-found';
-import {OfferNew} from '@components/offer-new/offer-new';
-import {PrivacyPolicy} from '@components/privacy-policy/privacy-policy';
-import {TermsConditions} from '@components/terms-conditions/terms-conditions';
-import {CookiesPolicy} from '@components/cookies-policy/cookies-policy';
+
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    loadComponent: () =>
+      import('@components/home-page/home-page').then(m => m.HomePage),
     title: 'Flexmile - Wynajem samochodów'
   },
   {
     path: 'oferty',
-    component: Offers,
+    loadComponent: () =>
+      import('@components/offers/offers').then(m => m.Offers),
     title: 'Samochody - Flexmile'
   },
   {
     path: 'oferta/:id',
-    component: OfferNew,
+    loadComponent: () =>
+      import('@components/offer-new/offer-new').then(m => m.OfferNew),
     title: 'Szczegóły samochodu - Flexmile',
     resolve: {
       offer: offerResolver
@@ -29,19 +26,27 @@ export const routes: Routes = [
   },
   {
     path: 'polityka-prywatnosci',
-    component: PrivacyPolicy,
+    loadComponent: () =>
+      import('@components/privacy-policy/privacy-policy').then(m => m.PrivacyPolicy),
     title: 'Polityka prywatności - Flexmile',
   },
   {
     path: 'regulamin',
-    component: TermsConditions,
+    loadComponent: () =>
+      import('@components/terms-conditions/terms-conditions').then(m => m.TermsConditions),
     title: 'Regulamin - Flexmile',
   },
   {
     path: 'polityka-cookies',
-    component: CookiesPolicy,
+    loadComponent: () =>
+      import('@components/cookies-policy/cookies-policy').then(m => m.CookiesPolicy),
     title: 'Polityka cookies - Flexmile',
   },
-  {path: '404', component: PageNotFound},
-  {path: '**', component: PageNotFound},
+  {
+    path: '404',
+    loadComponent: () =>
+      import('@components/page-not-found/page-not-found').then(m => m.PageNotFound),
+  },
+  {path: '**', redirectTo: '404'},
 ];
+

@@ -6,13 +6,15 @@
     <div class="hero-search--body">
       <div [formGroup]="searchForm" class="flex gap-3">
         <div class="dropdown-wrapper">
-          <flexmile-dropdown [disabled]="!carBrands.length" placeholder="Marka" [options]="carBrands" formControlName="make"></flexmile-dropdown>
+          <flexmile-dropdown [label]="'Marka pojazdu'" [disabled]="!carBrands.length" placeholder="Marka" [options]="carBrands" formControlName="make"></flexmile-dropdown>
         </div>
         <div class="dropdown-wrapper">
-          <flexmile-dropdown placeholder="Model" [options]="carModels" formControlName="model"
+          <flexmile-dropdown [label]="'Model'" placeholder="Model" [options]="carModels" formControlName="model"
                              [disabled]="!searchForm.get('make')?.value"></flexmile-dropdown>
         </div>
-        <flexmile-button [onlyIcon]="true" icon="pi-search" color="outline" (clicked)="goToFiltered()"></flexmile-button>
+        <div class="flex align-items-end">
+          <flexmile-button [onlyIcon]="true" icon="pi-search" color="outline" (clicked)="goToFiltered()"></flexmile-button>
+        </div>
       </div>
     </div>
   </div>

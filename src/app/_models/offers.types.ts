@@ -14,6 +14,7 @@ export interface OfferFilters {
   order?: string;
   orderby?: string;
   available_immediately?: boolean;
+  only_reserved?: boolean;
 }
 
 interface OfferAttributesModel {

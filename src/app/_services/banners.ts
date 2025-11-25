@@ -1,17 +1,19 @@
 import {Injectable} from '@angular/core';
 import {BannerTypes} from '@models/banners.types';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BannersService {
-  private banners: BannerTypes[] = [];
+  private bannersSubject = new BehaviorSubject<BannerTypes[]>([]);
+  public readonly banners$ = this.bannersSubject.asObservable();
 
   setBanners(data: BannerTypes[]): void {
-    this.banners = data;
+    this.bannersSubject.next(data ?? []);
   }
 
   getBanners(): BannerTypes[] {
-    return this.banners;
+    return this.bannersSubject.value;
   }
 }

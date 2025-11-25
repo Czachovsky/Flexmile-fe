@@ -18,14 +18,43 @@
       @if (!offerList()?.offers?.length) {
         <flexmile-nothing-found></flexmile-nothing-found>
       } @else {
-        <div class="list--body-grid">
-          @for (offer of offerList()?.offers; track trackByOfferId) {
-            <flexmile-car [offer]="offer"></flexmile-car>
-          }
-        </div>
-        <div class="list--load-more" [class.list--load-more-active]="hasMorePages() || loadingMore() || loadMoreError()">
+        @if (layoutItems().length) {
+          <div class="list--body-grid">
+            @for (item of layoutItems(); track trackByItem($index, item)) {
+              @if (item.type === 'banner' && item.bannerIndex !== undefined) {
+                @if (getBanner(item.bannerIndex); as banner) {
+                  @if (banner) {
+                    <div class="banner">
+                      <flexmile-banner-list
+                        [separator]="''"
+                        [label]="banner.label"
+                        [description]="banner.description"
+                        position="center">
+                      </flexmile-banner-list>
+                    </div>
+                  }
+                }
+              } @else if (item.type === 'offer' && item.offer) {
+                @if (item.isFullWidth) {
+                  <div class="product-full">
+                    <flexmile-car
+                      [cardSize]="badgeSizes.LG"
+                      [offer]="item.offer">
+                    </flexmile-car>
+                  </div>
+                } @else {
+                  <div class="product">
+                    <flexmile-car [offer]="item.offer"></flexmile-car>
+                  </div>
+                }
+              }
+            }
+          </div>
+        }
+        <div class="list--load-more"
+             [class.list--load-more-active]="hasMorePages() || loadingMore() || loadMoreError()">
           <div #loadMoreSentinel class="list--sentinel" aria-hidden="true"></div>
-          @if (!loadingMore()) {
+          @if (loadingMore()) {
             <div class="list--load-more-status flex align-items-center justify-content-center">
               <flexmile-loader></flexmile-loader>
             </div>
@@ -46,4 +75,7 @@
       }
     </div>
   }
+  <div class="reserved-list">
+    <flexmile-reserved-list></flexmile-reserved-list>
+  </div>
 </div>

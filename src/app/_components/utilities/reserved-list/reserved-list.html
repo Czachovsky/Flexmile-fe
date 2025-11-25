@@ -1,1 +1,11 @@
-<p>reserved-list works!</p>
+@if(reservedOffersList.length){
+  <div class="reserved--list">
+    <h3>Zarezerwowane</h3>
+    <div class="reserved--list_grid">
+      @for (offer of reservedOffersList; let i = $index; track i) {
+        <flexmile-car [offer]="offer"></flexmile-car>
+      }
+    </div>
+  </div>
+}
+

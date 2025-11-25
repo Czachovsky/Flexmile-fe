@@ -5,6 +5,7 @@
         @if (item.type === 'banner' && item.bannerIndex !== undefined) {
           <div class="banner">
             <flexmile-banner-list
+              [separator]="''"
               [label]="getBanner(item.bannerIndex).label"
               [description]="getBanner(item.bannerIndex).description"
               position="center">
