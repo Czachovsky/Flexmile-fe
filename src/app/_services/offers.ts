@@ -121,7 +121,6 @@ export class OffersService {
     });
 
      return this.http.get<OfferListModel>(this.apiUrl+'/offers', {params});
-    // return this.http.get<OfferListModel>('/example.json');
   }
 
   getOffer(id: number): Observable<OfferModel> {

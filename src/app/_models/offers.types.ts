@@ -20,7 +20,6 @@ export interface OfferFilters {
 interface OfferAttributesModel {
   available_immediately: boolean;
   coming_soon: boolean;
-  featured: boolean;
   new: boolean;
   popular: boolean;
 }

@@ -5,6 +5,7 @@ footer {
   padding-top: 120px;
   &.with-contact-form {
     position: relative;
+    overflow: hidden;
     &:before{
       content: '';
       position: absolute;
