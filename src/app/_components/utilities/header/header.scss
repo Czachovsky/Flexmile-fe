@@ -42,8 +42,11 @@
           padding: 8px 16px;
           border-radius: 32px;
           background: transparent;
-          &.active, &:hover {
-            background-color: var(--color-purple-secondary);
+
+          &:not(.social) {
+            &.active, &:hover {
+              background-color: var(--color-purple-secondary);
+            }
           }
         }
       }
