@@ -16,7 +16,7 @@ export class Animation implements OnInit, OnDestroy {
   @ViewChild('lottieContainer', {static: true}) container!: ElementRef
   width = input<string>('120px');
   height = input<string>('120px');
-  animationPath: string = '/layout/lottie/lines.json';
+  animationPath = input<string>('/layout/lottie/lines.json');
   private animation?: AnimationItem;
   private readonly animationService: AnimationService = inject(AnimationService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
@@ -30,7 +30,7 @@ export class Animation implements OnInit, OnDestroy {
   }
 
   private loadAnimation(): void {
-    this.animationService.getAnimationData(this.animationPath)
+    this.animationService.getAnimationData(this.animationPath())
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (animationData) => {

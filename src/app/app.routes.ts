@@ -13,13 +13,13 @@ export const routes: Routes = [
     path: 'oferty',
     loadComponent: () =>
       import('@components/offers/offers').then(m => m.Offers),
-    title: 'Samochody - Flexmile'
+    title: 'Flexmile - oferty'
   },
   {
     path: 'oferta/:id',
     loadComponent: () =>
       import('@components/offer-new/offer-new').then(m => m.OfferNew),
-    title: 'Szczegóły samochodu - Flexmile',
+    title: 'Flexmile - Szczegóły samochodu',
     resolve: {
       offer: offerResolver
     },
@@ -28,19 +28,19 @@ export const routes: Routes = [
     path: 'polityka-prywatnosci',
     loadComponent: () =>
       import('@components/privacy-policy/privacy-policy').then(m => m.PrivacyPolicy),
-    title: 'Polityka prywatności - Flexmile',
+    title: 'Flexmile - Polityka prywatności',
   },
   {
     path: 'regulamin',
     loadComponent: () =>
       import('@components/terms-conditions/terms-conditions').then(m => m.TermsConditions),
-    title: 'Regulamin - Flexmile',
+    title: 'Flexmile - Regulamin',
   },
   {
     path: 'polityka-cookies',
     loadComponent: () =>
       import('@components/cookies-policy/cookies-policy').then(m => m.CookiesPolicy),
-    title: 'Polityka cookies - Flexmile',
+    title: 'Flexmile - Polityka cookies',
   },
   {
     path: '404',

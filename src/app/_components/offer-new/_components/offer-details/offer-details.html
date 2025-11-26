@@ -116,6 +116,8 @@
               <span class="block">{{ spec.label }}</span>
               @if (spec.value === 'specs.transmission') {
                 <b class="block"> {{ getTransmissionLabel(details().specs.transmission) }}</b>
+              } @else if (spec.value === 'fuel_type') {
+                <b class="block"> {{ getFuelLabel(details().fuel_type) }}</b>
               } @else if (spec.value === 'specs.drivetrain') {
                 <b class="block"> {{ details().specs.drivetrain }}</b>
               } @else if (spec.value === 'body_type') {

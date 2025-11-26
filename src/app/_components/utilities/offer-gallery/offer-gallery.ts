@@ -10,11 +10,22 @@ import {OfferGalleryModel} from '@models/offers.types';
 export class OfferGallery implements OnInit  {
   gallery = input<OfferGalleryModel[]>([]);
   hideControls: InputSignal<boolean> = input<boolean>(false);
+  /**
+   * Index używany w widoku głównym (poza trybem lightbox).
+   */
   public currentIndex: number = 0;
+
+  /**
+   * Niezależny indeks używany wyłącznie w trybie lightbox.
+   * Dzięki temu zmiana zdjęcia w lightboxie nie wpływa na obraz główny.
+   */
+  public lightboxIndex: number = 0;
+
   public isLightboxOpen: boolean = false;
   private touchStartX: number = 0;
   private touchEndX: number = 0;
   private minSwipeDistance: number = 50;
+  private swipeContext: 'main' | 'lightbox' = 'main';
 
   ngOnInit(): void {
     this.preloadImages();
@@ -24,6 +35,10 @@ export class OfferGallery implements OnInit  {
     return this.gallery()[this.currentIndex] || null;
   }
 
+  get currentLightboxImage(): OfferGalleryModel | null {
+    return this.gallery()[this.lightboxIndex] || null;
+  }
+
   get totalImages(): number {
     return this.gallery()?.length || 0;
   }
@@ -31,6 +46,12 @@ export class OfferGallery implements OnInit  {
   goToImage(index: number): void {
     if (index >= 0 && index < this.totalImages) {
       this.currentIndex = index;
+    }
+  }
+
+  goToLightboxImage(index: number): void {
+    if (index >= 0 && index < this.totalImages) {
+      this.lightboxIndex = index;
     }
   }
 
@@ -47,6 +68,19 @@ export class OfferGallery implements OnInit  {
     }
   }
 
+  previousLightboxImage(event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (this.lightboxIndex > 0) {
+      this.lightboxIndex--;
+    } else {
+      // Loop to last image
+      this.lightboxIndex = this.totalImages - 1;
+    }
+  }
+
   nextImage(event?: Event): void {
     if (event) {
       event.stopPropagation();
@@ -59,7 +93,21 @@ export class OfferGallery implements OnInit  {
     }
   }
 
+  nextLightboxImage(event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (this.lightboxIndex < this.totalImages - 1) {
+      this.lightboxIndex++;
+    } else {
+      this.lightboxIndex = 0;
+    }
+  }
+
   openLightbox(): void {
+    // Start w lightboxie od aktualnie wybranego zdjęcia z widoku głównego
+    this.lightboxIndex = this.currentIndex;
     this.isLightboxOpen = true;
     document.body.style.overflow = 'hidden'; // Prevent body scroll
   }
@@ -78,10 +126,10 @@ export class OfferGallery implements OnInit  {
 
     switch (event.key) {
       case 'ArrowLeft':
-        this.previousImage();
+        this.previousLightboxImage();
         break;
       case 'ArrowRight':
-        this.nextImage();
+        this.nextLightboxImage();
         break;
       case 'Escape':
         this.closeLightbox();
@@ -89,7 +137,8 @@ export class OfferGallery implements OnInit  {
     }
   }
 
-  onTouchStart(event: TouchEvent): void {
+  onTouchStart(event: TouchEvent, context: 'main' | 'lightbox' = 'main'): void {
+    this.swipeContext = context;
     this.touchStartX = event.changedTouches[0].screenX;
   }
 
@@ -103,9 +152,17 @@ export class OfferGallery implements OnInit  {
 
     if (Math.abs(swipeDistance) > this.minSwipeDistance) {
       if (swipeDistance > 0) {
-        this.previousImage();
+        if (this.swipeContext === 'lightbox') {
+          this.previousLightboxImage();
+        } else {
+          this.previousImage();
+        }
       } else {
-        this.nextImage();
+        if (this.swipeContext === 'lightbox') {
+          this.nextLightboxImage();
+        } else {
+          this.nextImage();
+        }
       }
     }
   }
@@ -114,7 +171,8 @@ export class OfferGallery implements OnInit  {
   private mouseEndX: number = 0;
   private isMouseDown: boolean = false;
 
-  onMouseDown(event: MouseEvent): void {
+  onMouseDown(event: MouseEvent, context: 'main' | 'lightbox' = 'main'): void {
+    this.swipeContext = context;
     this.isMouseDown = true;
     this.mouseStartX = event.clientX;
   }
@@ -129,9 +187,17 @@ export class OfferGallery implements OnInit  {
 
     if (Math.abs(swipeDistance) > this.minSwipeDistance) {
       if (swipeDistance > 0) {
-        this.previousImage();
+        if (this.swipeContext === 'lightbox') {
+          this.previousLightboxImage();
+        } else {
+          this.previousImage();
+        }
       } else {
-        this.nextImage();
+        if (this.swipeContext === 'lightbox') {
+          this.nextLightboxImage();
+        } else {
+          this.nextImage();
+        }
       }
     }
   }
@@ -151,6 +217,13 @@ export class OfferGallery implements OnInit  {
 
   getImageUrl(size: 'thumbnail' | 'medium' | 'large' = 'large'): string {
     const image = this.currentImage;
+    if (!image) return '';
+
+    return image[size] || image.url;
+  }
+
+  getLightboxImageUrl(size: 'thumbnail' | 'medium' | 'large' = 'large'): string {
+    const image = this.currentLightboxImage;
     if (!image) return '';
 
     return image[size] || image.url;

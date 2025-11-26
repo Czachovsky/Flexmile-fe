@@ -5,13 +5,15 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FiltersType} from '@models/filters.types';
 import {OffersService} from '@services/offers';
+import {Player} from "@components/utilities/player/player";
 
 @Component({
   selector: 'flexmile-offers',
-  imports: [
-    List,
-    Filters
-  ],
+    imports: [
+        List,
+        Filters,
+        Player
+    ],
   templateUrl: './offers.html',
   styleUrl: './offers.scss',
 })

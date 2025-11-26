@@ -6,9 +6,9 @@
 
       <!-- Main Image Display -->
       <div class="main-image-container"
-           (touchstart)="onTouchStart($event)"
+           (touchstart)="onTouchStart($event, 'main')"
            (touchend)="onTouchEnd($event)"
-           (mousedown)="onMouseDown($event)"
+           (mousedown)="onMouseDown($event, 'main')"
            (mouseup)="onMouseUp($event)"
            (mouseleave)="onMouseLeave()"
            (click)="openLightbox()">
@@ -66,7 +66,7 @@
               }
             }
             @if(gallery().length > 4){
-             <span class="gallery-counter">+ {{gallery().length - 4}}</span>
+             <span class="gallery-counter cursor-pointer" (click)="openLightbox()">+ {{gallery().length - 4}}</span>
             }
           </div>
         </div>
@@ -91,20 +91,20 @@
 
           <!-- Main Image in Lightbox -->
           <div class="lightbox-main"
-               (touchstart)="onTouchStart($event)"
+               (touchstart)="onTouchStart($event, 'lightbox')"
                (touchend)="onTouchEnd($event)"
-               (mousedown)="onMouseDown($event)"
+               (mousedown)="onMouseDown($event, 'lightbox')"
                (mouseup)="onMouseUp($event)"
                (mouseleave)="onMouseLeave()">
 
-            <img [src]="getImageUrl('large')"
-                 [alt]="'Car image ' + (currentIndex + 1)"
+            <img [src]="getLightboxImageUrl('large')"
+                 [alt]="'Car image ' + (lightboxIndex + 1)"
                  class="lightbox-image">
 
             <!-- Navigation Arrows in Lightbox -->
             @if (totalImages > 1) {
               <button class="nav-arrow nav-arrow-left lightbox-arrow"
-                      (click)="previousImage($event)"
+                      (click)="previousLightboxImage($event)"
                       aria-label="Previous image">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="15 18 9 12 15 6"></polyline>
@@ -112,7 +112,7 @@
               </button>
 
               <button class="nav-arrow nav-arrow-right lightbox-arrow"
-                      (click)="nextImage($event)"
+                      (click)="nextLightboxImage($event)"
                       aria-label="Next image">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="9 18 15 12 9 6"></polyline>
@@ -120,7 +120,7 @@
               </button>
 
               <div class="image-counter lightbox-counter">
-                {{ currentIndex + 1 }} / {{ totalImages }}
+                {{ lightboxIndex + 1 }} / {{ totalImages }}
               </div>
             }
           </div>
@@ -131,8 +131,8 @@
               <div class="thumbnails-scroll">
                 @for (image of gallery(); track image; let i = $index) {
                   <div class="thumbnail"
-                       [class.active]="i === currentIndex"
-                       (click)="goToImage(i)">
+                       [class.active]="i === lightboxIndex"
+                       (click)="goToLightboxImage(i)">
                     <img [src]="image.thumbnail"
                          [alt]="'Thumbnail ' + (i + 1)"
                          loading="lazy">

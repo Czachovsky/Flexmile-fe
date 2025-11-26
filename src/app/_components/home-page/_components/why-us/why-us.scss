@@ -7,14 +7,15 @@
 
       .animation {
         position: absolute;
-        top: 60px;
 
         &._l {
           left: 260px;
+          top:64px;
         }
 
         &._r {
-          right: 260px;
+          right: 212px;
+          top: 43px;
         }
       }
 

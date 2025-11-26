@@ -8,7 +8,7 @@ import {
 } from '@models/offer.type';
 import {OfferBuilder} from '@builders/offer-builder';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {DecimalPipe} from '@angular/common';
+import {DecimalPipe, NgClass} from '@angular/common';
 import {OfferModel} from '@models/offers.types';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {Tooltip} from '@components/utilities/tooltip/tooltip';
@@ -30,7 +30,8 @@ import {Router} from '@angular/router';
     Input,
     BannerList,
     Loader,
-    Modal
+    Modal,
+    NgClass
   ],
   templateUrl: './offer-order.html',
   styleUrl: './offer-order.scss',

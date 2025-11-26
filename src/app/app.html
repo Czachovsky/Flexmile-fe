@@ -1,13 +1,17 @@
-<header>
-  <flexmile-header></flexmile-header>
-</header>
-<main>
-  <router-outlet/>
-</main>
-@if (showFooter()) {
-  <footer>
-    <flexmile-footer></flexmile-footer>
-  </footer>
+@if (isConfigLoaded()) {
+  @if (!isMaintenance()) {
+    <header>
+      <flexmile-header></flexmile-header>
+    </header>
+  }
+  <main>
+    <router-outlet/>
+  </main>
+  @if (showFooter() && !isMaintenance()) {
+    <footer>
+      <flexmile-footer></flexmile-footer>
+    </footer>
+  }
 }
 
 
