@@ -1,59 +1,193 @@
-# Flexmile
+# FlexMile
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+Platforma do wynajmu samochodów dla firm. FlexMile oferuje nowe auta w najmie z niską ratą miesięczną, bez wpłaty wstępnej i bez dodatkowych kosztów za ubezpieczenie, serwis czy opony.
 
-## Development server
+## Opis projektu
 
-To start a local development server, run:
+FlexMile to nowoczesna aplikacja webowa umożliwiająca firmom przeglądanie i rezerwację samochodów w systemie najmu długoterminowego. Aplikacja oferuje intuicyjny interfejs do przeglądania ofert, wyszukiwania pojazdów według różnych kryteriów oraz składania rezerwacji.
 
+## Funkcjonalności
+
+- **Strona główna** z sekcją hero i wyszukiwarką samochodów
+- **Lista ofert** z możliwością filtrowania i sortowania
+- **Szczegóły oferty** z galerią zdjęć i formularzem rezerwacji
+- **Wyszukiwarka** z zaawansowanymi filtrami (marka, model, cena, moc, itp.)
+- **Sekcja FAQ** z odpowiedziami na najczęściej zadawane pytania
+- **Opinie klientów** z carousel prezentującym rekomendacje
+- **Formularz kontaktowy** do komunikacji z firmą
+- **Tryb konserwacji** umożliwiający wyłączenie strony podczas prac technicznych
+- **System banerów** dynamicznie ładowanych z API
+- **Responsywny design** dostosowany do wszystkich urządzeń
+
+## Technologie
+
+- **Angular 20** - framework aplikacji
+- **TypeScript** - język programowania
+- **SCSS** - preprocesor CSS
+- **PrimeFlex** - biblioteka utility classes
+- **RxJS** - programowanie reaktywne
+- **Lottie** - animacje JSON
+- **ngx-owl-carousel-o** - karuzele i slidery
+- **Angular Router** - routing i nawigacja
+- **WordPress REST API** - backend API
+
+## Wymagania
+
+- Node.js (wersja zgodna z Angular 20)
+- npm lub yarn
+- Angular CLI 20.3.7
+
+## Instalacja
+
+1. Sklonuj repozytorium:
 ```bash
-ng serve
+git clone <repository-url>
+cd flexmile
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2. Zainstaluj zależności:
+```bash
+npm install
+```
 
-## Code scaffolding
+3. Skonfiguruj URL API w pliku `src/app/app.config.ts`:
+```typescript
+{ provide: API_URL, useValue: 'http://twoj-api-url/wp-json/flexmile/v1' }
+```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Rozwój
+
+### Uruchomienie serwera deweloperskiego
+
+```bash
+npm start
+```
+
+Aplikacja będzie dostępna pod adresem `http://localhost:4200/`. Aplikacja automatycznie przeładuje się po wprowadzeniu zmian w plikach źródłowych.
+
+### Tryb watch
+
+Aby automatycznie kompilować projekt podczas wprowadzania zmian:
+
+```bash
+npm run watch
+```
+
+### Generowanie komponentów
+
+Angular CLI oferuje narzędzia do generowania kodu. Aby utworzyć nowy komponent:
 
 ```bash
 ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Dla pełnej listy dostępnych schematów (komponenty, dyrektywy, pipe'y, serwisy), uruchom:
 
 ```bash
 ng generate --help
 ```
 
-## Building
+## Budowanie
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Build produkcyjny
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+Zbudowane pliki zostaną umieszczone w katalogu `dist/`. Build produkcyjny jest zoptymalizowany pod kątem wydajności i szybkości.
 
-For end-to-end (e2e) testing, run:
+### Konfiguracja budowania
+
+Projekt zawiera dwie konfiguracje budowania:
+- **production** - zoptymalizowany build z minifikacją i hashowaniem plików
+- **development** - build deweloperski z source maps i bez optymalizacji
+
+## Testy
+
+### Testy jednostkowe
+
+Aby uruchomić testy jednostkowe za pomocą Karma:
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Struktura projektu
 
-## Additional Resources
+```
+flexmile/
+├── public/                 # Zasoby statyczne
+│   ├── layout/            # Fonty, obrazy, animacje Lottie, style SCSS
+│   └── app-config.json    # Konfiguracja aplikacji (tryb konserwacji)
+├── src/
+│   ├── app/
+│   │   ├── _builders/     # Buildery do konstruowania obiektów
+│   │   ├── _components/   # Komponenty aplikacji
+│   │   │   ├── home-page/ # Strona główna
+│   │   │   ├── offers/    # Lista ofert
+│   │   │   ├── offer-new/ # Szczegóły oferty
+│   │   │   └── utilities/ # Komponenty pomocnicze (header, footer, formularze)
+│   │   ├── _guards/       # Strażnicy routingu
+│   │   ├── _models/       # Modele TypeScript
+│   │   ├── _pipes/        # Pipe'y Angular
+│   │   ├── _resolvers/    # Resolvery danych
+│   │   ├── _services/     # Serwisy Angular
+│   │   ├── _tokens/       # Injection tokens
+│   │   ├── app.config.ts  # Konfiguracja aplikacji
+│   │   ├── app.routes.ts  # Definicje tras
+│   │   └── app.ts         # Główny komponent aplikacji
+│   ├── index.html         # Główny plik HTML
+│   ├── main.ts            # Punkt wejścia aplikacji
+│   └── styles.scss        # Globalne style
+├── angular.json           # Konfiguracja Angular CLI
+├── package.json           # Zależności projektu
+└── tsconfig.json          # Konfiguracja TypeScript
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Konfiguracja
+
+### Tryb konserwacji
+
+Aby włączyć tryb konserwacji, ustaw w pliku `public/app-config.json`:
+
+```json
+{
+  "maintenance": true
+}
+```
+
+Gdy tryb konserwacji jest aktywny, wszystkie trasy są przekierowywane do strony konserwacji.
+
+### API Endpoint
+
+Domyślny endpoint API jest skonfigurowany w `src/app/app.config.ts`. Aplikacja komunikuje się z WordPress REST API pod adresem:
+
+```
+http://flexmile.local/wp-json/flexmile/v1
+```
+
+Główne endpointy:
+- `/banners` - pobieranie banerów
+- `/offers` - lista ofert samochodów
+- `/offer/:id` - szczegóły konkretnej oferty
+
+## Formatowanie kodu
+
+Projekt używa Prettier do formatowania kodu. Konfiguracja znajduje się w `package.json`:
+
+- Print width: 100 znaków
+- Single quotes: true
+- Angular HTML parser dla plików `.html`
+
+## Lokalizacja
+
+Aplikacja jest skonfigurowana dla lokalizacji polskiej (`pl-PL`). Formatowanie dat, liczb i walut jest dostosowane do standardów polskich.
+
+## Wsparcie
+
+W razie pytań lub problemów, skontaktuj się z zespołem deweloperskim lub utwórz issue w repozytorium projektu.
+
+## Licencja
+
+Projekt jest własnością prywatną FlexMile.

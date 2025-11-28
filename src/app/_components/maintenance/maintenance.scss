@@ -1,4 +1,54 @@
-.maintenance{
+@use 'mixins';
+
+.maintenance {
   height: 100vh;
-background: var(--p-primary-900);
+  background: var(--p-primary-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+
+  h1 {
+    text-align: center;
+    line-height: 100px;
+    @include mixins.fontSize(96);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  h3 {
+    @include mixins.fontSize(20);
+    line-height: 32px;
+    font-weight: 400;
+    text-align: center;
+    display: block;
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    position: relative;
+
+    &:after {
+      content: '';
+      width: 348px;
+      height: 1px;
+      background: var(--color-purple-700);
+      display: block;
+      bottom: 0;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .social{
+    display: flex;
+    justify-content: center;
+    a{
+      color: var(--color-white);
+      font-weight: 600;
+      @include mixins.fontSize(20);
+      line-height: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap:16px;
+    }
+  }
 }
