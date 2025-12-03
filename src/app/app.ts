@@ -10,6 +10,13 @@ import {HttpClient} from '@angular/common/http';
 import {API_URL} from '@tokens/api-url.token';
 import {BannerTypes} from '@models/banners.types';
 
+interface AppConfig {
+  maintenance?: boolean;
+  maintenanceForMobile?: boolean;
+  version?: string;
+  build?: string;
+}
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header, Footer],
@@ -52,7 +59,6 @@ export class App {
   }
 
   private updateFooterVisibility(): void {
-    // Dopóki konfiguracja się nie załaduje, nie pokazujemy stopki
     if (!this.isConfigLoaded()) {
       this.showFooter.set(false);
       return;
@@ -76,8 +82,9 @@ export class App {
   }
 
   private loadAppConfig(): void {
-    this.http.get<{ maintenance?: boolean }>('/app-config.json').subscribe({
+    this.http.get<AppConfig>('/app-config.json').subscribe({
       next: config => {
+        this.logAppBanner(config);
         if (config?.maintenance) {
           this.activateMaintenanceMode();
         } else {
@@ -86,10 +93,32 @@ export class App {
         }
       },
       error: () => {
+        this.logAppBanner();
         this.isConfigLoaded.set(true);
         this.updateFooterVisibility();
       }
     });
+  }
+
+  private logAppBanner(config?: AppConfig): void {
+    const APP_NAME = 'Flexmile';
+    const VERSION = config?.version ?? '1.0.0';
+    const BUILD = config?.build ?? 'local';
+    const ENV = window?.location?.hostname ?? 'unknown';
+    const TIME = new Date().toISOString();
+    const MAINTENANCE = config?.maintenance;
+    const accentStyle = 'color:#863087;font-weight:700;font-size:13px;';
+    const baseStyle = 'color:#e5e7eb;font-size:12px;';
+    const labelStyle = 'color:#9ca3af;font-weight:600;font-size:11px;';
+    const valueStyle = 'color:#e5e7eb;font-weight:500;font-size:11px;';
+
+    console.log('%cFLEXMILE%c app started', accentStyle, baseStyle);
+    console.log('%cName                 %c%s', labelStyle, valueStyle, APP_NAME);
+    console.log('%cVersion              %c%s', labelStyle, valueStyle, VERSION);
+    console.log('%cBuild                %c%s', labelStyle, valueStyle, BUILD);
+    console.log('%cEnv                  %c%s', labelStyle, valueStyle, ENV);
+    console.log('%cTime                 %c%s', labelStyle, valueStyle, TIME);
+    console.log('%cMaintenance mode     %c%s', labelStyle, valueStyle, MAINTENANCE);
   }
 
   private activateMaintenanceMode(): void {

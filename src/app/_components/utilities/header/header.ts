@@ -1,4 +1,4 @@
-import {Component, HostListener, inject, OnInit, OnDestroy} from '@angular/core';
+import {Component, HostListener, inject, OnInit, OnDestroy, Renderer2} from '@angular/core';
 import {menuElements, MenuElementsModel} from '@models/header.types';
 import {Screen} from '@services/screen';
 import {NgClass} from '@angular/common';
@@ -23,7 +23,8 @@ export class Header implements OnInit, OnDestroy {
   public activeMenuItem: string | null = null;
   private readonly router: Router = inject(Router);
   private scrollTimeout: any;
-
+  scrollPosition: any;
+  private renderer: Renderer2 = inject(Renderer2);
   ngOnInit() {
     this.updateActiveMenuItem();
   }
@@ -40,9 +41,20 @@ export class Header implements OnInit, OnDestroy {
     this.updateActiveMenuItem();
   }
 
+  public openMobileMenu(): void {
+    this.mobileMenuState = !this.mobileMenuState;
+
+    if (this.mobileMenuState) {
+      this.setStyles();
+    } else {
+      this.removeStyles();
+      window.scrollTo(0, this.scrollPosition);
+    }
+  }
+
   handleMenuItemClick(event: Event, item: MenuElementsModel) {
     event.preventDefault();
-    
+
     if (item.type === 'section' && item.section) {
       // If we're not on the home page, navigate first
       if (this.router.url !== '/') {
@@ -89,12 +101,12 @@ export class Header implements OnInit, OnDestroy {
     // Check which section is currently in viewport or closest to viewport top
     for (const item of sections) {
       if (!item.section) continue;
-      
+
       const element = document.getElementById(item.section);
       if (element) {
         const rect = element.getBoundingClientRect();
         const distanceFromTop = Math.abs(rect.top - headerHeight);
-        
+
         // Check if element is in viewport (with offset for header)
         if (
           rect.top <= headerHeight + viewportOffset &&
@@ -128,5 +140,20 @@ export class Header implements OnInit, OnDestroy {
       }
     }
     return false;
+  }
+
+  private setStyles(): void {
+    this.scrollPosition = window.pageYOffset;
+    this.renderer.setStyle(document.body, 'position', 'fixed');
+    this.renderer.setStyle(document.body, 'top', `-${this.scrollPosition}px`);
+    this.renderer.setStyle(document.body, 'width', '100%');
+    this.renderer.setStyle(document.body, 'overflow', 'hidden');
+  }
+
+  private removeStyles(): void {
+    this.renderer.removeStyle(document.body, 'position');
+    this.renderer.removeStyle(document.body, 'top');
+    this.renderer.removeStyle(document.body, 'width');
+    this.renderer.removeStyle(document.body, 'overflow');
   }
 }

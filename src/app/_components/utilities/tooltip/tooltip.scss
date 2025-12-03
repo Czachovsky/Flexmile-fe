@@ -1,3 +1,5 @@
+@use 'mixins';
+
 .tooltip-wrapper {
   position: relative;
   display: inline-block;
@@ -8,7 +10,7 @@
   position: absolute;
   padding: 8px 16px;
   border-radius: 16px;
-  font-size: 14px;
+  @include mixins.fontSize(14);
   font-weight: 600;
   white-space: nowrap;
   z-index: 1000;
@@ -113,8 +115,7 @@
 
   &.multi-line {
     white-space: normal;
-    font-size: 12px;
-    line-height: 18px;
+    @include mixins.fontSize(12, 18);
     font-weight: 400;
     min-width: 215px;
   }

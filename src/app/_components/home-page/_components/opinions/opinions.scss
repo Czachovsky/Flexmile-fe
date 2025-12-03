@@ -8,17 +8,16 @@
 
     .content {
       color: #525252;
-      line-height: 24px;
+      @include mixins.fontSize(16, 24);
     }
 
     .name {
       font-weight: 500;
-      @include mixins.fontSize(20);
-      line-height: 24px;
+      @include mixins.fontSize(20, 24);
     }
 
     .city {
-      line-height: 24px;
+      @include mixins.fontSize(16, 24);
     }
   }
 
@@ -41,15 +40,14 @@
         h2 {
           padding-bottom: 16px;
           color: var(--color-white);
-          line-height: 56px;
-          @include mixins.fontSize(48);
+          @include mixins.fontSize(48, 56);
           font-weight: 600;
         }
 
         span {
           color: var(--color-white);
           display: block;
-          line-height: 24px;
+          @include mixins.fontSize(16, 24);
         }
       }
     }

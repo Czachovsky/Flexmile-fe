@@ -4,8 +4,7 @@
   &__header {
     h3 {
       font-weight: 600;
-      line-height: 40px;
-      @include mixins.fontSize(32);
+      @include mixins.fontSize(32, 40);
     }
   }
 }

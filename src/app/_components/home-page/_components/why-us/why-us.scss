@@ -36,8 +36,7 @@
           width: 400px;
 
           h4 {
-            line-height: 32px;
-            @include mixins.fontSize(24);
+            @include mixins.fontSize(24, 32);
             text-align: center;
             padding-bottom: 8px;
             display: block;
@@ -47,7 +46,7 @@
             text-align: center;
             display: block;
             color: var(--color-black-700);
-            line-height: 24px;
+            @include mixins.fontSize(16, 24);
           }
         }
       }
@@ -65,8 +64,7 @@
           h2 {
             padding-bottom: 16px;
             color: var(--color-white);
-            line-height: 56px;
-            @include mixins.fontSize(48);
+            @include mixins.fontSize(48, 56);
             font-weight: 600;
           }
 
@@ -74,7 +72,7 @@
             color: var(--color-white);
             padding-bottom: 40px;
             display: block;
-            line-height: 24px;
+            @include mixins.fontSize(16, 24);
           }
         }
       }
@@ -93,8 +91,7 @@
     &.why {
       h2 {
         text-align: center;
-        line-height: 56px;
-        @include mixins.fontSize(48);
+        @include mixins.fontSize(48, 56);
         font-weight: 600;
         padding-bottom: 16px;
       }
@@ -104,7 +101,7 @@
         margin: 0 auto;
         text-align: center;
         color: var(--color-black-700);
-        line-height: 24px;
+        @include mixins.fontSize(16, 24);
         padding-bottom: 64px;
       }
 
@@ -165,8 +162,7 @@
           align-items: center;
           font-weight: 500;
           padding: 0 24px;
-          @include mixins.fontSize(20);
-          line-height: 24px;
+          @include mixins.fontSize(20, 24);
           height: 56px;
         }
 

@@ -101,19 +101,16 @@
       white-space: nowrap;
 
       &-amount {
-        @include mixins.fontSize(32);
-        line-height: 40px;
+        @include mixins.fontSize(32, 40);
       }
 
       &-label {
-        @include mixins.fontSize(24);
-        line-height: 32px;
+        @include mixins.fontSize(24, 32);
       }
     }
 
     .car-card__title {
-      @include mixins.fontSize(32);
-      line-height: 32px;
+      @include mixins.fontSize(32, 32);
       margin-bottom: 8px;
     }
 
@@ -123,16 +120,14 @@
   }
 
   h3#{&}__title {
-    @include mixins.fontSize(24);
+    @include mixins.fontSize(24, 32);
     font-weight: 600;
-    line-height: 32px;
     color: var(--color-black);
   }
 
   p#{&}__subtitle {
-    @include mixins.fontSize(16);
+    @include mixins.fontSize(16, 24);
     color: var(--color-black);
-    line-height: 24px;
   }
 
   &__specs {
@@ -189,7 +184,7 @@
 
   &__feature-label {
     color: var(--p-primary-900);
-    @include mixins.fontSize(14);
+    @include mixins.fontSize(13);
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -202,7 +197,7 @@
 
   &:hover:not(.card-large) {
     .car-card__feature-label {
-      width: 110px;
+      width: 100px;
     }
 
     .car-card__content {

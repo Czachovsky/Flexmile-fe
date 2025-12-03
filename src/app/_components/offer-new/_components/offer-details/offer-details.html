@@ -72,7 +72,7 @@
                 </div>
               </div>
               <div class="pb-5">
-                <div class="pb-2">Roczny limit kilometrów {{ offerService.selectedMileageLimit }}</div>
+                <div class="pb-2">Roczny limit kilometrów</div>
                 <div class="mileage flex gap-2 flex-wrap">
                   @for (limit of details().pricing.mileage_limits; track limit) {
                     <flexmile-button [btnClass]="isMileageLimitActive(limit) ? 'active' : ''"

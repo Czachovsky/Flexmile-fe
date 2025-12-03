@@ -34,8 +34,7 @@
   border-radius: 24px;
 
   &.medium {
-    @include mixins.fontSize(10);
-    line-height: 15px;
+    @include mixins.fontSize(10, 15);
     padding: 6px 12px;
     //max-height: 24px;
     .badge--icon {
@@ -45,8 +44,7 @@
   }
 
   &.large {
-    @include mixins.fontSize(16);
-    line-height: 25px;
+    @include mixins.fontSize(16, 25);
     padding: 12px 24px;
     //max-height: 48px;
     .badge--icon {

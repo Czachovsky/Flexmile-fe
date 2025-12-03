@@ -21,9 +21,8 @@ footer {
 
   h3 {
     color: var(--color-white);
-    @include mixins.fontSize(80);
+    @include mixins.fontSize(80, 100%);
     font-weight: 600;
-    line-height: 100%;
   }
 
   .phone {
@@ -37,8 +36,7 @@ footer {
     a {
       color: var(--color-white);
       font-weight: 600;
-      @include mixins.fontSize(32);
-      line-height: 40px;
+      @include mixins.fontSize(32, 40);
     }
   }
 
@@ -48,16 +46,14 @@ footer {
 
       span {
         color: var(--color-white);
-        @include mixins.fontSize(20);
-        line-height: 28px;
+        @include mixins.fontSize(20, 28);
       }
     }
   }
 
   .copyright {
     color: var(--color-white);
-    @include mixins.fontSize(14);
-    line-height: 24px;
+    @include mixins.fontSize(14, 24);
 
     span {
       color: var(--color-green-900);

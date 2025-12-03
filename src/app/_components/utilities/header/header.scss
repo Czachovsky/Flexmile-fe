@@ -1,3 +1,5 @@
+@use 'mixins';
+
 .header {
   position: fixed;
   top: 0;
@@ -8,10 +10,23 @@
   background: #863087;
 
   &--logo {
+    @include mixins.media-query('max', 'xl') {
+      z-index: 901;
+    }
+
     svg {
       height: 62px;
       width: auto;
       transition: all 0.3s ease-in-out;
+      @include mixins.media-query('max', 'xxxl') {
+        height: 40px
+      }
+      @include mixins.media-query('max', 'xxl') {
+        height: 24px
+      }
+      @include mixins.media-query('max', 'xl') {
+        height: 32px
+      }
     }
   }
 
@@ -32,16 +47,145 @@
   }
 
   &--nav {
+    .desktop-nav {
+      display: flex;
+      @include mixins.media-query('max', 'xl') {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--p-primary-900);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 900;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &.is-open {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    .mobile-nav {
+      @include mixins.media-query('max', 'xl') {
+        z-index: 901;
+        .search {
+          border: 2px solid var(--color-green-800);
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          z-index: 50;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          position: relative;
+          cursor: pointer;
+
+          span {
+            color: var(--color-white);
+          }
+        }
+        .hamburger-menu {
+          overflow: hidden;
+          position: relative;
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          z-index: 50;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--color-green-800);
+          border-radius: 50%;
+
+          svg {
+            overflow: visible;
+          }
+
+          .line {
+            fill: none;
+            stroke: var(--p-primary-900);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+          }
+
+          .line-top {
+            transform-origin: 12px 6px;
+          }
+
+          .line-middle {
+            transform-origin: 12px 12px;
+          }
+
+          .line-bottom {
+            transform-origin: 12px 18px;
+          }
+
+
+          &.is-active {
+            .line-top {
+              transform: translateY(6px) rotate(45deg);
+            }
+
+            .line-middle {
+              opacity: 0;
+              transform: scale(0);
+            }
+
+            .line-bottom {
+              transform: translateY(-6px) rotate(-45deg);
+            }
+          }
+        }
+      }
+    }
+
     ul {
+      @include mixins.media-query('max', 'xl') {
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px !important;
+        padding: 160px 24px 24px 24px !important;
+      }
+
       li {
+        @include mixins.media-query('max', 'xl') {
+          &:last-child{
+            margin-top: auto;
+            width: 100%;
+            border-top: 1px solid var(--color-purple-700);
+            padding-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            a{
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              gap: 24px
+            }
+          }
+        }
         a {
           color: var(--color-white);
           transition: all 0.3s ease-in-out;
           position: relative;
-          line-height: 24px;
+          @include mixins.fontSize(16, 24);
           padding: 8px 16px;
           border-radius: 32px;
           background: transparent;
+          @include mixins.media-query('max', 'xxl') {
+            @include mixins.fontSize(14, 24);
+          }
+          @include mixins.media-query('max', 'xl') {
+            @include mixins.fontSize(20, 24);
+            display: block;
+          }
 
           &:not(.social) {
             &.active, &:hover {

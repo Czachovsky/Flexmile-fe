@@ -35,8 +35,7 @@
     & > div {
       cursor: pointer;
       padding: 8px;
-      @include mixins.fontSize(14);
-      line-height: 24px;
+      @include mixins.fontSize(14, 24);
       border-radius: 8px;
 
       &:hover {

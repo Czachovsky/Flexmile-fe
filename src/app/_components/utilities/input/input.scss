@@ -5,8 +5,7 @@
 // -------------------------------------
 label {
   font-weight: 400;
-  @include mixins.fontSize(14);
-  line-height: 16px;
+  @include mixins.fontSize(14, 16);
 }
 
 // -------------------------------------
@@ -90,8 +89,7 @@ input {
       font-weight: 400;
       display: flex;
       align-items: center;
-      @include mixins.fontSize(12);
-      line-height: 18px;
+      @include mixins.fontSize(12, 18);
       cursor: pointer;
       &::before {
         content: "";

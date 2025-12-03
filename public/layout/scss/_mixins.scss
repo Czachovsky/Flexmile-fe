@@ -1,10 +1,5 @@
 @use "variables";
 
-@mixin fontSize($size, $important: false) {
-  $remSize: $size / variables.$mainFontSize;
-  font-size: #{$remSize}rem#{if($important, ' !important', '')};
-}
-
 @mixin padding($values...) {
   $converted-values: ();
 
@@ -17,9 +12,33 @@
 
 @import "variables";
 
-@mixin fontSize($size, $important: false) {
+@mixin fontSize($size, $lineHeight: null, $important: false) {
   $remSize: $size / variables.$mainFontSize;
   font-size: #{$remSize}rem #{"#{if($important, ' !important', '')}"};
+  
+  @if $lineHeight != null {
+    @if type-of($lineHeight) == 'number' and unit($lineHeight) == '' {
+      $remLineHeight: $lineHeight / variables.$mainFontSize;
+      line-height: #{$remLineHeight}rem #{"#{if($important, ' !important', '')}"};
+    } @else {
+      line-height: #{$lineHeight} #{"#{if($important, ' !important', '')}"};
+    }
+  } @else {
+    // Automatyczna proporcja line-height: 1.2 dla małych fontów, 1.0 dla dużych (>48px)
+    @if $size >= 48 {
+      line-height: 1.0;
+    } @else if $size >= 32 {
+      line-height: 1.25;
+    } @else if $size >= 24 {
+      line-height: 1.333;
+    } @else if $size >= 20 {
+      line-height: 1.2;
+    } @else if $size >= 16 {
+      line-height: 1.5;
+    } @else {
+      line-height: 1.714;
+    }
+  }
 }
 @mixin media-query($type, $breakpoint) {
   $value: map-get(variables.$grid-breakpoints, $breakpoint);

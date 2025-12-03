@@ -11,7 +11,6 @@
   color: var(--p-primary-900);
   font-weight: 700;
   background: var(--color-green-800);
-  line-height: 1rem;
   transition: all variables.$transitionDuration ease;
 
   &:hover {
@@ -38,9 +37,8 @@
     }
 
     &-large {
-      @include mixins.fontSize(16);
+      @include mixins.fontSize(16, 24);
       @include mixins.padding(16);
-      line-height: 24px;
     }
 
     &-outline {

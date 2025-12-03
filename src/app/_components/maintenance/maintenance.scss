@@ -10,15 +10,13 @@
 
   h1 {
     text-align: center;
-    line-height: 100px;
-    @include mixins.fontSize(96);
+    @include mixins.fontSize(96, 100);
     margin-bottom: 16px;
     display: block;
   }
 
   h3 {
-    @include mixins.fontSize(20);
-    line-height: 32px;
+    @include mixins.fontSize(20, 32);
     font-weight: 400;
     text-align: center;
     display: block;
@@ -44,8 +42,7 @@
     a{
       color: var(--color-white);
       font-weight: 600;
-      @include mixins.fontSize(20);
-      line-height: 24px;
+      @include mixins.fontSize(20, 24);
       display: inline-flex;
       align-items: center;
       gap:16px;

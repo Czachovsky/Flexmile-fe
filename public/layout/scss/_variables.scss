@@ -51,26 +51,29 @@ $mainFontSize: 16;
 $borderRadius: 12px;
 $transitionDuration: 0.3s;
 
+
+
+
 $grid-breakpoints: (
   xs: 0,
   sm: 375px,
   md: 414px,
   lg: 768px,
-  xlg: 960px,
-  xl: 980px,
-  xxl: 1200px,
-  xxxl: 1340px,
+  xlg: 992px,
+  xl: 1024px,
+  xxl: 1280px,
+  xxxl: 1440px,
   fhd: 1920px
 ) !default;
 
 $container-max-widths: (
-  sm: 100%,
-  md: 100%,
-  lg: 100%,
-  xlg: 960px,
-  xl: 980px,
-  xxl: 1200px,
-  xxxl: 1340px,
+  sm: 90%,
+  md: 90%,
+  lg: 768px,
+  xlg: 992px,
+  xl: 1024px,
+  xxl: 1280px,
+  xxxl: 1440px,
   fhd: 1920px
 ) !default;
 
