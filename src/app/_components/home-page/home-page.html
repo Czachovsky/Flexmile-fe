@@ -2,25 +2,28 @@
 <div class="container">
   <div class="home-offers pt-7">
     <div class="home-offers--header flex align-items-start justify-content-between pb-5">
-      <div>
+      <div class="home-offers--header-left">
         <h2 class="mb-3">Nowe samochody od Flexmile!</h2>
         <span
-          class="block">Tylko stała miesięczna rata – bez dodatkowych kosztów za ubezpieczenie, serwis czy opony.</span>
+          class="inline xxl:block">Tylko stała miesięczna rata – bez dodatkowych kosztów za ubezpieczenie, serwis czy opony.</span>
         <span
-          class="block">Wybierz nowy samochód i ciesz się pełnym komfortem jazdy bez niespodzianek i ukrytych opłat.</span>
+          class="inline xxl:block">Wybierz nowy samochód i ciesz się pełnym komfortem jazdy bez niespodzianek i ukrytych opłat.</span>
       </div>
-      <div>
+      <div class="home-offers--heade-right hidden xl:flex">
         <flexmile-link title="Pokaż pełną ofertę" url="/oferty" icon="pi-arrow-right"
                        iconPosition="right"></flexmile-link>
       </div>
     </div>
     <div class="home-offers--list">
       @if (offersList?.offers?.length) {
-                <flexmile-homepage-list [offerList]="offersList"></flexmile-homepage-list>
+        <div class="__counter pb-3">
+          Liczba dostępnych ofert: <b>{{ offersList?.meta?.total ?? 0 }}</b>
+        </div>
+        <flexmile-homepage-list [offerList]="offersList"></flexmile-homepage-list>
       }
       <div class="pt-5 pb-7 flex align-items-center justify-content-center">
         <flexmile-button label="Zobacz więcej" iconPosition="right" icon="pi-arrow-right"
-                         btnClass="mr-3"></flexmile-button>
+                         btnClass="w-full xlg:w-auto"></flexmile-button>
       </div>
     </div>
   </div>

@@ -76,10 +76,12 @@
 
 <ng-template #offerFeatures>
   <div class="car-card__features">
-    <div class="car-card__feature-label">
+    <div class="car-card__feature-label hidden xl:flex">
       Usługi w cenie:
     </div>
-
+    <div class="car-card__feature-label flex xl:hidden">
+      W cenie:
+    </div>
     <flexmile-tooltip [config]="{text: 'Serwis pojazdu', position: 'top'}">
       <div class="car-card__feature-btn flex align-items-center justify-content-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="36" viewBox="0 0 149 166" fill="none">

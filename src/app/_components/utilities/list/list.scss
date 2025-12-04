@@ -23,11 +23,23 @@
       .product-full,
       .banner {
         width: 100%;
+        min-width: 0;
       }
 
       .product-full,
       .banner {
         grid-column: 1 / -1;
+      }
+
+      // Responsive breakpoints
+      @include mixins.media-query('max', 'xxl') {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      @include mixins.media-query('max', 'lg') {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
     }
   }

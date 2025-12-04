@@ -64,6 +64,10 @@ h2 {
   @include mixins.fontSize(48, 56);
   font-weight: 600;
   color: var(--color-black);
+  @include mixins.media-query('max', 'xlg') {
+    @include mixins.fontSize(28, 36);
+  }
+
 }
 
 
@@ -116,16 +120,15 @@ h2 {
   }
 }
 
-
 .list {
   &--body {
     &-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 32px;
 
       .product {
-
+        min-width: 0;
       }
 
       .banner {
@@ -135,6 +138,17 @@ h2 {
 
       .product-full {
         grid-column: 1 / -1;
+      }
+
+      // Responsive breakpoints
+      @include mixins.media-query('max', 'xxl') {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      @include mixins.media-query('max', 'lg') {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
     }
   }

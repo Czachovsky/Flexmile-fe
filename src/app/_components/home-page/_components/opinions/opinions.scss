@@ -22,7 +22,7 @@
   }
 
   .dreams {
-    .col-8 {
+    .xlg\:col-8 {
       padding: 0 0 0 16px;
 
       & > div {
@@ -52,14 +52,20 @@
       }
     }
 
-    .col-4 {
+    .xlg\:col-4 {
       padding: 0 16px 0 0;
-
+      @include mixins.media-query('max', 'xl') {
+        padding: 0 0 24px 0;
+      }
       & > div {
         border-radius: 24px;
         background: url('../../../../../../public/layout/images/gosciu.webp') no-repeat scroll center center / cover;
         height: 100%;
         width: 100%;
+        @include mixins.media-query('max', 'xl') {
+          width: 100%;
+          aspect-ratio: 1.1065 / 1;
+        }
       }
     }
   }

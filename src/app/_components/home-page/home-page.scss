@@ -1,29 +1,49 @@
 @use "mixins";
 
-.home-offers{
-  &--header{
-    span{
+.home-offers {
+  &--header {
+    &-left {
+      max-width: 70%;
+      @include mixins.media-query('max', 'xl') {
+        max-width: 100%;
+      }
+    }
+
+    span {
       color: var(--color-black-700);
       @include mixins.fontSize(18, 24);
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(14, 24);
+      }
     }
   }
 }
 
-.add_info{
-  ._d{
+.__counter {
+  @include mixins.fontSize(14, 24);
+  b{
+    font-weight: 600;
+  }
+}
+
+.add_info {
+  ._d {
     max-width: 526px;
   }
-  ._img{
+
+  ._img {
     background: url('../../../../public/layout/images/chlopy.webp') no-repeat scroll center center / cover;
     max-width: 640px;
     width: 100%;
     aspect-ratio: 320/237;
   }
-  h2{
-font-weight: 600;
+
+  h2 {
+    font-weight: 600;
     @include mixins.fontSize(48, 56);
   }
-  span{
+
+  span {
     color: var(--color-black-700);
     @include mixins.fontSize(16, 24);
   }

@@ -198,6 +198,9 @@
   &:hover:not(.card-large) {
     .car-card__feature-label {
       width: 100px;
+      @include mixins.media-query('max', 'xlg') {
+        width: 60px;
+      }
     }
 
     .car-card__content {
