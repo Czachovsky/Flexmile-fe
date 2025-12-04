@@ -1,37 +1,54 @@
 @use "mixins";
-.not-found{
+
+.not-found {
   height: 100vh;
-  padding-top:126px;
+  padding-top: 126px;
   background: var(--p-primary-900);
   display: flex;
   align-items: center;
   justify-content: center;
-  & > div{
+
+  & > div {
     text-align: center;
-    h3{
+
+    h3 {
       color: var(--color-white);
       font-weight: 600;
       @include mixins.fontSize(120, 100%);
       margin-bottom: 16px;
       position: relative;
       display: inline-block;
-      svg{
+
+      svg {
         position: absolute;
         bottom: -10px;
         right: 29px;
       }
+
+      @include mixins.media-query('max', 'xl') {
+        @include mixins.fontSize(107, 100%);
+      }
     }
-    h4{
+
+    h4 {
       font-weight: 600;
       @include mixins.fontSize(48, 56);
       margin-bottom: 16px;
+      @include mixins.media-query('max', 'xl') {
+        @include mixins.fontSize(32, 40);
+      }
     }
-    span{
+
+    span {
       @include mixins.fontSize(20, 32);
       margin-bottom: 48px;
       display: block;
+      @include mixins.media-query('max', 'xl') {
+        @include mixins.fontSize(14, 24);
+      }
     }
-    h4, span{
+
+    h4, span {
       color: var(--color-white);
     }
   }

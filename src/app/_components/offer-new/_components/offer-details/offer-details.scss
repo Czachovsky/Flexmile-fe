@@ -39,8 +39,14 @@
   }
 
   &__body {
+    & > .flex {
+      gap: 32px;
+      align-items: flex-start;
+    }
+
     &-info {
       flex: 1;
+      min-width: 0;
 
       &-header {
         h1 {
@@ -74,7 +80,20 @@
       padding: 40px;
       border-radius: var(--border-radius-base);
       border: 1px solid var(--color-black-100);
-      max-width: 470px;
+      flex: 0 0 auto;
+      min-width: 400px;
+      max-width: 500px;
+
+      @include mixins.media-query('max', 'xxl') {
+        min-width: 350px;
+        max-width: 400px;
+      }
+
+      @include mixins.media-query('max', 'xl') {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+      }
 
       & > h3, & > div {
         border-bottom: 1px solid var(--color-black-100);
@@ -106,6 +125,18 @@
 
         .b {
         }
+      }
+    }
+
+    // Responsive layout - zmiana na kolumnę poniżej xl (1024px)
+    @include mixins.media-query('max', 'xl') {
+      & > .flex {
+        flex-direction: column;
+      }
+
+      &-info {
+        width: 100%;
+        padding-right: 0 !important;
       }
     }
   }
@@ -141,11 +172,17 @@
   padding-bottom: 120px;
   &-container {
     max-width: 770px;
+    @include mixins.media-query('max', 'xl') {
+      max-width: 100%;
+    }
   }
 
   h3 {
     font-weight: 600;
     @include mixins.fontSize(32, 40);
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(24, 32);
+    }
   }
 
   .technicals {
@@ -153,7 +190,9 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-
+      @include mixins.media-query('max', 'xlg') {
+        grid-template-columns: repeat(2, 1fr);
+      }
       & > div {
         border-radius: 16px;
         background-color: var(--color-black-50);
