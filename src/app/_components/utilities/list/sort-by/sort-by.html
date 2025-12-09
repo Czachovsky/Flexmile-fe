@@ -3,11 +3,31 @@
     Sortowanie: <span>{{ sortByLabel }}</span>
     <i class="pi pi-chevron-up"></i>
   </div>
-  @if (isOpen()) {
+  @if (isOpen() && !screen.isMobile()) {
     <div class="sort-list">
       @for (sort of sortByList; track sort) {
         <div (click)="sortBy(sort)">{{ sort.label }}</div>
       }
+    </div>
+  }
+  @if (isOpen() && screen.isMobile() && sortMobileState) {
+    <div class="sort-mobile-overlay"
+         @fadeInOut
+         (click)="sortMobileState = false"></div>
+    <div class="sort-mobile" @slideUpDown>
+      <div class="sort-mobile-header">
+        <div class="sort-mobile-title">
+          Sortuj
+        </div>
+        <div class="sort-mobile-hide" (click)="sortMobileState = false">
+          <i class="pi pi-times"></i>
+        </div>
+      </div>
+      <div class="sort-mobile-list">
+        @for (sort of sortByList; track sort) {
+          <div (click)="sortBy(sort)">{{ sort.label }}</div>
+        }
+      </div>
     </div>
   }
 </div>

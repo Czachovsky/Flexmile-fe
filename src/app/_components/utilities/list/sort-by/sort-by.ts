@@ -3,6 +3,8 @@ import {OrderbyType, OrderType, SortByListModel} from '@models/offers.types';
 import {NgClass} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {Screen} from '@services/screen';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'flexmile-sort-by',
@@ -11,9 +13,43 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   ],
   templateUrl: './sort-by.html',
   styleUrl: './sort-by.scss',
+  animations: [
+    trigger('slideUpDown', [
+      state('void', style({
+        transform: 'translateY(100%)',
+        opacity: 0
+      })),
+      state('*', style({
+        transform: 'translateY(0)',
+        opacity: 1
+      })),
+      transition(':enter', [
+        animate('0.35s cubic-bezier(0.16, 1, 0.3, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.25s cubic-bezier(0.7, 0, 0.84, 0)')
+      ])
+    ]),
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      state('*', style({
+        opacity: 1
+      })),
+      transition(':enter', [
+        animate('0.25s ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.2s ease-out')
+      ])
+    ])
+  ]
 })
 export class SortBy implements OnInit {
   isOpen = signal(false);
+  public readonly screen: Screen = inject(Screen);
+  public sortMobileState: boolean = false;
   sortByList: SortByListModel[] = [
     {label: 'Najnowsze', selected: false, order: OrderType.DESC, orderBy: OrderbyType.date},
     {label: 'Najstarsze', selected: false, order: OrderType.ASC, orderBy: OrderbyType.date},
@@ -44,6 +80,7 @@ export class SortBy implements OnInit {
 
   public toggleOpenSortBy(): void{
     this.isOpen.update(v => !v);
+    this.sortMobileState = this.screen.isMobile();
   }
 
   public sortBy(sortObj: SortByListModel): void {
