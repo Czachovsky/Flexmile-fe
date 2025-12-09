@@ -25,7 +25,7 @@ export class Header implements OnInit, OnDestroy {
   private scrollTimeout: any;
   scrollPosition: any;
   private renderer: Renderer2 = inject(Renderer2);
-  
+
   constructor() {
     // Automatically close mobile menu when screen size changes to desktop
     effect(() => {
@@ -37,7 +37,7 @@ export class Header implements OnInit, OnDestroy {
       }
     });
   }
-  
+
   ngOnInit() {
     this.updateActiveMenuItem();
   }
@@ -67,21 +67,42 @@ export class Header implements OnInit, OnDestroy {
 
   handleMenuItemClick(event: Event, item: MenuElementsModel) {
     event.preventDefault();
+    console.log(item)
 
-    if (item.type === 'section' && item.section) {
-      // If we're not on the home page, navigate first
-      if (this.router.url !== '/') {
-        this.router.navigate(['/']).then(() => {
-          // Wait for navigation and DOM update
-          setTimeout(() => {
-            this.scrollToSection(item.section!);
-          }, 100);
-        });
-      } else {
-        this.scrollToSection(item.section);
+    // Close mobile menu first if on mobile
+    const isMobile = this.screen.isMobile();
+    if (isMobile) {
+      this.mobileMenuState = false;
+      this.removeStyles();
+    }
+
+    // If we're not on the home page, navigate to home first
+    const isOnHomePage = this.router.url === '/';
+
+    if (!isOnHomePage) {
+      this.router.navigate(['/']).then(() => {
+        // Wait for navigation, DOM update, and mobile menu to close
+        const delay = isMobile ? 300 : 100;
+        setTimeout(() => {
+          if (item.type === 'section' && item.section) {
+            this.scrollToSection(item.section);
+          } else if (item.type === 'url' && item.url && item.url !== '/') {
+            // Navigate to the URL after reaching home page
+            this.router.navigate([item.url]);
+          }
+        }, delay);
+      });
+    } else {
+      // We're already on home page
+      if (item.type === 'section' && item.section) {
+        // Wait for mobile menu to close before scrolling
+        const delay = isMobile ? 200 : 0;
+        setTimeout(() => {
+          this.scrollToSection(item.section!);
+        }, delay);
+      } else if (item.type === 'url' && item.url) {
+        this.router.navigate([item.url]);
       }
-    } else if (item.type === 'url' && item.url) {
-      this.router.navigate([item.url]);
     }
   }
 
@@ -153,6 +174,10 @@ export class Header implements OnInit, OnDestroy {
       }
     }
     return false;
+  }
+
+  public goToList(): void {
+   void this.router.navigate(['/oferty']);
   }
 
   private setStyles(): void {

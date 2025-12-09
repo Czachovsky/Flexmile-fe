@@ -4,7 +4,9 @@
 .faq {
   max-width: 860px;
   margin: 0 auto;
-
+  @include mixins.media-query('max', 'xlg') {
+    max-width: 768px;
+  }
   h2 {
     @include mixins.fontSize(48, 56);
     font-weight: 600;

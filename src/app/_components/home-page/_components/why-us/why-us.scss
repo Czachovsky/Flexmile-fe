@@ -118,7 +118,6 @@
 
       .xlg\:col-4 {
         padding: 0 0 0 16px;
-
         & > div {
           background: url('../../../../../../public/layout/images/car-woman.webp') no-repeat scroll center left;
           height: 100%;
@@ -167,7 +166,7 @@
       max-width: 1300px;
       margin: -105px auto 0 auto;
       @include mixins.media-query('max', 'xlg') {
-        width: 100vw;
+        width: 100%;
         margin: 24px auto 0 auto;
 
         position: relative;

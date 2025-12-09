@@ -6,7 +6,6 @@ import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
 @Component({
   selector: 'flexmile-opinions',
   imports: [
-    ButtonComponent,
     CarouselModule
   ],
   templateUrl: './opinions.html',
@@ -18,7 +17,7 @@ export class Opinions {
     navText: ['<i class="pi pi-arrow-left"></i>', '<i class="pi pi-arrow-right"></i>'],
     nav: true,
     loop: true,
-    dots: false,
+    dots: true,
     navSpeed: 1000,
     autoplay: true,
     autoplayTimeout: 5000,

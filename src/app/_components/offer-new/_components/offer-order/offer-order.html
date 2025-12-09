@@ -45,7 +45,7 @@
                 <div class="mileage flex gap-2 flex-wrap pb-5">
                   @for (limit of details().pricing.mileage_limits; track limit) {
                     <flexmile-button [btnClass]="isMileageLimitActive(limit) ? 'active' : ''"
-                                     label="{{limit | number:'1.0-0'}}" color="secondary"
+                                     label="{{(limit / 1000) | number:'1.0-0'}}" color="secondary"
                                      size="medium" (click)="selectMileageLimit(limit)"></flexmile-button>
                   }
                 </div>

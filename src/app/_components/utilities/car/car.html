@@ -18,9 +18,9 @@
     }
   </div>
 
-  <div class="car-card__image-wrapper xlg:px-4 px-3 xlg:pt-4 pt-3">
-    <img src="/layout/images/car_test.png" alt="" class="car-card__image block">
-  </div>
+  @if (cardSize() !== badgeSizes.LG || (cardSize() === badgeSizes.LG && !screen.isMobile())) {
+    <ng-container *ngTemplateOutlet="imageTemplate"></ng-container>
+  }
 
   <div class="car-card__content xlg:p-4 p-3">
     <div class="car-card__header mb-2">
@@ -55,14 +55,18 @@
       </div>
     </div>
 
+    @if (cardSize() === badgeSizes.LG && screen.isMobile()) {
+      <ng-container *ngTemplateOutlet="imageTemplate"></ng-container>
+    }
+
     <div class="car-card__price pb-3">
       <span class="car-card__price-amount">{{ offer().price_from }}</span>
       <span class="car-card__price-label"> PLN/ netto mies.</span>
     </div>
     @if (cardSize() === badgeSizes.LG) {
-      <div>
+      <div class="btn_wrapper">
         <flexmile-button label="Sprawdź ofertę" iconPosition="right" icon="pi-arrow-right"
-                         btnClass="mr-3"></flexmile-button>
+                         btnClass="w-full lg:w-auto"></flexmile-button>
       </div>
     }
     @if (cardSize() !== badgeSizes.LG) {
@@ -90,6 +94,11 @@
   </div>
 </ng-template>
 
+<ng-template #imageTemplate>
+  <div class="car-card__image-wrapper xlg:px-4 px-3 xlg:pt-4 pt-3">
+    <img src="/layout/images/car_test.png" alt="" class="car-card__image block">
+  </div>
+</ng-template>
 
 <ng-template #mobileFeatures>
   <div class="car-card__feature-btn flex align-items-center justify-content-center">
@@ -179,8 +188,10 @@
 </ng-template>
 
 @if (screen.isMobile() && featuresState) {
-  <div class="features_mobile_overlay" (click)="featuresState = false"></div>
-  <div class="features_mobile">
+  <div class="features_mobile_overlay"
+       @fadeInOut
+       (click)="featuresState = false"></div>
+  <div class="features_mobile" @slideUpDown>
     <div class="features_mobile-header">
       <div class="features_mobile-title">
         W racie najmu <br>od flexmile!

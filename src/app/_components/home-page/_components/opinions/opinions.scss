@@ -24,17 +24,29 @@
   .dreams {
     .xlg\:col-8 {
       padding: 0 0 0 16px;
-
+      @include mixins.media-query('max', 'xl') {
+        padding: 0;
+      }
       & > div {
         background: #863087;
         border-radius: 24px;
         padding: 40px;
         position: relative;
-
+        @include mixins.media-query('max', 'xlg') {
+          padding:128px 24px 24px 24px;
+        }
         .icon {
           position: absolute;
           right: 40px;
           top: 40px;
+          @include mixins.media-query('max', 'xlg') {
+            right: unset;
+            top: 24px;
+            left: 24px;
+            svg{
+              height: 80px;
+            }
+          }
         }
 
         h2 {
@@ -42,12 +54,18 @@
           color: var(--color-white);
           @include mixins.fontSize(48, 56);
           font-weight: 600;
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(28, 36);
+          }
         }
 
         span {
           color: var(--color-white);
           display: block;
           @include mixins.fontSize(16, 24);
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(14, 24);
+          }
         }
       }
     }
@@ -57,6 +75,7 @@
       @include mixins.media-query('max', 'xl') {
         padding: 0 0 24px 0;
       }
+
       & > div {
         border-radius: 24px;
         background: url('../../../../../../public/layout/images/gosciu.webp') no-repeat scroll center center / cover;
@@ -67,6 +86,23 @@
           aspect-ratio: 1.1065 / 1;
         }
       }
+    }
+  }
+}
+
+:host ::ng-deep {
+  .owl-dots {
+    display: none;
+    @include mixins.media-query('max', 'xlg') {
+      display: block;
+      position: relative;
+      top:8px;
+    }
+  }
+
+  .owl-nav {
+    @include mixins.media-query('max', 'xlg') {
+      display: none !important;
     }
   }
 }

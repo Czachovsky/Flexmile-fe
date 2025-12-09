@@ -3,26 +3,38 @@
 footer {
   background: var(--p-primary-900);
   padding-top: 120px;
+
   &.with-contact-form {
-    & > div{
+    & > div {
       position: relative;
       overflow: hidden;
-      &:before{
+
+      &:before {
         content: '';
         position: absolute;
         width: 516px;
         height: 328px;
         background: url('../../../../../public/layout/images/car-footer.webp') no-repeat scroll center center / cover;
-        bottom:-45px;
-        left:270px;
+        bottom: -45px;
+        left: 270px;
+        @include mixins.media-query('max', 'xlg') {
+          display: none;
+        }
       }
     }
+  }
+
+  .grid {
+    position: relative;
   }
 
   h3 {
     color: var(--color-white);
     @include mixins.fontSize(80, 100%);
     font-weight: 600;
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(52, 64);
+    }
   }
 
   .phone {
@@ -32,21 +44,35 @@ footer {
     align-items: center;
     justify-content: flex-start;
     gap: 24px;
+    @include mixins.media-query('max', 'xlg') {
+      max-width: unset;
+    }
 
     a {
       color: var(--color-white);
       font-weight: 600;
       @include mixins.fontSize(32, 40);
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(24, 32);
+      }
     }
   }
 
   .contact {
+    @include mixins.media-query('max', 'xlg') {
+      border-bottom: 1px solid var(--color-purple-700);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
     div {
       padding: 16px 0;
 
       span {
         color: var(--color-white);
         @include mixins.fontSize(20, 28);
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(16, 24);
+        }
       }
     }
   }

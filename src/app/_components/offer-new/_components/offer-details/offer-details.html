@@ -72,11 +72,11 @@
                 </div>
               </div>
               <div class="pb-5">
-                <div class="pb-2">Roczny limit kilometrów</div>
+                <div class="pb-2">Roczny limit kilometrów <span>(tys. km)</span></div>
                 <div class="mileage flex gap-2 flex-wrap">
                   @for (limit of details().pricing.mileage_limits; track limit) {
                     <flexmile-button [btnClass]="isMileageLimitActive(limit) ? 'active' : ''"
-                                     label="{{limit | number:'1.0-0'}}" color="secondary"
+                                     label="{{(limit / 1000) | number:'1.0-0'}}" color="secondary"
                                      size="medium" (click)="selectMileageLimit(limit)"></flexmile-button>
                   }
                 </div>
@@ -113,17 +113,17 @@
         <div class="technicals-info">
           @for (spec of technicalsArray; track spec.value) {
             <div>
-              <span class="block">{{ spec.label }}</span>
+              <span class="block">{{ spec.label | nullsafe: null : "" : "bd." }}</span>
               @if (spec.value === 'specs.transmission') {
-                <b class="block"> {{ getTransmissionLabel(details().specs.transmission) }}</b>
+                <b class="block"> {{ getTransmissionLabel(details().specs.transmission) | nullsafe: null : "" : "bd." }}</b>
               } @else if (spec.value === 'fuel_type') {
-                <b class="block"> {{ getFuelLabel(details().fuel_type) }}</b>
+                <b class="block"> {{ getFuelLabel(details().fuel_type) | nullsafe: null : "" : "bd." }}</b>
               } @else if (spec.value === 'specs.drivetrain') {
-                <b class="block"> {{ details().specs.drivetrain }}</b>
+                <b class="block"> {{ details().specs.drivetrain | nullsafe: null : "" : "bd." }}</b>
               } @else if (spec.value === 'body_type') {
-                <b class="block"> {{ getBodyTypeLabel(details().body_type) }}</b>
+                <b class="block"> {{ getBodyTypeLabel(details().body_type) | nullsafe: null : "" : "bd."}}</b>
               } @else {
-                <b class="block">{{ getSpecValue(spec.value) }} @if (spec.value === 'specs.horsepower') {
+                <b class="block">{{ getSpecValue(spec.value) | nullsafe: null : "" : "bd." }} @if (spec.value === 'specs.horsepower') {
                   KM
                 }</b>
               }
@@ -196,7 +196,7 @@
       </div>
       <div>
         <flexmile-banner-list size="small" [icon]="descriptionBanner.icon" label="Odbiór w salonie" separator="lub"
-                              description="dostawa pod dom!"></flexmile-banner-list>
+                              description=" dostawa pod dom!"></flexmile-banner-list>
       </div>
     </div>
     @if (similarOffers().length) {

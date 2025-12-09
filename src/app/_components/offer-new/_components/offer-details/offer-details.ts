@@ -9,6 +9,7 @@ import {BannerList} from '@components/utilities/banner-list/banner-list';
 import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carousel';
 import {descriptionBanner, offerDescription, offerFirstStepModel} from '@models/offer.type';
 import {OfferService} from '@services/offer';
+import {NullsafePipe} from '../../../../_pipes/nullsafe-pipe';
 
 @Component({
   selector: 'flexmile-offer-details',
@@ -19,7 +20,8 @@ import {OfferService} from '@services/offer';
     DecimalPipe,
     BannerList,
     OffersCarousel,
-    SlicePipe
+    SlicePipe,
+    NullsafePipe
   ],
   templateUrl: './offer-details.html',
   styleUrl: './offer-details.scss',

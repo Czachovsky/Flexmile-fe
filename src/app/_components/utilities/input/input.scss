@@ -46,6 +46,7 @@ textarea.f-textarea {
   @include mixins.fontSize(16);
   outline: none !important;
   max-width: 100%;
+  width: 100%;
 }
 
 // -------------------------------------
@@ -85,10 +86,10 @@ input {
     + label {
       -webkit-user-select: none;
       user-select: none;
-      justify-content: center;
+      justify-content: flex-start;
       font-weight: 400;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       @include mixins.fontSize(12, 18);
       cursor: pointer;
       &::before {

@@ -5,31 +5,53 @@
 
   font-weight: 600;
   white-space: pre;
-  &.large{
+  @include mixins.media-query('max', 'xlg') {
+    & > div {
+      flex-direction: column;
+    }
+
+  }
+
+  &.large {
     padding: 40px 0;
     @include mixins.fontSize(32);
+    @include mixins.media-query('max', 'xlg') {
+      padding: 16px 0;
+      @include mixins.fontSize(24, 32);
+    }
     @include mixins.media-query('max', 'xxl') {
       @include mixins.fontSize(24);
     }
   }
-  &.small{
+
+  &.small {
     padding: 27px 0;
     @include mixins.fontSize(24);
   }
+
   &--label {
     color: var(--color-white);
+    @include mixins.media-query('max', 'xlg') {
+      flex-direction: column;
+    }
 
     svg {
       height: 48px;
       width: auto;
       margin-right: 24px;
+      @include mixins.media-query('max', 'xlg') {
+        margin-right: 0;
+        margin-bottom: 8px;
+        height: 32px;
+      }
     }
   }
 
   &--description {
     color: var(--color-green-800);
   }
-  &--template{
+
+  &--template {
     @include mixins.fontSize(24, 32);
   }
 }

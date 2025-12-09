@@ -1,7 +1,7 @@
-<footer id="footer" [ngClass]="{'with-contact-form' : !hideContactForm()}">
+<footer id="footer">
   <div class="container">
     <div class="grid mt-0">
-      <div class="col-7">
+      <div class="xlg:col-6 xxl:col-7 col-12">
 
         <div>
           <div class="pb-5">
@@ -31,7 +31,7 @@
             </svg>
           </div>
           <h3 class="pb-5">Skontaktuj <br> się z nami!</h3>
-          <div class="phone pb-5 mb-5">
+          <div class="phone xlg:pb-5 xlg:mb-5 mb-4 pb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
               <g clip-path="url(#clip0_1669_104297)">
                 <path
@@ -92,11 +92,11 @@
         </div>
 
       </div>
-      @if (!hideContactForm()) {
-        <div class="col-5">
+
+        <div class="xxl:col-5 xlg:col-6 col-12">
           <flexmile-contact-form></flexmile-contact-form>
         </div>
-      }
+
       <div class="col-12">
         <div class="copyright py-5 text-right">
           © Copyrigt by <span>flexmile</span> 2025. Wszelkie prawa zastrzeżone

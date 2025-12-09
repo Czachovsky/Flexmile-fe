@@ -43,6 +43,8 @@
     align-items: center;
     justify-content: space-between;
     @include mixins.media-query('max', 'xlg') {
+      flex-wrap: wrap;
+      gap: 8px;
       padding: 16px 16px 0;
     }
   }
@@ -54,6 +56,22 @@
     position: relative;
     max-height: 440px;
     overflow: hidden;
+    @include mixins.media-query('max', 'xxl') {
+      img {
+        position: relative;
+        top: -70px;
+      }
+    }
+    @include mixins.media-query('max', 'xlg') {
+      padding-top: 30px;
+      max-height: unset;
+    }
+    @include mixins.media-query('max', 'lg') {
+      flex-direction: column-reverse;
+      img {
+        top: 0;
+      }
+    }
 
     .car-card__badges {
       justify-content: flex-start;
@@ -64,10 +82,16 @@
 
     .car-card__specs {
       gap: 24px;
+      @include mixins.media-query('max', 'xlg') {
+        gap: 8px;
+      }
 
       .car-card__spec {
         span {
           @include mixins.fontSize(16);
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(14, 24);
+          }
         }
       }
     }
@@ -76,6 +100,16 @@
       position: absolute;
       bottom: 40px;
       right: 40px;
+      @include mixins.media-query('max', 'xlg') {
+        bottom: 16px;
+        right: 16px;
+      }
+      @include mixins.media-query('max', 'lg') {
+        position: absolute;
+        bottom: 100px;
+        left: 16px;
+        width: calc(100% - 32px);
+      }
     }
 
     .car-card__header {
@@ -89,15 +123,24 @@
       display: flex;
       align-items: center;
       justify-content: end;
-
+      @include mixins.media-query('max', 'lg') {
+        top:0;
+      }
       img {
         max-height: 570px;
+        @include mixins.media-query('max', 'lg') {
+          max-height: unset;
+        }
       }
     }
 
     .car-card__content {
       padding-left: 40px !important;
       padding-bottom: 40px !important;
+      @include mixins.media-query('max', 'xlg') {
+        padding-left: 16px !important;
+        padding-bottom: 16px !important;
+      }
     }
 
     .car-card__price {
@@ -115,10 +158,16 @@
     .car-card__title {
       @include mixins.fontSize(32, 32);
       margin-bottom: 8px;
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(24, 32);
+      }
     }
 
     .car-card__subtitle {
       @include mixins.fontSize(20);
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(14, 24);
+      }
     }
   }
 
@@ -268,6 +317,7 @@
     background: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0;
+    will-change: opacity;
   }
   .features_mobile {
     position: fixed;
@@ -279,6 +329,9 @@
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     padding: 16px 24px 0 24px;
+    will-change: transform, opacity;
+    max-height: 90vh;
+    overflow-y: auto;
 
     &-header {
       display: flex;
@@ -311,6 +364,7 @@
         justify-content: flex-start;
         gap: 16px;
         margin-bottom: 24px;
+
         span {
           @include mixins.fontSize(16, 24);
           font-weight: 500;
@@ -319,3 +373,10 @@
     }
   }
 }
+
+@include mixins.media-query('max', 'lg') {
+  .btn_wrapper{
+    padding-top: 90px;
+  }
+}
+

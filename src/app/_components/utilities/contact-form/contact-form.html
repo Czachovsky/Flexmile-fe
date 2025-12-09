@@ -1,25 +1,25 @@
 <div class="contact-form">
   <div [formGroup]="contactForm">
     <div class="grid">
-      <div class="col-6 pb-3">
+      <div class="xlg:col-6 col-12 pb-3">
         <div>
           <flexmile-input label="Imię" placeholder="Wpisz Imię" [control]="contactForm.get('first_name')"
                           inputId="first_name"></flexmile-input>
         </div>
       </div>
-      <div class="col-6 pb-3">
+      <div class="xlg:col-6 col-12 pb-3">
         <div>
           <flexmile-input label="Nazwisko" placeholder="Wpisz Nazwisko" [control]="contactForm.get('last_name')"
                           inputId="last_name"></flexmile-input>
         </div>
       </div>
-      <div class="col-6 pb-3">
+      <div class="xlg:col-6 col-12 pb-3">
         <div>
           <flexmile-input label="Email" placeholder="Wpisz Email" inputId="email"
                           [control]="contactForm.get('email')"></flexmile-input>
         </div>
       </div>
-      <div class="col-6 pb-3">
+      <div class="xlg:col-6 col-12 pb-3">
         <div>
           <flexmile-input label="Telefon" placeholder="Wpisz Telefon" inputId="phone"
                           [control]="contactForm.get('phone')"></flexmile-input>

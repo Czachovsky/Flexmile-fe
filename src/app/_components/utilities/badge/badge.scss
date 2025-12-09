@@ -13,6 +13,10 @@
         svg {
           height: 24px;
           width: auto;
+          @include mixins.media-query('max', 'xlg') {
+            height: 16px;
+            width: auto;
+          }
         }
       }
     }
@@ -49,6 +53,14 @@
     //max-height: 48px;
     .badge--icon {
       margin-right: 12px;
+    }
+
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(10, 15);
+      padding: 6px 12px;
+      .badge--icon {
+        margin-right: 8px;
+      }
     }
   }
 

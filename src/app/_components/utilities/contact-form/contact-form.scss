@@ -5,6 +5,10 @@
   border-radius: var(--border-radius-base);
   padding: 40px;
   position: relative;
+  @include mixins.media-query('max', 'xlg') {
+    background: none;
+    padding: 0;
+  }
 }
 
 :host ::ng-deep {

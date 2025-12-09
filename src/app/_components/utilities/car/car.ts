@@ -7,6 +7,7 @@ import {NgTemplateOutlet} from '@angular/common';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {FuelType, OfferListOffersModel, TransmissionType} from '@models/offers.types';
 import {Screen} from '@services/screen';
+import {trigger, state, style, transition, animate} from '@angular/animations';
 
 @Component({
   selector: 'flexmile-car',
@@ -18,7 +19,39 @@ import {Screen} from '@services/screen';
   ],
   templateUrl: './car.html',
   styleUrl: './car.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideUpDown', [
+      state('void', style({
+        transform: 'translateY(100%)',
+        opacity: 0
+      })),
+      state('*', style({
+        transform: 'translateY(0)',
+        opacity: 1
+      })),
+      transition(':enter', [
+        animate('0.35s cubic-bezier(0.16, 1, 0.3, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.25s cubic-bezier(0.7, 0, 0.84, 0)')
+      ])
+    ]),
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      state('*', style({
+        opacity: 1
+      })),
+      transition(':enter', [
+        animate('0.25s ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.2s ease-out')
+      ])
+    ])
+  ]
 })
 export class Car {
   cardSize = input<badgeSizes>(badgeSizes.MD);
