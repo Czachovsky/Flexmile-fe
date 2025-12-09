@@ -7,15 +7,24 @@
 
       .animation {
         position: absolute;
+        @include mixins.media-query('max', 'xlg') {
+          display: none;
+        }
 
         &._l {
           left: 260px;
-          top:64px;
+          top: 64px;
+          @include mixins.media-query('max', 'xxl') {
+            left: 160px;
+          }
         }
 
         &._r {
           right: 212px;
           top: 43px;
+          @include mixins.media-query('max', 'xxl') {
+            right: 112px;
+          }
         }
       }
 
@@ -31,15 +40,30 @@
       .elements {
         align-items: flex-start;
         justify-content: space-between;
+        @include mixins.media-query('max', 'xlg') {
+          flex-direction: column;
+          align-items: center;
+        }
 
         & > div {
           width: 400px;
+          @include mixins.media-query('max', 'xlg') {
+            width: 100%;
+            padding-bottom: 48px;
+          }
 
           h4 {
             @include mixins.fontSize(24, 32);
             text-align: center;
             padding-bottom: 8px;
             display: block;
+            @include mixins.media-query('max', 'xxl') {
+              @include mixins.fontSize(20, 32);
+              min-height: 75px;
+            }
+            @include mixins.media-query('max', 'xlg') {
+              min-height: unset;
+            }
           }
 
           span {
@@ -47,14 +71,20 @@
             display: block;
             color: var(--color-black-700);
             @include mixins.fontSize(16, 24);
+            @include mixins.media-query('max', 'xxl') {
+              @include mixins.fontSize(14, 24);
+            }
           }
         }
       }
     }
 
     &.dreams {
-      .col-8 {
+      .xlg\:col-8 {
         padding: 0 16px 0 0;
+        @include mixins.media-query('max', 'xlg') {
+          padding: 0 0 16px 0;
+        }
 
         & > div {
           background: #863087;
@@ -66,6 +96,12 @@
             color: var(--color-white);
             @include mixins.fontSize(48, 56);
             font-weight: 600;
+            @include mixins.media-query('max', 'xlg') {
+              @include mixins.fontSize(28, 36);
+              br {
+                display: none;
+              }
+            }
           }
 
           span {
@@ -73,103 +109,161 @@
             padding-bottom: 40px;
             display: block;
             @include mixins.fontSize(16, 24);
+            @include mixins.media-query('max', 'xlg') {
+              @include mixins.fontSize(14, 24);
+            }
           }
         }
       }
 
-      .col-4 {
+      .xlg\:col-4 {
         padding: 0 0 0 16px;
 
         & > div {
           background: url('../../../../../../public/layout/images/car-woman.webp') no-repeat scroll center left;
           height: 100%;
           width: 100%;
+          background-size: cover;
+          border-radius: 24px;
+          @include mixins.media-query('max', 'xlg') {
+            height: 300px;
+          }
         }
       }
     }
 
-    &.why {
-      h2 {
-        text-align: center;
-        @include mixins.fontSize(48, 56);
-        font-weight: 600;
-        padding-bottom: 16px;
+  }
+  .why {
+    h2 {
+      text-align: center;
+      @include mixins.fontSize(48, 56);
+      font-weight: 600;
+      padding-bottom: 16px;
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(28, 36);
+        text-align: left;
+      }
+    }
+
+    .description {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--color-black-700);
+      @include mixins.fontSize(16, 24);
+      padding-bottom: 64px;
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(14, 24);
+        text-align: left;
+        max-width: unset;
+      }
+    }
+
+    .cars {
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: -105px auto 0 auto;
+      @include mixins.media-query('max', 'xlg') {
+        width: 100vw;
+        margin: 24px auto 0 auto;
+
+        position: relative;
       }
 
-      .description {
-        max-width: 640px;
-        margin: 0 auto;
-        text-align: center;
-        color: var(--color-black-700);
-        @include mixins.fontSize(16, 24);
-        padding-bottom: 64px;
-      }
-
-      .cars {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: -105px;
-
-        img {
-          display: block;
+      img {
+        display: block;
+        @include mixins.media-query('max', 'xlg') {
+          max-height: 140px;
+          max-width: 100%;
         }
       }
+    }
 
-      .table {
-        max-width: 640px;
-        margin: 0 auto;
-        display: flex;
-        border-radius: 24px;
-        overflow: hidden;
+    .table {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      border-radius: 24px;
 
-        .table-left_header {
-          background: var(--color-green-800);
-        }
+      .table-left_header {
+        background: var(--color-green-800);
+        border-top-left-radius: 24px;
+      }
 
-        .table-right_header {
-          background: var(--color-black-100);
-        }
+      .table-right_header {
+        background: var(--color-black-100);
+        border-top-right-radius: 24px;
+      }
 
-        .table-left_body {
+      .table-left_body {
+        & > div {
           border-left: 1px solid #E2E2E2;
-        }
 
-        .table-left_body, .table-right_body {
-          & > div {
-            span {
-              margin-right: 8px;
-            }
-
-            height: 56px;
-            display: flex;
-            align-items: center;
-            padding-left: 24px;
-            color: #525252;
-            border-bottom: 1px solid #E2E2E2;
-            border-right: 1px solid #E2E2E2;
+          &.left-last {
+            border-bottom-left-radius: 24px;
           }
         }
 
-        .table-right_body {
-          & > div {
-            background: #FAFAFA;
-          }
-        }
+      }
 
-        .table-left_header, .table-right_header {
+      .table-left_body, .table-right_body {
+        & > div {
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(14, 24);
+            height: 80px;
+          }
+
+          span {
+            margin-right: 8px;
+          }
+
+          height: 56px;
           display: flex;
           align-items: center;
-          font-weight: 500;
-          padding: 0 24px;
-          @include mixins.fontSize(20, 24);
-          height: 56px;
-        }
-
-        & > div {
-          flex: 1;
+          padding-left: 24px;
+          color: #525252;
+          border-bottom: 1px solid #E2E2E2;
+          border-right: 1px solid #E2E2E2;
         }
       }
+
+      .table-right_body {
+        & > div {
+          background: #FAFAFA;
+
+          &.right-last {
+            border-bottom-right-radius: 24px;
+          }
+        }
+      }
+
+      .table-left_header, .table-right_header {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        padding: 0 24px;
+        @include mixins.fontSize(20, 24);
+        height: 56px;
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(16, 24);
+          height: 80px;
+        }
+      }
+
+      & > div {
+        flex: 1;
+      }
+    }
+  }
+}
+
+.how-it-works {
+  @include mixins.media-query('max', 'xxl') {
+    svg {
+      max-height: 100px;
     }
   }
 }

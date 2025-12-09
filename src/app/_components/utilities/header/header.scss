@@ -57,12 +57,22 @@
         height: 100vh;
         background-color: var(--p-primary-900);
         transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
+        visibility: hidden;
+        pointer-events: none;
         z-index: 900;
         overflow-y: auto;
         overflow-x: hidden;
+        
         &.is-open {
           transform: translateX(0);
+          visibility: visible;
+          pointer-events: auto;
+          transition: transform 0.3s ease-in-out, visibility 0s 0s;
+        }
+        
+        // Ensure menu is immediately hidden when not open (no transition delay)
+        &:not(.is-open) {
+          transition: transform 0.3s ease-in-out, visibility 0s 0.3s;
         }
       }
     }

@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {NgTemplateOutlet} from '@angular/common';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {FuelType, OfferListOffersModel, TransmissionType} from '@models/offers.types';
+import {Screen} from '@services/screen';
 
 @Component({
   selector: 'flexmile-car',
@@ -25,8 +26,10 @@ export class Car {
   protected readonly badgeTypes = badgeTypes;
   protected readonly badgeSizes = badgeSizes;
   private router: Router = inject(Router);
+  public readonly screen: Screen = inject(Screen);
   public readonly transmissionType = TransmissionType;
   public readonly fuelType = FuelType;
+  public featuresState: boolean = false;
 
 
   public goToOffer(id: number): void {
@@ -39,5 +42,10 @@ export class Car {
 
   public getFuelLabel(type: string): string {
     return this.fuelType[type as keyof typeof FuelType];
+  }
+
+  public showFeatures(event: Event): void {
+    event.stopPropagation();
+    this.featuresState = this.screen.isMobile();
   }
 }

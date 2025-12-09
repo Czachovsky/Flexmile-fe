@@ -8,6 +8,10 @@
   h2 {
     @include mixins.fontSize(48, 56);
     font-weight: 600;
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(28, 36);
+      text-align: left;
+    }
   }
 
   &-list {
@@ -15,6 +19,7 @@
       background: var(--color-black-50);
       transition: background 0.3s ease;
       border-radius: var(--border-radius-base);
+
       &.expanded {
         background: var(--p-primary-900);
 
@@ -33,6 +38,9 @@
         @include mixins.fontSize(20, 24);
         color: var(--color-black);
         transition: color 0.3s ease;
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(16, 24);
+        }
       }
 
       &__arrow {
@@ -47,61 +55,10 @@
         height: 0;
         overflow: hidden;
         transition: height 0.3s ease;
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(14, 24);
+        }
       }
     }
   }
 }
-
-//
-//.servicesSections {
-//  .service {
-//    border: 1px solid var(--black-100);
-//    border-radius: 1rem;
-//    & > div{
-//      @include mixins.lower-than('lg') {
-//        flex-direction: column;
-//      }
-//    }
-//    &.expanded {
-//      border-color: var(--black-900);
-//
-//      .questionArrow {
-//        transform: rotate(180deg);
-//      }
-//
-//      .questionAnswer {
-//        height: auto;
-//        // height: 137px;
-//      }
-//    }
-//  }
-//
-//  .servicesIcon {
-//    width: 48px;
-//    height: 48px;
-//    background: var(--red-500);
-//    border-radius: 50px;
-//  }
-//
-//  .questionTitle {
-//    font-weight: 700;
-//    @include mixins.fontSize(20);
-//    @include mixins.lower-than('lg') {
-//      @include mixins.fontSize(18);
-//    }
-//  }
-//
-//  .questionAnswer {
-//    color: var(--black-700);
-//    @include mixins.fontSize(16);
-//    line-height: 24px;
-//    height: 0;
-//    overflow: hidden;
-//    transition: height 0.3s ease;
-//  }
-//
-//  .questionArrow {
-//    font-size: 24px;
-//    color: var(--gray-900);
-//  }
-//}

@@ -1,4 +1,4 @@
-import {Component, HostListener, inject, OnInit, OnDestroy, Renderer2} from '@angular/core';
+import {Component, HostListener, inject, OnInit, OnDestroy, Renderer2, effect} from '@angular/core';
 import {menuElements, MenuElementsModel} from '@models/header.types';
 import {Screen} from '@services/screen';
 import {NgClass} from '@angular/common';
@@ -25,6 +25,19 @@ export class Header implements OnInit, OnDestroy {
   private scrollTimeout: any;
   scrollPosition: any;
   private renderer: Renderer2 = inject(Renderer2);
+  
+  constructor() {
+    // Automatically close mobile menu when screen size changes to desktop
+    effect(() => {
+      const screenWidth = this.screen.screenSize();
+      // Close menu when switching to desktop (>= 1024px)
+      if (screenWidth >= 1024 && this.mobileMenuState) {
+        this.mobileMenuState = false;
+        this.removeStyles();
+      }
+    });
+  }
+  
   ngOnInit() {
     this.updateActiveMenuItem();
   }

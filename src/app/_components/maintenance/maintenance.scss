@@ -7,12 +7,21 @@
   align-items: center;
   justify-content: center;
   color: var(--color-white);
+  @include mixins.media-query('max', 'xl') {
+    padding: 0 24px;
+    svg.ludzik {
+      height: 130px;
+    }
+  }
 
   h1 {
     text-align: center;
     @include mixins.fontSize(96, 100);
     margin-bottom: 16px;
     display: block;
+    @include mixins.media-query('max', 'xl') {
+      @include mixins.fontSize(52, 62);
+    }
   }
 
   h3 {
@@ -23,6 +32,14 @@
     margin-bottom: 80px;
     padding-bottom: 80px;
     position: relative;
+    @include mixins.media-query('max', 'xl') {
+      @include mixins.fontSize(16, 24);
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      br {
+        display: none;
+      }
+    }
 
     &:after {
       content: '';
@@ -36,16 +53,21 @@
       transform: translateX(-50%);
     }
   }
-  .social{
+
+  .social {
     display: flex;
     justify-content: center;
-    a{
+
+    a {
       color: var(--color-white);
       font-weight: 600;
       @include mixins.fontSize(20, 24);
       display: inline-flex;
       align-items: center;
-      gap:16px;
+      gap: 16px;
+      @include mixins.media-query('max', 'xl') {
+        @include mixins.fontSize(16, 24);
+      }
     }
   }
 }

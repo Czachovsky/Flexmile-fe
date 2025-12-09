@@ -21,14 +21,24 @@
 
 .__counter {
   @include mixins.fontSize(14, 24);
-  b{
+
+  b {
     font-weight: 600;
   }
 }
 
 .add_info {
+  @include mixins.media-query('max', 'xlg') {
+    .grid {
+      flex-direction: column-reverse;
+    }
+  }
+
   ._d {
     max-width: 526px;
+    @include mixins.media-query('max', 'xlg') {
+      max-width: unset;
+    }
   }
 
   ._img {
@@ -41,10 +51,16 @@
   h2 {
     font-weight: 600;
     @include mixins.fontSize(48, 56);
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(26, 36);
+    }
   }
 
   span {
     color: var(--color-black-700);
     @include mixins.fontSize(16, 24);
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(14, 24);
+    }
   }
 }
