@@ -2,15 +2,27 @@
 
 .reserved--list {
   padding-bottom: 120px;
+
   h3 {
     @include mixins.fontSize(48, 56);
     padding-bottom: 32px;
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(28, 36);
+    }
   }
 
   &_grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 32px;
+    @include mixins.media-query('max', 'xxl') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    @include mixins.media-query('max', 'lg') {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
 }
 

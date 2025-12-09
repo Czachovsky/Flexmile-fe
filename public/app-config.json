@@ -1,6 +1,5 @@
 {
   "maintenance": false,
-  "maintenanceForMobile": true,
   "version": "1.0.0",
   "build": "local"
 }

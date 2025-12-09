@@ -12,7 +12,6 @@ import {BannerTypes} from '@models/banners.types';
 
 interface AppConfig {
   maintenance?: boolean;
-  maintenanceForMobile?: boolean;
   version?: string;
   build?: string;
 }

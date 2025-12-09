@@ -11,7 +11,7 @@ import {distinctUntilChanged, EMPTY, startWith, switchMap} from 'rxjs';
 import {enumToList} from '../../../helpers';
 import {FuelType, TransmissionType} from '@models/offers.types';
 import {ActivatedRoute, Router} from '@angular/router';
-
+import {Screen} from '@services/screen';
 @Component({
   selector: 'flexmile-filters',
   imports: [
@@ -24,6 +24,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrl: './filters.scss',
 })
 export class Filters implements OnInit {
+  public readonly screen: Screen = inject(Screen);
   public readonly inputType = InputType;
   public readonly offersService: OffersService = inject(OffersService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
@@ -33,6 +34,7 @@ export class Filters implements OnInit {
   public transmissionTypeList: DropdownOption[] = enumToList(TransmissionType);
   private router: Router = inject(Router);
   private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  public isMobileFiltersOpen: boolean = false;
 
   ngOnInit() {
     this.getBrands();
@@ -49,6 +51,10 @@ export class Filters implements OnInit {
 
   public resetFilters(): void {
     this.offersService.filtersForm.reset({'price_from': 500, 'price_to': 10000, 'available_immediately': null});
+  }
+
+  public toggleMobileFilters(): void {
+    this.isMobileFiltersOpen = !this.isMobileFiltersOpen;
   }
 
   private getBrands(): void {

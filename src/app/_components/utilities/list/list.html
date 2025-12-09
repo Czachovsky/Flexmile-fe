@@ -7,7 +7,7 @@
     @if (!hideHeader() && offerList()?.offers?.length) {
       <div class="list--header pb-5 flex align-items-center justify-content-between">
         <div class="list--header-counter">
-          Liczba dostępnych ofert: <span>{{ offerList()?.meta?.total ?? 0 }}</span>
+          Liczba ofert: <span>{{ offerList()?.meta?.total ?? 0 }}</span>
         </div>
         <div>
           <flexmile-sort-by></flexmile-sort-by>

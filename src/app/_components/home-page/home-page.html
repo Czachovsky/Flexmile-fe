@@ -17,7 +17,7 @@
     <div class="home-offers--list">
       @if (offersList?.offers?.length) {
         <div class="__counter pb-3">
-          Liczba dostępnych ofert: <b>{{ offersList?.meta?.total ?? 0 }}</b>
+          Liczba ofert: <b>{{ offersList?.meta?.total ?? 0 }}</b>
         </div>
         <flexmile-homepage-list [offerList]="offersList"></flexmile-homepage-list>
       }
