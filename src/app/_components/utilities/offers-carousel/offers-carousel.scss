@@ -9,3 +9,20 @@
   }
 }
 
+
+:host ::ng-deep {
+  .owl-dots {
+    display: none;
+    @include mixins.media-query('max', 'xlg') {
+      display: block;
+      position: relative;
+      top:8px;
+    }
+  }
+
+  .owl-nav {
+    @include mixins.media-query('max', 'xlg') {
+      display: none !important;
+    }
+  }
+}

@@ -34,17 +34,6 @@
     @include mixins.media-query('max', 'xlg') {
       flex-direction: column;
     }
-
-    svg {
-      height: 48px;
-      width: auto;
-      margin-right: 24px;
-      @include mixins.media-query('max', 'xlg') {
-        margin-right: 0;
-        margin-bottom: 8px;
-        height: 32px;
-      }
-    }
   }
 
   &--description {
@@ -53,5 +42,19 @@
 
   &--template {
     @include mixins.fontSize(24, 32);
+  }
+}
+
+:host ::ng-deep {
+
+  svg {
+    height: 48px;
+    width: auto;
+    margin-right: 24px;
+    @include mixins.media-query('max', 'xlg') {
+      margin-right: 0;
+      margin-bottom: 8px;
+      height: 32px;
+    }
   }
 }

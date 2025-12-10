@@ -1,21 +1,36 @@
 @use "mixins";
+
 .no-offers {
-  padding: 120px 0;
+  padding-top: 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  @include mixins.media-query('max', 'xlg') {
+    svg{
+      max-height: 88px;
+    }
+  }
   h4 {
     @include mixins.fontSize(48, 56);
     font-weight: 600;
     text-align: center;
     display: block;
-    padding-top:48px;
+    padding-top: 48px;
     padding-bottom: 16px;
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(32, 40);
+      br{
+        display: none;
+      }
+    }
   }
-  span{
+
+  span {
     color: var(--color-black-700);
     @include mixins.fontSize(20, 32);
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(14, 24);
+    }
   }
 }

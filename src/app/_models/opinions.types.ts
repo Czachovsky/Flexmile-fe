@@ -8,38 +8,39 @@ export interface OpinionsModel {
 export const OPINIONS: OpinionsModel[] = [
   {
     rate: 5,
-    opinion: "Terminowo, solidnie i bez kombinowania. Widać doświadczenie.",
+    opinion: "Terminowo, solidnie i bez kombinowania. Widać duże doświadczenie.",
     name: "Marek K.",
     city: "Wrocław"
   },
   {
-    rate: 4,
-    opinion: "Dobra jakość, ale komunikacja mogłaby być szybsza. Poza tym bez zastrzeżeń.",
+    rate: 5,
+    opinion: "Świetna jakość i bardzo dobra komunikacja. Wszystko przebiegło sprawnie.",
     name: "Agnieszka P.",
     city: "Warszawa"
   },
   {
-    rate: 3,
-    opinion: "Poprawnie, choć liczyłem na większą dbałość o szczegóły.",
+    rate: 5,
+    opinion: "Bardzo rzetelne wykonanie. Całość dopracowana i przemyślana.",
     name: "Łukasz R.",
     city: "Poznań"
   },
   {
     rate: 5,
-    opinion: "Profesjonalne podejście od początku do końca. Zero stresu.",
+    opinion: "Profesjonalne podejście od początku do końca. Współpraca bezproblemowa.",
     name: "Karolina M.",
     city: "Gdańsk"
   },
   {
-    rate: 2,
-    opinion: "Sama usługa wykonana, ale obsługa klienta do poprawy.",
+    rate: 5,
+    opinion: "Usługa wykonana na wysokim poziomie, pełna satysfakcja.",
     name: "Paweł S.",
     city: "Katowice"
   },
   {
-    rate: 4,
-    opinion: "Dobra robota. Małe opóźnienie, ale końcowy efekt na plus.",
+    rate: 5,
+    opinion: "Bardzo dobra robota. Wszystko zgodnie z ustaleniami i w świetnej jakości.",
     name: "Joanna L.",
     city: "Lublin"
   }
-]
+];
+

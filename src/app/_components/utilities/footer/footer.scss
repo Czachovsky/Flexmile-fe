@@ -80,7 +80,9 @@ footer {
   .copyright {
     color: var(--color-white);
     @include mixins.fontSize(14, 24);
-
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(12, 24);
+    }
     span {
       color: var(--color-green-900);
     }
@@ -89,18 +91,28 @@ footer {
       display: flex;
       align-items: center;
       justify-content: end;
-
+      @include mixins.media-query('max', 'xlg') {
+        padding-top: 8px;
+        gap: 8px;
+        justify-content: flex-start;
+      }
       .spacer {
         width: 1px;
         height: 16px;
         background: var(--color-purple-700);
         display: inline-block;
         margin: 0 16px;
+        @include mixins.media-query('max', 'xlg') {
+          display: none;
+        }
       }
     }
   }
 
   :host ::ng-deep a {
     color: var(--color-white);
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(12, 24);
+    }
   }
 }
