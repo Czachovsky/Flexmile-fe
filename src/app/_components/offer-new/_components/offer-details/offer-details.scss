@@ -5,30 +5,52 @@
 
 
   &--description {
-    h4{
+    h4 {
       font-weight: 500;
       @include mixins.fontSize(20, 24);
       margin-bottom: 8px;
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(18, 24);
+        margin-bottom: 4px
+      }
     }
-    span{
+
+    span {
       color: var(--color-black-700);
+      @include mixins.media-query('max', 'xlg') {
+        @include mixins.fontSize(14, 24);
+      }
     }
-    &_item{
+
+    &_item {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       gap: 16px;
+      @include mixins.media-query('max', 'xlg') {
+        align-items: flex-start;
+      }
     }
-    &_item-icon{
+
+    &_item-icon {
       width: 80px;
       height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      img{
+      @include mixins.media-query('max', 'xlg') {
+        align-items: flex-start;
+        width: unset;
+        height: unset;
+      }
+
+      img {
         display: block;
         max-width: 50px;
         height: auto;
+        @include mixins.media-query('max', 'xlg') {
+          max-width: 32px;
+        }
       }
     }
   }
@@ -36,6 +58,11 @@
   &__id {
     color: var(--color-black-700);
     @include mixins.fontSize(12);
+    @include mixins.media-query('max', 'xlg') {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   &__body {
@@ -52,17 +79,27 @@
         h1 {
           @include mixins.fontSize(40, 56);
           font-weight: 600;
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(28, 36);
+          }
         }
 
         span {
           font-weight: 500;
           @include mixins.fontSize(20);
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(14, 24);
+          }
         }
 
         &-specs {
           display: flex;
           align-items: center;
           gap: 24px;
+          flex-wrap: wrap;
+          @include mixins.media-query('max', 'xlg') {
+            gap: 16px;
+          }
 
           div {
             display: flex;
@@ -70,6 +107,10 @@
             gap: 8px;
             color: var(--color-black-700);
             @include mixins.fontSize(16);
+            white-space: nowrap;
+            @include mixins.media-query('max', 'xlg') {
+              @include mixins.fontSize(14, 24);
+            }
           }
         }
       }
@@ -83,10 +124,13 @@
       flex: 0 0 auto;
       min-width: 400px;
       max-width: 500px;
-
+      @include mixins.media-query('max', 'xlg') {
+        border-color: var(--color-white);
+      }
       @include mixins.media-query('max', 'xxl') {
         min-width: 350px;
         max-width: 400px;
+        padding: 32px;
       }
 
       @include mixins.media-query('max', 'xl') {
@@ -95,7 +139,7 @@
         width: 100%;
       }
 
-      & > h3, & > div {
+      .header-wrapper {
         border-bottom: 1px solid var(--color-black-100);
       }
 
@@ -115,15 +159,18 @@
           color: var(--p-primary-900);
           font-weight: 600;
           @include mixins.fontSize(32);
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(28, 36);
+          }
 
           span {
             @include mixins.fontSize(24);
             color: var(--p-primary-900);
             font-weight: 600;
+            @include mixins.media-query('max', 'xlg') {
+              @include mixins.fontSize(16, 24);
+            }
           }
-        }
-
-        .b {
         }
       }
     }
@@ -170,6 +217,7 @@
 
 .offer--info {
   padding-bottom: 120px;
+
   &-container {
     max-width: 770px;
     @include mixins.media-query('max', 'xl') {
@@ -193,6 +241,7 @@
       @include mixins.media-query('max', 'xlg') {
         grid-template-columns: repeat(2, 1fr);
       }
+
       & > div {
         border-radius: 16px;
         background-color: var(--color-black-50);
@@ -252,10 +301,16 @@
     & > div {
       padding: 40px;
       border-radius: 24px;
+      @include mixins.media-query('max', 'xlg') {
+        padding: 24px;
+      }
 
       & > div {
         font-weight: 500;
         @include mixins.fontSize(20, 24);
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(16, 24);
+        }
       }
 
       ul {
@@ -264,6 +319,10 @@
           padding-left: 24px;
           margin-bottom: 4px;
           position: relative;
+          @include mixins.media-query('max', 'xlg') {
+            @include mixins.fontSize(14, 24);
+            padding-left: 16px;
+          }
 
           &:before {
             content: '';

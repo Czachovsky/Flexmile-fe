@@ -78,16 +78,14 @@ interface OfferListMetaModel {
   total_pages: number;
 }
 
+
+
 export interface OfferListOffersModel {
   id: number;
   car_reference_id: string;
   title: string;
   slug: string;
-  image: {
-    thumbnail: boolean;
-    medium: boolean;
-    large: boolean;
-  };
+  image: string;
   engine: string;
   horsepower: number;
   transmission: string;

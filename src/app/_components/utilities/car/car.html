@@ -96,7 +96,11 @@
 
 <ng-template #imageTemplate>
   <div class="car-card__image-wrapper xlg:px-4 px-3 xlg:pt-4 pt-3">
-    <img src="/layout/images/car_test.png" alt="" class="car-card__image block">
+    @if (offer().image) {
+      <img [src]="offer().image" alt="" class="car-card__image block">
+    } @else {
+      <img src="/layout/images/car_test.png" alt="" class="car-card__image block">
+    }
   </div>
 </ng-template>
 

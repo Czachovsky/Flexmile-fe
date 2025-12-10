@@ -1,23 +1,29 @@
 <div class="offer">
   <div class="container">
     <div class="offer__id py-4">
+      @if (screen.isMobile()) {
+        <flexmile-link title="Wróć" url="/oferty" icon="pi-arrow-left"
+                       iconPosition="left"></flexmile-link>
+      }
       {{ details().car_reference_id }}
     </div>
-    <div class="offer__body pb-7">
+    <div class="offer__body xlg:pb-7 pb-4">
       <div class="flex">
-        <div class="offer__body-info pr-7">
+        <div class="offer__body-info xxl:pr-7">
           <div class="offer__body-info-header">
             <div class="flex align-items-center justify-content-between pb-2">
               <h1>{{ details().brand.name }} {{ details().model }}</h1>
-              @if (!details().available) {
-                <flexmile-badge [type]="badgeTypes.RESERVED" [size]="badgeSizes.LG"></flexmile-badge>
-              } @else {
-                @if (details().attributes.available_immediately) {
-                  <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
-                }
-                @if (details().attributes.coming_soon) {
-                  <flexmile-badge [type]="badgeTypes.SOON" [size]="badgeSizes.LG"
-                                  [date]="details().coming_soon_date"></flexmile-badge>
+              @if (!screen.isMobile()) {
+                @if (!details().available) {
+                  <flexmile-badge [type]="badgeTypes.RESERVED" [size]="badgeSizes.LG"></flexmile-badge>
+                } @else {
+                  @if (details().attributes.available_immediately) {
+                    <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
+                  }
+                  @if (details().attributes.coming_soon) {
+                    <flexmile-badge [type]="badgeTypes.SOON" [size]="badgeSizes.LG"
+                                    [date]="details().coming_soon_date"></flexmile-badge>
+                  }
                 }
               }
             </div>
@@ -53,16 +59,34 @@
                 {{ details().specs.horsepower }} KM
               </div>
             </div>
+            @if (screen.isMobile()) {
+              @if (!details().available) {
+                <flexmile-badge [type]="badgeTypes.RESERVED" [size]="badgeSizes.LG"></flexmile-badge>
+              } @else {
+                @if (details().attributes.available_immediately) {
+                  <flexmile-badge [type]="badgeTypes.AVAILABLE" [size]="badgeSizes.LG"></flexmile-badge>
+                }
+                @if (details().attributes.coming_soon) {
+                  <flexmile-badge [type]="badgeTypes.SOON" [size]="badgeSizes.LG"
+                                  [date]="details().coming_soon_date"></flexmile-badge>
+                }
+              }
+            }
           </div>
           <div class="offer__body-gallery">
             <flexmile-offer-gallery [gallery]="details().gallery!" [hideControls]="true"></flexmile-offer-gallery>
           </div>
         </div>
         <div class="offer__body-form">
-          <h3 class="block pb-5 mb-5">Wybierz ofertę najmu idealną dla Twojej firmy!</h3>
-          <div class="block pb-5 mb-5">
+          <div class="header-wrapper pb-5 mb-5">
+            <h3 class="block pb-2">Wybierz ofertę najmu idealną dla Twojej firmy!</h3>
+            <span>
+            Wypełnij krótki formularz, a nasz doradca skontaktuje się z Tobą. Złożenie zapytania jest bezpłatne i nie stanowi zobowiązania.
+          </span>
+          </div>
+          <div class="block">
             <div>
-              <div class="pb-5">
+              <div class="xlg:pb-5 pb-4">
                 <div class="pb-2">Czas trwania umowy <span>(w miesiącach)</span></div>
                 <div class="periods flex gap-2 flex-wrap">
                   @for (period of details().pricing.rental_periods; track period) {
@@ -71,7 +95,7 @@
                   }
                 </div>
               </div>
-              <div class="pb-5">
+              <div class="xlg:pb-5 pb-4">
                 <div class="pb-2">Roczny limit kilometrów <span>(tys. km)</span></div>
                 <div class="mileage flex gap-2 flex-wrap">
                   @for (limit of details().pricing.mileage_limits; track limit) {
@@ -82,7 +106,7 @@
                 </div>
               </div>
               <div class="offer__body-form-price">
-                <div class="p pb-5">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span>
+                <div class="p xlg:pb-5 pb-4">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span>
                 </div>
                 <div class="b">
                   <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'"
@@ -95,9 +119,6 @@
 
             </div>
           </div>
-          <span>
-            Wypełnij krótki formularz, a nasz doradca skontaktuje się z Tobą. Złożenie zapytania jest bezpłatne i nie stanowi zobowiązania.
-          </span>
         </div>
       </div>
     </div>
@@ -106,7 +127,7 @@
 <div class="offer--info">
   <div class="container">
     <div class="offer--info-container pb-7">
-      <div class="technicals pt-7 pb-5">
+      <div class="technicals xlg:pt-7 pt-4 xlg:pb-5 pb-4">
         <div class="technicals-header">
           <h3 class="pb-5">Dane techniczne</h3>
         </div>
@@ -115,15 +136,17 @@
             <div>
               <span class="block">{{ spec.label | nullsafe: null : "" : "bd." }}</span>
               @if (spec.value === 'specs.transmission') {
-                <b class="block"> {{ getTransmissionLabel(details().specs.transmission) | nullsafe: null : "" : "bd." }}</b>
+                <b
+                  class="block"> {{ getTransmissionLabel(details().specs.transmission) | nullsafe: null : "" : "bd." }}</b>
               } @else if (spec.value === 'fuel_type') {
                 <b class="block"> {{ getFuelLabel(details().fuel_type) | nullsafe: null : "" : "bd." }}</b>
               } @else if (spec.value === 'specs.drivetrain') {
                 <b class="block"> {{ details().specs.drivetrain | nullsafe: null : "" : "bd." }}</b>
               } @else if (spec.value === 'body_type') {
-                <b class="block"> {{ getBodyTypeLabel(details().body_type) | nullsafe: null : "" : "bd."}}</b>
+                <b class="block"> {{ getBodyTypeLabel(details().body_type) | nullsafe: null : "" : "bd." }}</b>
               } @else {
-                <b class="block">{{ getSpecValue(spec.value) | nullsafe: null : "" : "bd." }} @if (spec.value === 'specs.horsepower') {
+                <b
+                  class="block">{{ getSpecValue(spec.value) | nullsafe: null : "" : "bd." }} @if (spec.value === 'specs.horsepower') {
                   KM
                 }</b>
               }
@@ -134,9 +157,9 @@
         </div>
       </div>
       @if (details().additional_equipment?.length || details().standard_equipment?.length) {
-        <div class="equipment py-5">
+        <div class="equipment xlg:py-5 py-4">
           <div class="equipment-header">
-            <h3 class="pb-5">Wyposażenie</h3>
+            <h3 class="xlg:pb-5 pb-4">Wyposażenie</h3>
           </div>
           <div class="equipment-list">
             @if (details().standard_equipment?.length) {
@@ -178,10 +201,10 @@
           </div>
         </div>
       }
-      <div class="offer--description pt-5">
+      <div class="offer--description xlg:pt-5 pt-4">
         <h3 class="pb-5">W racie najmu od flexmile!</h3>
         @for (description of descriptionList; track description.label) {
-          <div class="flex offer--description_item mb-5">
+          <div class="flex offer--description_item xlg:mb-5 mb-3">
             <div class="offer--description_item-icon">
               @if (description.icon) {
                 <img src="{{description.icon}}" alt="{{description.label}}">

@@ -10,6 +10,8 @@ import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carou
 import {descriptionBanner, offerDescription, offerFirstStepModel} from '@models/offer.type';
 import {OfferService} from '@services/offer';
 import {NullsafePipe} from '../../../../_pipes/nullsafe-pipe';
+import {Screen} from '@services/screen'
+import {Link} from '@components/utilities/link/link';
 
 @Component({
   selector: 'flexmile-offer-details',
@@ -21,7 +23,8 @@ import {NullsafePipe} from '../../../../_pipes/nullsafe-pipe';
     BannerList,
     OffersCarousel,
     SlicePipe,
-    NullsafePipe
+    NullsafePipe,
+    Link
   ],
   templateUrl: './offer-details.html',
   styleUrl: './offer-details.scss',
@@ -49,6 +52,7 @@ export class OfferDetails implements OnInit {
     {label: 'Liczba miejsc', value: 'specs.seats'},
     {label: 'Kolor', value: 'specs.color'}
   ];
+  public readonly screen: Screen = inject(Screen);
 
   ngOnInit(): void {
     if (this.details().pricing.rental_periods.length > 0 && !this.offerService.selectedPeriod) {
