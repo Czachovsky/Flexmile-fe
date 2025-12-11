@@ -46,11 +46,6 @@ export class App {
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
     this.updateFooterVisibility();
-    this.http.get<BannerTypes[]>(this.apiUrl + '/banners').subscribe({
-      next: data => {
-        this.banners.setBanners(data);
-      },
-    })
   }
 
   private scrollToTop(): void {
@@ -81,7 +76,9 @@ export class App {
   }
 
   private loadAppConfig(): void {
-    this.http.get<AppConfig>('/app-config.json').subscribe({
+    // Dodajemy timestamp do URL, aby wymusić pobranie nowej wersji (cache-busting)
+    const timestamp = new Date().getTime();
+    this.http.get<AppConfig>(`/app-config.json?t=${timestamp}`).subscribe({
       next: config => {
         this.logAppBanner(config);
         if (config?.maintenance) {
@@ -89,14 +86,26 @@ export class App {
         } else {
           this.isConfigLoaded.set(true);
           this.updateFooterVisibility();
+          this.loadBanners();
         }
       },
       error: () => {
         this.logAppBanner();
         this.isConfigLoaded.set(true);
         this.updateFooterVisibility();
+        this.loadBanners();
       }
     });
+  }
+
+  private loadBanners(): void {
+    if (!this.isMaintenance()) {
+      this.http.get<BannerTypes[]>(this.apiUrl + '/banners').subscribe({
+        next: data => {
+          this.banners.setBanners(data);
+        },
+      });
+    }
   }
 
   private logAppBanner(config?: AppConfig): void {
