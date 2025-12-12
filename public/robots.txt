@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Wyklucz strony administracyjne i techniczne
+Disallow: /404
+Disallow: /maintenance
+
+# Sitemap
+Sitemap: https://flexmile.pl/sitemap.xml
+

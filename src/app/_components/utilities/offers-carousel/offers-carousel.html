@@ -1,15 +1,24 @@
 <div class="offers-carousel">
   <div class="offers-carousel__header flex align-items-center justify-content-between pb-5">
     <h3>Podobne oferty</h3>
-    <flexmile-button label="Pokaż pełną ofertę" iconPosition="right" icon="pi-arrow-right" (clicked)="goToList()" [btnClass]="'hidden xlg:flex'"></flexmile-button>
+    <flexmile-button label="Pokaż pełną ofertę" iconPosition="right" icon="pi-arrow-right" (clicked)="goToList()"
+                     [btnClass]="'hidden xlg:flex'"></flexmile-button>
   </div>
   <div class="offers-carousel__body">
-    <owl-carousel-o [options]="customOptions">
-      @for (offer of similarOffers(); let i = $index; track i) {
-        <ng-template carouselSlide>
+    @if (similarOffers().length > 3) {
+      <owl-carousel-o [options]="customOptions">
+        @for (offer of similarOffers(); let i = $index; track i) {
+          <ng-template carouselSlide>
+            <flexmile-car [offer]="offer"></flexmile-car>
+          </ng-template>
+        }
+      </owl-carousel-o>
+    } @else {
+      <div class="no_carousel">
+        @for (offer of similarOffers(); let i = $index; track i) {
           <flexmile-car [offer]="offer"></flexmile-car>
-        </ng-template>
-      }
-    </owl-carousel-o>
+        }
+      </div>
+    }
   </div>
 </div>

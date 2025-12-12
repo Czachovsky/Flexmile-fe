@@ -6,10 +6,11 @@
   >
     <div
       class="modal__backdrop"
+      @fadeInOut
       (click)="handleBackdropClick()"
     ></div>
 
-    <div class="modal__panel">
+    <div class="modal__panel" @slideUpDown>
       @if (!hideCloseButton()) {
         <button
           type="button"

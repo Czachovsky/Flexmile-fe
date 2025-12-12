@@ -8,7 +8,7 @@ import {
 } from '@models/offer.type';
 import {OfferBuilder} from '@builders/offer-builder';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {DecimalPipe, NgClass} from '@angular/common';
+import {DecimalPipe, NgClass, NgTemplateOutlet} from '@angular/common';
 import {OfferModel} from '@models/offers.types';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {Tooltip} from '@components/utilities/tooltip/tooltip';
@@ -19,6 +19,7 @@ import {InputType} from '@models/common.types';
 import {Loader} from '@components/utilities/loader/loader';
 import {Modal} from '@components/utilities/modal/modal';
 import {Router} from '@angular/router';
+import {Screen} from '@services/screen';
 
 @Component({
   selector: 'flexmile-offer-order',
@@ -31,13 +32,15 @@ import {Router} from '@angular/router';
     BannerList,
     Loader,
     Modal,
-    NgClass
+    NgClass,
+    NgTemplateOutlet
   ],
   templateUrl: './offer-order.html',
   styleUrl: './offer-order.scss',
 })
 export class OfferOrder {
   public offerService: OfferService = inject(OfferService);
+  public screen: Screen = inject(Screen);
   orderObject = input.required<offerFirstStepModel>();
   public details: InputSignal<OfferModel> = input.required<OfferModel>();
   orderForm: FormGroup<OfferFormValues> = OfferBuilder.build()
@@ -89,7 +92,6 @@ export class OfferOrder {
   }
 
   public orderCar(): void {
-    console.log(this.orderForm.getRawValue());
     this.ordering = true;
     const orderObject: offerOrderModel = this.orderForm.getRawValue() as offerOrderModel;
     const orderType: 'order' | 'reservation' = this.details().attributes.coming_soon ? 'reservation' : 'order';

@@ -147,3 +147,4 @@ export class App {
     this.router.navigateByUrl('/maintenance', { replaceUrl: true });
   }
 }
+

@@ -11,6 +11,7 @@ import {Player} from '@components/utilities/player/player';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {HomepageList} from '@components/home-page/_components/homepage-list/homepage-list';
 import {ButtonComponent} from '@components/utilities/button/button';
+import {SeoService} from '@services/seo';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -32,8 +33,10 @@ export class HomePage implements OnInit {
   protected readonly badgeTypes = badgeTypes;
   private readonly offers: OffersService = inject(OffersService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly seoService: SeoService = inject(SeoService);
   public offersList: OfferListModel | undefined;
   ngOnInit() {
+    this.seoService.setHomePageMeta();
     this.offers.getOffers({per_page: 29}).pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe({

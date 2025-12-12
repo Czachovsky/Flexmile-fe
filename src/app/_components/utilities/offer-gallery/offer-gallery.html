@@ -14,8 +14,10 @@
            (click)="openLightbox()">
 
         <img [src]="getImageUrl('large')"
-             [alt]="'Car image ' + (currentIndex + 1)"
-             class="main-image">
+             [alt]="getImageAlt(currentIndex)"
+             class="main-image"
+             fetchpriority="high"
+             decoding="async">
 
         <!-- Navigation Arrows -->
         @if (totalImages > 1 && !hideControls) {
@@ -60,7 +62,7 @@
                      [class.active]="i === currentIndex"
                      (click)="goToImage(i)">
                   <img [src]="image.thumbnail"
-                       [alt]="'Thumbnail ' + (i + 1)"
+                       [alt]="getImageAlt(i)"
                        loading="lazy">
                 </div>
               }
@@ -98,8 +100,9 @@
                (mouseleave)="onMouseLeave()">
 
             <img [src]="getLightboxImageUrl('large')"
-                 [alt]="'Car image ' + (lightboxIndex + 1)"
-                 class="lightbox-image">
+                 [alt]="getImageAlt(lightboxIndex)"
+                 class="lightbox-image"
+                 decoding="async">
 
             <!-- Navigation Arrows in Lightbox -->
             @if (totalImages > 1) {
@@ -134,7 +137,7 @@
                        [class.active]="i === lightboxIndex"
                        (click)="goToLightboxImage(i)">
                     <img [src]="image.thumbnail"
-                         [alt]="'Thumbnail ' + (i + 1)"
+                         [alt]="getImageAlt(i)"
                          loading="lazy">
                   </div>
                 }
@@ -151,6 +154,6 @@
 <!-- Empty state -->
 @if (!gallery || gallery().length === 0) {
   <div class="gallery-empty">
-    <img src="/layout/images/no-image.png">
+    <img src="/layout/images/no-image.png" [alt]="(carBrand() && carModel() ? carBrand() + ' ' + carModel() : 'Samochód') + ' - brak zdjęcia'" loading="lazy">
   </div>
 }

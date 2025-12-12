@@ -7,6 +7,7 @@ import {OfferListModel, OfferListOffersModel, OfferModel} from '@models/offers.t
 import {offerFirstStepModel, SIMILAR_OFFERS_COUNT} from '@models/offer.type';
 import {Player} from '@components/utilities/player/player';
 import {Loader} from '@components/utilities/loader/loader';
+import {SeoService} from '@services/seo';
 
 @Component({
   selector: 'flexmile-offer-new',
@@ -23,6 +24,7 @@ export class OfferNew implements OnInit {
   private readonly offerService: OffersService = inject(OffersService);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly seoService: SeoService = inject(SeoService);
   public readonly isLoading = signal(true);
   public readonly offerData = signal<OfferModel | null>(null);
   public ordering: boolean = false;
@@ -37,6 +39,7 @@ export class OfferNew implements OnInit {
       if (resolvedOffer) {
         this.offerData.set(resolvedOffer);
         this.isLoading.set(false);
+        this.seoService.setOfferPageMeta(resolvedOffer);
         this.getSimilarOffers();
       } else {
         // Jeśli resolver zwrócił null, sprawdzamy serwis jako fallback
@@ -44,6 +47,7 @@ export class OfferNew implements OnInit {
         if (currentOffer) {
           this.offerData.set(currentOffer);
           this.isLoading.set(false);
+          this.seoService.setOfferPageMeta(currentOffer);
           this.getSimilarOffers();
         } else {
           // Jeśli nie ma oferty, ukryjemy loader (resolver przekierował lub wystąpił błąd)

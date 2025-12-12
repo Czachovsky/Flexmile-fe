@@ -7,6 +7,17 @@
       @include mixins.fontSize(32, 40);
     }
   }
+  .no_carousel{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 33.333%));
+    gap: 24px;
+    @include mixins.media-query('max', 'xl') {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 50%));
+    }
+    @include mixins.media-query('max', 'xlg') {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 100%));
+    }
+  }
 }
 
 

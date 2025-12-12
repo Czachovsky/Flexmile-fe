@@ -4,8 +4,12 @@
   color: var(--p-primary-900);
   font-weight: 600;
   display: inline-flex;
-  cursor: pointer;
   gap: 8px;
+  width: 100%;
+
+  span {
+    cursor: pointer;
+  }
 }
 
 .offer-order {
@@ -29,6 +33,9 @@
       h4 {
         font-weight: 500;
         @include mixins.fontSize(20);
+        @include mixins.media-query('max', 'xl') {
+          @include mixins.fontSize(18, 24);
+        }
       }
 
       & > div {
@@ -45,14 +52,18 @@
   }
 
   &_left {
-    flex: 1;
-
     & > div {
 
       max-width: 640px;
+      @include mixins.media-query('max', 'xl') {
+        max-width: 100%;
+      }
 
       & > h2 {
         @include mixins.fontSize(48, 56);
+        @include mixins.media-query('max', 'xl') {
+          @include mixins.fontSize(28, 36);
+        }
       }
 
       & > span {
@@ -62,17 +73,26 @@
         padding-bottom: 32px;
         display: block;
         border-bottom: 1px solid var(--color-black-100);
+        @include mixins.media-query('max', 'xl') {
+          @include mixins.fontSize(14, 24);
+        }
       }
     }
   }
 
   &_right {
     max-width: 415px;
+    min-width: 415px;
     width: 100%;
-
+    @include mixins.media-query('max', 'xl') {
+      max-width: unset;
+    }
     & > div {
       background: var(--color-black-50);
       border-radius: var(--border-radius-base);
+      @include mixins.media-query('max', 'xl') {
+        border-radius:0;
+      }
 
       .right_label {
         background: var(--p-primary-900);
@@ -126,10 +146,12 @@
 
       .right_img {
         max-height: 276px;
-
+        @include mixins.media-query('max', 'xl') {
+          max-height: unset;
+        }
         img {
           display: block;
-          width: 100%;
+          max-width: 100%;
         }
       }
 
@@ -177,3 +199,22 @@
     @include mixins.fontSize(14, 24);
   }
 }
+
+
+@include mixins.media-query('max', 'xl') {
+  .mobile_title {
+    @include mixins.fontSize(14, 24);
+  }
+
+  :host ::ng-deep {
+    .periods, .mileage {
+      .btn {
+        @include mixins.fontSize(16, 24);
+        padding: 0;
+        height: 48px;
+        min-width: 48px;
+      }
+    }
+  }
+}
+

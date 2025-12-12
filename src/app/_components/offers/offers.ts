@@ -6,6 +6,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FiltersType} from '@models/filters.types';
 import {OffersService} from '@services/offers';
 import {Player} from "@components/utilities/player/player";
+import {SeoService} from '@services/seo';
 
 @Component({
   selector: 'flexmile-offers',
@@ -22,6 +23,7 @@ export class Offers implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private destroyRef = inject(DestroyRef);
+  private readonly seoService: SeoService = inject(SeoService);
   private currentFilters: FiltersType = {
     make: '',
     model: '',
@@ -32,6 +34,7 @@ export class Offers implements OnInit {
   };
 
   ngOnInit(): void {
+    this.seoService.setOffersPageMeta();
     this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       // If price params are missing, add default values to URL
       if (!params['price_from'] || !params['price_to']) {

@@ -10,6 +10,8 @@ import {OfferGalleryModel} from '@models/offers.types';
 export class OfferGallery implements OnInit  {
   gallery = input<OfferGalleryModel[]>([]);
   hideControls: InputSignal<boolean> = input<boolean>(false);
+  carBrand = input<string>('');
+  carModel = input<string>('');
   /**
    * Index używany w widoku głównym (poza trybem lightbox).
    */
@@ -227,6 +229,13 @@ export class OfferGallery implements OnInit  {
     if (!image) return '';
 
     return image[size] || image.url;
+  }
+
+  getImageAlt(index: number): string {
+    const brand = this.carBrand() || '';
+    const model = this.carModel() || '';
+    const carName = brand && model ? `${brand} ${model}` : 'Samochód';
+    return `${carName} - zdjęcie ${index + 1}`;
   }
 
 }
