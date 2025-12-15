@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
-    { provide: API_URL, useValue: 'http://flexmile.local/wp-json/flexmile/v1' },
+    { provide: API_URL, useValue: 'https://api.flexmile.mr-creations.pl/wp-json/flexmile/v1' },
     { provide: LOCALE_ID, useValue: 'pl-PL' },
     provideHttpClient(),
   ]
