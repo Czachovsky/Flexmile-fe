@@ -4,22 +4,20 @@ footer {
   background: var(--p-primary-900);
   padding-top: 120px;
 
-  &.with-contact-form {
-    & > div {
-      position: relative;
-      overflow: hidden;
+  & > div {
+    position: relative;
+    overflow: hidden;
 
-      &:before {
-        content: '';
-        position: absolute;
-        width: 516px;
-        height: 328px;
-        background: url('../../../../../public/layout/images/car-footer.webp') no-repeat scroll center center / cover;
-        bottom: -45px;
-        left: 270px;
-        @include mixins.media-query('max', 'xlg') {
-          display: none;
-        }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 516px;
+      height: 328px;
+      background: url('../../../../../public/layout/images/car-footer.webp') no-repeat scroll center center / cover;
+      bottom: -45px;
+      left: 270px;
+      @include mixins.media-query('max', 'xlg') {
+        display: none;
       }
     }
   }
@@ -64,6 +62,7 @@ footer {
       padding-bottom: 24px;
       margin-bottom: 24px;
     }
+
     div {
       padding: 16px 0;
 
@@ -83,6 +82,7 @@ footer {
     @include mixins.media-query('max', 'xlg') {
       @include mixins.fontSize(12, 24);
     }
+
     span {
       color: var(--color-green-900);
     }
@@ -96,6 +96,7 @@ footer {
         gap: 8px;
         justify-content: flex-start;
       }
+
       .spacer {
         width: 1px;
         height: 16px;
@@ -113,6 +114,19 @@ footer {
     color: var(--color-white);
     @include mixins.media-query('max', 'xlg') {
       @include mixins.fontSize(12, 24);
+    }
+  }
+
+  .no-contact-form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    ._logo{
+      width: 100%;
+    }
+    .phone{
+      border-bottom: none;
     }
   }
 }

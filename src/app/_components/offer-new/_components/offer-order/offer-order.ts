@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, InputSignal, output} from '@angular/core';
+import {Component, effect, inject, input, InputSignal, output, OnDestroy, OnInit} from '@angular/core';
 import {
   descriptionBanner,
   offerFirstStepModel,
@@ -20,6 +20,7 @@ import {Loader} from '@components/utilities/loader/loader';
 import {Modal} from '@components/utilities/modal/modal';
 import {Router} from '@angular/router';
 import {Screen} from '@services/screen';
+import {ComponentVisibilityService} from '@services/component-visibility';
 
 @Component({
   selector: 'flexmile-offer-order',
@@ -38,7 +39,7 @@ import {Screen} from '@services/screen';
   templateUrl: './offer-order.html',
   styleUrl: './offer-order.scss',
 })
-export class OfferOrder {
+export class OfferOrder implements OnInit, OnDestroy {
   public offerService: OfferService = inject(OfferService);
   public screen: Screen = inject(Screen);
   orderObject = input.required<offerFirstStepModel>();
@@ -51,6 +52,7 @@ export class OfferOrder {
   public ordering: boolean = false;
   public ordered: boolean = false;
   private router: Router = inject(Router);
+  private componentVisibilityService: ComponentVisibilityService = inject(ComponentVisibilityService);
 
   constructor() {
     effect(() => {
@@ -58,6 +60,13 @@ export class OfferOrder {
       this.orderForm.patchValue(offers);
       console.log('Offers changed:', offers, this.orderForm, this.details());
     });
+  }
+  ngOnInit(): void {
+    this.componentVisibilityService.setContactFormVisibility(false);
+  }
+
+  ngOnDestroy(): void {
+    this.componentVisibilityService.setContactFormVisibility(true);
   }
 
   public backToDetails(): void {
