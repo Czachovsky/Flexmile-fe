@@ -5,19 +5,29 @@
     padding: 40px;
     background-color: var(--color-black-50);
     border-radius: var(--border-radius-base);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .stars {
+      flex-shrink: 0;
+    }
 
     .content {
       color: #525252;
       @include mixins.fontSize(16, 24);
+      flex-grow: 1;
     }
 
     .name {
       font-weight: 500;
       @include mixins.fontSize(20, 24);
+      flex-shrink: 0;
     }
 
     .city {
       @include mixins.fontSize(16, 24);
+      flex-shrink: 0;
     }
   }
 
@@ -91,6 +101,19 @@
 }
 
 :host ::ng-deep {
+  .owl-stage {
+    display: flex;
+  }
+
+  .owl-item {
+    display: flex;
+    height: auto;
+    
+    .opinion {
+      width: 100%;
+    }
+  }
+
   .owl-dots {
     display: none;
     @include mixins.media-query('max', 'xlg') {

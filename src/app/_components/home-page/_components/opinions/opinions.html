@@ -37,7 +37,7 @@
       <owl-carousel-o [options]="customOptions">
         @for (opinion of opinions; let i = $index; track i) {
           <ng-template carouselSlide>
-            <div class="opinion">
+              <div class="opinion">
 
               <div class="stars pb-4">
                 @for (star of getStarsArray(opinion.rate); track $index) {

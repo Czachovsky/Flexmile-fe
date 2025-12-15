@@ -8,37 +8,37 @@ export interface OpinionsModel {
 export const OPINIONS: OpinionsModel[] = [
   {
     rate: 5,
-    opinion: "Terminowo, solidnie i bez kombinowania. Widać duże doświadczenie.",
-    name: "Marek K.",
+    opinion: "Polecam serdecznie. Leasing praktycznie bezobsługowy. Wszystko poszło sprawnie. Pan Łukasz ultra profesjonalista.",
+    name: "Emil P.",
     city: "Wrocław"
   },
   {
     rate: 5,
-    opinion: "Świetna jakość i bardzo dobra komunikacja. Wszystko przebiegło sprawnie.",
-    name: "Agnieszka P.",
+    opinion: "Polecamy serdecznie! Pełen profesjonalizm, doskonała obsługa. Samochody sprawdzone i z pewnego źródła.",
+    name: "Bogusław Z.",
     city: "Warszawa"
   },
   {
     rate: 5,
-    opinion: "Bardzo rzetelne wykonanie. Całość dopracowana i przemyślana.",
-    name: "Łukasz R.",
+    opinion: "Polecam bardzo Next-car 🥰 trzecie autko i jak zawsze najlepszy zakup 😍\n",
+    name: "Karolina R.",
     city: "Poznań"
   },
   {
     rate: 5,
-    opinion: "Profesjonalne podejście od początku do końca. Współpraca bezproblemowa.",
-    name: "Karolina M.",
+    opinion: "Polecam wszystkim... Można śmiało robić zakup w ciemno. Szybko, fachowo i sprawnie. Świetny kontakt i serwis przy zakupie...",
+    name: "Michał M.",
     city: "Gdańsk"
   },
   {
     rate: 5,
-    opinion: "Usługa wykonana na wysokim poziomie, pełna satysfakcja.",
+    opinion: "Świetna obsługa,zakup samochodu realizowany przez NEXT CAR od A do Z. Pełne zaangażowanie przez Pana Łukasza. Polecam serdecznie",
     name: "Paweł S.",
     city: "Katowice"
   },
   {
     rate: 5,
-    opinion: "Bardzo dobra robota. Wszystko zgodnie z ustaleniami i w świetnej jakości.",
+    opinion: "Świetna współpraca, polecam serdecznie Pana Łukasza.",
     name: "Joanna L.",
     city: "Lublin"
   }
