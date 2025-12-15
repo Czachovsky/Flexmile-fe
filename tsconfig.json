@@ -19,7 +19,8 @@
       "@services/*": ["./src/app/_services/*"],
       "@components/*": ["./src/app/_components/*"],
       "@tokens/*": ["./src/app/_tokens/*"],
-      "@builders/*": ["./src/app/_builders/*"]
+      "@builders/*": ["./src/app/_builders/*"],
+      "@env/*" : ["./src/environments/*"]
     }
   },
   "angularCompilerOptions": {

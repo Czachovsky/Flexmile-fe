@@ -50,10 +50,7 @@ cd flexmile
 npm install
 ```
 
-3. Skonfiguruj URL API w pliku `src/app/app.config.ts`:
-```typescript
-{ provide: API_URL, useValue: 'http://twoj-api-url/wp-json/flexmile/v1' }
-```
+3. Skonfiguruj URL API w plikach environment (zobacz sekcję "Konfiguracja środowisk" poniżej)
 
 ## Rozwój
 
@@ -89,19 +86,30 @@ ng generate --help
 
 ## Budowanie
 
-### Build produkcyjny
+### Build dla różnych środowisk
+
+Projekt obsługuje trzy środowiska z różnymi konfiguracjami API:
 
 ```bash
-npm run build
+# Build dla środowiska lokalnego
+npm run build:local
+
+# Build dla środowiska deweloperskiego (dev)
+npm run build:dev
+
+# Build dla środowiska produkcyjnego
+npm run build:prod
 ```
 
 Zbudowane pliki zostaną umieszczone w katalogu `dist/`. Build produkcyjny jest zoptymalizowany pod kątem wydajności i szybkości.
 
 ### Konfiguracja budowania
 
-Projekt zawiera dwie konfiguracje budowania:
-- **production** - zoptymalizowany build z minifikacją i hashowaniem plików
-- **development** - build deweloperski z source maps i bez optymalizacji
+Projekt zawiera cztery konfiguracje budowania:
+- **local** - build lokalny z source maps (domyślny environment.ts)
+- **dev** - build deweloperski z source maps (environment.dev.ts)
+- **production** - zoptymalizowany build z minifikacją i hashowaniem plików (environment.prod.ts)
+- **development** - build deweloperski z source maps i bez optymalizacji (używany przez `ng serve`)
 
 ## Testy
 
@@ -159,18 +167,33 @@ Aby włączyć tryb konserwacji, ustaw w pliku `public/app-config.json`:
 
 Gdy tryb konserwacji jest aktywny, wszystkie trasy są przekierowywane do strony konserwacji.
 
+### Konfiguracja środowisk
+
+Projekt używa plików environment do zarządzania konfiguracją dla różnych środowisk. URL API jest konfigurowany w plikach:
+
+- `src/environments/environment.ts` - środowisko lokalne (domyślne)
+- `src/environments/environment.dev.ts` - środowisko deweloperskie
+- `src/environments/environment.prod.ts` - środowisko produkcyjne
+
+Podczas builda odpowiedni plik environment jest automatycznie podmieniany w zależności od wybranej konfiguracji.
+
+**Domyślne URL API:**
+- **Lokalne**: `http://flexmile.local/wp-json/flexmile/v1`
+- **Dev**: `https://api-dev.flexmile.mr-creations.pl/wp-json/flexmile/v1`
+- **Prod**: `https://api.flexmile.mr-creations.pl/wp-json/flexmile/v1`
+
+Aby zmienić URL API dla danego środowiska, edytuj odpowiedni plik environment.
+
 ### API Endpoint
 
-Domyślny endpoint API jest skonfigurowany w `src/app/app.config.ts`. Aplikacja komunikuje się z WordPress REST API pod adresem:
-
-```
-http://flexmile.local/wp-json/flexmile/v1
-```
-
-Główne endpointy:
+Główne endpointy API:
 - `/banners` - pobieranie banerów
 - `/offers` - lista ofert samochodów
-- `/offer/:id` - szczegóły konkretnej oferty
+- `/offers/:id` - szczegóły konkretnej oferty
+- `/offers/brands` - lista dostępnych marek
+- `/offers/brands/:brandName/models` - modele dla danej marki
+- `/reservations` - składanie rezerwacji
+- `/contact` - formularz kontaktowy
 
 ## Formatowanie kodu
 

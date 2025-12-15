@@ -9,6 +9,7 @@ import {BannersService} from '@services/banners';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '@tokens/api-url.token';
 import {BannerTypes} from '@models/banners.types';
+import { environment } from '@env/environment';
 
 interface AppConfig {
   maintenance?: boolean;
@@ -111,7 +112,7 @@ export class App {
   private logAppBanner(config?: AppConfig): void {
     const APP_NAME = 'Flexmile';
     const VERSION = config?.version ?? '1.0.0';
-    const BUILD = config?.build ?? 'local';
+    const BUILD = environment.buildType;
     const ENV = window?.location?.hostname ?? 'unknown';
     const TIME = new Date().toISOString();
     const MAINTENANCE = config?.maintenance;

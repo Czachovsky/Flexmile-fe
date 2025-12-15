@@ -11,6 +11,7 @@ import {API_URL} from '@tokens/api-url.token';
 import {provideHttpClient} from '@angular/common/http';
 import {registerLocaleData} from '@angular/common';
 import localePl from '@angular/common/locales/pl';
+import { environment } from '@env/environment';
 
 registerLocaleData(localePl);
 
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
-    { provide: API_URL, useValue: 'https://api.flexmile.mr-creations.pl/wp-json/flexmile/v1' },
+    { provide: API_URL, useValue: environment.apiUrl },
     { provide: LOCALE_ID, useValue: 'pl-PL' },
     provideHttpClient(),
   ]
