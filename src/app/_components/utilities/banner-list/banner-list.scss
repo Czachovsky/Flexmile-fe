@@ -4,7 +4,7 @@
   border-radius: 24px;
 
   font-weight: 600;
-  white-space: pre;
+  white-space: normal;
   @include mixins.media-query('max', 'xlg') {
     & > div {
       flex-direction: column;
@@ -22,6 +22,9 @@
     @include mixins.media-query('max', 'xxl') {
       @include mixins.fontSize(24);
     }
+    @include mixins.media-query('max', 'lg') {
+      @include mixins.fontSize(16);
+    }
   }
 
   &.small {
@@ -31,13 +34,21 @@
 
   &--label {
     color: var(--color-white);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     @include mixins.media-query('max', 'xlg') {
       flex-direction: column;
+      text-align: center;
     }
   }
 
   &--description {
     color: var(--color-green-800);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    @include mixins.media-query('max', 'xlg') {
+      text-align: center;
+    }
   }
 
   &--template {
