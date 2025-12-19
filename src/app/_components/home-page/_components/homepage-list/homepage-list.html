@@ -14,11 +14,11 @@
         } @else if (item.type === 'offer' && item.offer) {
           @if (item.isFullWidth) {
             <div class="product-full">
-              <flexmile-car [cardSize]="badgeSizes.LG" [offer]="item.offer"></flexmile-car>
+              <flexmile-car [cardSize]="badgeSizes.LG" [offer]="item.offer" [disableLazyLoad]="true"></flexmile-car>
             </div>
           } @else {
             <div class="product">
-              <flexmile-car [offer]="item.offer"></flexmile-car>
+              <flexmile-car [offer]="item.offer" [disableLazyLoad]="true"></flexmile-car>
             </div>
           }
         }

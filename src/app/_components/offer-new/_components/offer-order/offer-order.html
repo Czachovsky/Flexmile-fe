@@ -150,18 +150,22 @@
           <div class="right_id pb-2">
             {{ details().car_reference_id }}
           </div>
-          <div class="right_title pb-1">
-            {{ details().brand.name }} {{ details().model }}
-          </div>
-          <div class="right_subtitle">
-            {{ details().specs.engine ? details().specs.engine + ', ' : '' }}{{ details().specs.engine_capacity }} cm³
-          </div>
-          <div class="right_img">
-            @if (details().gallery.length) {
-              <img src="{{details().gallery[0].large}}" alt="{{ details().brand.name }} {{ details().model }}">
-            } @else {
-              <img src="/layout/images/no-image.png" alt="{{ details().brand.name }} {{ details().model }}">
-            }
+          <div class="pb-4 flex justify-content-between align-items-end">
+            <div class="right_img mr-4">
+              @if (details().gallery.length) {
+                <img src="{{details().gallery[0].large}}" alt="{{ details().brand.name }} {{ details().model }}">
+              } @else {
+                <img src="/layout/images/no-image.png" alt="{{ details().brand.name }} {{ details().model }}">
+              }
+            </div>
+            <div>
+              <div class="right_title pb-1">
+                {{ details().brand.name }} {{ details().model }}
+              </div>
+              <div class="right_subtitle">
+                {{ details().specs.engine ? details().specs.engine + ', ' : '' }}{{ details().specs.engine_capacity }} cm³
+              </div>
+            </div>
           </div>
           <div class="right_price pb-4">
             {{ offerService.calculatedPrice | number:'1.0-0' }} PLN <span>/netto mies.</span>

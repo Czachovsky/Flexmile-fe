@@ -1,4 +1,5 @@
 @use "mixins";
+
 .player {
   position: fixed;
   bottom: 40px; // Default, will be updated dynamically by JS
@@ -15,12 +16,19 @@
   gap: 12px;
   cursor: pointer;
   z-index: 90;
+  box-shadow: 0 12px 28px 0 #00000033;
   @include mixins.media-query('max', 'xlg') {
-    right: 40px;
+    right: 20px;
+    bottom: 20px;
+
   }
+
   &--label {
     color: var(--p-primary-900);
     font-weight: 600;
+    @include mixins.media-query('max', 'xlg') {
+      @include mixins.fontSize(14);
+    }
   }
 
   &--button {

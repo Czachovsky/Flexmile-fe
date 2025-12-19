@@ -1,0 +1,7 @@
+// Wyłącz content-visibility dla kart na stronie głównej
+// aby uniknąć zmiany wysokości sekcji podczas scrollowania
+:host ::ng-deep .car-card {
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto !important;
+}
+

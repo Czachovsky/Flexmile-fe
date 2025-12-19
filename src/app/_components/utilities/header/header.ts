@@ -67,8 +67,8 @@ export class Header implements OnInit, OnDestroy {
 
   handleMenuItemClick(event: Event, item: MenuElementsModel) {
     event.preventDefault();
-    console.log(item)
-
+    item.active = true;
+    menuElements.map(el => el.active = el.label === item.label);
     // Close mobile menu first if on mobile
     const isMobile = this.screen.isMobile();
     if (isMobile) {
@@ -159,9 +159,6 @@ export class Header implements OnInit, OnDestroy {
   }
 
   isMenuItemActive(item: MenuElementsModel): boolean {
-    if (item.type === 'section' && item.section) {
-      return this.activeMenuItem === item.section;
-    }
     if (item.type === 'url' && item.url) {
       const currentUrl = this.router.url;
       // Handle root path

@@ -14,7 +14,8 @@
   transition: all variables.$transitionDuration ease;
 
   &:hover {
-
+    background: #D9DF73;
+    transition: all variables.$transitionDuration ease;
   }
 
   &:disabled,
@@ -44,6 +45,9 @@
     &-outline {
       background: transparent;
       color: var(--color-white);
+      &:hover {
+        background: rgba(0,0,0,0.1);
+      }
     }
 
     &-secondary {

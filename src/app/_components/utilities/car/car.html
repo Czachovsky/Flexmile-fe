@@ -97,9 +97,9 @@
 <ng-template #imageTemplate>
   <div class="car-card__image-wrapper xlg:px-4 px-3 xlg:pt-4 pt-3">
     @if (offer().image) {
-      <img [src]="offer().image" [alt]="offer().brand.name + ' ' + offer().model + ' - ' + offer().engine + ', ' + offer().engine_capacity + ' cm³'" class="car-card__image block" loading="lazy" decoding="async" fetchpriority="low">
+      <img [src]="offer().image" [alt]="offer().brand.name + ' ' + offer().model + ' - ' + offer().engine + ', ' + offer().engine_capacity + ' cm³'" class="car-card__image block" [loading]="disableLazyLoad() ? 'eager' : 'lazy'" decoding="async" fetchpriority="low">
     } @else {
-      <img src="/layout/images/no-image.png" [alt]="offer().brand.name + ' ' + offer().model + ' - brak zdjęcia'" class="car-card__image block" loading="lazy" decoding="async" fetchpriority="low">
+      <img src="/layout/images/no-image.png" [alt]="offer().brand.name + ' ' + offer().model + ' - brak zdjęcia'" class="car-card__image block" [loading]="disableLazyLoad() ? 'eager' : 'lazy'" decoding="async" fetchpriority="low">
     }
   </div>
 </ng-template>

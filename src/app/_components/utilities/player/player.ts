@@ -1,8 +1,20 @@
-import {Component, input, OnInit, OnDestroy, signal, Renderer2, ElementRef, inject, DestroyRef, AfterViewInit} from '@angular/core';
+import {
+  Component,
+  input,
+  OnInit,
+  OnDestroy,
+  signal,
+  Renderer2,
+  ElementRef,
+  inject,
+  DestroyRef,
+  AfterViewInit
+} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {OffersService} from '@services/offers';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {debounceTime} from 'rxjs/operators';
+import {Screen} from '@services/screen';
 
 @Component({
   selector: 'flexmile-player',
@@ -25,17 +37,22 @@ export class Player implements OnInit, OnDestroy, AfterViewInit {
   private offersService = inject(OffersService);
   private scrollListener?: () => void;
   private mutationObserver?: MutationObserver;
+  private screen: Screen = inject(Screen);
 
   ngOnInit(): void {
     if (this.fileName()) {
       this.initializeAudio();
     }
-    this.setupScrollListener();
-    this.setupLoadingListener();
+    if (!this.screen.isMobile()) {
+      this.setupScrollListener();
+      this.setupLoadingListener()
+    }
   }
 
   ngAfterViewInit(): void {
-    this.setupMutationObserver();
+    if (!this.screen.isMobile()) {
+      this.setupMutationObserver();
+    }
   }
 
   ngOnDestroy(): void {
@@ -54,8 +71,8 @@ export class Player implements OnInit, OnDestroy, AfterViewInit {
 
   private setupScrollListener(): void {
     this.scrollListener = () => this.updatePosition();
-    window.addEventListener('scroll', this.scrollListener, { passive: true });
-    window.addEventListener('resize', this.scrollListener, { passive: true });
+    window.addEventListener('scroll', this.scrollListener, {passive: true});
+    window.addEventListener('resize', this.scrollListener, {passive: true});
     // Initial calculation
     setTimeout(() => this.updatePosition(), 0);
   }
@@ -96,7 +113,7 @@ export class Player implements OnInit, OnDestroy, AfterViewInit {
   private updatePosition(): void {
     const footer = document.querySelector('footer');
     const playerElement = this.elementRef.nativeElement.querySelector('.player');
-    
+
     if (!footer || !playerElement) {
       // Fallback to fixed positioning if footer not found
       this.renderer.setStyle(playerElement, 'bottom', '40px');

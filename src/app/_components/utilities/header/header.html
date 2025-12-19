@@ -48,16 +48,11 @@
     <ul class="desktop-nav gap-1 align-items-start xl:align-items-center xxxl:gap-2" [ngClass]="{'is-open' : mobileMenuState}">
       @for (item of menuElements; track $index) {
         <li>
-          @if (item.type === 'url' && item.url) {
-            <a [routerLink]="item.url" [ngClass]="{'active': isMenuItemActive(item)}">{{ item.label }}</a>
-          } @else {
-            <a
-              [href]="item.type === 'section' && item.section ? '#' + item.section : '#'"
-              [ngClass]="{'active': isMenuItemActive(item)}"
+            <span
+              [ngClass]="{'active': item.active}"
               (click)="handleMenuItemClick($event, item)">
               {{ item.label }}
-            </a>
-          }
+            </span>
         </li>
       }
       <li>

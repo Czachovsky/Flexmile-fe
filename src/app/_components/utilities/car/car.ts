@@ -56,6 +56,7 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 export class Car {
   cardSize = input<badgeSizes>(badgeSizes.MD);
   offer = input.required<OfferListOffersModel>()
+  disableLazyLoad = input<boolean>(false);
   protected readonly badgeTypes = badgeTypes;
   protected readonly badgeSizes = badgeSizes;
   private router: Router = inject(Router);

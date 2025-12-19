@@ -54,7 +54,7 @@
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100vh;
+        height: 100dvh;
         background-color: var(--p-primary-900);
         transform: translateX(-100%);
         visibility: hidden;
@@ -62,14 +62,14 @@
         z-index: 900;
         overflow-y: auto;
         overflow-x: hidden;
-        
+
         &.is-open {
           transform: translateX(0);
           visibility: visible;
           pointer-events: auto;
           transition: transform 0.3s ease-in-out, visibility 0s 0s;
         }
-        
+
         // Ensure menu is immediately hidden when not open (no transition delay)
         &:not(.is-open) {
           transition: transform 0.3s ease-in-out, visibility 0s 0.3s;
@@ -181,7 +181,7 @@
             }
           }
         }
-        a {
+        span {
           color: var(--color-white);
           transition: all 0.3s ease-in-out;
           position: relative;
@@ -189,6 +189,7 @@
           padding: 8px 16px;
           border-radius: 32px;
           background: transparent;
+          cursor: pointer;
           @include mixins.media-query('max', 'xxl') {
             @include mixins.fontSize(14, 24);
           }

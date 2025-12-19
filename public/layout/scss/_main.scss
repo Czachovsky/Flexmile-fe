@@ -11,6 +11,9 @@ html {
   font-family: var(--font-family), sans-serif;
 }
 
+html, body{
+  overflow-x: hidden;
+}
 .__loading {
   z-index: 999;
   width: 100%;

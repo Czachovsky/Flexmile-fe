@@ -124,6 +124,9 @@
       flex: 0 0 auto;
       min-width: 400px;
       max-width: 500px;
+      //@TODO ogarnac sticky na koncu
+      //position: sticky;
+      //top: 160px;
       @include mixins.media-query('max', 'xlg') {
         border-color: var(--color-white);
       }
