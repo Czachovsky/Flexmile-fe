@@ -34,6 +34,10 @@ interface OfferSpecsModel {
   transmission: string;
   year: number;
   horsepower: number;
+  co2_emission: number;
+  condition: string;
+  interior_color: string;
+  mileage?: number;
 }
 
 interface OfferPricingModel {
@@ -108,6 +112,12 @@ export interface OfferListOffersModel {
 export interface OfferListModel {
   offers: OfferListOffersModel[];
   meta: OfferListMetaModel;
+}
+
+export enum ConditionType {
+  demo = 'Demo',
+  new = 'Nowy',
+  used = 'Używany'
 }
 
 export enum TransmissionType {

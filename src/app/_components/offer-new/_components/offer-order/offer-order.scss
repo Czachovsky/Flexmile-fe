@@ -86,6 +86,7 @@
     width: 100%;
     @include mixins.media-query('max', 'xl') {
       max-width: unset;
+      min-width: unset;
     }
     & > div {
       background: var(--color-black-50);

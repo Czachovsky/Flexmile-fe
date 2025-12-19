@@ -1,5 +1,12 @@
-import {Component, inject, input, InputSignal, OnInit, output} from '@angular/core';
-import {BodyType, FuelType, OfferListOffersModel, OfferModel, TransmissionType} from '@models/offers.types';
+import {AfterViewInit, Component, DestroyRef, ElementRef, inject, input, InputSignal, OnDestroy, OnInit, output, ViewChild} from '@angular/core';
+import {
+  BodyType,
+  ConditionType,
+  FuelType,
+  OfferListOffersModel,
+  OfferModel,
+  TransmissionType
+} from '@models/offers.types';
 import {DecimalPipe, SlicePipe} from '@angular/common';
 import {Badge} from '@components/utilities/badge/badge';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
@@ -9,9 +16,13 @@ import {BannerList} from '@components/utilities/banner-list/banner-list';
 import {OffersCarousel} from '@components/utilities/offers-carousel/offers-carousel';
 import {descriptionBanner, offerDescription, offerFirstStepModel} from '@models/offer.type';
 import {OfferService} from '@services/offer';
-import {NullsafePipe} from '../../../../_pipes/nullsafe-pipe';
+import {NullsafePipe} from '@pipes/nullsafe-pipe';
 import {Screen} from '@services/screen'
 import {Link} from '@components/utilities/link/link';
+import {fromEvent} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {throttleTime} from 'rxjs/operators';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'flexmile-offer-details',
@@ -28,8 +39,26 @@ import {Link} from '@components/utilities/link/link';
   ],
   templateUrl: './offer-details.html',
   styleUrl: './offer-details.scss',
+  animations: [
+    trigger('slideUpDown', [
+      state('void', style({
+        transform: 'translateY(100%)',
+        opacity: 0
+      })),
+      state('*', style({
+        transform: 'translateY(0)',
+        opacity: 1
+      })),
+      transition(':enter', [
+        animate('0.35s cubic-bezier(0.16, 1, 0.3, 1)')
+      ]),
+      transition(':leave', [
+        animate('0.25s cubic-bezier(0.7, 0, 0.84, 0)')
+      ])
+    ])
+  ]
 })
-export class OfferDetails implements OnInit {
+export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
   public offerService: OfferService = inject(OfferService);
   public details: InputSignal<OfferModel> = input.required<OfferModel>();
   public similarOffers: InputSignal<OfferListOffersModel[] | []> = input.required<OfferListOffersModel[] | []>();
@@ -38,11 +67,14 @@ export class OfferDetails implements OnInit {
   public readonly badgeSizes = badgeSizes;
   public readonly transmissionType = TransmissionType;
   public readonly fuelType = FuelType;
+  public readonly conditionType = ConditionType;
   public readonly bodyType = BodyType;
   public readonly standardEquipmentDefaultVisible = 9;
   public standardEquipmentDisplayCount = this.standardEquipmentDefaultVisible;
   public readonly technicalsArray: { value: string; label: string }[] = [
+    {label: 'Stan', value: 'specs.condition'},
     {label: 'Paliwo', value: 'fuel_type'},
+    {label: 'Emisja CO2', value: 'specs.co2_emission'},
     {label: 'Skrzynia biegów', value: 'specs.transmission'},
     {label: 'Silnik', value: 'specs.engine'},
     {label: 'Moc', value: 'specs.horsepower'},
@@ -50,9 +82,15 @@ export class OfferDetails implements OnInit {
     {label: 'Nadwozie', value: 'body_type'},
     {label: 'Liczba drzwi', value: 'specs.doors'},
     {label: 'Liczba miejsc', value: 'specs.seats'},
-    {label: 'Kolor', value: 'specs.color'}
+    {label: 'Kolor', value: 'specs.color'},
+    {label: 'Kolor wnętrza', value: 'specs.interior_color'}
   ];
   public readonly screen: Screen = inject(Screen);
+  private readonly destroyRef = inject(DestroyRef);
+
+  @ViewChild('offerInfoSection', { static: false }) offerInfoSection!: ElementRef<HTMLElement>;
+  public isOfferInfoAtTop = false;
+  private intersectionObserver?: IntersectionObserver;
 
   ngOnInit(): void {
     if (this.details().pricing.rental_periods.length > 0 && !this.offerService.selectedPeriod) {
@@ -62,6 +100,41 @@ export class OfferDetails implements OnInit {
       this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
     this.offerService.calculatePrice(this.details());
+  }
+
+  ngAfterViewInit(): void {
+    if (this.screen.isMobile() && this.offerInfoSection?.nativeElement) {
+      this.setupScrollListener();
+    }
+  }
+
+  private setupScrollListener(): void {
+    if (!this.offerInfoSection?.nativeElement || typeof window === 'undefined') {
+      return;
+    }
+
+    const checkPosition = () => {
+      if (!this.offerInfoSection?.nativeElement) {
+        return;
+      }
+      const rect = this.offerInfoSection.nativeElement.getBoundingClientRect();
+      this.isOfferInfoAtTop = rect.top <= 157.3125;
+    };
+    setTimeout(() => checkPosition(), 0);
+    fromEvent(window, 'scroll', { passive: true })
+      .pipe(
+        throttleTime(10),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => {
+        checkPosition();
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
   }
 
   public getTransmissionLabel(type: string): string {
@@ -74,6 +147,10 @@ export class OfferDetails implements OnInit {
 
   public getFuelLabel(type: string): string {
     return this.fuelType[type as keyof typeof FuelType];
+  }
+
+  public getConditionLabel(type:string): string {
+    return this.conditionType[type as keyof typeof ConditionType];
   }
 
   public selectMileageLimit(limit: number): void {
@@ -131,6 +208,7 @@ export class OfferDetails implements OnInit {
       alert('Wybierz okres wynajmu i roczny limit kilometrów');
       return;
     }
+    window.scrollTo(0, 0);
     this.nextStep.emit({
       offer_id: this.details().id,
       rental_months: this.offerService.selectedPeriod!,

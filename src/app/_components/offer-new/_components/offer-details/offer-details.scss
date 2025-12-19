@@ -358,3 +358,18 @@
     }
   }
 }
+
+.mobile-button-wrapper{
+  position: fixed;
+  bottom: 0;
+  z-index: 9999;
+  background: var(--color-white);
+  width: 100%;
+  left: 0;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  padding: 16px 24px 0 24px;
+  will-change: transform, opacity;
+  max-height: 90vh;
+  overflow-y: auto;
+}

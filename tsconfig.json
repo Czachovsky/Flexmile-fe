@@ -20,6 +20,7 @@
       "@components/*": ["./src/app/_components/*"],
       "@tokens/*": ["./src/app/_tokens/*"],
       "@builders/*": ["./src/app/_builders/*"],
+      "@pipes/*": ["./src/app/_pipes/*"],
       "@env/*" : ["./src/environments/*"]
     }
   },
