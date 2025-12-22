@@ -17,6 +17,7 @@
 
     span {
       color: var(--color-black-700);
+      @include mixins.fontSize(16);
       @include mixins.media-query('max', 'xlg') {
         @include mixins.fontSize(14, 24);
       }

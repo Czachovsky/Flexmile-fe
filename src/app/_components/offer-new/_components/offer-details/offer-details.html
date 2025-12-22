@@ -221,22 +221,39 @@
           </div>
         </div>
       }
-      <div class="offer--description xlg:pt-5 pt-4 xlg:pb-0 pb-5">
-        <h3 class="pb-5">W racie najmu od flexmile!</h3>
-        @for (description of descriptionList; track description.label) {
-          <div class="flex offer--description_item xlg:mb-5 mb-3">
-            <div class="offer--description_item-icon">
-              @if (description.icon) {
-                <img src="{{description.icon}}" alt="{{description.label}}">
-              }
-            </div>
-            <div class="flex flex-column">
-              <h4>{{ description.label }}</h4>
-              <span>{{ description.description }}</span>
-            </div>
-          </div>
-        }
-      </div>
+      @if(checkIfAnyTrue() || details().custom_additional_data.length){
+        <div class="offer--description xlg:pt-5 pt-4 xlg:pb-0 pb-5">
+          <h3 class="pb-5">W racie najmu od flexmile!</h3>
+          @for (description of descriptionList; track description.label) {
+            @if(details().additional_services[description.id]){
+              <div class="flex offer--description_item xlg:mb-5 mb-3">
+                <div class="offer--description_item-icon">
+                  @if (description.icon) {
+                    <img src="{{description.icon}}" alt="{{description.label}}">
+                  }
+                </div>
+                <div class="flex flex-column">
+                  <h4>{{ description.label }}</h4>
+                  <span>{{ description.description }}</span>
+                </div>
+              </div>
+            }
+          }
+          @if(details().custom_additional_data.length){
+            @for (additionalDescription of details().custom_additional_data; track additionalDescription.title) {
+              <div class="flex offer--description_item xlg:mb-5 mb-3">
+                <div class="offer--description_item-icon">
+                    <img src="/layout/images/2.svg" alt="{{additionalDescription.title}}">
+                </div>
+                <div class="flex flex-column">
+                  <h4>{{ additionalDescription.title }}</h4>
+                  <span>{{ additionalDescription.description }}</span>
+                </div>
+              </div>
+            }
+          }
+        </div>
+      }
       <div>
         <flexmile-banner-list size="small" [icon]="descriptionBanner.icon" label="Odbiór w salonie" separator="lub"
                               description=" dostawa pod dom!"></flexmile-banner-list>

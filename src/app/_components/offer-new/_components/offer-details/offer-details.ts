@@ -87,7 +87,8 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
   ];
   public readonly screen: Screen = inject(Screen);
   private readonly destroyRef = inject(DestroyRef);
-
+  public readonly descriptionList = offerDescription;
+  public readonly descriptionBanner = descriptionBanner;
   @ViewChild('offerInfoSection', { static: false }) offerInfoSection!: ElementRef<HTMLElement>;
   public isOfferInfoAtTop = false;
   private intersectionObserver?: IntersectionObserver;
@@ -135,6 +136,10 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
     }
+  }
+
+  public checkIfAnyTrue(): boolean {
+    return Object.values(this.details().additional_services).some(value => value);
   }
 
   public getTransmissionLabel(type: string): string {
@@ -219,6 +224,5 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  protected readonly descriptionList = offerDescription;
-  protected readonly descriptionBanner = descriptionBanner;
+
 }

@@ -73,6 +73,17 @@ export interface OfferModel {
   standard_equipment?: string[];
   additional_equipment?: string[];
   coming_soon_date?: string;
+  custom_additional_data: {title: string, description: string}[];
+  additional_services: AdditionalServicesModel;
+}
+
+interface AdditionalServicesModel {
+  financing: boolean;
+  vehicle_service: boolean;
+  insurance_oc_ac_nnw: boolean;
+  assistance_24h: boolean;
+  summer_winter_tires: boolean;
+  [key: string]: boolean;
 }
 
 interface OfferListMetaModel {
