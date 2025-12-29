@@ -61,6 +61,10 @@
   }
 
   &__body {
+    &-gallery{
+      max-width: 815px;
+      margin: 0 auto;
+    }
     & > .flex {
       gap: 32px;
       align-items: flex-start;

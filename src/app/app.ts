@@ -114,7 +114,6 @@ export class App {
     const BUILD = environment.buildType;
     const BUILDTIME = environment.buildtime;
     const ENV = window?.location?.hostname ?? 'unknown';
-    const TIME = new Date().toISOString();
     const MAINTENANCE = config?.maintenance;
     const accentStyle = 'color:#863087;font-weight:700;font-size:13px;';
     const baseStyle = 'color:#e5e7eb;font-size:12px;';
