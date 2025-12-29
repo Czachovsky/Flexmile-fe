@@ -15,12 +15,12 @@
       </div>
     </div>
     <div class="home-offers--list">
-<!--      @if (offersList?.offers?.length) {-->
-<!--        <div class="__counter pb-3">-->
-<!--          Liczba ofert: <b>{{ offersList?.meta?.total ?? 0 }}</b>-->
-<!--        </div>-->
-<!--        <flexmile-homepage-list [offerList]="offersList"></flexmile-homepage-list>-->
-<!--      }-->
+      @if (offersList?.offers?.length) {
+        <div class="__counter pb-3">
+          Liczba ofert: <b>{{ offersList?.meta?.total ?? 0 }}</b>
+        </div>
+        <flexmile-homepage-list [offerList]="offersList"></flexmile-homepage-list>
+      }
       <div class="pt-5 pb-7 flex align-items-center justify-content-center">
         <flexmile-button label="Zobacz więcej" iconPosition="right" icon="pi-arrow-right"
                          btnClass="w-full xlg:w-auto"></flexmile-button>
