@@ -20,8 +20,7 @@ interface AppConfig {
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header, Footer],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  templateUrl: './app.html'
 })
 export class App {
   public readonly screen: Screen = inject(Screen);
@@ -113,6 +112,7 @@ export class App {
     const APP_NAME = 'Flexmile';
     const VERSION = config?.version ?? '1.0.0';
     const BUILD = environment.buildType;
+    const BUILDTIME = environment.buildtime;
     const ENV = window?.location?.hostname ?? 'unknown';
     const TIME = new Date().toISOString();
     const MAINTENANCE = config?.maintenance;
@@ -125,8 +125,8 @@ export class App {
     console.log('%cName                 %c%s', labelStyle, valueStyle, APP_NAME);
     console.log('%cVersion              %c%s', labelStyle, valueStyle, VERSION);
     console.log('%cBuild                %c%s', labelStyle, valueStyle, BUILD);
+    console.log('%cBuildtime            %c%s', labelStyle, valueStyle, BUILDTIME);
     console.log('%cEnv                  %c%s', labelStyle, valueStyle, ENV);
-    console.log('%cTime                 %c%s', labelStyle, valueStyle, TIME);
     console.log('%cMaintenance mode     %c%s', labelStyle, valueStyle, MAINTENANCE);
   }
 

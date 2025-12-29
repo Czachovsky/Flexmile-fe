@@ -4,12 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --live-reload=false",
-    "build": "ng build",
-    "build:local": "ng build --configuration local",
-    "build:dev": "ng build --configuration dev",
-    "build:prod": "ng build --configuration production && node scripts/generate-sitemap.js",
+    "build": "node scripts/set-buildtime.js && ng build",
+    "build:local": "node scripts/set-buildtime.js && ng build --configuration local",
+    "build:dev": "node scripts/set-buildtime.js && ng build --configuration dev",
+    "build:prod": "node scripts/set-buildtime.js && ng build --configuration production && node scripts/generate-sitemap.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "watch": "ng build --watch --configuration development",
+    "serve": "npx serve dist/flexmile/browser -l 4200",
     "test": "ng test"
   },
   "prettier": {
