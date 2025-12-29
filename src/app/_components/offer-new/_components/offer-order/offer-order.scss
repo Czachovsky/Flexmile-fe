@@ -214,15 +214,13 @@
     @include mixins.fontSize(14, 24);
   }
 
-  :host ::ng-deep {
-    .periods, .mileage {
-      .btn {
-        @include mixins.fontSize(16, 24);
-        padding: 0;
-        height: 48px;
-        min-width: 48px;
-      }
+}
+
+:host ::ng-deep {
+  .periods, .mileage {
+    .btn {
+      @include mixins.fontSize(16, 24);
+      max-height: 48px;
     }
   }
 }
-
