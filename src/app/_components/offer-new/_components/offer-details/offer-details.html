@@ -107,9 +107,22 @@
                   }
                 </div>
               </div>
+              <div class="xlg:pb-5 pb-4">
+                <div class="pb-2">Opłata początkowa</div>
+                <div class="initial-payment flex gap-2 flex-wrap">
+                @for (initialPayment of details().pricing.initial_payments; track initialPayment) {
+                  <flexmile-button label="{{ initialPayment| number:'1.0-0' }} zł" color="secondary"
+                                   [btnClass]="isInitialPaymentActive(initialPayment) ? 'active' : ''"
+                                   size="medium" (click)="selectInitialPayment(initialPayment)"></flexmile-button>
+                }
+                </div>
+              </div>
               <div class="offer__body-form-price">
-                <div class="p xlg:pb-5 pb-4">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN
+                <div class="p">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN
                   <span>/netto mies.</span>
+                </div>
+                <div class="price-info xlg:pb-5 pb-4">
+                  <b>0 zł</b> wpłaty na start!
                 </div>
                 <div class="b">
                   <flexmile-button [disabled]="!canOrder()" [btnClass]="'w-full'"
@@ -136,7 +149,8 @@
         </div>
         <div class="technicals-info">
           @for (spec of technicalsArray; track spec.value) {
-            <div>
+            @if(getSpecValue(spec.value) && getSpecValue(spec.value) !== '' && getSpecValue(spec.value) !== ' ' && getSpecValue(spec.value) !== null){
+              <div>
               <span class="block">
                 @if (spec.value === 'specs.condition' && details().specs.condition !== 'new') {
                   {{ getConditionLabel(details().specs.condition) }}
@@ -145,34 +159,35 @@
                 }
               </span>
 
-              @if (spec.value === 'specs.condition' && details().specs.condition !== 'new') {
-                <b class="block">{{ getSpecValue('specs.mileage')  | number:'1.0-0' | nullsafe: null : "" : "bd." }}km
-                </b>
-              } @else {
-                @if (spec.value === 'specs.transmission') {
-                  <b
-                    class="block"> {{ getTransmissionLabel(details().specs.transmission) | nullsafe: null : "" : "bd." }}</b>
-                } @else if (spec.value === 'fuel_type') {
-                  <b class="block"> {{ getFuelLabel(details().fuel_type) | nullsafe: null : "" : "bd." }}</b>
-                } @else if (spec.value === 'specs.drivetrain') {
-                  <b class="block"> {{ details().specs.drivetrain | nullsafe: null : "" : "bd." }}</b>
-                } @else if (spec.value === 'body_type') {
-                  <b class="block"> {{ getBodyTypeLabel(details().body_type) | nullsafe: null : "" : "bd." }}</b>
-                } @else if (spec.value === 'specs.condition') {
-                  <b class="block"> {{ getConditionLabel(details().specs.condition) | nullsafe: null : "" : "bd." }}</b>
-                } @else {
-                  <b
-                    class="block">{{ getSpecValue(spec.value) | nullsafe: null : "" : "bd." }}
-                    @if (spec.value === 'specs.horsepower') {
-                      KM
-                    }
-                    @if (spec.value === 'specs.co2_emission') {
-                      g/km
-                    }
+                @if (spec.value === 'specs.condition' && details().specs.condition !== 'new') {
+                  <b class="block">{{ getSpecValue('specs.mileage')  | number:'1.0-0' | nullsafe: null : "" : "bd." }}km
                   </b>
+                } @else {
+                  @if (spec.value === 'specs.transmission') {
+                    <b
+                      class="block"> {{ getTransmissionLabel(details().specs.transmission) | nullsafe: null : "" : "bd." }}</b>
+                  } @else if (spec.value === 'fuel_type') {
+                    <b class="block"> {{ getFuelLabel(details().fuel_type) | nullsafe: null : "" : "bd." }}</b>
+                  } @else if (spec.value === 'specs.drivetrain') {
+                    <b class="block"> {{ details().specs.drivetrain | nullsafe: null : "" : "bd." }}</b>
+                  } @else if (spec.value === 'body_type') {
+                    <b class="block"> {{ getBodyTypeLabel(details().body_type) | nullsafe: null : "" : "bd." }}</b>
+                  } @else if (spec.value === 'specs.condition') {
+                    <b class="block"> {{ getConditionLabel(details().specs.condition) | nullsafe: null : "" : "bd." }}</b>
+                  } @else {
+                    <b
+                      class="block">{{ getSpecValue(spec.value) | nullsafe: null : "" : "bd." }}
+                      @if (spec.value === 'specs.horsepower') {
+                        KM
+                      }
+                      @if (spec.value === 'specs.co2_emission') {
+                        g/km
+                      }
+                    </b>
+                  }
                 }
-              }
-            </div>
+              </div>
+            }
           }
         </div>
       </div>
@@ -221,11 +236,11 @@
           </div>
         </div>
       }
-      @if(checkIfAnyTrue() || details().custom_additional_data.length){
+      @if (checkIfAnyTrue() || details().custom_additional_data.length) {
         <div class="offer--description xlg:pt-5 pt-4 xlg:pb-0 pb-5">
           <h3 class="pb-5">W racie najmu od flexmile!</h3>
           @for (description of descriptionList; track description.label) {
-            @if(details().additional_services[description.id]){
+            @if (details().additional_services[description.id]) {
               <div class="flex offer--description_item xlg:mb-5 mb-3">
                 <div class="offer--description_item-icon">
                   @if (description.icon) {
@@ -239,11 +254,11 @@
               </div>
             }
           }
-          @if(details().custom_additional_data.length){
+          @if (details().custom_additional_data.length) {
             @for (additionalDescription of details().custom_additional_data; track additionalDescription.title) {
               <div class="flex offer--description_item xlg:mb-5 mb-3">
                 <div class="offer--description_item-icon">
-                    <img src="/layout/images/2.svg" alt="{{additionalDescription.title}}">
+                  <img src="/layout/images/6.svg" alt="{{additionalDescription.title}}">
                 </div>
                 <div class="flex flex-column">
                   <h4>{{ additionalDescription.title }}</h4>

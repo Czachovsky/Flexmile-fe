@@ -12,6 +12,7 @@ import {enumToList} from '../../../helpers';
 import {FuelType, TransmissionType} from '@models/offers.types';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Screen} from '@services/screen';
+import {NgClass} from '@angular/common';
 @Component({
   selector: 'flexmile-filters',
   imports: [
@@ -19,6 +20,7 @@ import {Screen} from '@services/screen';
     ReactiveFormsModule,
     NgxSliderModule,
     Input,
+    NgClass,
   ],
   templateUrl: './filters.html',
   styleUrl: './filters.scss',

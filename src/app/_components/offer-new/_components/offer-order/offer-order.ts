@@ -83,6 +83,11 @@ export class OfferOrder implements OnInit, OnDestroy {
     this.offerService.selectPeriod(period, this.details());
   }
 
+  public selectInitialPayment(price: number): void {
+    this.orderForm.get('initial_payment')?.setValue(price);
+    this.offerService.selectInitialPayment(price, this.details());
+  }
+
   public isPeriodActive(period: number): boolean {
     return this.offerService.selectedPeriod === period;
   }
@@ -90,7 +95,9 @@ export class OfferOrder implements OnInit, OnDestroy {
   public isMileageLimitActive(limit: number): boolean {
     return this.offerService.selectedMileageLimit === limit;
   }
-
+  public isInitialPaymentActive(limit: number): boolean {
+    return this.offerService.selectedInitialPayment === limit;
+  }
   public canOrder(): boolean {
     return Boolean(this.orderForm.get('consent_email')?.value) && this.orderForm.valid;
   }

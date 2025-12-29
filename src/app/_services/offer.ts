@@ -11,6 +11,7 @@ import {API_URL} from '@tokens/api-url.token';
 export class OfferService {
   public selectedPeriod: number | null = null;
   public selectedMileageLimit: number | null = null;
+  public selectedInitialPayment: number | null = null;
   public calculatedPrice: number = 0;
   private readonly http: HttpClient = inject(HttpClient);
   private apiUrl = inject(API_URL);
@@ -22,6 +23,11 @@ export class OfferService {
 
   public selectPeriod(period: number, offerDetail: OfferModel): void {
     this.selectedPeriod = period;
+    this.calculatePrice(offerDetail);
+  }
+
+  public selectInitialPayment(price: number, offerDetail: OfferModel): void {
+    this.selectedInitialPayment = price;
     this.calculatePrice(offerDetail);
   }
 
@@ -40,8 +46,13 @@ export class OfferService {
   }
 
   public calculatePrice(offerDetail: OfferModel): void {
-    if (this.selectedPeriod && this.selectedMileageLimit) {
-      const priceKey = `${this.selectedPeriod}_${this.selectedMileageLimit}`;
+    console.log(offerDetail);
+    console.log(this.selectedPeriod, this.selectedMileageLimit, this.selectedInitialPayment)
+    if (this.selectedPeriod != null &&
+      this.selectedMileageLimit != null &&
+      this.selectedInitialPayment != null) {
+      const priceKey = `${this.selectedPeriod}_${this.selectedMileageLimit}_${this.selectedInitialPayment}`;
+      console.log('priceKey ', priceKey);
       this.calculatedPrice = offerDetail.pricing.price_matrix[priceKey] || 0;
     } else {
       this.calculatedPrice = 0;
@@ -49,6 +60,6 @@ export class OfferService {
   }
 
   public orderOrReserve(reservationObject: offerOrderModel, orderType: 'reservation' | 'order'): Observable<OrderResponse> {
-      return this.http.post<OrderResponse>(this.apiUrl + `/reservations?type=${orderType}`, reservationObject);
+    return this.http.post<OrderResponse>(this.apiUrl + `/reservations?type=${orderType}`, reservationObject);
   }
 }

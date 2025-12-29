@@ -54,6 +54,16 @@
                 </div>
               </div>
               <div>
+                <span>Opłata początkowa</span>
+                <div class="mileage flex gap-2 flex-wrap pb-5">
+                  @for (initialPayment of details().pricing.initial_payments; track initialPayment) {
+                    <flexmile-button label="{{ initialPayment| number:'1.0-0' }} zł" color="secondary"
+                                     [btnClass]="isInitialPaymentActive(initialPayment) ? 'active' : ''"
+                                     size="medium" (click)="selectInitialPayment(initialPayment)"></flexmile-button>
+                  }
+                </div>
+              </div>
+              <div>
                 <span class="flex align-items-center gap-2">Preferowane miejsce odbioru <flexmile-tooltip
                   [config]="{text: 'Pytanie ma charakter informacyjny. Decyzję można zmienić w kolejnych etapach', position: 'top', multiline: true}"> <svg
                   xmlns="http://www.w3.org/2000/svg" width="16" height="16"

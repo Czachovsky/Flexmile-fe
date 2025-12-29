@@ -51,6 +51,7 @@ export interface offerFirstStepModel {
   rental_months: number;
   annual_mileage_limit: number;
   monthly_price: number;
+  initial_payment: number;
 }
 
 export interface offerOrderModel extends offerFirstStepModel {
@@ -66,6 +67,7 @@ export interface OfferFormValues {
   rental_months: FormControl<number | null>;
   annual_mileage_limit: FormControl<number | null>;
   monthly_price: FormControl<number | null>;
+  initial_payment: FormControl<number | null>;
   company_name: FormControl<string | null>;
   tax_id: FormControl<string | null>;
   email: FormControl<string | null>;

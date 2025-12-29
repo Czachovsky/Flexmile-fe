@@ -44,6 +44,7 @@ interface OfferPricingModel {
   lowest_price: number;
   mileage_limits: number[];
   rental_periods: number[];
+  initial_payments: number[];
   price_matrix: { [key: string]: number };
 }
 

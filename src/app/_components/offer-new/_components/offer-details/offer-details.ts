@@ -100,6 +100,10 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
     if (this.details().pricing.mileage_limits.length > 0 && !this.offerService.selectedMileageLimit) {
       this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
+    if (this.details().pricing.initial_payments.length > 0 && !this.offerService.selectedInitialPayment) {
+      console.log(this.details().pricing.initial_payments[0])
+      this.offerService.selectedInitialPayment = this.details().pricing.initial_payments[0];
+    }
     this.offerService.calculatePrice(this.details());
   }
 
@@ -162,6 +166,10 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
     this.offerService.selectMileageLimit(limit, this.details());
   }
 
+  public selectInitialPayment(price: number): void {
+    this.offerService.selectInitialPayment(price, this.details());
+  }
+
   public selectPeriod(period: number): void {
     this.offerService.selectPeriod(period, this.details());
   }
@@ -172,6 +180,10 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
 
   public isMileageLimitActive(limit: number): boolean {
     return this.offerService.selectedMileageLimit === limit;
+  }
+
+  public isInitialPaymentActive(limit: number): boolean {
+    return this.offerService.selectedInitialPayment === limit;
   }
 
   public canOrder(): boolean {
@@ -218,7 +230,8 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
       offer_id: this.details().id,
       rental_months: this.offerService.selectedPeriod!,
       annual_mileage_limit: this.offerService.selectedMileageLimit!,
-      monthly_price: this.offerService.calculatedPrice
+      monthly_price: this.offerService.calculatedPrice,
+      initial_payment: this.offerService.selectedInitialPayment!
     })
 
   }

@@ -25,17 +25,12 @@
 
     &_item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-start;
       gap: 16px;
-      @include mixins.media-query('max', 'xlg') {
-        align-items: flex-start;
-      }
     }
 
     &_item-icon {
-      width: 80px;
-      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -47,10 +42,9 @@
 
       img {
         display: block;
-        max-width: 50px;
         height: auto;
         @include mixins.media-query('max', 'xlg') {
-          max-width: 32px;
+          max-width: 40px;
         }
       }
     }
@@ -159,6 +153,16 @@
       }
 
       &-price {
+        .price-info {
+          color: var(--p-primary-900);
+          @include mixins.fontSize(12);
+          font-weight: 500;
+
+          b {
+            font-weight: 700;
+          }
+        }
+
         .p {
           color: var(--p-primary-900);
           font-weight: 600;
@@ -195,7 +199,7 @@
 
 
 :host ::ng-deep {
-  .mileage {
+  .mileage, .initial-payment {
     flexmile-button {
       max-height: 48px;
 
@@ -360,7 +364,7 @@
   }
 }
 
-.mobile-button-wrapper{
+.mobile-button-wrapper {
   position: fixed;
   bottom: 0;
   z-index: 9999;

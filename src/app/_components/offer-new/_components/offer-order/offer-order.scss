@@ -14,7 +14,9 @@
 
 .offer-order {
   padding-bottom: 120px;
-
+.__loading{
+  position: fixed;
+}
   .radios {
     label {
       color: #525252;

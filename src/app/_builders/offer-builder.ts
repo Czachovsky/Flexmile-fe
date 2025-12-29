@@ -16,6 +16,7 @@ static build(): FormGroup<OfferFormValues> {
     rental_months: new FormControl<number | null>(null, [Validators.required]),
     annual_mileage_limit: new FormControl<number | null>(null, [Validators.required]),
     monthly_price: new FormControl<number | null>(null, [Validators.required]),
+    initial_payment: new FormControl<number | null>(null, [Validators.required]),
     company_name: new FormControl<string | null>(null, [Validators.required]),
     tax_id: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('[0-9]*')]),
     phone: new FormControl<string | null>(null, [Validators.required, this.phoneValidator]),

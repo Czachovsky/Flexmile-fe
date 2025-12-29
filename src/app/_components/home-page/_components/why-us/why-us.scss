@@ -163,8 +163,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1300px;
+      width: 1600px;
       margin: -105px auto 0 auto;
+      @include mixins.media-query('max', 'xxxl') {
+        position: relative;
+        right: -50%;
+        transform: translateX(-50%);
+      }
       @include mixins.media-query('max', 'xlg') {
         width: 100%;
         margin: 24px auto 0 auto;

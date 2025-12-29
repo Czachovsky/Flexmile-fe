@@ -10,3 +10,4 @@ export class ComponentVisibilityService {
     this._isContactFormVisible.set(visible);
   }
 }
+

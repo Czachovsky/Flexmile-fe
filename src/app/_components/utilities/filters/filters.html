@@ -1,76 +1,97 @@
 <div class="filters">
   <h3 class="pb-4">Znajdź auto na wynajem od Flexmile!</h3>
   <div class="filters__form" [formGroup]="offersService.filtersForm">
-    @if(screen.isMobile()){
-     <div class="mobile_available pb-4">
-       <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="available_immediately" [type]="inputType.checkbox" formControlName="available_immediately"></flexmile-input>
-     </div>
+    @if (screen.isMobile()) {
+      <div class="mobile_available pb-4">
+        <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="available_immediately" [type]="inputType.checkbox"
+                        formControlName="available_immediately"></flexmile-input>
+      </div>
     }
     <div class="mobile-filters flex xlg:hidden" [class.opened]="isMobileFiltersOpen" (click)="toggleMobileFilters()">
-    <div>
-      Wyszukaj
-      <i class="pi pi-chevron-down"></i>
-    </div>
+      <div>
+        Wyszukaj
+        <i class="pi pi-chevron-down"></i>
+      </div>
     </div>
     <div class="filters__content" [class.opened]="isMobileFiltersOpen">
-    <div class="grid mt-0">
-      <div class="xlg:col-8 col-12">
-        <div class="grid">
-          <div class="xlg:col-6 col-12 pb-0">
-            <div>
-              <div class="mb-4">
-                <flexmile-dropdown placeholder="Wybierz markę" [options]="carBrands" formControlName="make"
-                                   [label]="'Marka pojazdu'" [showClearButton]="true"></flexmile-dropdown>
-              </div>
+      <div class="grid mt-0">
+        <div class="xlg:col-8 col-12">
+          <div class="grid">
+            <div class="xlg:col-6 col-12 pb-0">
               <div>
-                <flexmile-dropdown [hideSearch]="true" placeholder="Paliwo" [options]="fuelList"
-                                   [label]="'Rodzaj paliwa'" formControlName="fuel"></flexmile-dropdown>
-              </div>
+                <div class="mb-4">
+                  <flexmile-dropdown placeholder="Wybierz markę" [options]="carBrands" formControlName="make"
+                                     [label]="'Marka pojazdu'" [showClearButton]="true"></flexmile-dropdown>
+                </div>
+                <div [ngClass]="{'mb-4' : screen.isMobile()}">
+                  @if (screen.isMobile()) {
+                    <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="model"
+                                       [label]="'Model pojazdu'"
+                                       [disabled]="!offersService.filtersForm.get('make')?.value"></flexmile-dropdown>
+                  } @else {
+                    <flexmile-dropdown [hideSearch]="true" placeholder="Paliwo" [options]="fuelList"
+                                       [label]="'Rodzaj paliwa'" formControlName="fuel"></flexmile-dropdown>
+                  }
 
-            </div>
-          </div>
-          <div class="xlg:col-6 col-12 pb-0">
-            <div>
-              <div class="mb-4">
-                <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="model"
-                                   [label]="'Model pojazdu'"
-                                   [disabled]="!offersService.filtersForm.get('make')?.value"></flexmile-dropdown>
+                </div>
+
               </div>
+            </div>
+            <div class="xlg:col-6 col-12 pb-0">
               <div>
-                <flexmile-dropdown [hideSearch]="true" placeholder="Skrzynia" [options]="transmissionTypeList"
-                                   [label]="'Typ skrzyni'" formControlName="transmission"></flexmile-dropdown>
+                <div class="mb-4">
+                  @if (screen.isMobile()) {
+                    <flexmile-dropdown [hideSearch]="true" placeholder="Paliwo" [options]="fuelList"
+                                       [label]="'Rodzaj paliwa'" formControlName="fuel"></flexmile-dropdown>
+                  } @else {
+                    <flexmile-dropdown placeholder="Wybierz model" [options]="carModels" formControlName="model"
+                                       [label]="'Model pojazdu'"
+                                       [disabled]="!offersService.filtersForm.get('make')?.value"></flexmile-dropdown>
+                  }
+
+                </div>
+                <div>
+                  <flexmile-dropdown [hideSearch]="true" placeholder="Skrzynia" [options]="transmissionTypeList"
+                                     [label]="'Typ skrzyni'" formControlName="transmission"></flexmile-dropdown>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="xlg:col-4 col-12 flex">
-        <div class="flex flex-1 flex-column max-w-full">
-          <span class="label">Budżet miesięczny</span>
-          <div class="filters__price xlg:p-4 p-0 flex-1 ">
-            <div class="flex">
-              <div class="range_input"><flexmile-input formControlName="price_from" inputId="price_from" [type]="inputType.text" [isPriceInput]="true"></flexmile-input></div>
-              <div class="spacer">-</div>
-              <div class="range_input"><flexmile-input formControlName="price_to" inputId="price_to" [type]="inputType.text" [isPriceInput]="true"></flexmile-input></div>
+        <div class="xlg:col-4 col-12 flex">
+          <div class="flex flex-1 flex-column max-w-full">
+            <span class="label">Budżet miesięczny</span>
+            <div class="filters__price xlg:p-4 p-0 flex-1 ">
+              <div class="flex">
+                <div class="range_input">
+                  <flexmile-input formControlName="price_from" inputId="price_from" [type]="inputType.text"
+                                  [isPriceInput]="true"></flexmile-input>
+                </div>
+                <div class="spacer">-</div>
+                <div class="range_input">
+                  <flexmile-input formControlName="price_to" inputId="price_to" [type]="inputType.text"
+                                  [isPriceInput]="true"></flexmile-input>
+                </div>
+              </div>
+              <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500"
+                              [max]="10000"></flexmile-input>
             </div>
-            <flexmile-input (rangeChanged)="priceRangeChanged($event)" [type]="inputType.range" [min]="500"
-                            [max]="10000"></flexmile-input>
           </div>
         </div>
       </div>
-    </div>
-    <div class="grid">
-      <div class="col-12">
-        <div class="flex pt-5 filters__bottom align-items-center justify-content-between">
-          <div>
-            @if(!screen.isMobile()){
-              <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="available_immediately" [type]="inputType.checkbox" formControlName="available_immediately"></flexmile-input>
-            }
+      <div class="grid">
+        <div class="col-12">
+          <div class="flex pt-5 filters__bottom align-items-center justify-content-between">
+            <div>
+              @if (!screen.isMobile()) {
+                <flexmile-input label="Pokaż tylko dostępne od ręki" inputId="available_immediately"
+                                [type]="inputType.checkbox" formControlName="available_immediately"></flexmile-input>
+              }
+            </div>
+            <div><span class="cursor-pointer" (click)="resetFilters()">Wyczyść filtry</span></div>
           </div>
-          <div><span class="cursor-pointer" (click)="resetFilters()">Wyczyść filtry</span></div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </div>
