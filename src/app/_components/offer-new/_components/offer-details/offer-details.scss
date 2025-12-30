@@ -1,8 +1,58 @@
 @use 'mixins';
 
 .offer {
-  background: var(--color-black-50);
+  .offer-details-container {
+    & > .container {
+      padding-bottom: 120px;
+      @include mixins.media-query('max', 'xl') {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+    }
+  }
 
+  .offer-details-container-r {
+    padding-bottom: 184px;
+    padding-top: 71px;
+  }
+
+  .offer-details-container-l {
+    @include mixins.media-query('max', 'xxxl') {
+      padding-right: 32px;
+    }
+    @include mixins.media-query('max', 'xl') {
+      padding-right: 0;
+    }
+  }
+
+  .gray-bg {
+    background: var(--color-black-50);
+    position: relative;
+    @include mixins.media-query('max', 'xxl') {
+      padding-bottom: 120px;
+    }
+    @include mixins.media-query('max', 'xl') {
+      padding-bottom: 64px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    &:after {
+      content: '';
+      background: var(--color-black-50);
+      width: 200vw;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      z-index: -1;
+      margin-left: -100vw;
+      left: 50%;
+      @include mixins.media-query('max', 'xl') {
+        content: none;
+      }
+    }
+  }
 
   &--description {
     h4 {
@@ -61,10 +111,18 @@
   }
 
   &__body {
-    &-gallery{
+    @include mixins.media-query('max', 'xxxl') {
+      padding-bottom: 120px !important;
+    }
+    @include mixins.media-query('max', 'xl') {
+      padding-bottom: 32px !important;
+    }
+
+    &-gallery {
       max-width: 815px;
       margin: 0 auto;
     }
+
     & > .flex {
       gap: 32px;
       align-items: flex-start;
@@ -123,9 +181,11 @@
       flex: 0 0 auto;
       min-width: 400px;
       max-width: 500px;
-      //@TODO ogarnac sticky na koncu
-      //position: sticky;
-      //top: 160px;
+      position: sticky;
+      top: 160px;
+      @include mixins.media-query('max', 'xxxl') {
+        padding: 30px;
+      }
       @include mixins.media-query('max', 'xlg') {
         border-color: var(--color-white);
       }
@@ -229,11 +289,16 @@
 
 .offer--info {
   padding-bottom: 120px;
+  @include mixins.media-query('max', 'xl') {
+    padding-bottom: 0;
+  }
 
   &-container {
     max-width: 770px;
     @include mixins.media-query('max', 'xl') {
       max-width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
     }
   }
 
@@ -381,4 +446,12 @@
   will-change: transform, opacity;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+@include mixins.media-query('max', 'xl') {
+  .similar-offers {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
 }

@@ -22,6 +22,10 @@ export class Screen {
 
   private screenWidth = signal<number>(this.getCurrentWidth());
 
+  readonly isLowerThanTablet = computed(() =>
+  this.screenWidth() < this.defaultBreakpoints.tablet
+  )
+
   readonly isMobile = computed(() =>
     this.screenWidth() < this.defaultBreakpoints.mobile
   );
