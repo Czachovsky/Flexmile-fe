@@ -7,7 +7,7 @@ import {
   OfferModel,
   TransmissionType
 } from '@models/offers.types';
-import {DecimalPipe, SlicePipe} from '@angular/common';
+import {DecimalPipe, NgClass, SlicePipe} from '@angular/common';
 import {Badge} from '@components/utilities/badge/badge';
 import {OfferGallery} from '@components/utilities/offer-gallery/offer-gallery';
 import {badgeSizes, badgeTypes} from '@models/common.types';
@@ -35,7 +35,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     OffersCarousel,
     SlicePipe,
     NullsafePipe,
-    Link
+    Link,
+    NgClass
   ],
   templateUrl: './offer-details.html',
   styleUrl: './offer-details.scss',
@@ -101,7 +102,6 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
       this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
     }
     if (this.details().pricing.initial_payments.length > 0 && !this.offerService.selectedInitialPayment) {
-      console.log(this.details().pricing.initial_payments[0])
       this.offerService.selectedInitialPayment = this.details().pricing.initial_payments[0];
     }
     this.offerService.calculatePrice(this.details());
@@ -143,7 +143,7 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public checkIfAnyTrue(): boolean {
-    return Object.values(this.details().additional_services).some(value => value);
+    return Object.values(this.details().additional_services).some(value => value.enabled);
   }
 
   public getTransmissionLabel(type: string): string {

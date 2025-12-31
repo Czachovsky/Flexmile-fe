@@ -64,7 +64,6 @@ export class HeroSearch implements OnInit {
               value: model.toLowerCase(),
               label: model
             }))
-            console.log(this.carModels)
           }
         })
       }

@@ -35,7 +35,7 @@ export class OfferNew implements OnInit {
     // Subskrybujemy dane z resolvera
     const subscription = this.route.data.subscribe(data => {
       const resolvedOffer = data['offer'] as OfferModel | null;
-      
+
       if (resolvedOffer) {
         this.offerData.set(resolvedOffer);
         this.isLoading.set(false);
@@ -67,8 +67,6 @@ export class OfferNew implements OnInit {
   getSimilarOffers(): void {
     const offer = this.offerData();
     if (!offer) return;
-    
-    console.log(offer.brand.slug);
     this.offerService.getOffers({car_brand: offer.brand.slug, per_page: SIMILAR_OFFERS_COUNT}).subscribe({
       next: (offers: OfferListModel) => {
         if (offers && offers.offers.length) {

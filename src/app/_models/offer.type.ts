@@ -3,40 +3,28 @@ import {FormControl} from '@angular/forms';
 export const SIMILAR_OFFERS_COUNT = 6;
 
 export interface offerDescriptionModel {
-  label: string;
-  description: string;
   icon?: string;
   id: string;
 }
 
 export const offerDescription: offerDescriptionModel[] = [
   {
-    label: 'Finansowanie',
-    description: 'Elastyczne warunki najmu dopasowane do Twoich potrzeb i budżetu.',
     icon: '/layout/images/1.svg',
     id: 'financing'
   },
   {
-    label: 'Serwis pojazdu',
-    description: 'Regularne przeglądy i naprawy w cenie — bez dodatkowych kosztów.',
     icon: '/layout/images/2.svg',
     id: 'vehicle_service'
   },
   {
-    label: 'Ubezpieczenie OC/AC/NNW',
-    description: 'Pełna ochrona przez cały okres wynajmu, wliczona w ratę.',
     icon: '/layout/images/3.svg',
     id: 'insurance_oc_ac_nnw'
   },
   {
-    label: 'Assistance 24h',
-    description: 'Pomoc na drodze o każdej porze — w Polsce i za granicą.',
     icon: '/layout/images/4.svg',
     id: 'assistance_24h'
   },
   {
-    label: 'Opony letnie i zimowe',
-    description: 'Zawsze gotowy do jazdy!',
     icon: '/layout/images/5.svg',
     id: 'summer_winter_tires'
   }

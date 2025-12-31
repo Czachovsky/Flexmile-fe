@@ -58,7 +58,6 @@ export class OfferOrder implements OnInit, OnDestroy {
     effect(() => {
       const offers = this.orderObject();
       this.orderForm.patchValue(offers);
-      console.log('Offers changed:', offers, this.orderForm, this.details());
     });
   }
   ngOnInit(): void {

@@ -83,7 +83,7 @@
                 </div>
               </div>
             </div>
-            @if(screen.isLowerThanTablet()){
+            @if (screen.isLowerThanTablet()) {
               <div class="offer__body-form">
                 <div class="header-wrapper pb-5 mb-5">
                   <h3 class="block pb-2">Wybierz ofertę najmu idealną dla Twojej firmy!</h3>
@@ -98,7 +98,8 @@
                       <div class="periods flex gap-2 flex-wrap">
                         @for (period of details().pricing.rental_periods; track period) {
                           <flexmile-button [btnClass]="isPeriodActive(period) ? 'active' : ''" [label]="period"
-                                           color="secondary" size="medium" (click)="selectPeriod(period)"></flexmile-button>
+                                           color="secondary" size="medium"
+                                           (click)="selectPeriod(period)"></flexmile-button>
                         }
                       </div>
                     </div>
@@ -118,7 +119,8 @@
                         @for (initialPayment of details().pricing.initial_payments; track initialPayment) {
                           <flexmile-button label="{{ initialPayment| number:'1.0-0' }} zł" color="secondary"
                                            [btnClass]="isInitialPaymentActive(initialPayment) ? 'active' : ''"
-                                           size="medium" (click)="selectInitialPayment(initialPayment)"></flexmile-button>
+                                           size="medium"
+                                           (click)="selectInitialPayment(initialPayment)"></flexmile-button>
                         }
                       </div>
                     </div>
@@ -126,7 +128,8 @@
                       <div class="p">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN
                         <span>/netto mies.</span>
                       </div>
-                      <div class="price-info xlg:pb-5 pb-4">
+                      <div class="price-info xlg:pb-5 pb-4"
+                           [ngClass]="{'opacity-0' : offerService.selectedInitialPayment !== 0}">
                         <b>0 zł</b> wpłaty na start!
                       </div>
                       <div class="b">
@@ -248,17 +251,17 @@
                 @if (checkIfAnyTrue() || details().custom_additional_data.length) {
                   <div class="offer--description xlg:pt-5 pt-4 xlg:pb-0 pb-5">
                     <h3 class="pb-5">W racie najmu od flexmile!</h3>
-                    @for (description of descriptionList; track description.label) {
-                      @if (details().additional_services[description.id]) {
+                    @for (description of descriptionList; track description.id) {
+                      @if (details().additional_services[description.id].enabled) {
                         <div class="flex offer--description_item xlg:mb-5 mb-3">
                           <div class="offer--description_item-icon">
                             @if (description.icon) {
-                              <img src="{{description.icon}}" alt="{{description.label}}">
+                              <img src="{{description.icon}}" alt="{{details().additional_services[description.id].title}}">
                             }
                           </div>
                           <div class="flex flex-column">
-                            <h4>{{ description.label }}</h4>
-                            <span>{{ description.description }}</span>
+                            <h4>{{ details().additional_services[description.id].title }}</h4>
+                            <span>{{ details().additional_services[description.id].description }}</span>
                           </div>
                         </div>
                       }
@@ -332,7 +335,8 @@
                     <div class="p">{{ offerService.calculatedPrice | number:'1.0-0' }} PLN
                       <span>/netto mies.</span>
                     </div>
-                    <div class="price-info xlg:pb-5 pb-4">
+                    <div class="price-info xlg:pb-5 pb-4"
+                         [ngClass]="{'opacity-0' : offerService.selectedInitialPayment !== 0}">
                       <b>0 zł</b> wpłaty na start!
                     </div>
                     <div class="b">

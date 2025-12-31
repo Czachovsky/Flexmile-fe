@@ -46,13 +46,10 @@ export class OfferService {
   }
 
   public calculatePrice(offerDetail: OfferModel): void {
-    console.log(offerDetail);
-    console.log(this.selectedPeriod, this.selectedMileageLimit, this.selectedInitialPayment)
     if (this.selectedPeriod != null &&
       this.selectedMileageLimit != null &&
       this.selectedInitialPayment != null) {
       const priceKey = `${this.selectedPeriod}_${this.selectedMileageLimit}_${this.selectedInitialPayment}`;
-      console.log('priceKey ', priceKey);
       this.calculatedPrice = offerDetail.pricing.price_matrix[priceKey] || 0;
     } else {
       this.calculatedPrice = 0;

@@ -79,12 +79,18 @@ export interface OfferModel {
 }
 
 interface AdditionalServicesModel {
-  financing: boolean;
-  vehicle_service: boolean;
-  insurance_oc_ac_nnw: boolean;
-  assistance_24h: boolean;
-  summer_winter_tires: boolean;
-  [key: string]: boolean;
+  financing: AdditionalServiceModel;
+  vehicle_service: AdditionalServiceModel;
+  insurance_oc_ac_nnw: AdditionalServiceModel;
+  assistance_24h: AdditionalServiceModel;
+  summer_winter_tires: AdditionalServiceModel;
+  [key: string]: any;
+}
+
+interface AdditionalServiceModel {
+  enabled: boolean;
+  description: string;
+  title: string;
 }
 
 interface OfferListMetaModel {
@@ -129,7 +135,9 @@ export interface OfferListModel {
 export enum ConditionType {
   demo = 'Demo',
   new = 'Nowy',
-  used = 'Używany'
+  used = 'Używany',
+  ex_lease = 'Poleasingowy',
+  ex_contract = 'Pokontraktowy'
 }
 
 export enum TransmissionType {
