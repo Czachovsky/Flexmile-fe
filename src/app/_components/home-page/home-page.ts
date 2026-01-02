@@ -12,6 +12,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {HomepageList} from '@components/home-page/_components/homepage-list/homepage-list';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {SeoService} from '@services/seo';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'flexmile-home-page',
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly seoService: SeoService = inject(SeoService);
   public offersList: OfferListModel | undefined;
+  private readonly router: Router = inject(Router);
   ngOnInit() {
     this.seoService.setHomePageMeta();
     this.offers.getOffers({per_page: 29}).pipe(
@@ -47,5 +49,8 @@ export class HomePage implements OnInit {
         console.error('Error loading offers:', error);
       }
     })
+  }
+  goToOffer(): void{
+    this.router.navigate(['/oferty']);
   }
 }

@@ -8,38 +8,38 @@ export interface OpinionsModel {
 export const OPINIONS: OpinionsModel[] = [
   {
     rate: 5,
-    opinion: "Polecam serdecznie. Leasing praktycznie bezobsługowy. Wszystko poszło sprawnie. Pan Łukasz ultra profesjonalista.",
-    name: "Emil P.",
+    opinion: "Najbardziej spodobało mi się to, że na stronie Flexmile mogłem sam wybrać auto, ustawić okres najmu i przebieg — a rata wyliczyła się od razu. Zero dzwonienia, czekania na ofertę czy negocjacji. Szybko, jasno i konkretnie..",
+    name: "Michał",
     city: "Wrocław"
   },
   {
     rate: 5,
-    opinion: "Polecamy serdecznie! Pełen profesjonalizm, doskonała obsługa. Samochody sprawdzone i z pewnego źródła.",
-    name: "Bogusław Z.",
+    opinion: "Potrzebowałem nowego samochodu do firmy, ale zależało mi na pełnej kontroli kosztów. Na Flexmile skonfigurowałem ofertę w kilka minut — zmieniłem przebieg i długość umowy, aż rata idealnie dopasowała się do mojego budżetu. Rewelacja!",
+    name: "Paweł",
     city: "Warszawa"
   },
   {
     rate: 5,
-    opinion: "Polecam bardzo Next-car 🥰 trzecie autko i jak zawsze najlepszy zakup 😍\n",
-    name: "Karolina R.",
+    opinion: "Najem długoterminowy kojarzył mi się z papierologią i długim oczekiwaniem na wyceny. A tu? Wchodzę na stronę, wybieram samochód, ustawiam parametry i widzę finalną ratę. Wszystko przejrzyste i bez niespodzianek.",
+    name: "Katarzyna",
     city: "Poznań"
   },
   {
     rate: 5,
-    opinion: "Polecam wszystkim... Można śmiało robić zakup w ciemno. Szybko, fachowo i sprawnie. Świetny kontakt i serwis przy zakupie...",
-    name: "Michał M.",
+    opinion: "Podoba mi się, że mam wybór. Mogę porównać kilka modeli, zmieniać przebieg i okres najmu, a system od razu przelicza ratę. Dzięki temu wiedziałem dokładnie, na co mnie stać — zanim wysłałem zapytanie.",
+    name: "Tomasz",
     city: "Gdańsk"
   },
   {
     rate: 5,
-    opinion: "Świetna obsługa,zakup samochodu realizowany przez NEXT CAR od A do Z. Pełne zaangażowanie przez Pana Łukasza. Polecam serdecznie",
-    name: "Paweł S.",
+    opinion: "Zanim trafiłam na Flexmile, dostawałam oferty dopiero po kilku dniach od wysłania zapytania. Tutaj wszystko zobaczyłam od ręki. Wybrałam auto, dopasowałam warunki i od razu wiedziałam, ile zapłacę miesięcznie. To ogromna wygoda.",
+    name: "Anna",
     city: "Katowice"
   },
   {
     rate: 5,
-    opinion: "Świetna współpraca, polecam serdecznie Pana Łukasza.",
-    name: "Joanna L.",
+    opinion: "Cenię sobie niezależność — dlatego spodobało mi się, że ofertę konfiguruję sam. Bez presji, bez rozmów sprzedażowych. A kiedy już wybrałem model i warunki, doradca tylko dopiął formalności. Profesjonalnie i bez stresu.",
+    name: "Marek",
     city: "Lublin"
   }
 ];

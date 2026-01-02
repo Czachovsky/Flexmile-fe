@@ -95,6 +95,7 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
   private intersectionObserver?: IntersectionObserver;
 
   ngOnInit(): void {
+    this.offerService.freshInit();
     if (this.details().pricing.rental_periods.length > 0 && !this.offerService.selectedPeriod) {
       this.offerService.selectedPeriod = this.details().pricing.rental_periods[0];
     }

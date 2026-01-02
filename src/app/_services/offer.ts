@@ -39,6 +39,13 @@ export class OfferService {
     return this.selectedMileageLimit === limit;
   }
 
+  public freshInit(): void {
+    this.selectedPeriod = null;
+    this.selectedMileageLimit = null;
+    this.selectedInitialPayment = null;
+
+  }
+
   public canOrder(): boolean {
     return this.selectedPeriod !== null &&
       this.selectedMileageLimit !== null &&

@@ -125,6 +125,7 @@ export interface OfferListOffersModel {
   available: boolean;
   engine_capacity: number;
   coming_soon_date?: string;
+  additional_services: AdditionalServicesModel;
 }
 
 export interface OfferListModel {
@@ -154,7 +155,7 @@ export enum DrivetrainType {
 
 export enum FuelType {
   diesel = 'Diesel',
-  petrol = 'Bezołowiowa',
+  petrol = 'Benzyna',
   electric = 'Elektryczny',
   hybrid = 'Hybryda',
   plug_in_hybrid = 'Hybryda Plug-in'

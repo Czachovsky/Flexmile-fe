@@ -14,7 +14,13 @@
   }
 
 </div>
-<flexmile-player [label]="offerData()!.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
-                 [fileName]="offerData()!.attributes.coming_soon ? 'rezerwacja.m4a' : 'zamowienie.m4a'"></flexmile-player>
+@if (ordering) {
+  <flexmile-player [label]="offerData()!.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
+                   [fileName]="offerData()!.attributes.coming_soon ? 'rezerwacja.m4a' : 'zamowienie.m4a'"></flexmile-player>
+} @else {
+  <flexmile-player [label]="offerData()!.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
+                   [fileName]="'wybor_parametrow.m4a'"></flexmile-player>
+}
+
 
 

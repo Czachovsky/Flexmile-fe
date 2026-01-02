@@ -3,11 +3,13 @@ import {Tooltip} from '@components/utilities/tooltip/tooltip';
 import {Badge} from '@components/utilities/badge/badge';
 import {badgeSizes, badgeTypes} from '@models/common.types';
 import {Router} from '@angular/router';
-import {NgTemplateOutlet} from '@angular/common';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {ButtonComponent} from '@components/utilities/button/button';
 import {FuelType, OfferListOffersModel, TransmissionType} from '@models/offers.types';
 import {Screen} from '@services/screen';
 import {trigger, state, style, transition, animate} from '@angular/animations';
+import {offerListFeatures} from '@models/offer.type';
+import {SanitizePipe} from '@pipes/sanitize-pipe';
 
 @Component({
   selector: 'flexmile-car',
@@ -15,7 +17,9 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
     Tooltip,
     Badge,
     NgTemplateOutlet,
-    ButtonComponent
+    ButtonComponent,
+    SanitizePipe,
+    NgClass
   ],
   templateUrl: './car.html',
   styleUrl: './car.scss',
@@ -64,7 +68,7 @@ export class Car {
   public readonly transmissionType = TransmissionType;
   public readonly fuelType = FuelType;
   public featuresState: boolean = false;
-
+  public offerListFeatures = offerListFeatures;
 
   public goToOffer(id: number): void {
     this.router.navigateByUrl(`/oferta/${id}`);
@@ -81,5 +85,9 @@ export class Car {
   public showFeatures(event: Event): void {
     event.stopPropagation();
     this.featuresState = this.screen.isMobile();
+  }
+
+  public checkIfAnyTrue(): boolean {
+    return Object.values(this.offer().additional_services).some(value => value.enabled);
   }
 }
