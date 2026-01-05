@@ -1,10 +1,13 @@
 @use 'mixins';
 
 .hero {
-  padding-top:125px;
+  padding-top: 125px;
   background: url('../../../../../../public/layout/images/hero-img.webp') no-repeat scroll center right;
   @include mixins.media-query('max', 'xxxl') {
     background-size: 55vw auto;
+  }
+  @include mixins.media-query('max', 'xl') {
+    padding-top: 88px;
   }
   @include mixins.media-query('max', 'xlg') {
     background-image: url('../../../../../../public/layout/images/hero-img.webp');
@@ -12,13 +15,15 @@
     background-position: right calc(100% - 48px);
     background-size: 350px auto;
   }
+
   .container {
-    padding-top:120px;
+    padding-top: 120px;
     padding-bottom: 120px;
     @include mixins.media-query('max', 'xlg') {
-      padding-top:24px;
+      padding-top: 0;
       padding-bottom: 320px;
     }
+
     h1 {
       color: var(--color-white);
       @include mixins.fontSize(96, 100%);
@@ -26,6 +31,7 @@
       @include mixins.media-query('max', 'xlg') {
         @include mixins.fontSize(52, 64);
       }
+
       span {
         color: var(--color-green-800);
         text-transform: uppercase;
