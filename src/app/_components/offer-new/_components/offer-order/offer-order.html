@@ -23,13 +23,9 @@
             }
           </h2>
           <span>
-            @if (details().attributes.coming_soon) {
-              Wybrałeś auto – teraz tylko jeden krok, aby je bezpłatnie zarezerwować!
-              <br>Rezerwacja nie stanowi zobowiązania.
-            } @else {
-              Jesteś o krok od nowego samochodu! Wypełnij krótki formularz, a nasz doradca potwierdzi dostępność wybranego auta i ustali z Tobą szczegóły odbioru.
-                Złożenie zamówienia nic nie kosztuje i nie stanowi zobowiązania.
-            }
+            Jesteś o krok od nowego samochodu!
+            Wypełnij krótki formularz, a nasz doradca potwierdzi dostępność wybranego auta i ustali z Tobą szczegóły wynajmu oraz odbioru.
+            <br>Złożenie @if (details().attributes.coming_soon) {rezerwacji} @else{zamówienia} jest bezpłatne i nie oznacza jeszcze zawarcia umowy.
             </span>
           <div class="offer-order-details">
             <div class="offer-order-details_section">

@@ -174,7 +174,17 @@ export class Header implements OnInit, OnDestroy {
   }
 
   public goToList(): void {
-   void this.router.navigate(['/oferty']);
+    void this.router.navigate(['/oferty']);
+  }
+
+  public goToMainPage(): void {
+    const isOnHomePage = this.router.url === '/';
+
+    if (isOnHomePage) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      void this.router.navigate(['/']);
+    }
   }
 
   private setStyles(): void {

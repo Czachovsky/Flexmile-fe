@@ -3,7 +3,11 @@
 footer {
   background: var(--p-primary-900);
   padding-top: 120px;
-
+._logo{
+  svg{
+    max-height: 40px;
+  }
+}
   & > div {
     position: relative;
     overflow: hidden;
@@ -124,6 +128,9 @@ footer {
     flex-wrap: wrap;
     ._logo{
       width: 100%;
+      svg{
+        max-height: 40px;
+      }
     }
     .phone{
       border-bottom: none;

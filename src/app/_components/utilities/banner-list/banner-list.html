@@ -16,7 +16,7 @@
         <div class="list-banner--template">
           <ng-container [ngTemplateOutlet]="bannerTemplate()!" />
         </div>
-      } @else {{{ label() }} {{ separator() }}}
+      } @else {{{ label() }}{{ separator() }}}
     </span>
     @if(!bannerTemplate()){
     <span class="list-banner--description">{{ description() }}</span>

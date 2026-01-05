@@ -77,7 +77,7 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
     {label: 'Paliwo', value: 'fuel_type'},
     {label: 'Emisja CO2', value: 'specs.co2_emission'},
     {label: 'Skrzynia biegów', value: 'specs.transmission'},
-    {label: 'Silnik', value: 'specs.engine'},
+    {label: 'Silnik/wersja', value: 'specs.engine'},
     {label: 'Moc', value: 'specs.horsepower'},
     {label: 'Napęd', value: 'specs.drivetrain'},
     {label: 'Nadwozie', value: 'body_type'},
@@ -96,16 +96,8 @@ export class OfferDetails implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.offerService.freshInit();
-    if (this.details().pricing.rental_periods.length > 0 && !this.offerService.selectedPeriod) {
-      this.offerService.selectedPeriod = this.details().pricing.rental_periods[0];
-    }
-    if (this.details().pricing.mileage_limits.length > 0 && !this.offerService.selectedMileageLimit) {
-      this.offerService.selectedMileageLimit = this.details().pricing.mileage_limits[0];
-    }
-    if (this.details().pricing.initial_payments.length > 0 && !this.offerService.selectedInitialPayment) {
-      this.offerService.selectedInitialPayment = this.details().pricing.initial_payments[0];
-    }
-    this.offerService.calculatePrice(this.details());
+    // Select the option with the lowest price (matching lowest_price from offer)
+    this.offerService.selectLowestPriceOption(this.details());
   }
 
   ngAfterViewInit(): void {

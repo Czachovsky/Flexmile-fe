@@ -52,7 +52,7 @@ export const FaqObject: FaqTypes[] = [
   },
   {
     header: 'Co zawiera miesięczna rata?',
-    body: 'Zakres raty zależy od wybranego wariantu i może obejmować finansowanie pojazdu, serwis i przeglądy, ubezpieczenie AC/OC/NNW, opony oraz assistance. Zakres jest zawsze jasno komunikowany.',
+    body: 'Rata zawiera: finansowanie pojazdu, serwis, assistance, ubezpieczenie, opony.',
     isExpanded: false,
     contentHeight: 0
   },

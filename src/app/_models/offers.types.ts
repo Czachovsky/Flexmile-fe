@@ -42,6 +42,7 @@ interface OfferSpecsModel {
 
 interface OfferPricingModel {
   lowest_price: number;
+  display_price?: number;
   mileage_limits: number[];
   rental_periods: number[];
   initial_payments: number[];
@@ -167,6 +168,8 @@ export enum BodyType {
   hatchback = 'Hatchback',
   combi = 'Kombi',
   coupe = 'Coupe',
+  dostawczy = 'Dostawczy',
+  van = 'Van'
 }
 
 export enum OrderType {

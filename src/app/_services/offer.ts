@@ -63,6 +63,44 @@ export class OfferService {
     }
   }
 
+  public selectLowestPriceOption(offerDetail: OfferModel): void {
+    const { pricing } = offerDetail;
+    const { lowest_price, display_price, rental_periods, mileage_limits, initial_payments, price_matrix } = pricing;
+
+    // If display_price is set, use it; otherwise use lowest_price
+    const targetPrice = display_price ?? lowest_price;
+
+    // Find the combination that matches the target price
+    for (const period of rental_periods) {
+      for (const mileageLimit of mileage_limits) {
+        for (const initialPayment of initial_payments) {
+          const priceKey = `${period}_${mileageLimit}_${initialPayment}`;
+          const price = price_matrix[priceKey];
+
+          if (price === targetPrice) {
+            this.selectedPeriod = period;
+            this.selectedMileageLimit = mileageLimit;
+            this.selectedInitialPayment = initialPayment;
+            this.calculatedPrice = price;
+            return;
+          }
+        }
+      }
+    }
+
+    // Fallback: if no exact match found, select first options
+    if (rental_periods.length > 0) {
+      this.selectedPeriod = rental_periods[0];
+    }
+    if (mileage_limits.length > 0) {
+      this.selectedMileageLimit = mileage_limits[0];
+    }
+    if (initial_payments.length > 0) {
+      this.selectedInitialPayment = initial_payments[0];
+    }
+    this.calculatePrice(offerDetail);
+  }
+
   public orderOrReserve(reservationObject: offerOrderModel, orderType: 'reservation' | 'order'): Observable<OrderResponse> {
     return this.http.post<OrderResponse>(this.apiUrl + `/reservations?type=${orderType}`, reservationObject);
   }

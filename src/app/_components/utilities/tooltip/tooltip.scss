@@ -111,12 +111,11 @@
 
 // Opcjonalnie: obsługa długiego tekstu
 .tooltip-content {
-  max-width: 250px;
-
   &.multi-line {
     white-space: normal;
     @include mixins.fontSize(12, 18);
     font-weight: 400;
     min-width: 215px;
+    max-width: 250px;
   }
 }

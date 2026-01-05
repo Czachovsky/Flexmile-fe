@@ -20,7 +20,7 @@ export class Opinions {
     dots: true,
     navSpeed: 1000,
     autoplay: true,
-    autoplayTimeout: 5000,
+    autoplayTimeout: 6000,
     autoplayHoverPause: true,
     center: true,
     margin: 24,

@@ -26,7 +26,7 @@ export const OPINIONS: OpinionsModel[] = [
   },
   {
     rate: 5,
-    opinion: "Podoba mi się, że mam wybór. Mogę porównać kilka modeli, zmieniać przebieg i okres najmu, a system od razu przelicza ratę. Dzięki temu wiedziałem dokładnie, na co mnie stać — zanim wysłałem zapytanie.",
+    opinion: "Podoba mi się, że mam wybór. Mogę porównać kilka modeli, zmieniać przebieg i okres najmu, a system od razu przelicza ratę. Dzięki temu wiedziałem dokładnie, na co mnie stać — zanim złożyłem zamówienie.",
     name: "Tomasz",
     city: "Gdańsk"
   },
