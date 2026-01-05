@@ -2,12 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {API_URL} from '@tokens/api-url.token';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {OfferFilters, OfferListModel, OfferModel} from '@models/offers.types';
-import {BehaviorSubject, Observable, Subscription, of} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {CarModelsModel, MakeListModel} from '@models/hero-search.types';
 import {FormGroup} from '@angular/forms';
 import {FilterBuilder} from '@builders/filters-builder';
 import {FiltersType} from '@models/filters.types';
-import {delay, finalize, tap} from 'rxjs/operators';
+import {delay, finalize, tap, shareReplay, filter} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,20 @@ export class OffersService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private loadingMoreSubject = new BehaviorSubject<boolean>(false);
   private loadMoreErrorSubject = new BehaviorSubject<boolean>(false);
+  private makesSubject = new BehaviorSubject<MakeListModel[]>([]);
+  private makesLoadingSubject = new BehaviorSubject<boolean>(false);
+  private modelsCache = new Map<string, BehaviorSubject<CarModelsModel | null>>();
+  private modelsLoadingCache = new Map<string, BehaviorSubject<boolean>>();
+  private modelsLoadSubscriptions = new Map<string, Subscription>();
   private filterSubscription?: Subscription;
   private loadMoreSubscription?: Subscription;
+  private makesLoadSubscription?: Subscription;
   public readonly offersList$ = this.offersListSubject.asObservable();
   public readonly loading$ = this.loadingSubject.asObservable();
   public readonly loadingMore$ = this.loadingMoreSubject.asObservable();
   public readonly loadMoreError$ = this.loadMoreErrorSubject.asObservable();
+  public readonly makes$ = this.makesSubject.asObservable();
+  public readonly makesLoading$ = this.makesLoadingSubject.asObservable();
   private readonly defaultPerPage = 29;
   private latestFilters: OfferFilters = {};
 
@@ -128,42 +136,115 @@ export class OffersService {
   }
 
   getMakes(): Observable<MakeListModel[]> {
-    const cacheKey = 'makes_cache';
-    const cacheExpiryKey = 'makes_cache_expiry';
-    const cacheDuration = 2 * 24 * 60 * 60 * 1000;
-
-    const cachedData = localStorage.getItem(cacheKey);
-    const expiryTime = localStorage.getItem(cacheExpiryKey);
-
-    if (cachedData && expiryTime) {
-      const now = Date.now();
-      const expiry = parseInt(expiryTime, 10);
-
-      if (now < expiry) {
-        try {
-          const parsedData = JSON.parse(cachedData) as MakeListModel[];
-          return of(parsedData);
-        } catch (error) {
-          console.error('Error parsing cached makes data:', error);
-          localStorage.removeItem(cacheKey);
-          localStorage.removeItem(cacheExpiryKey);
-        }
-      } else {
-        localStorage.removeItem(cacheKey);
-        localStorage.removeItem(cacheExpiryKey);
-      }
+    if (this.makesSubject.value.length > 0) {
+      return this.makes$;
     }
-    return this.http.get<MakeListModel[]>(this.apiUrl + '/offers/brands').pipe(
-      tap((data: MakeListModel[]) => {
-        const expiry = Date.now() + cacheDuration;
-        localStorage.setItem(cacheKey, JSON.stringify(data));
-        localStorage.setItem(cacheExpiryKey, expiry.toString());
-      })
+    if (this.makesLoadingSubject.value) {
+      return this.makes$;
+    }
+    this.loadMakes();
+    return this.makes$;
+  }
+
+  private loadMakes(): void {
+    if (this.makesLoadingSubject.value) {
+      return;
+    }
+
+    this.makesLoadingSubject.next(true);
+
+    if (this.makesLoadSubscription) {
+      this.makesLoadSubscription.unsubscribe();
+    }
+
+    this.makesLoadSubscription = this.http.get<MakeListModel[]>(this.apiUrl + '/offers/brands')
+      .pipe(
+        shareReplay(1),
+        finalize(() => this.makesLoadingSubject.next(false))
+      )
+      .subscribe({
+        next: (data: MakeListModel[]) => {
+          this.makesSubject.next(data);
+        },
+        error: (error) => {
+          console.error('Error loading makes:', error);
+          this.makesSubject.next([]);
+        }
+      });
+  }
+
+  getModelsForBrand(brandName: string): Observable<CarModelsModel> {
+    const normalizedBrand = brandName.toLowerCase();
+
+    // Sprawdź czy modele są już w cache
+    if (!this.modelsCache.has(normalizedBrand)) {
+      this.modelsCache.set(normalizedBrand, new BehaviorSubject<CarModelsModel | null>(null));
+      this.modelsLoadingCache.set(normalizedBrand, new BehaviorSubject<boolean>(false));
+    }
+
+    const modelsSubject = this.modelsCache.get(normalizedBrand)!;
+    const loadingSubject = this.modelsLoadingCache.get(normalizedBrand)!;
+
+    // Jeśli dane są już załadowane, zwróć je natychmiast
+    if (modelsSubject.value !== null) {
+      return modelsSubject.asObservable().pipe(
+        filter((data): data is CarModelsModel => data !== null),
+        shareReplay(1)
+      );
+    }
+
+    // Jeśli trwa już ładowanie, zwróć istniejący observable
+    if (loadingSubject.value) {
+      return modelsSubject.asObservable().pipe(
+        filter((data): data is CarModelsModel => data !== null),
+        shareReplay(1)
+      );
+    }
+
+    // Rozpocznij ładowanie danych
+    this.loadModelsForBrand(normalizedBrand);
+    return modelsSubject.asObservable().pipe(
+      filter((data): data is CarModelsModel => data !== null),
+      shareReplay(1)
     );
   }
 
-  getModelsForBrand(brandName: string) {
-    return this.http.get<CarModelsModel>(this.apiUrl + `/offers/brands/${brandName}/models`);
+  private loadModelsForBrand(brandName: string): void {
+    const normalizedBrand = brandName.toLowerCase();
+    const loadingSubject = this.modelsLoadingCache.get(normalizedBrand);
+    const modelsSubject = this.modelsCache.get(normalizedBrand);
+
+    if (!loadingSubject || !modelsSubject) {
+      return;
+    }
+
+    if (loadingSubject.value) {
+      return;
+    }
+
+    loadingSubject.next(true);
+
+    const existingSubscription = this.modelsLoadSubscriptions.get(normalizedBrand);
+    if (existingSubscription) {
+      existingSubscription.unsubscribe();
+    }
+
+    const subscription = this.http.get<CarModelsModel>(this.apiUrl + `/offers/brands/${normalizedBrand}/models`)
+      .pipe(
+        shareReplay(1),
+        finalize(() => loadingSubject.next(false))
+      )
+      .subscribe({
+        next: (data: CarModelsModel) => {
+          modelsSubject.next(data);
+        },
+        error: (error) => {
+          console.error(`Error loading models for brand ${brandName}:`, error);
+          modelsSubject.next(null);
+        }
+      });
+
+    this.modelsLoadSubscriptions.set(normalizedBrand, subscription);
   }
 
   setCurrentOffer(offer: OfferModel | null): void {
