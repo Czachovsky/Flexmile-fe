@@ -73,7 +73,9 @@ export class Car {
   public goToOffer(id: number): void {
     this.router.navigateByUrl(`/oferta/${id}`);
   }
-
+ public goToOfferList(): void {
+    this.router.navigate(['/oferty']);
+  }
   public getTransmissionLabel(type: string): string {
     return this.transmissionType[type as keyof typeof TransmissionType];
   }

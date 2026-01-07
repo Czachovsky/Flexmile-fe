@@ -66,7 +66,7 @@
     </div>
     @if (cardSize() === badgeSizes.LG) {
       <div class="btn_wrapper" [ngClass]="{'_p' : checkIfAnyTrue()}">
-        <flexmile-button label="Sprawdź ofertę" iconPosition="right" icon="pi-arrow-right"
+        <flexmile-button (clicked)="goToOfferList()" label="Sprawdź ofertę" iconPosition="right" icon="pi-arrow-right"
                          btnClass="w-full lg:w-auto"></flexmile-button>
       </div>
     }
@@ -113,7 +113,8 @@
 <ng-template #mobileFeatures>
   @for (f of offerListFeatures; track f) {
     @if (offer().additional_services[f.id].enabled) {
-      <div class="car-card__feature-btn flex align-items-center justify-content-center" [innerHTML]="f.icon | sanitize: 'html'"></div>
+      <div class="car-card__feature-btn flex align-items-center justify-content-center"
+           [innerHTML]="f.icon | sanitize: 'html'"></div>
     }
   }
 </ng-template>
@@ -121,7 +122,8 @@
   @for (f of offerListFeatures; track f) {
     @if (offer().additional_services[f.id].enabled) {
       <flexmile-tooltip [config]="{text: offer().additional_services[f.id].title, position: 'top', appendTo: 'body'}">
-        <div class="car-card__feature-btn flex align-items-center justify-content-center" [innerHTML]="f.icon | sanitize: 'html'">
+        <div class="car-card__feature-btn flex align-items-center justify-content-center"
+             [innerHTML]="f.icon | sanitize: 'html'">
         </div>
       </flexmile-tooltip>
     }
@@ -146,7 +148,7 @@
         @if (offer().additional_services[f.id].enabled) {
           <div class="feature">
             <div [innerHTML]="f.icon | sanitize: 'html'"></div>
-            <span>{{offer().additional_services[f.id].title}}</span>
+            <span>{{ offer().additional_services[f.id].title }}</span>
           </div>
         }
       }
