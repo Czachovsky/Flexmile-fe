@@ -161,14 +161,23 @@
 
     .car-card__price {
       white-space: nowrap;
-
+      @include mixins.media-query('max', 'xlg') {
+        white-space: normal;
+      }
       &-amount {
         @include mixins.fontSize(32, 40);
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(24);
+        }
       }
 
       &-label {
         @include mixins.fontSize(24, 32);
+        @include mixins.media-query('max', 'xlg') {
+          @include mixins.fontSize(16);
+        }
       }
+
     }
 
     .car-card__title {

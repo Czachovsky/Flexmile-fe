@@ -50,8 +50,12 @@ export function scrollToSectionById(sectionId: string, options?: ScrollToSection
 
   const performScroll = () => {
     const rect = element.getBoundingClientRect();
-    window.scrollBy({
-      top: rect.top - offset,
+    const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const targetScrollY = currentScrollY + rect.top - offset;
+    
+    // Use scrollTo with absolute position for better reliability, especially on mobile
+    window.scrollTo({
+      top: targetScrollY,
       behavior,
     });
   };

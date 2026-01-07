@@ -81,12 +81,15 @@
 
 <ng-template #offerFeatures>
   <div class="car-card__features" (click)="showFeatures($event)">
-    <div class="car-card__feature-label hidden xl:flex">
-      Usługi w cenie:
-    </div>
-    <div class="car-card__feature-label flex xl:hidden">
-      W cenie:
-    </div>
+    @if (cardSize() !== badgeSizes.LG) {
+      <div class="car-card__feature-label hidden xl:flex">
+        Usługi w cenie:
+      </div>
+      <div class="car-card__feature-label flex xl:hidden">
+        W cenie:
+      </div>
+    }
+
     @if (screen.isMobile()) {
       <ng-container *ngTemplateOutlet="mobileFeatures"></ng-container>
     } @else {
