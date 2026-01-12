@@ -138,7 +138,7 @@ export class App {
       {
         path: 'maintenance',
         loadComponent: () =>
-          import('@components/maintenance/maintenance').then(m => m.Maintenance),
+          import('./_components/maintenance/maintenance').then(m => m.Maintenance),
         title: 'Flexmile - Strona w budowie',
       },
       { path: '**', redirectTo: 'maintenance' },

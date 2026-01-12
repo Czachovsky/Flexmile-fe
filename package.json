@@ -11,6 +11,7 @@
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "watch": "ng build --watch --configuration development",
     "serve": "npx serve dist/flexmile/browser -l 4200",
+    "serve:prod": "npm run build:prod && npx serve dist/flexmile/browser -l 4200",
     "test": "ng test"
   },
   "prettier": {

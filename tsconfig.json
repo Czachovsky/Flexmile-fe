@@ -13,7 +13,8 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "paths": {
       "@models/*": ["./src/app/_models/*"],
       "@services/*": ["./src/app/_services/*"],

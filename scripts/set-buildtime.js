@@ -9,13 +9,13 @@ const envFiles = [
 ];
 
 // Ustaw timestamp builda
-const buildtime = new Date().toISOString();
+const buildtime = new Date().toString();
 console.log(`Setting buildtime to: ${buildtime}`);
 
 envFiles.forEach(filePath => {
   if (fs.existsSync(filePath)) {
     let content = fs.readFileSync(filePath, 'utf8');
-    
+
     // Zastąp buildtime aktualnym timestampem
     // Obsługuje zarówno 'BUILDTIME_PLACEHOLDER' jak i istniejące wartości timestampu
     if (content.includes('buildtime:')) {
@@ -30,7 +30,7 @@ envFiles.forEach(filePath => {
         `$1$2,$3  buildtime: '${buildtime}'$3$4`
       );
     }
-    
+
     fs.writeFileSync(filePath, content, 'utf8');
     console.log(`Updated: ${path.basename(filePath)}`);
   } else {

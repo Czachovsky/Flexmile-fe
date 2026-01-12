@@ -19,7 +19,7 @@
                    [fileName]="offerData()!.attributes.coming_soon ? 'rezerwacja.m4a' : 'zamowienie.m4a'"></flexmile-player>
 } @else {
   <flexmile-player [label]="offerData()!.attributes.coming_soon ? 'Jak zarezerwować?' : 'Jak zamówić?'"
-                   [fileName]="'wybor_parametrow.m4a'"></flexmile-player>
+                   [fileName]="offerData()!.attributes.coming_soon ? 'wybor_parametrow-rezerwacja.m4a' : 'wybor_parametrow_zamowienie.m4a'"></flexmile-player>
 }
 
 
