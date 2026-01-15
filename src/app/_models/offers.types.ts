@@ -151,7 +151,10 @@ export enum DrivetrainType {
   FWD = 'FWD (przedni)',
   RWD = 'RWD (tylny)',
   AWD = 'AWD (4x4)',
-  '4WD' = '4WD (4x4 dołączany)'
+  '4WD' = '4WD (4x4 dołączany)',
+  Quattro = 'Quattro - 4x4',
+  xDrive = 'xDrive - 4x4',
+  SDrive = 'SDrive - przód'
 }
 
 export enum FuelType {

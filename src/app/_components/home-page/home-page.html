@@ -20,7 +20,7 @@
         <flexmile-homepage-list [offerList]="offersList"></flexmile-homepage-list>
       }
       <div class="pt-5 pb-7 flex align-items-center justify-content-center">
-        <flexmile-button label="Zobacz więcej" iconPosition="right" icon="pi-arrow-right"
+        <flexmile-button (clicked)="goToOffer()" label="Zobacz więcej" iconPosition="right" icon="pi-arrow-right"
                          btnClass="w-full xlg:w-auto"></flexmile-button>
       </div>
     </div>

@@ -14,7 +14,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "paths": {
       "@models/*": ["./src/app/_models/*"],
       "@services/*": ["./src/app/_services/*"],

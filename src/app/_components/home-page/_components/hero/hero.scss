@@ -3,17 +3,21 @@
 .hero {
   padding-top: 125px;
   background: url('../../../../../../public/layout/images/hero-img.webp') no-repeat scroll center right;
+  background-size: 55vw auto;
+  min-height: 600px;
   @include mixins.media-query('max', 'xxxl') {
     background-size: 55vw auto;
   }
   @include mixins.media-query('max', 'xl') {
     padding-top: 88px;
+    min-height: 500px;
   }
   @include mixins.media-query('max', 'xlg') {
     background-image: url('../../../../../../public/layout/images/hero-img.webp');
     background-repeat: no-repeat;
     background-position: right calc(100% - 48px);
     background-size: 350px auto;
+    min-height: 400px;
   }
 
   .container {

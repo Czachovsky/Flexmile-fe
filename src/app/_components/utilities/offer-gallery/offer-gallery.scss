@@ -50,6 +50,7 @@
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
+  aspect-ratio: 16 / 10;
 }
 
 // Navigation Arrows

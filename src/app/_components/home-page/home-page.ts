@@ -51,6 +51,6 @@ export class HomePage implements OnInit {
     })
   }
   goToOffer(): void{
-    this.router.navigate(['/oferty']);
+  void this.router.navigate(['/oferty']);
   }
 }
