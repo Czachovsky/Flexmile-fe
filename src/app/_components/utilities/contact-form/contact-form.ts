@@ -46,6 +46,15 @@ export class ContactForm {
         next: () => {
           this.errorChecked = false;
           this.successfullySent = true;
+          
+          // Google Ads conversion tracking
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-17883080050/IPQ3COz0iucbEPLKqM9C',
+              'value': 1.0,
+              'currency': 'PLN'
+            });
+          }
         }
       })
     }

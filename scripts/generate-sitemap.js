@@ -4,7 +4,7 @@ const https = require('https');
 const http = require('http');
 
 // Konfiguracja
-const API_URL = process.env.API_URL || 'http://flexmile.local/wp-json/flexmile/v1';
+const API_URL = process.env.API_URL || 'https://api.flexmile.pl/wp-json/flexmile/v1';
 const BASE_URL = process.env.BASE_URL || 'https://flexmile.pl';
 const OUTPUT_PATH = path.join(__dirname, '../dist/flexmile/browser/sitemap.xml');
 
@@ -47,18 +47,19 @@ function generateUrlEntry(path, priority, changefreq) {
 function fetchOffers() {
   return new Promise((resolve, reject) => {
     const url = new URL(`${API_URL}/offers`);
-    url.searchParams.append('per_page', '1000');
-    
+    url.searchParams.append('per_page', '100');
+
     const client = url.protocol === 'https:' ? https : http;
-    
+
     client.get(url.toString(), (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
+        console.log(url);
         try {
           const parsed = JSON.parse(data);
           resolve(parsed.offers || []);
@@ -79,17 +80,17 @@ async function generateSitemap() {
   console.log('Generating sitemap...');
   console.log(`API URL: ${API_URL}`);
   console.log(`Base URL: ${BASE_URL}`);
-  
+
   // Pobierz oferty
   const offers = await fetchOffers();
   console.log(`Found ${offers.length} offers`);
-  
+
   // Generuj wpisy URL
   const urls = [
     ...staticPages.map(page => generateUrlEntry(page.url, page.priority, page.changefreq)),
     ...offers.map(offer => generateUrlEntry(`/oferta/${offer.id}`, '0.8', 'weekly'))
   ];
-  
+
   // Generuj XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -98,13 +99,13 @@ async function generateSitemap() {
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 ${urls.join('\n')}
 </urlset>`;
-  
+
   // Zapisz plik
   const outputDir = path.dirname(OUTPUT_PATH);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-  
+
   fs.writeFileSync(OUTPUT_PATH, xml, 'utf8');
   console.log(`Sitemap generated successfully: ${OUTPUT_PATH}`);
   console.log(`Total URLs: ${urls.length}`);
