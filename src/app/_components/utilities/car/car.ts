@@ -71,11 +71,17 @@ export class Car {
   public offerListFeatures = offerListFeatures;
 
   public goToOffer(id: number): void {
-    this.router.navigateByUrl(`/oferta/${id}`);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`/oferta/${id}`])
+    );
+    window.open(url, '_blank');
+
   }
- public goToOfferList(): void {
+
+  public goToOfferList(): void {
     this.router.navigate(['/oferty']);
   }
+
   public getTransmissionLabel(type: string): string {
     return this.transmissionType[type as keyof typeof TransmissionType];
   }
