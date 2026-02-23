@@ -1,0 +1,100 @@
+@use 'mixins';
+.cookies-info {
+  background: var(--color-white);
+  z-index: 999;
+  left: 64px;
+  bottom: 64px;
+  border-radius: var(--border-radius-base);
+  box-shadow: 0 16px 30px 0 rgba(0, 0, 0, 0.2);
+  max-width: 480px;
+  @include mixins.media-query('max', 'xlg') {
+    left:24px;
+    bottom:24px;
+    right:24px;
+    .cookies-info-links{
+      padding-top:16px;
+    }
+  }
+  &-header{
+    @include mixins.fontSize(16, 24);
+    font-weight: 600;
+  }
+  &-info{
+    @include mixins.fontSize(14, 24);
+    color: var(--color-black-700);
+  }
+}
+:host ::ng-deep{
+  .btn-outline{
+    color: var(--color-black-900) !important;
+  }
+  .link-title{
+    color: var(--color-black-900);
+    @include mixins.fontSize(14, 24);
+  }
+}
+
+.cookies-modal {
+  max-width: 620px;
+
+  &__title {
+    @include mixins.fontSize(32, 40);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  &__lead {
+    @include mixins.fontSize(14, 24);
+    color: var(--color-black-700);
+    margin-bottom: 24px;
+  }
+
+  &__section {
+  padding-bottom: 16px;
+  }
+
+  &__section-title {
+    @include mixins.fontSize(20, 24);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  &__section-desc {
+    @include mixins.fontSize(14, 22);
+    color: var(--color-black-700);
+    margin-bottom: 12px;
+  }
+
+  &__checkbox-row {
+    margin-top: 8px;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  &__links-separator {
+    width: 1px;
+    height: 16px;
+    background: var(--color-purple-700);
+  }
+
+  @include mixins.media-query('max', 'xlg') {
+    &__footer {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+  }
+}

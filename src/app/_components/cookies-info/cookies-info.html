@@ -1,0 +1,91 @@
+@if (showCookiesInfo()) {
+  @if (!showMoreInfo()) {
+    <div class="cookies-info fixed p-4">
+      <div class="pb-4">
+        <div class="cookies-info-header mb-2">Ta strona wykorzystuje pliki cookies w celach statystycznych i
+          marketingowych
+          (Google Ads).
+        </div>
+        <div class="cookies-info-info">Możesz zaakceptować cookies lub zmienić swoje ustawienia.</div>
+      </div>
+      <div class="flex align-items-center justify-content-between flex-wrap">
+        <div class="flex gap-2">
+          <flexmile-button [btnClass]="'px-4'" label="Akceptuj" size="small"
+                           (clicked)="acceptCookies()"></flexmile-button>
+          <flexmile-button [btnClass]="'px-4'" label="Ustawienia" size="small" color="outline"
+                           (clicked)="showMore(true)"></flexmile-button>
+        </div>
+        <div class="cookies-info-links">
+          <flexmile-link [title]="'Polityka cookies'" [url]="'/polityka-cookies'"></flexmile-link>
+        </div>
+      </div>
+    </div>
+  }
+  <flexmile-modal
+    [isOpen]="showMoreInfo()"
+    [content]="modalContent"
+    (closed)="showMore(false)"
+  ></flexmile-modal>
+
+  <ng-template #modalContent>
+    <div class="cookies-modal">
+      <h2 class="cookies-modal__title">
+        Ustawienia plików cookies
+      </h2>
+
+      <p class="cookies-modal__lead">
+        Możesz zdecydować, które pliki cookies chcesz zaakceptować.<br>
+        Niezbędne pliki cookies są zawsze włączone – bez nich strona nie działa poprawnie.
+      </p>
+
+      <section class="cookies-modal__section cookies-modal__section--checkbox">
+        <h3 class="cookies-modal__section-title">
+          Niezbędne pliki cookies
+        </h3>
+        <div class="cookies-modal__checkbox-row cookies-modal__checkbox-row--static">
+          <div class="checkbox-wrapper">
+            <flexmile-input
+              [type]="inputType.checkbox"
+              [label]="'Niezbędne pliki cookies są konieczne do prawidłowego funkcjonowania strony i nie mogą zostać wyłączone.'"
+              [inputId]="'cookies-necessary'"
+              [control]="cookiesAcceptedControl"
+            ></flexmile-input>
+          </div>
+        </div>
+      </section>
+
+      <section class="cookies-modal__section cookies-modal__section--checkbox">
+        <h3 class="cookies-modal__section-title">
+          Marketingowe pliki cookies (Google Ads)
+        </h3>
+        <div class="cookies-modal__checkbox-row">
+          <flexmile-input
+            [type]="inputType.checkbox"
+            [label]="'Marketingowe pliki cookies służą do mierzenia skuteczności kampanii reklamowych oraz wyświetlania dopasowanych reklam.'"
+            [inputId]="'cookies-marketing'"
+            [control]="marketingControl"
+          ></flexmile-input>
+        </div>
+      </section>
+
+      <div class="cookies-modal__footer">
+       <div class="w-full">
+         <flexmile-button
+           label="Zapisz wybór"
+           size="large"
+           [btnClass]="'w-full'"
+           (clicked)="saveCookiesSettings()"
+         ></flexmile-button>
+       </div>
+
+        <div class="cookies-modal__links">
+          <flexmile-link [url]="'/polityka-prywatnosci'" title="Polityka prywatności"></flexmile-link>
+          <span class="cookies-modal__links-separator"></span>
+          <flexmile-link [url]="'/polityka-cookies'" title="Polityka Cookies"></flexmile-link>
+          <span class="cookies-modal__links-separator"></span>
+          <flexmile-link [url]="'/regulamin'" title="Regulamin"></flexmile-link>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+}

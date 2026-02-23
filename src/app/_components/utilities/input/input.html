@@ -54,7 +54,7 @@
   } @else if (type() === inputType.checkbox) {
     <div class="checkbox-wrapper">
       <input [id]="inputId()" type="checkbox" aria-hidden="true"  [formControl]="formControl"/>
-      <label [for]="inputId()">{{label()}}</label>
+      <label [for]="inputId()" [class]="inputClass()">{{label()}}</label>
     </div>
   }
 </div>

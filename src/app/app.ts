@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {API_URL} from '@tokens/api-url.token';
 import {BannerTypes} from '@models/banners.types';
 import { environment } from '@env/environment';
+import {CookiesInfo} from '@components/cookies-info/cookies-info';
 
 interface AppConfig {
   maintenance?: boolean;
@@ -19,7 +20,7 @@ interface AppConfig {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer],
+  imports: [RouterOutlet, Header, Footer, CookiesInfo],
   templateUrl: './app.html'
 })
 export class App {

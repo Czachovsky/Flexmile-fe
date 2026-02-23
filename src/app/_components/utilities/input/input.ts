@@ -45,6 +45,7 @@ import {NgClass} from '@angular/common';
   ]
 })
 export class Input implements ControlValueAccessor, OnInit, OnDestroy {
+  public inputClass: InputSignal<string> = input<string>('');
   public type: InputSignal<InputType> = input<InputType>(InputType.text);
   public label: InputSignal<string> = input<string>('');
   public classList: InputSignal<string> = input<string>('');
