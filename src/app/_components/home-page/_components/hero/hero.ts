@@ -3,12 +3,14 @@ import {ButtonComponent} from '@components/utilities/button/button';
 import {HeroSearch} from '@components/home-page/_components/hero-search/hero-search';
 import {Router} from '@angular/router';
 import {scrollToSectionById} from '../../../../helpers';
+import {HeroSlider} from '@components/home-page/_components/hero-slider/hero-slider';
 
 @Component({
   selector: 'flexmile-hero',
   imports: [
     ButtonComponent,
-    HeroSearch
+    HeroSearch,
+    HeroSlider
   ],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
