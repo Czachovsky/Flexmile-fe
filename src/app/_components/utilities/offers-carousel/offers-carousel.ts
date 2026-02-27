@@ -1,40 +1,51 @@
-import {Component, inject, input, InputSignal} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, input, InputSignal, ViewChild} from '@angular/core';
 import {ButtonComponent} from '@components/utilities/button/button';
-import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
 import {Car} from '@components/utilities/car/car';
 import {OfferListOffersModel} from '@models/offers.types';
 import {Router} from '@angular/router';
+import Swiper from 'swiper';
+import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 
 @Component({
   selector: 'flexmile-offers-carousel',
   imports: [
     ButtonComponent,
-    CarouselModule,
     Car
   ],
   templateUrl: './offers-carousel.html',
   styleUrl: './offers-carousel.scss',
 })
-export class OffersCarousel {
+export class OffersCarousel implements AfterViewInit{
   private router: Router = inject(Router);
   public similarOffers: InputSignal<OfferListOffersModel[] | []> = input.required<OfferListOffersModel[] | []>();
-  public readonly customOptions: OwlOptions = {
-    navText: ['<i class="pi pi-arrow-left"></i>', '<i class="pi pi-arrow-right"></i>'],
-    nav: true,
-    loop: true,
-    dots: false,
-    navSpeed: 700,
-    autoplay: true,
-    autoplayTimeout: 5000,
-    center: true,
-    margin: 24,
-    items: 3,
-    responsive: {
-      0: {items: 1},
-      992: {items: 3},
-    }
-  }
+  @ViewChild('swiperContainer') swiperContainer!: ElementRef;
+  swiper!: Swiper;
+
   public goToList(): void {
     void this.router.navigate(['/oferty']);
+  }
+
+  ngAfterViewInit() {
+    if(this.similarOffers().length > 3){
+      this.swiper = new Swiper(this.swiperContainer.nativeElement, {
+        modules: [Navigation, Pagination, Autoplay],
+        slidesPerView: 3,
+        spaceBetween: 24,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".opinions-button-next",
+          prevEl: ".opinions-button-prev",
+        },
+        breakpoints: {
+          0: {slidesPerView: 1},
+          992: {slidesPerView: 3, spaceBetween: 24,},
+        },
+      });
+      console.log(this.swiper);
+    }
   }
 }

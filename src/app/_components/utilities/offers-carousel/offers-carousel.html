@@ -4,15 +4,25 @@
     <flexmile-button label="Pokaż pełną ofertę" iconPosition="right" icon="pi-arrow-right" (clicked)="goToList()"
                      [btnClass]="'hidden xlg:flex'"></flexmile-button>
   </div>
-  <div class="offers-carousel__body">
+  <div class="offers-carousel__body relative">
     @if (similarOffers().length > 3) {
-      <owl-carousel-o [options]="customOptions">
-        @for (offer of similarOffers(); let i = $index; track i) {
-          <ng-template carouselSlide>
-            <flexmile-car [offer]="offer"></flexmile-car>
-          </ng-template>
-        }
-      </owl-carousel-o>
+      <div class="swiper" #swiperContainer>
+        <div class="swiper-wrapper">
+          @for (offer of similarOffers(); let i = $index; track i) {
+            <div class="swiper-slide">
+              <div class="slide-content">
+                <flexmile-car [offer]="offer"></flexmile-car>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="opinions-button-next hidden xlg:flex">
+        <i class="pi pi-arrow-right"></i>
+      </div>
+      <div class="opinions-button-prev hidden xlg:flex">
+        <i class="pi pi-arrow-left"></i>
+      </div>
     } @else {
       <div class="no_carousel">
         @for (offer of similarOffers(); let i = $index; track i) {

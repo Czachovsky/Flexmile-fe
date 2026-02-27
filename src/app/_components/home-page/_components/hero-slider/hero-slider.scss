@@ -13,6 +13,7 @@
     height: 440px;
 
     &-image {
+      z-index: 10;
       img {
         right: 0;
         top: -8px;
@@ -39,5 +40,19 @@
         @include mixins.fontSize(20, 32);
       }
     }
+  }
+}
+
+:host ::ng-deep {
+  .swiper-pagination{
+    bottom: -41px;
+  }
+  .swiper-pagination-bullet{
+    width: 16px;
+    height: 16px;
+    background: var(--color-purple-500);
+  }
+  .swiper-pagination-bullet-active{
+    background: var(--color-green-900);
   }
 }

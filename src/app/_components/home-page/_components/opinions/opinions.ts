@@ -1,36 +1,41 @@
-import {Component} from '@angular/core';
-import {ButtonComponent} from '@components/utilities/button/button';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {OPINIONS, OpinionsModel} from '@models/opinions.types';
-import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
+import Swiper from 'swiper';
+import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 
 @Component({
   selector: 'flexmile-opinions',
-  imports: [
-    CarouselModule
-  ],
+  imports: [],
   templateUrl: './opinions.html',
   styleUrl: './opinions.scss',
 })
-export class Opinions {
+export class Opinions implements AfterViewInit {
+  @ViewChild('swiperContainer') swiperContainer!: ElementRef;
   public readonly opinions: OpinionsModel[] = OPINIONS;
-  public readonly customOptions: OwlOptions = {
-    navText: ['<i class="pi pi-arrow-left"></i>', '<i class="pi pi-arrow-right"></i>'],
-    nav: true,
-    loop: true,
-    dots: true,
-    navSpeed: 1000,
-    autoplay: true,
-    autoplayTimeout: 6000,
-    autoplayHoverPause: true,
-    center: true,
-    margin: 24,
-    items: 3,
-    responsive: {
-      0: {items: 1},
-      992: {items: 3},
-    }
-  }
+  swiper!: Swiper;
 
+
+  ngAfterViewInit() {
+    this.swiper = new Swiper(this.swiperContainer.nativeElement, {
+      modules: [Navigation, Pagination, Autoplay],
+      slidesPerView: 3,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".opinions-button-next",
+        prevEl: ".opinions-button-prev",
+      },
+      breakpoints: {
+        0: {slidesPerView: 1},
+        992: {slidesPerView: 3, spaceBetween: 24,},
+      },
+    });
+
+  }
 
   getStarsArray(rating: number): boolean[] {
     return Array.from({length: 5}, (_, i) => i < rating);

@@ -14,6 +14,7 @@ html {
 body {
   overflow-x: hidden;
 }
+
 .__loading {
   z-index: 999;
   width: 100%;
@@ -23,7 +24,6 @@ body {
   justify-content: center;
   background: rgba(255, 255, 255, 0.5);
 }
-
 
 
 input[type="radio"] {
@@ -130,6 +130,7 @@ h2 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 32px;
       align-items: stretch;
+
       .product {
         min-width: 0;
 
@@ -161,31 +162,29 @@ h2 {
   }
 }
 
-.owl-nav {
-  & > div {
-    position: absolute;
+.opinions-button-next, .opinions-button-prev {
+  position: absolute;
+  padding: 0 !important;
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 50px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--color-green-800) !important;
+  color: var(--p-primary-900) !important;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+  cursor: pointer;
+}
 
-    padding: 0 !important;
-    height: 40px !important;
-    width: 40px !important;
-    border-radius: 50px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: var(--color-green-800) !important;
-    color: var(--p-primary-900) !important;
-    top: 50%;
-    transform: translateY(-50%);
+.opinions-button-next {
+  right: 0;
+  margin: 0 -20px 0 0 !important;
+}
 
-    &.owl-prev {
-      left: 0;
-      margin: 0 0 0 -20px !important;
-    }
-
-    &.owl-next {
-      right: 0;
-      margin: 0 -20px 0 0 !important;
-    }
-  }
+.opinions-button-prev {
+  left: 0;
+  margin: 0 0 0 -20px !important;
 }
 

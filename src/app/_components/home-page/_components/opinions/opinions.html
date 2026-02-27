@@ -33,34 +33,44 @@
     </div>
   </div>
   <div class="container">
-    <div class="opinions-list">
-      <owl-carousel-o [options]="customOptions">
-        @for (opinion of opinions; let i = $index; track i) {
-          <ng-template carouselSlide>
-              <div class="opinion">
+    <div class="opinions-list relative">
+      <div class="swiper" #swiperContainer>
+        <div class="swiper-wrapper">
+          @for (opinion of opinions; track $index) {
+            <div class="swiper-slide">
+              <div class="slide-content">
+                <div class="opinion">
 
-              <div class="stars pb-4">
-                @for (star of getStarsArray(opinion.rate); track $index) {
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M11.913 0C12.1296 3.14591e-05 12.3216 0.139715 12.3886 0.345703L14.9706 8.29199H23.3261C23.5425 8.2922 23.7348 8.43184 23.8017 8.6377C23.8683 8.84342 23.7949 9.06903 23.62 9.19629L16.8603 14.1074L19.4423 22.0537C19.5091 22.2595 19.4355 22.4849 19.2606 22.6123C19.0854 22.7396 18.848 22.7396 18.6728 22.6123L11.913 17.7012L5.15323 22.6123C4.978 22.7396 4.74057 22.7396 4.56533 22.6123C4.39042 22.485 4.31687 22.2595 4.38369 22.0537L6.96475 14.1074L0.20596 9.19629C0.0310818 9.06903 -0.0422948 8.84345 0.024319 8.6377C0.0912205 8.43183 0.283466 8.29217 0.499905 8.29199H8.85537L11.4374 0.345703C11.5043 0.139704 11.6964 0 11.913 0Z"
-                          [attr.fill]="star ? '#863087' : '#E5E5E5'"/>
-                  </svg>
-                }
-              </div>
-              <div class="content pb-4">
-                {{ opinion.opinion }}
-              </div>
-              <div class="name">
-                {{ opinion.name }}
-              </div>
-              <div class="city">
-                {{ opinion.city }}
+                  <div class="stars pb-4">
+                    @for (star of getStarsArray(opinion.rate); track $index) {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M11.913 0C12.1296 3.14591e-05 12.3216 0.139715 12.3886 0.345703L14.9706 8.29199H23.3261C23.5425 8.2922 23.7348 8.43184 23.8017 8.6377C23.8683 8.84342 23.7949 9.06903 23.62 9.19629L16.8603 14.1074L19.4423 22.0537C19.5091 22.2595 19.4355 22.4849 19.2606 22.6123C19.0854 22.7396 18.848 22.7396 18.6728 22.6123L11.913 17.7012L5.15323 22.6123C4.978 22.7396 4.74057 22.7396 4.56533 22.6123C4.39042 22.485 4.31687 22.2595 4.38369 22.0537L6.96475 14.1074L0.20596 9.19629C0.0310818 9.06903 -0.0422948 8.84345 0.024319 8.6377C0.0912205 8.43183 0.283466 8.29217 0.499905 8.29199H8.85537L11.4374 0.345703C11.5043 0.139704 11.6964 0 11.913 0Z"
+                              [attr.fill]="star ? '#863087' : '#E5E5E5'"/>
+                      </svg>
+                    }
+                  </div>
+                  <div class="content pb-4">
+                    {{ opinion.opinion }}
+                  </div>
+                  <div class="name">
+                    {{ opinion.name }}
+                  </div>
+                  <div class="city">
+                    {{ opinion.city }}
+                  </div>
+                </div>
               </div>
             </div>
-          </ng-template>
-        }
-      </owl-carousel-o>
+          }
+        </div>
+      </div>
+      <div class="opinions-button-next hidden xlg:flex">
+        <i class="pi pi-arrow-right"></i>
+      </div>
+      <div class="opinions-button-prev hidden xlg:flex">
+        <i class="pi pi-arrow-left"></i>
+      </div>
     </div>
   </div>
 </div>

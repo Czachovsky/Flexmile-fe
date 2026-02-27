@@ -97,8 +97,31 @@
         }
       }
     }
+
   }
 }
+
+
+.opinions-list {
+  .swiper {
+    .swiper-wrapper {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .swiper-slide {
+      height: auto;
+      display: flex;
+
+      .slide-content {
+        display: flex;
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+
 
 :host ::ng-deep {
   .owl-stage {
@@ -108,7 +131,7 @@
   .owl-item {
     display: flex;
     height: auto;
-    
+
     .opinion {
       width: 100%;
     }

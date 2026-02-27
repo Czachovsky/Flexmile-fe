@@ -1,30 +1,39 @@
 <div class="hero-slider">
-  <div class="hero-slider-rect">
-    <!--    <owl-carousel-o [options]="owlOptions">-->
-    <!--      @for (slide of slides; let i = $index; track i) {-->
-    <!--        <ng-template carouselSlide>-->
-    <div class="hero-slider-rect-inner">
-      <div class="flex justify-content-between align-items-start">
-        <div>
-          <div class="hero-slider-rect-price pb-2">
-            <span>2 606 zł</span> /netto mies.
+  <div class="hero-slider-rect relative">
+    <div class="swiper" #swiperContainer>
+      <div class="swiper-wrapper">
+        @for (slide of slides; let i = $index; track i) {
+          <div class="swiper-slide">
+            <div class="slide-content">
+              <div class="hero-slider-rect-inner">
+                <div class="flex justify-content-between align-items-start">
+                  <div>
+                    <div class="hero-slider-rect-price pb-2">
+                      <span>{{ slide.price_from | number:'1.0-0' }} zł</span> /netto mies.
+                    </div>
+                    <div class="hero-slider-rect-info">
+                      {{ slide.brand }} {{ slide.model }} {{ slide.engine }}
+                    </div>
+                  </div>
+                  <div>
+                    <flexmile-button label="" iconPosition="right" icon="pi-arrow-right"
+                                     btnClass="mr-0 xlg:mr-3 w-full xlg:w-auto mb-3 xlg:mb-0"
+                                     [onlyIcon]="true" (clicked)="goToOffer(slide.id)"></flexmile-button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="hero-slider-rect-info">
-            BMW seria 4 420i Gran Coupe
-          </div>
-        </div>
-        <div>
-          <flexmile-button label="" iconPosition="right" icon="pi-arrow-right"
-                           btnClass="mr-0 xlg:mr-3 w-full xlg:w-auto mb-3 xlg:mb-0"
-                           [onlyIcon]="true"></flexmile-button>
-        </div>
+        }
       </div>
     </div>
     <div class="relative hero-slider-rect-image">
-      <img class="absolute" src="/layout/images/x.png" alt="XXX">
+      @for (slide of slides; track $index) {
+        <img class="absolute" [src]="slide.image"
+             [alt]="slide.brand"
+             [@slideAnimation]="getAnimationState($index)">
+      }
     </div>
-    <!--        </ng-template>-->
-    <!--      }-->
-    <!--    </owl-carousel-o>-->
+    <div class="swiper-pagination" #swiperPagination></div>
   </div>
 </div>
