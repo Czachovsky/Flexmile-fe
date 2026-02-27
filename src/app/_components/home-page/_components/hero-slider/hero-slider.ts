@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   DestroyRef,
   ElementRef,
@@ -19,7 +18,7 @@ import {Router} from '@angular/router';
 
 
 @Component({
-  selector: 'flexmile-hero-slider',
+  selector: '[flexmile-hero-slider]',
   imports: [
     ButtonComponent,
     DecimalPipe,
@@ -63,15 +62,27 @@ import {Router} from '@angular/router';
     ])
   ]
 })
-export class HeroSlider implements OnInit, AfterViewInit {
-  @ViewChild('swiperContainer') swiperContainer!: ElementRef;
-  @ViewChild('swiperPagination') swiperPagination!: ElementRef;
+export class HeroSlider implements OnInit {
+  @ViewChild('swiperContainer') set swiperContainer(el: ElementRef | undefined) {
+    this.swiperContainerRef = el;
+    this.tryInitSlider();
+  }
+
+  @ViewChild('swiperPagination') set swiperPagination(el: ElementRef | undefined) {
+    this.swiperPaginationRef = el;
+    this.tryInitSlider();
+  }
+
   swiper!: Swiper;
   public slides: HeroSlides[] = [];
   public currentIndex: number = 0;
   private readonly heroSliderStore = inject(HeroSliderStore);
   private readonly destroyRef = inject(DestroyRef);
   private router: Router = inject(Router);
+  private swiperContainerRef?: ElementRef;
+  private swiperPaginationRef?: ElementRef;
+  private sliderInitialized = false;
+
   ngOnInit(): void {
     this.heroSliderStore.loadSlides();
 
@@ -79,22 +90,34 @@ export class HeroSlider implements OnInit, AfterViewInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((slides: HeroSlides[] | null) => {
         this.slides = slides ?? [];
+        this.tryInitSlider();
       });
   }
 
+  private tryInitSlider(): void {
+    if (this.sliderInitialized ||
+      !this.slides.length ||
+      !this.swiperContainerRef ||
+      !this.swiperPaginationRef) {
+      return;
+    }
+    this.initSlider();
+  }
 
-  ngAfterViewInit() {
-    this.swiper = new Swiper(this.swiperContainer.nativeElement, {
+
+  private initSlider(): void {
+    this.sliderInitialized = true;
+    this.swiper = new Swiper(this.swiperContainerRef!.nativeElement, {
       modules: [Navigation, Pagination, Autoplay],
       slidesPerView: 1,
       spaceBetween: 30,
       loop: true,
       autoplay: {
-        delay: 15000,
+        delay: 2000,
         disableOnInteraction: false,
       },
       pagination: {
-        el: this.swiperPagination.nativeElement,
+        el: this.swiperPaginationRef!.nativeElement,
         clickable: true,
         dynamicBullets: true,
       },
@@ -106,7 +129,7 @@ export class HeroSlider implements OnInit, AfterViewInit {
     });
   }
 
-  public  getAnimationState(index: number): string {
+  public getAnimationState(index: number): string {
 
     if (index === this.currentIndex) {
       return 'current';

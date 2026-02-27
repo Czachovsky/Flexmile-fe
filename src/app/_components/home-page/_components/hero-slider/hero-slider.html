@@ -1,39 +1,43 @@
+@if (slides.length) {
 <div class="hero-slider">
-  <div class="hero-slider-rect relative">
-    <div class="swiper" #swiperContainer>
-      <div class="swiper-wrapper">
-        @for (slide of slides; let i = $index; track i) {
-          <div class="swiper-slide">
-            <div class="slide-content">
-              <div class="hero-slider-rect-inner">
-                <div class="flex justify-content-between align-items-start">
-                  <div>
-                    <div class="hero-slider-rect-price pb-2">
-                      <span>{{ slide.price_from | number:'1.0-0' }} zł</span> /netto mies.
-                    </div>
-                    <div class="hero-slider-rect-info">
-                      {{ slide.brand }} {{ slide.model }} {{ slide.engine }}
+  <div class="hero-slider-rect top-0"></div>
+  <div class="hero-slider-swipper">
+      <div class="swiper" #swiperContainer>
+        <div class="swiper-wrapper">
+          @for (slide of slides; let i = $index; track i) {
+            <div class="swiper-slide">
+              <div class="slide-content">
+                <div class="hero-slider-swipper-content">
+                  <div class="hero-slider-rect-inner">
+                    <div class="flex justify-content-between align-items-start">
+                      <div>
+                        <div class="hero-slider-rect-price pb-0 xlg:pb-2">
+                          <span>{{ slide.price_from | number:'1.0-0' }} zł</span> /netto mies.
+                        </div>
+                        <div class="hero-slider-rect-info">
+                          {{ slide.brand }} {{ slide.model }} {{ slide.engine }}
+                        </div>
+                      </div>
+                      <div>
+                        <flexmile-button label="" iconPosition="right" icon="pi-arrow-right"
+                                         btnClass="mr-0 xlg:mr-3 w-full xlg:w-auto mb-3 xlg:mb-0"
+                                         [onlyIcon]="true" (clicked)="goToOffer(slide.id)"></flexmile-button>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <flexmile-button label="" iconPosition="right" icon="pi-arrow-right"
-                                     btnClass="mr-0 xlg:mr-3 w-full xlg:w-auto mb-3 xlg:mb-0"
-                                     [onlyIcon]="true" (clicked)="goToOffer(slide.id)"></flexmile-button>
+                  <div class="relative hero-slider-rect-image">
+                    <img [src]="slide.image"
+                         [alt]="slide.brand"
+                         [@slideAnimation]="getAnimationState($index)">
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        }
+
+          }
+        </div>
       </div>
-    </div>
-    <div class="relative hero-slider-rect-image">
-      @for (slide of slides; track $index) {
-        <img class="absolute" [src]="slide.image"
-             [alt]="slide.brand"
-             [@slideAnimation]="getAnimationState($index)">
-      }
-    </div>
-    <div class="swiper-pagination" #swiperPagination></div>
+      <div class="swiper-pagination" #swiperPagination></div>
   </div>
 </div>
+}

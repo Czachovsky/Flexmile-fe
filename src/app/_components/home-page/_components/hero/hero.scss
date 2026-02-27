@@ -12,6 +12,7 @@
   }
   @include mixins.media-query('max', 'xlg') {
     min-height: 400px;
+    position: relative;
   }
 
   .container {
@@ -19,7 +20,7 @@
     padding-bottom: 120px;
     @include mixins.media-query('max', 'xlg') {
       padding-top: 0;
-      padding-bottom: 320px;
+      padding-bottom: 360px;
     }
 
     h1 {
