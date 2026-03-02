@@ -190,6 +190,7 @@
 
     .car-card__subtitle {
       @include mixins.fontSize(20);
+      white-space: nowrap;
       @include mixins.media-query('max', 'xlg') {
         @include mixins.fontSize(14, 24);
       }

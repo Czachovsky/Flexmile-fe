@@ -16,8 +16,8 @@
   }
 
   .container {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     @include mixins.media-query('max', 'xlg') {
       padding-top: 0;
       padding-bottom: 360px;

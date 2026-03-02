@@ -111,9 +111,9 @@ export class HeroSlider implements OnInit {
       modules: [Navigation, Pagination, Autoplay],
       slidesPerView: 1,
       spaceBetween: 30,
-      loop: true,
+      loop: false,
       autoplay: {
-        delay: 2000,
+        delay: 4000,
         disableOnInteraction: false,
       },
       pagination: {

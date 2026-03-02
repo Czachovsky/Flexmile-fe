@@ -5,8 +5,10 @@
   <title>Flexmile - Wynajem samochodów dla Firm</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Flexmile – nowoczesna platforma najmu samochodów dla Firm. Zero wpłaty własnej, szybki proces, atrakcyjne niskie raty. Wybierz auto, a My zajmiemy się resztą! 1,2,3…Jeździsz Ty!">
-  <meta name="keywords" content="wynajem samochodów, leasing samochodów, najem aut dla firm, samochody firmowe, flexmile">
+  <meta name="description"
+        content="Flexmile – nowoczesna platforma najmu samochodów dla Firm. Zero wpłaty własnej, szybki proces, atrakcyjne niskie raty. Wybierz auto, a My zajmiemy się resztą! 1,2,3…Jeździsz Ty!">
+  <meta name="keywords"
+        content="wynajem samochodów, leasing samochodów, najem aut dla firm, samochody firmowe, flexmile">
   <meta name="author" content="Flexmile">
   <meta name="robots" content="index, follow">
 
@@ -18,7 +20,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flexmile.pl/">
   <meta property="og:title" content="Flexmile - Wynajem samochodów dla Firm">
-  <meta property="og:description" content="Flexmile – nowoczesna platforma najmu samochodów dla Firm. Zero wpłaty własnej, szybki proces, atrakcyjne niskie raty.">
+  <meta property="og:description"
+        content="Flexmile – nowoczesna platforma najmu samochodów dla Firm. Zero wpłaty własnej, szybki proces, atrakcyjne niskie raty.">
   <meta property="og:locale" content="pl_PL">
   <meta property="og:site_name" content="Flexmile">
 
@@ -26,7 +29,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://flexmile.pl/">
   <meta name="twitter:title" content="Flexmile - Wynajem samochodów dla Firm">
-  <meta name="twitter:description" content="Flexmile – nowoczesna platforma najmu samochodów dla Firm. Zero wpłaty własnej, szybki proces, atrakcyjne niskie raty.">
+  <meta name="twitter:description"
+        content="Flexmile – nowoczesna platforma najmu samochodów dla Firm. Zero wpłaty własnej, szybki proces, atrakcyjne niskie raty.">
 
   <!-- Resource Hints for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -37,7 +41,8 @@
 
   <!-- Preload Critical Fonts -->
   <link rel="preload" href="/layout/fonts/Alexandria-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/layout/fonts/Alexandria-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/layout/fonts/Alexandria-SemiBold.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
   <link rel="preload" href="/layout/fonts/Alexandria-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
   <!-- Icons -->
@@ -47,6 +52,31 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
   <meta name="apple-mobile-web-app-title" content="Flexmile"/>
   <link rel="manifest" href="site.webmanifest"/>
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1611958403467096');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id=1611958403467096&ev=PageView&noscript=1"
+  /></noscript>
 </head>
 <body>
 <app-root></app-root>

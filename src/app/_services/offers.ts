@@ -7,7 +7,7 @@ import {CarModelsModel, MakeListModel} from '@models/hero-search.types';
 import {FormGroup} from '@angular/forms';
 import {FilterBuilder} from '@builders/filters-builder';
 import {FiltersType} from '@models/filters.types';
-import {delay, finalize, tap, shareReplay, filter} from 'rxjs/operators';
+import {delay, finalize, shareReplay, filter} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -129,6 +129,10 @@ export class OffersService {
     });
 
      return this.http.get<OfferListModel>(this.apiUrl+'/offers', {params});
+  }
+
+  getHomepageOffers(): Observable<OfferListModel> {
+    return this.http.get<OfferListModel>(this.apiUrl+'/offers/homepage');
   }
 
   getOffer(id: number): Observable<OfferModel> {
