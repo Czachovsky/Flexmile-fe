@@ -20,7 +20,7 @@
     padding-bottom: 80px;
     @include mixins.media-query('max', 'xlg') {
       padding-top: 0;
-      padding-bottom: 360px;
+     // padding-bottom: 360px;
     }
 
     h1 {
@@ -41,7 +41,9 @@
       color: var(--color-white);
       @include mixins.fontSize(24, 32);
       @include mixins.media-query('max', 'xlg') {
-        @include mixins.fontSize(14, 24);
+        @include mixins.fontSize(16, 24);
+        text-transform: uppercase;
+        color: #F0E2EF;
       }
     }
   }

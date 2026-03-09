@@ -13,6 +13,7 @@ interface   LayoutItem {
   isFullWidth?: boolean;
 }
 
+
 @Component({
   selector: 'flexmile-homepage-list',
   imports: [
@@ -28,7 +29,7 @@ export class HomepageList {
   protected readonly badgeSizes = badgeSizes;
 
   // Wzorzec: 3, 3, banner, 3, 1 (full), 3, 3
-  private readonly pattern = [3, 3, 'banner', 3, 1, 3, 3, 'banner', 3, 1, 3, 3, 'banner', 3];
+  private readonly pattern = [3, 3, 'banner', 3, 1, 3, 3, 'banner', 3, 1, 3, 3, 'banner', 3, 3, 3, 'banner', 3, 1, 3, 3, 'banner', 3, 1, 3, 3, 'banner', 3];
 
   private readonly banners: BannerTypes[] = this.bannersService.getBanners();
 
@@ -40,10 +41,10 @@ export class HomepageList {
 
     for (const patternItem of this.pattern) {
       if (patternItem === 'banner') {
-        if (bannerIndex < this.banners.length) {
+        if (this.banners.length > 0 && offerIndex < offers.length) {
           items.push({
             type: 'banner',
-            bannerIndex: bannerIndex
+            bannerIndex: bannerIndex % this.banners.length
           });
           bannerIndex++;
         }
@@ -82,9 +83,7 @@ export class HomepageList {
   }
 
   trackByItem(index: number, item: LayoutItem): string | number {
-    if (item.type === 'offer' && item.offer) {
-      return item.offer.id;
-    }
-    return `banner-${item.bannerIndex}`;
+    // Używamy index - każda pozycja w liście musi mieć unikalny klucz (bannery się powtarzają, oferty mogą się powtarzać w danych)
+    return index;
   }
 }
